@@ -1,6 +1,8 @@
 from enum import Enum
 import struct
 import binascii
+from pcapfile import savefile
+import os
 
 from utils.me_base import *
 
@@ -106,10 +108,11 @@ class OmciPacket:
         return self.me_inst
 
 class Analyser:
-    def __init__(self, buffer):
+    def __init__(self, buffer=[]):
         self.buffer = buffer
         self.packets = []
         self.entities = []
+        self.output = ""
 
     def translateAll(self):
         for raw_pkt in self.buffer:
@@ -177,10 +180,59 @@ class Analyser:
                             e_append = {'me': entity.getId(), 'name': entity.getName(), 'inst': entity.getInstance()}
                             appendMeWithPointer(ent_obj, e_append)
 
+        self.output = "blockdiag {\n"
+        control = []
         for x in mes_with_pointers:
-            print(print(x))
+            name = "{}{}".format(x['name'], x['inst'])
+            if name not in control:
+                control.append(x['name'])
+                self.output += '\t"{} ({})" [width = 192, height = 64];\n'.format(x['name'], x['inst'])
 
-        print("=============")
+            for p in x['pointers']:
+                name = "{}{}".format(p['name'], p['inst'])
+                if name not in control:
+                    control.append(p['name'])
+                    self.output += '\t"{} ({})" [width = 192, height = 64];\n'.format(p['name'], p['inst'])
+
+        self.output += "\n\n"
         for x in mes_with_pointers:
             for p in x['pointers']:
-                print("\t\"{} ({})\" -> \"{} ({})\";".format(x['name'], x['inst'], p['name'], p['inst']))
+                self.output += '\t"{} ({})" -> "{} ({})"\n'.format(x['name'], x['inst'], p['name'], p['inst'])
+
+        self.output += "}\n"
+
+    def getOutput(self):
+        return self.output
+
+    def generateImage(self, name):
+        file = "output/" + name
+        with open(file, "w") as f:
+            f.write(self.output)
+
+        # TODO Change to subprocess
+        os.system("blockdiag %s --no-transparency" % file)
+        os.system("rm -rf %s" % file)
+
+    def setBuffer(self, buf):
+        self.buffer = buf
+
+    def getBuffer(self):
+        return self.buffer
+
+    def loadBuffer(self, file):
+        if not os.path.isfile(file):
+            print("%s is not a file." % file)
+            return False
+
+        try:
+            raw_file = open(file, 'rb')
+            pcapfile = savefile.load_savefile(raw_file, verbose=False)
+            self.buffer = []
+            for pkt in pcapfile.packets:
+                self.buffer.append((pkt.raw()[14:],))
+
+        except Exception as e:
+            print(str(e))
+            return False
+
+        return True

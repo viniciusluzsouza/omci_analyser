@@ -28,12 +28,23 @@ Choose an option and press ENTER:
    0) Back
 """
 
+    ANALYSER = """
+########### Analyser ###########
+
+Choose an option and press ENTER:
+   1) Analyse
+   2) Load Capture
+
+   0) Back
+"""
+
     NOT_IMPLEMENTED = "\n/!\\ Not implemented! /!\\\n"
 
     INVALID_OPT = "Invalid option\n"
 
     def __init__(self):
-        pass
+        self.capturator = None
+        self.analyser = None
 
     def convertOptWithPrint(self, opt):
         try:
@@ -51,7 +62,7 @@ Choose an option and press ENTER:
     def askConfirm(self, question):
         while True:
             opt = input(question + " [Y/n]: ").lower()
-            if opt == 'y' or opt == 'yes':
+            if opt == 'y' or opt == 'yes' or opt == '':
                 return True
             elif opt == 'n' or opt == 'no':
                 return False
@@ -121,8 +132,66 @@ Choose an option and press ENTER:
                 self.printTitle = False
 
     def analyserMenu(self):
-        print(self.NOT_IMPLEMENTED)
-        return
+        if not self.analyser:
+            self.analyser = Analyser()
+
+        while True:
+            print(self.ANALYSER)
+
+            try:
+                opt = input(self.CHOOSE)
+
+                opt = self.convertOptWithPrint(opt)
+                if opt is None:
+                    continue
+
+                if opt == 1:
+                    if self.capturator and len(self.capturator.getBuffer()):
+                        buf = self.capturator.getBuffer()
+                    else:
+                        buf = self.analyser.getBuffer()
+
+                    if buf:
+                        self.analyser.setBuffer(buf)
+                        self.analyser.translateAll()
+                        self.analyser.analyse()
+                        if self.askConfirm("Show the output?"):
+                            print("\n%s" % self.analyser.getOutput())
+
+                        if self.askConfirm("Generate .png?"):
+                            while True:
+                                pngfile = input("File name: ")
+                                if pngfile != "":
+                                    break
+                            self.analyser.generateImage(pngfile)
+                            print("Generated on folder output.")
+
+                    else:
+                        print("There is no capture to analyse. Start a capture or load one!")
+
+                elif opt == 2:
+                    while True:
+                        file = input("Inform the file with location: ")
+                        if file != "":
+                            break
+
+                    if self.analyser.loadBuffer(file):
+                        print("Capture successfully loaded!")
+
+
+                elif opt == 0:
+                    break
+
+                else:
+                    print(self.INVALID_OPT)
+                    self.printTitle = False
+
+                self.printTitle = False
+
+            except Exception as e:
+                print(str(e))
+                self.printTitle = False
+
 
     def verifierMenu(self):
         print(self.NOT_IMPLEMENTED)
@@ -145,11 +214,6 @@ Choose an option and press ENTER:
                 if opt == 1:
                     self.capturatorMenu()
                 elif opt == 2:
-                    buf = self.capturator.getBuffer() if self.capturator else []
-                    analyser = Analyser(buf)
-                    analyser.translateAll()
-                    # analyser.printPackets()
-                    analyser.analyse()
                     self.analyserMenu()
                 elif opt == 3:
                     self.verifierMenu()
