@@ -1,130 +1,228 @@
 import re
 
-# text = """
-# [2] = { me_class_name = "ONT Data",
-# 	{ attname="MIB Data Sync", length=1, setbycreate=false }},
-# -- ADD by Maycon at 2020-08-05
-#
-# [4] = { me_class_name = "PON IF line card - Doesn't documented at ITU-T file G.984.4",
-# 	{ attname="Not_identified", length=4, setbycreate=false },
-# 	{ attname="Not_identified", length=4, setbycreate=false },
-# 	{ attname="Not_identified", length=4, setbycreate=false },
-# 	{ attname="Not_identified", length=4, setbycreate=false },
-# 	{ attname="Not_identified", length=4, setbycreate=false },
-# 	{ attname="Not_identified", length=4, setbycreate=false }},
-#
-# [5] = { me_class_name = "Cardholder",
-# 	{ attname="Actual Plug-in Unit Type", length=1, setbycreate=false },
-# 	{ attname="Expected Plug-in Unit Type", length=1, setbycreate=false },
-# 	{ attname="Expected Port Count", length=1, setbycreate=false },
-# 	{ attname="Expected Equipment Id", length=20, setbycreate=false },
-# 	{ attname="Actual Equipment Id", length=20, setbycreate=false },
-# 	{ attname="Protection Profile Pointer", length=1, setbycreate=false },
-# 	{ attname="Invoke Protection Switch", length=1, setbycreate=false }},
-#
-# [6] = { me_class_name = "Circuit Pack",
-# 	{ attname="Type", length=1, setbycreate=true },
-# 	{ attname="Number of ports", length=1, setbycreate=false },
-# 	{ attname="Serial Number", length=8, setbycreate=false },
-# 	{ attname="Version", length=14, setbycreate=false },
-# 	{ attname="Vendor Id", length=4, setbycreate=false },
-# 	{ attname="Administrative State", length=1, setbycreate=true },
-# 	{ attname="Operational State", length=1, setbycreate=false },
-# 	{ attname="Bridged or IP Ind", length=1, setbycreate=false },
-# 	{ attname="Equipment Id", length=20, setbycreate=false },
-# 	{ attname="Card Configuration", length=1, setbycreate=true },
-# 	{ attname="Total T-CONT Buffer Number", length=1, setbycreate=false },
-# 	{ attname="Total Priority Queue Number", length=1, setbycreate=false },
-# 	{ attname="Total Traffic Scheduler Number", length=1, setbycreate=false },
-# 	{ attname="Power Shed Override", length=4, setbycreate=false }},
-#
-# [7] = { me_class_name = "Software Image",
-# 	{ attname="Version", length=14, setbycreate=false },
-# 	{ attname="Is committed", length=1, setbycreate=false },
-# 	{ attname="Is active", length=1, setbycreate=false },
-# 	{ attname="Is valid", length=1, setbycreate=false }},
-#
-# [11] = { me_class_name = "PPTP Ethernet UNI",
-# 	{attname="Expected Type", length=1, setbycreate=false},
-# 	{attname="Sensed Type", length=1, setbycreate=false},
-# 	{attname="Auto Detection Configuration", length=1, setbycreate=false},
-# 	{attname="Ethernet Loopback Configuration",	length=1, setbycreate=false},
-# 	{attname="Administrative State", length=1, setbycreate=false},
-# 	{attname="Operational State", length=1, setbycreate=false},
-# 	{attname="Configuration Ind", length=1, setbycreate=false},
-# 	{attname="Max Frame Size", length=2, setbycreate=false},
-# 	{attname="DTE or DCE", length=1, setbycreate=false},
-# 	{attname="Pause Time", length=2, setbycreate=false},
-# 	{attname="Bridged or IP Ind", length=1, setbycreate=false},
-# 	{attname="ARC", length=1, setbycreate=false},
-# 	{attname="ARC Interval", length=1, setbycreate=false},
-# 	{attname="PPPoE Filter", length=1, setbycreate=false},
-# 	{attname="Power Control", length=1, setbycreate=false}},
-#
-# [24] = { me_class_name = "Ethernet PM History Data",
-# 	{ attname="Interval End Time", length=1, setbycreate=false }, -- 1
-# 	{ attname="Threshold Data 1/2 Id", length=2, setbycreate=true }, --2
-# 	{ attname="FCS errors Drop events", length=4, setbycreate=false }, -- 3
-# 	{ attname="Excessive Collision Counter", length=4, setbycreate=false }, -- 4
-# 	{ attname="Late Collision Counter", length=4, setbycreate=false }, -- 5
-# 	{ attname="Frames too long", length=4, setbycreate=false },
-# 	{ attname="Buffer overflows on Receive", length=4, setbycreate=false },
-# 	{ attname="Buffer overflows on Transmit", length=4, setbycreate=false },
-# 	{ attname="Single Collision Frame Counter", length=4, setbycreate=false },
-# 	{ attname="Multiple Collisions Frame Counter", length=4, setbycreate=false },
-# 	{ attname="SQE counter", length=4, setbycreate=false },
-# 	{ attname="Deferred Transmission Counter", length=4, setbycreate=false },
-# 	{ attname="Internal MAC Transmit Error Counter", length=4, setbycreate=false },
-# 	{ attname="Carrier Sense Error Counter", length=4, setbycreate=false },
-# 	{ attname="Alignment Error Counter", length=4, setbycreate=false },
-# 	{ attname="Internal MAC Receive Error Counter", length=4, setbycreate=false}},
-#
-# -- ADD by Maycon at 2020-08-05
-# [40] = { me_class_name = "PON physical path termination point - Doesn't documented at ITU-T file G.984.4",
-# 	{ attname="Not_identified", length=4, setbycreate=false }},
-#
-# [44] = { me_class_name = "Vendor Specific",
-# 	{ attname="Sub-Entity", length=1, setbycreate=true },
-# 	subentity_attr = {}},
-#
-# [45] = { me_class_name = "MAC Bridge Service Profile",
-# 	{ attname="Spanning tree ind", length=1, setbycreate=true },
-# 	{ attname="Learning ind", length=1, setbycreate=true },
-# 	{ attname="Port bridging ind", length=1, setbycreate=true },
-# 	{ attname="Priority", length=2, setbycreate=true },
-# 	{ attname="Max age", length=2, setbycreate=true },
-# 	{ attname="Hello time", length=2, setbycreate=true },
-# 	{ attname="Forward delay", length=2, setbycreate=true },
-# 	{ attname="Unknown MAC address discard", length=1, setbycreate=true },
-# 	{ attname="MAC learning depth", length=1, setbycreate=true }},
-#
-# [47] = { me_class_name = "MAC bridge port configuration data",
-# 	{ attname="Bridge id pointer", length=2, setbycreate=true },
-# 	{ attname="Port num", length=1, setbycreate=true },
-# 	{ attname="TP type", length=1, setbycreate=true },
-# 	{ attname="TP pointer", length=2, setbycreate=true },
-# 	{ attname="Port priority", length=2, setbycreate=true },
-# 	{ attname="Port path cost", length=2, setbycreate=true },
-# 	{ attname="Port spanning tree ind", length=1, setbycreate=true },
-# 	{ attname="Encapsulation method", length=1, setbycreate=true },
-# 	{ attname="LAN FCS ind", length=1, setbycreate=true },
-# 	{ attname="Port MAC address", length=6, setbycreate=false },
-# 	{ attname="Outbound TD pointer", length=2, setbycreate=false },
-# 	{ attname="Inbound TD pointer", length=2, setbycreate=false }},
-#
-# [48] = { me_class_name = "MAC bridge port designation data",
-# 	{ attname="Designated bridge root cost port", length=24, setbycreate=false },
-# 	{ attname="Port state", length=1, setbycreate=false }},
-#
-# [49] = { me_class_name = "MAC bridge port filter table data",
-# 	{ attname="MAC filter table", length=8, setbycreate=false }},
-#
-# [51] = { me_class_name = "MAC Bridge PM History Data",
-# 	{ attname="Interval end time", length=1, setbycreate=false },
-# 	{ attname="Threshold data 1/2 id", length=2, setbycreate=true },
-# 	{ attname="Bridge learning entry discard count", length=4, setbycreate=false }},
-#
-# """
+SET_POINTERS_METHOD = "    def setPointers(self):"
+# pointer_rule="1-11,2-14,3-130,4-134|347,5-266,6-281,7-98,8-117,9-286,11-329,12-162,13-419" },
+mes_specific_methods = {
+    47: SET_POINTERS_METHOD + """
+        tp_type = self.tp_type.getValue()
+        if tp_type == 1:
+            self.tp_pointer.setPointer([11])
+        elif tp_type == 2:
+            self.tp_pointer.setPointer([14])
+        elif tp_type == 3:
+            self.tp_pointer.setPointer([130])
+        elif tp_type == 4:
+            self.tp_pointer.setPointer([134, 347])
+        elif tp_type == 5:
+            self.tp_pointer.setPointer([266])
+        elif tp_type == 6:
+            self.tp_pointer.setPointer([281])
+        elif tp_type == 7:
+            self.tp_pointer.setPointer([98])
+        elif tp_type == 8:
+            self.tp_pointer.setPointer([117])
+        elif tp_type == 9:
+            self.tp_pointer.setPointer([286])
+        elif tp_type == 11:
+            self.tp_pointer.setPointer([329])
+        elif tp_type == 12:
+            self.tp_pointer.setPointer([162])
+        elif tp_type == 13:
+            self.tp_pointer.setPointer([419])
+        else:
+            self.tp_pointer.setPointer(None)
+
+        self.bridge_id_pointer.setPointer([45])
+        self.outbound_td_pointer.setPointer([280])
+        self.inbound_td_pointer.setPointer([280])\n""",
+
+    58: SET_POINTERS_METHOD + """
+        self.network_specific_extensions_pointer.setPointer([137])\n""",
+
+    130: SET_POINTERS_METHOD + """
+        tp_type = self.tp_type.getValue()
+        if tp_type == 1:
+            self.tp_pointer.setPointer([11])
+        elif tp_type == 2:
+            self.tp_pointer.setPointer([134, 347])
+        elif tp_type == 3:
+            self.tp_pointer.setPointer([286])
+        elif tp_type == 4:
+            self.tp_pointer.setPointer([427])
+        elif tp_type == 6:
+            self.tp_pointer.setPointer([162])
+        elif tp_type == 7:
+            self.tp_pointer.setPointer([329])
+        elif tp_type == 8:
+            self.tp_pointer.setPointer([265])
+        elif tp_type == 9:
+            self.tp_pointer.setPointer([419])
+        else:
+            self.tp_pointer.setPointer(None)
+
+        self.interwork_tp_pointer_for_p_bit_priority_0.setPointer([266,281,404])
+        self.interwork_tp_pointer_for_p_bit_priority_1.setPointer([266,281,404])
+        self.interwork_tp_pointer_for_p_bit_priority_2.setPointer([266,281,404])
+        self.interwork_tp_pointer_for_p_bit_priority_3.setPointer([266,281,404])
+        self.interwork_tp_pointer_for_p_bit_priority_4.setPointer([266,281,404])
+        self.interwork_tp_pointer_for_p_bit_priority_5.setPointer([266,281,404])
+        self.interwork_tp_pointer_for_p_bit_priority_6.setPointer([266,281,404])
+        self.interwork_tp_pointer_for_p_bit_priority_7.setPointer([266,281,404])\n""",
+
+    136: SET_POINTERS_METHOD + """
+        self.ip_host_pointer.setPointer([134,347])\n""",
+
+    137: SET_POINTERS_METHOD + """
+        self.security_pointer.setPointer([148])
+        self.address_pointer.setPointer([157])\n""",
+
+    138: SET_POINTERS_METHOD + """
+        self.voip_configuration_address_pointer.setPointer([137])\n""",
+
+    139: SET_POINTERS_METHOD + """
+        self.user_protocol_pointer.setPointer([153, 155])
+        self.pptp_pointer.setPointer([53])
+        self.voip_media_profile_pointer.setPointer([142])\n""",
+
+    142: SET_POINTERS_METHOD + """
+        self.voice_service_profile_pointer.setPointer([58])
+        self.rtp_profile_pointer.setPointer([143])\n""",
+
+    143: SET_POINTERS_METHOD + """
+        self.ip_host_config_pointer.setPointer([134, 347])\n""",
+
+    150: SET_POINTERS_METHOD + """
+        self.proxy_server_address_pointer.setPointer([157])
+        self.outbound_proxy_address_pointer.setPointer([157])
+        self.tcp_udp_pointer.setPointer([136])
+        self.redundant_sip_agent_pointer.setPointer([150])\n""",
+
+    153: SET_POINTERS_METHOD + """
+        self.sip_agent_pointer.setPointer([150])
+        self.network_dial_plan_pointer.setPointer([145])
+        self.application_services_profile_pointer.setPointer([146])
+        self.feature_code_pointer.setPointer([147])
+        self.pptp_pointer.setPointer([53])\n""",
+
+    171: SET_POINTERS_METHOD + """
+        ass_type = self.association_type.getValue()
+        if ass_type == 1:
+            self.associated_me_pointer.setPointer([130])
+        elif ass_type == 2:
+            self.associated_me_pointer.setPointer([11])
+        elif ass_type == 3:
+            self.associated_me_pointer.setPointer([134, 347])
+        elif ass_type == 4:
+            self.associated_me_pointer.setPointer([427])
+        elif ass_type == 5:
+            self.associated_me_pointer.setPointer([266])
+        elif ass_type == 6:
+            self.associated_me_pointer.setPointer([281])
+        elif ass_type == 7:
+            self.associated_me_pointer.setPointer([162])
+        elif ass_type == 9:
+            self.associated_me_pointer.setPointer([286])
+        elif ass_type == 10:
+            self.associated_me_pointer.setPointer([329])
+        elif ass_type == 11:
+            self.associated_me_pointer.setPointer([333])
+        elif ass_type == 12:
+            self.associated_me_pointer.setPointer([419])
+        else:
+            self.associated_me_pointer.setPointer(None)\n""",
+
+    250: SET_POINTERS_METHOD + """
+        self.pointer_to_ip_host_config_data_me.setPointer([134, 347])
+        self.pointer_to_larg_string_me_pointer_for_username.setPointer([157])
+        self.pointer_to_larg_string_me_pointer_for_service_name.setPointer([157])\n""",
+
+    266: SET_POINTERS_METHOD + """
+        iw_option = self.interworking_option.getValue()
+        if iw_option == 0:
+            self.service_profile_pointer.setPointer([21])
+            self.gal_profile_pointer.setPointer(None)
+        elif iw_option == 1:
+            self.service_profile_pointer.setPointer([45])
+            self.gal_profile_pointer.setPointer([272])
+        elif iw_option == 3:
+            self.gal_profile_pointer.setPointer([272])
+        elif iw_option == 4:
+            self.service_profile_pointer.setPointer([128])
+            self.gal_profile_pointer.setPointer([272])
+        elif iw_option == 5:
+            self.service_profile_pointer.setPointer([130])
+            self.gal_profile_pointer.setPointer([272])
+        elif iw_option == 6:
+            self.service_profile_pointer.setPointer(None)
+            self.gal_profile_pointer.setPointer(None)
+        elif iw_option == 7:
+            self.service_profile_pointer.setPointer([21])
+            self.gal_profile_pointer.setPointer(None)
+        else:
+            self.service_profile_pointer.setPointer(None)
+            self.gal_profile_pointer.setPointer(None)
+    
+        self.gem_port_network_ctp_connectivity_pointer.setPointer([268])
+        self.interworking_termination_point_pointer.setPointer([11, 268, 12])\n""",
+
+    268: SET_POINTERS_METHOD + """
+        self.t_cont_pointer.setPointer([262])
+        self.traffic_management_pointer_for_upstream.setPointer([277, 262])
+        self.traffic_descriptor_profile_pointer.setPointer([280])
+        self.priority_queue_pointer_for_downstream.setPointer([277])\n""",
+
+    277: SET_POINTERS_METHOD + """
+        self.traffic_scheduler_g_pointer.setPointer([278])\n""",
+
+    278: SET_POINTERS_METHOD + """
+        self.tcont_pointer.setPointer([262])
+        self.traffic_shed_pointer.setPointer([278])\n""",
+
+    279: SET_POINTERS_METHOD + """
+        self.working_ani_g_pointer.setPointer([263, 313, 315])
+        self.protection_ani_g_pointer.setPointer([263, 313, 315])\n""",
+
+    281: SET_POINTERS_METHOD + """
+        iw_option = self.interworking_option.getValue()
+        if iw_option == 0:
+            self.service_profile_pointer.setPointer([21])
+            self.gal_profile_pointer.setPointer(None)
+        elif iw_option == 1:
+            self.service_profile_pointer.setPointer([45])
+            self.gal_profile_pointer.setPointer([272])
+        elif iw_option == 3:
+            self.gal_profile_pointer.setPointer([272])
+        elif iw_option == 4:
+            self.service_profile_pointer.setPointer([128])
+            self.gal_profile_pointer.setPointer([272])
+        elif iw_option == 5:
+            self.service_profile_pointer.setPointer([130])
+            self.gal_profile_pointer.setPointer([272])
+        elif iw_option == 6:
+            self.service_profile_pointer.setPointer(None)
+            self.gal_profile_pointer.setPointer(None)
+        elif iw_option == 7:
+            self.service_profile_pointer.setPointer([21])
+            self.gal_profile_pointer.setPointer(None)
+        else:
+            self.service_profile_pointer.setPointer(None)
+            self.gal_profile_pointer.setPointer(None)
+
+        self.gem_port_network_ctp_connectivity_pointer.setPointer([268])
+        self.interworking_termination_point_pointer.setPointer([11, 268, 12])\n""",
+
+    310: SET_POINTERS_METHOD + """
+        self.multicast_operations_profile_pointer.setPointer([309])\n""",
+
+    318: SET_POINTERS_METHOD + """
+        self.local_file_name_pointer.setPointer([157])
+        self.network_address_pointer.setPointer([137])
+        self.gem_iwtp_pointer.setPointer([266])\n""",
+
+    329: SET_POINTERS_METHOD + """
+        self.multicast_operations_profile_pointer.setPointer([136])\n""",
+
+}
 
 file = open("base.txt", "r")
 text = file.read()
@@ -136,21 +234,33 @@ mes_classes = """
 
 me_block_pattern = re.compile(
     r'\[(\d+)\]...{\s+me_class_name\s+=\s+"(.+)"(.+[\n].+attname="(.+)".+length=(\d+).+setbycreate=(\w+))*')
+
+mes = {}
 for match in me_block_pattern.finditer(text):
     me_id = match.group(1)
+    me_id_int = int(me_id)
     me_name = match.group(2)
 
     attributes = []
     me_attr_pattern = re.compile(r'attname="(.+)".+length=(\d+).+setbycreate=(\w+)')
     for m in me_attr_pattern.finditer(match.group()):
         name_str = m.group(1).lower().replace(' ', '_').replace('-', '_')
-        attributes.append({'name_str': name_str, 'name': m.group(1), 'length': m.group(2), 'setbycreate': m.group(2)})
+        attributes.append({'name_str': name_str, 'name': m.group(1), 'length': m.group(2), 'setbycreate': m.group(3)})
 
+    # TODO ME NAME with '-' (ANI-G, T-CONT)
     classname = me_name[:me_name.find('-')].strip().title().replace(' ', '') if '-' in me_name else me_name.strip().title().replace(' ', '')
-    line = "\nclass {}:\n    def __init__(self):\n".format(classname)
+    mes[me_id_int] = classname
+
+    line = """
+class {}(ManagedEntity):
+    def __init__(self, instance):
+        ManagedEntity.__init__(self, {}, instance)
+        self.name = \"{}\"\n""".format(classname, me_id, classname)
+
     for attr in attributes:
-        set_by_create = "True" if attr['setbycreate']  == "true" else "False"
-        line += "        self.{} = MeAttribute(\"{}\", {}, {}, False)\n".format(attr['name_str'], attr['name'], attr['length'], set_by_create)
+        set_by_create = "True" if "true" in attr['setbycreate'].lower() else "False"
+        # is_pointer = "True" if "pointer" in str(attr['name']).lower() else "False"
+        line += "        self.{} = MeAttribute(\"{}\", {}, {}, False, {})\n".format(attr['name_str'], attr['name'], attr['length'], set_by_create, "None")
 
     line += "\n        self.attributes = (\n"
     for attr in attributes:
@@ -158,8 +268,78 @@ for match in me_block_pattern.finditer(text):
 
     line = line[0:-1] # Remove last blank line
     line += """
-        )
-    
+        )\n\n"""
+
+    if me_id_int in mes_specific_methods.keys():
+        line += mes_specific_methods[me_id_int]
+    else:
+        line += SET_POINTERS_METHOD + "\n        pass\n"
+
+    mes_classes += "\n" + line
+
+attr_class = """
+class MeAttribute:
+    def __init__(self, name, length, setbycreate, mandatory, points_to=None, value=None):
+        self.name = name
+        self.length = length
+        self.setbycreate = setbycreate
+        self.mandatory = mandatory
+        self.points_to = points_to
+        self.value = value
+
+    def getName(self):
+        return self.name
+
+    def getPointer(self):
+        return self.points_to
+
+    def setPointer(self, pointer):
+        self.points_to = pointer
+
+    def setValue(self, value):
+        self.value = value
+
+    def getValue(self):
+        return self.value
+
+    def getSetByCreate(self):
+        return self.setbycreate
+
+    def getLength(self):
+        return self.length\n
+"""
+
+mes_translate = """
+class MeTranslate:
+    @staticmethod
+    def getInstance(me, inst):
+        if me == 0:
+            return None"""
+for mk in mes.keys():
+    mes_translate += "\n        elif me == %d:\n            return %s(inst)" % (mk, mes[mk])
+
+mes_translate += "\n        else:\n            return None\n"
+
+me_class = """
+class ManagedEntity:
+    def __init__(self, id, instance):
+        self.me_id = id
+        self.instance = instance
+        self.attributes = ()
+        self.name = "Default"
+
+    def getName(self):
+        return self.name
+
+    def getId(self):
+        return self.me_id
+
+    def getInstance(self):
+        return self.instance
+
+    def setInstance(self, value):
+        self.instance = value
+
     def getAttributes(self):
         return self.attributes
 
@@ -167,35 +347,55 @@ for match in me_block_pattern.finditer(text):
         if pos > len(self.attributes):
             return None
 
-        return self.attributes[pos-1]
+        return self.attributes[pos]
 
     def setAttribute(self, attr, value):
-        if attr > len(self.attributes):
+        if not len(self.attributes) or attr > len(self.attributes):
             return -1
 
-        self.attributes[attr-1].setValue(value)
+        self.attributes[attr].setValue(value)
         return 0
-    """
 
-    mes_classes += "\n" + line
+    def printout(self):
+        line = \"ME {} ({})\\n\".format(self.name, self.me_id)
+        for attr in self.attributes:
+            line += \"\t{}: {}\\n\".format(attr.getName(), attr.getValue())
 
-attr_class = """
-class MeAttribute:
-    def __init__(self, name, length, setbycreate, mandatory, value=None):
-        self.name = name
-        self.length = length
-        self.setbycreate = setbycreate
-        self.mandatory = mandatory
-        self.value = value
+        line += \"\\n\"
+        print(line)
 
-    def setValue(self, value):
-        self.value = value
+    # Abstract - will be implemented on each ME, if necessary
+    def setPointers(self):
+        return True
 
-    def getValue(self, value):
-        return value
+    def create(self, pkt):
+        attributes = pkt[8:]
+        it = 0
+        for i, attr in enumerate(self.attributes):
+            if not attr.getSetByCreate():
+                continue
 
+            length = self.attributes[i].getLength()
+            self.attributes[i].setValue(attributes[it:it+length])
+            it += length
+
+    def setAttributes(self, pkt):
+        raw_mask = int.from_bytes(pkt[8:10], \'big\')
+        mask = [(raw_mask >> bit) & 1 for bit in range(16 - 1, -1, -1)]
+        attributes = pkt[10:]
+
+        it = 0
+        for i, attr in enumerate(mask):
+            if not attr or i >= len(self.attributes):
+                continue
+
+            length = self.attributes[i].getLength()
+            self.attributes[i].setValue(attributes[it:it+length])
+            it += length\n
 """
 
 with open("me_base.py", "w") as f:
     f.write(attr_class)
+    f.write(me_class)
     f.write(mes_classes)
+    f.write(mes_translate)

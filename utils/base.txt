@@ -207,7 +207,7 @@
 	{attname="Video Lower Optical Threshold", length=1, setbycreate=false},
 	{attname="Video Upper Optical Threshold", length=1, setbycreate=false}},
  
-[130] = { me_class_name = "P Mapper Service Profile 802 1",
+[130] = { me_class_name = "IEEE 8021P Mapper Service Profile",
 	{attname="TP Pointer", length=2,  setbycreate=true},
 	{attname="Interwork TP pointer for P-bit priority 0", length=2, setbycreate=true},
 	{attname="Interwork TP pointer for P-bit priority 1", length=2, setbycreate=true},
@@ -461,12 +461,12 @@
 	{ attname="Not_identified", length=4, setbycreate=false },
 	{ attname="Not_identified", length=4, setbycreate=false }},
 
-[262] = { me_class_name = "T-CONT",
+[262] = { me_class_name = "TCONT",
 	{ attname="Alloc-id", length=2, setbycreate=false },
 	{ attname="Mode indicator", length=1, setbycreate=false },
 	{ attname="Policy", length=1, setbycreate=false }},
 
-[263] = { me_class_name = "ANI-G",
+[263] = { me_class_name = "ANIG",
 	{ attname="SR indication", length=1, setbycreate=false },
 	{ attname="Total T-CONT number", length=2, setbycreate=false },
 	{ attname="GEM block length", length=2, setbycreate=false },

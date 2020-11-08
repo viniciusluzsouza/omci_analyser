@@ -3,6 +3,7 @@ import struct
 import binascii
 import os
 
+
 class Capturator:
     MSGTYPE = {
         4: "Create",
@@ -34,6 +35,7 @@ class Capturator:
 
     def __init__(self, interface):
         self.buff = []
+        self.buff_omci = []
         self.sock = None
 
         self.setInterface(interface)
@@ -71,6 +73,8 @@ class Capturator:
             p = struct.unpack("!16s16s16s14s", packet[0][0:62])
             self.buff.append([p[0], p[1], p[2], p[3]])
 
+            o = struct.unpack("!48s", packet[0][14:62])
+            self.buff_omci.append(o)
 
     def saveDump(self, file):
         file_str = file + ".pcap" if "pcap" not in file else file
@@ -84,12 +88,17 @@ class Capturator:
 
                 f.write(line)
 
+        # TODO: Change to subprocess
         os.system("text2pcap output/temp.txt output/%s -q" % file_str)
         os.system("rm -rf output/temp.txt")
 
     def clearDump(self):
         self.buff = []
+        self.buff_omci = []
 
     def closeSock(self):
         if self.sock:
             self.sock.close()
+
+    def getBuffer(self):
+        return self.buff_omci if self.buff_omci else []

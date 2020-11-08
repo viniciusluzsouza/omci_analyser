@@ -1,5 +1,6 @@
 import os
 from capturator import Capturator
+from analyser import Analyser
 
 class MainMenu:
     CHOOSE = "Option: "
@@ -98,7 +99,7 @@ Choose an option and press ENTER:
                         print("Capturator not initialized!")
 
                 elif opt == 0:
-                    self.closeCapturator()
+                    # self.closeCapturator()
                     break
 
                 else:
@@ -144,6 +145,11 @@ Choose an option and press ENTER:
                 if opt == 1:
                     self.capturatorMenu()
                 elif opt == 2:
+                    buf = self.capturator.getBuffer() if self.capturator else []
+                    analyser = Analyser(buf)
+                    analyser.translateAll()
+                    # analyser.printPackets()
+                    analyser.analyse()
                     self.analyserMenu()
                 elif opt == 3:
                     self.verifierMenu()
@@ -156,8 +162,9 @@ Choose an option and press ENTER:
 
                 self.printTitle = True
 
-            except Exception:
+            except Exception as e:
                 self.printTitle = True
+                raise e
 
 
 if __name__ == '__main__':

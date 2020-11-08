@@ -32,11 +32,16 @@ try:
             packets.append(p)
             p = ""
 
-    while True:
+    end = 0
+    while end < 1:
         for pkt in packets:
             print(":".join("{:02x}".format(ord(c)) for c in pkt))
             s.send(pkt.encode('latin1'))
-            sleep(0.01)
+            sleep(0.001)
+
+        end += 1
+
+    print("Sent packets: %d" % (end*len(packets)))
 
 except Exception as e:
     print(str(e))
