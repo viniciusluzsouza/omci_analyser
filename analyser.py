@@ -3,6 +3,7 @@ import struct
 import binascii
 from pcapfile import savefile
 import os
+import re
 
 from utils.me_base import *
 
@@ -186,18 +187,18 @@ class Analyser:
             name = "{}{}".format(x['name'], x['inst'])
             if name not in control:
                 control.append(x['name'])
-                self.output += '\t"{} ({})" [width = 192, height = 64];\n'.format(x['name'], x['inst'])
+                self.output += '\t"{} ({}) [{}-{}]" [width = 192, height = 64];\n'.format(x['name'], x['inst'], x['me'], x['inst'])
 
             for p in x['pointers']:
                 name = "{}{}".format(p['name'], p['inst'])
                 if name not in control:
                     control.append(p['name'])
-                    self.output += '\t"{} ({})" [width = 192, height = 64];\n'.format(p['name'], p['inst'])
+                    self.output += '\t"{} ({}) [{}-{}]" [width = 192, height = 64];\n'.format(p['name'], p['inst'], p['me'], p['inst'])
 
         self.output += "\n\n"
         for x in mes_with_pointers:
             for p in x['pointers']:
-                self.output += '\t"{} ({})" -> "{} ({})"\n'.format(x['name'], x['inst'], p['name'], p['inst'])
+                self.output += '\t"{} ({}) [{}-{}]" -> "{} ({}) [{}-{}]"\n'.format(x['name'], x['inst'], x['me'], x['inst'], p['name'], p['inst'], p['me'], p['inst'])
 
         self.output += "}\n"
 
@@ -236,3 +237,25 @@ class Analyser:
             return False
 
         return True
+
+    def showEntity(self, entity):
+        me = 0
+        inst = 0
+
+        try:
+            p = re.compile(r'(\d+)-(\d+)')
+            for m in p.finditer(str(entity)):
+                me = int(m.group(1))
+                inst = int(m.group(2))
+        except Exception:
+            pass
+
+        if me == 0 and inst == 0:
+            print("Invalid syntax")
+            return
+
+        e = self.findMeInstance(me, inst)
+        if e is None:
+            print("Entity doesnt exist")
+        else:
+            e.printBeauty()

@@ -34,6 +34,7 @@ Choose an option and press ENTER:
 Choose an option and press ENTER:
    1) Analyse
    2) Load Capture
+   3) Show Entity
 
    0) Back
 """
@@ -177,6 +178,14 @@ Choose an option and press ENTER:
 
                     if self.analyser.loadBuffer(file):
                         print("Capture successfully loaded!")
+
+                elif opt == 3:
+                    while True:
+                        entity = input("Inform the entity identifier. E.g: [45-0] (0 to exit): ")
+                        if entity == '0':
+                            break
+
+                        self.analyser.showEntity(entity)
 
 
                 elif opt == 0:

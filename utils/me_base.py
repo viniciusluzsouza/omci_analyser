@@ -65,6 +65,26 @@ class ManagedEntity:
         self.attributes[attr].setValue(value)
         return 0
 
+    def printBeauty(self):
+        line = "\n{} ({})\n".format(self.name, self.me_id)
+        line += "Instance: {}\n".format(self.instance)
+        for attr in self.attributes:
+            val = attr.getValue()
+
+            if val is not None:
+                try:
+                    if attr.getLength() > 4:
+                        val = val.decode()
+                    else:
+                        val = int.from_bytes(val, 'big')
+                except Exception:
+                    pass
+
+            line += "  {}: {}\n".format(attr.getName(), val)
+
+        line += "\n"
+        print(line)
+
     def printout(self):
         line = "ME {} ({})\n".format(self.name, self.me_id)
         for attr in self.attributes:
