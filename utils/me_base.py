@@ -29,8 +29,100 @@ class MeAttribute:
     def getLength(self):
         return self.length
 
-
 class ManagedEntity:
+    me_dict = {
+        2: "ONT Data",
+        4: "PON IF line card",
+        5: "Cardholder",
+        6: "Circuit Pack",
+        7: "Software Image",
+        11: "PPTP Ethernet UNI",
+        24: "Ethernet PM History Data",
+        40: "PON physical path termination point",
+        44: "Vendor Specific",
+        45: "MAC Bridge Service Profile",
+        47: "MAC bridge port configuration data",
+        48: "MAC bridge port designation data",
+        49: "MAC bridge port filter table data",
+        51: "MAC Bridge PM History Data",
+        52: "MAC Bridge Port PM History Data",
+        53: "Physical path termination point POTS UNI",
+        58: "Voice service profile",
+        79: "MAC bridge port filter preassign table",
+        82: "PPTP Video UNI",
+        84: "VLAN tagging filter data",
+        89: "Ethernet PM History Data 2",
+        90: "PPTP Video ANI",
+        130: "IEEE 8021P Mapper Service Profile",
+        131: "OLT",
+        133: "ONT Power Shedding",
+        134: "IP host config data",
+        136: "TCP UDP config data",
+        137: "Network address",
+        138: "VoIP config data",
+        139: "VoIP voice CTP",
+        141: "VoIP line status",
+        142: "VoIP media profile",
+        143: "RTP profile data",
+        148: "Authentication security method",
+        150: "SIP agent config data",
+        153: "SIP user data",
+        157: "Large string",
+        158: "ONT remote debug",
+        159: "Equipment protection profile",
+        160: "Equipment extension package",
+        171: "Extended VLAN tagging operation configuration data",
+        250: "PPPoE BY GCOM",
+        255: "Ethernet performance monitoring history data 4",
+        256: "ONT",
+        257: "ONT2",
+        261: "PON TC adapter",
+        262: "TCONT",
+        263: "ANIG",
+        264: "UNI",
+        266: "GEM interworking Termination Point",
+        267: "GEM Port PM History Data",
+        268: "GEM Port Network CTP",
+        271: "GAL TDM profile",
+        272: "GAL Ethernet profile",
+        273: "Threshold Data 1",
+        274: "Threshold Data 2",
+        275: "GAL TDM PM History Data",
+        276: "GAL Ethernet PM History Data",
+        277: "Priority queue",
+        278: "Traffic Scheduler",
+        279: "Protection data",
+        281: "Multicast GEM interworking termination point",
+        287: "OMCI",
+        290: "Dot1X Port Extension Package",
+        291: "Dot1X configuration profile",
+        296: "Ethernet PM History Data 3",
+        297: "Port mapping package",
+        309: "Multicast operations profile",
+        310: "Multicast subscriber config info",
+        311: "Multicast Subscriber Monitor",
+        312: "FEC PM History Data",
+        318: "File transfer controller",
+        321: "Ethernet Frame PM History Data DS",
+        322: "Ethernet Frame PM History Data US",
+        329: "Virtual Ethernet interface point",
+        340: "BBF TR",
+        341: "GEM port network CTP performance monitoring history data",
+        65303: "PPPoE INTELBRAS OLT 8820i 110Gi",
+        65320: "Wan Extended Config FH",
+        65321: "WAN Profile File FH",
+        65322: "WAN Mode FH",
+        65323: "WAN CONFIG FH",
+        65324: "WAN PORT BIND FH",
+        65329: "WAN WAN Profile FH",
+        65326: "Wifi General Config",
+        65327: "Wifi Advance Config",
+        65338: "WAN Extended VLAN FH",
+        65529: "ONU Capability",
+        65530: "LOID Authentication",
+        999999: "DEFAULT",
+    }
+
     def __init__(self, id, instance):
         self.me_id = id
         self.instance = instance
@@ -429,6 +521,7 @@ class MacBridgePortConfigurationData(ManagedEntity):
 
     def setPointers(self):
         tp_type = self.tp_type.getValue()
+        tp_type = int.from_bytes(tp_type, 'big') if tp_type is not None else None
         if tp_type == 1:
             self.tp_pointer.setPointer([11])
         elif tp_type == 2:
@@ -779,6 +872,7 @@ class Ieee8021PMapperServiceProfile(ManagedEntity):
 
     def setPointers(self):
         tp_type = self.tp_type.getValue()
+        tp_type = int.from_bytes(tp_type, 'big') if tp_type is not None else None
         if tp_type == 1:
             self.tp_pointer.setPointer([11])
         elif tp_type == 2:
@@ -1295,6 +1389,7 @@ class ExtendedVlanTaggingOperationConfigurationData(ManagedEntity):
 
     def setPointers(self):
         ass_type = self.association_type.getValue()
+        ass_type = int.from_bytes(ass_type, 'big') if ass_type is not None else None
         if ass_type == 1:
             self.associated_me_pointer.setPointer([130])
         elif ass_type == 2:
@@ -1583,6 +1678,7 @@ class GemInterworkingTerminationPoint(ManagedEntity):
 
     def setPointers(self):
         iw_option = self.interworking_option.getValue()
+        iw_option = int.from_bytes(iw_option, 'big') if iw_option is not None else None
         if iw_option == 0:
             self.service_profile_pointer.setPointer([21])
             self.gal_profile_pointer.setPointer(None)
@@ -1902,6 +1998,7 @@ class MulticastGemInterworkingTerminationPoint(ManagedEntity):
 
     def setPointers(self):
         iw_option = self.interworking_option.getValue()
+        iw_option = int.from_bytes(iw_option, 'big') if iw_option is not None else None
         if iw_option == 0:
             self.service_profile_pointer.setPointer([21])
             self.gal_profile_pointer.setPointer(None)

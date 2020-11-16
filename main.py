@@ -187,7 +187,6 @@ Choose an option and press ENTER:
 
                         self.analyser.showEntity(entity)
 
-
                 elif opt == 0:
                     break
 

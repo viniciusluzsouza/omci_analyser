@@ -159,6 +159,7 @@ class Analyser:
             e.setPointers()
 
         mes_with_pointers = []
+        added_mes = []
 
         def appendMeWithPointer(ent, points_to=None):
             if points_to is None:
@@ -170,35 +171,41 @@ class Analyser:
 
         for e in self.entities:
             ent_obj = {'me': e.getId(), 'name': e.getName(), 'inst': e.getInstance(), 'pointers': []}
+            # print(ent_obj)
             appendMeWithPointer(ent_obj)
             for attr in e.getAttributes():
                 attr_pointer = attr.getPointer()
                 if attr_pointer is not None:
                     for me_candidate in attr_pointer:
                         val = attr.getValue()
-                        entity = self.findMeInstance(me_candidate, int.from_bytes(val, 'big')) if val is not None else None
+                        if val is None:
+                            continue
+
+                        val_int = int.from_bytes(val, 'big')
+                        entity = self.findMeInstance(me_candidate, val_int)
                         if entity is not None:
                             e_append = {'me': entity.getId(), 'name': entity.getName(), 'inst': entity.getInstance()}
                             appendMeWithPointer(ent_obj, e_append)
+                        else:
+                            if me_candidate in ManagedEntity.me_dict and val_int != 0:
+                                e_append = {'me': me_candidate, 'name': ManagedEntity.me_dict[me_candidate], 'inst': val_int}
+                                appendMeWithPointer(ent_obj, e_append)
+                                if e_append not in added_mes:
+                                    added_mes.append(e_append)
 
-        self.output = "blockdiag {\n"
-        control = []
-        for x in mes_with_pointers:
-            name = "{}{}".format(x['name'], x['inst'])
-            if name not in control:
-                control.append(x['name'])
-                self.output += '\t"{} ({}) [{}-{}]" [width = 192, height = 64];\n'.format(x['name'], x['inst'], x['me'], x['inst'])
 
-            for p in x['pointers']:
-                name = "{}{}".format(p['name'], p['inst'])
-                if name not in control:
-                    control.append(p['name'])
-                    self.output += '\t"{} ({}) [{}-{}]" [width = 192, height = 64];\n'.format(p['name'], p['inst'], p['me'], p['inst'])
+
+        self.output = 'digraph OmciGraph {\n\tnode [shape="box", style="filled", fillcolor="#dae8fc"]\n'
+
+        for a in added_mes:
+            self.output += '\t"{} ({}) [{}-{}]" [shape="box", style="filled", fillcolor="#fff2cc"]\n'.format(a['name'], a['inst'], a['me'], a['inst'])
 
         self.output += "\n\n"
         for x in mes_with_pointers:
             for p in x['pointers']:
-                self.output += '\t"{} ({}) [{}-{}]" -> "{} ({}) [{}-{}]"\n'.format(x['name'], x['inst'], x['me'], x['inst'], p['name'], p['inst'], p['me'], p['inst'])
+                new_line = '\t"{} ({}) [{}-{}]" -> "{} ({}) [{}-{}]"\n'.format(x['name'], x['inst'], x['me'], x['inst'], p['name'], p['inst'], p['me'], p['inst'])
+                if new_line not in self.output:
+                    self.output += new_line
 
         self.output += "}\n"
 
@@ -211,7 +218,8 @@ class Analyser:
             f.write(self.output)
 
         # TODO Change to subprocess
-        os.system("blockdiag %s --no-transparency" % file)
+        #os.system("blockdiag %s --no-transparency" % file)
+        os.system("dot -Tpng %s -o %s.png" % (file, file))
         os.system("rm -rf %s" % file)
 
     def setBuffer(self, buf):

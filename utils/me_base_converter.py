@@ -5,6 +5,7 @@ SET_POINTERS_METHOD = "    def setPointers(self):"
 mes_specific_methods = {
     47: SET_POINTERS_METHOD + """
         tp_type = self.tp_type.getValue()
+        tp_type = int.from_bytes(tp_type, 'big') if tp_type is not None else None
         if tp_type == 1:
             self.tp_pointer.setPointer([11])
         elif tp_type == 2:
@@ -41,6 +42,7 @@ mes_specific_methods = {
 
     130: SET_POINTERS_METHOD + """
         tp_type = self.tp_type.getValue()
+        tp_type = int.from_bytes(tp_type, 'big') if tp_type is not None else None
         if tp_type == 1:
             self.tp_pointer.setPointer([11])
         elif tp_type == 2:
@@ -106,6 +108,7 @@ mes_specific_methods = {
 
     171: SET_POINTERS_METHOD + """
         ass_type = self.association_type.getValue()
+        ass_type = int.from_bytes(ass_type, 'big') if ass_type is not None else None
         if ass_type == 1:
             self.associated_me_pointer.setPointer([130])
         elif ass_type == 2:
@@ -138,6 +141,7 @@ mes_specific_methods = {
 
     266: SET_POINTERS_METHOD + """
         iw_option = self.interworking_option.getValue()
+        iw_option = int.from_bytes(iw_option, 'big') if iw_option is not None else None
         if iw_option == 0:
             self.service_profile_pointer.setPointer([21])
             self.gal_profile_pointer.setPointer(None)
@@ -184,6 +188,7 @@ mes_specific_methods = {
 
     281: SET_POINTERS_METHOD + """
         iw_option = self.interworking_option.getValue()
+        iw_option = int.from_bytes(iw_option, 'big') if iw_option is not None else None
         if iw_option == 0:
             self.service_profile_pointer.setPointer([21])
             self.gal_profile_pointer.setPointer(None)
@@ -235,11 +240,15 @@ mes_classes = """
 me_block_pattern = re.compile(
     r'\[(\d+)\]...{\s+me_class_name\s+=\s+"(.+)"(.+[\n].+attname="(.+)".+length=(\d+).+setbycreate=(\w+))*')
 
+me_dict = "    me_dict = {\n"
+
 mes = {}
 for match in me_block_pattern.finditer(text):
     me_id = match.group(1)
     me_id_int = int(me_id)
     me_name = match.group(2)
+
+    me_dict += '        {}: "{}",\n'.format(me_id_int, me_name[:me_name.find('-')].strip() if '-' in me_name else me_name.strip())
 
     attributes = []
     me_attr_pattern = re.compile(r'attname="(.+)".+length=(\d+).+setbycreate=(\w+)')
@@ -320,8 +329,10 @@ for mk in mes.keys():
 
 mes_translate += "\n        else:\n            return None\n"
 
-me_class = """
-class ManagedEntity:
+me_dict += "    }\n"
+me_class = "class ManagedEntity:\n"
+me_class += me_dict
+me_class += """
     def __init__(self, id, instance):
         self.me_id = id
         self.instance = instance
