@@ -161,6 +161,9 @@ class Analyser:
         mes_with_pointers = []
         added_mes = []
 
+        def breakStr(string, every=13):
+            return '\\n'.join(string[i:i + every] for i in range(0, len(string), every))
+
         def appendMeWithPointer(ent, points_to=None):
             if points_to is None:
                 return
@@ -169,6 +172,8 @@ class Analyser:
             if ent not in mes_with_pointers:
                 mes_with_pointers.append(ent)
 
+        implicitly_linked_mes = {}
+        implicitly_not_found = []
         for e in self.entities:
             ent_obj = {'me': e.getId(), 'name': e.getName(), 'inst': e.getInstance(), 'pointers': []}
             # print(ent_obj)
@@ -193,19 +198,79 @@ class Analyser:
                                 if e_append not in added_mes:
                                     added_mes.append(e_append)
 
+            imp_link = e.getImplicitlyLinked()
+            found_il = False
+            for il in imp_link:
+                ent = self.findMeInstance(il, e.getInstance())
+                if ent is not None:
+                    found_il = True
+                    imp_key = e.getId() + ent.getId() + e.getInstance()
+                    if imp_key not in implicitly_linked_mes:
+                        implicitly_linked_mes[imp_key] = {
+                            'me1': e.getId(),
+                            'name1': e.getName(),
+                            'me2': ent.getId(),
+                            'name2': ent.getName(),
+                            'inst': e.getInstance()
+                        }
 
+            if not found_il:
+                implicitly_not_found.append(e)
 
         self.output = 'digraph OmciGraph {\n\tnode [shape="box", style="filled", fillcolor="#dae8fc"]\n'
 
         for a in added_mes:
-            self.output += '\t"{} ({}) [{}-{}]" [shape="box", style="filled", fillcolor="#fff2cc"]\n'.format(a['name'], a['inst'], a['me'], a['inst'])
+            me_num = a['me']
+            name = "{}".format(a['name'])
+            inst = "({})".format(a['inst'])
+            idx = "[{}-{}]".format(me_num, a['inst'])
+            name = breakStr(name) + "\\n" + inst + "\\n" + idx
+            self.output += '\t"{}" [shape="box", style="filled", fillcolor="#fff2cc"]\n'.format(name)
+            for inf in implicitly_not_found:
+                if me_num in inf.getImplicitlyLinked():
+                    imp_key = inf.getId() + me_num + inf.getInstance()
+                    if imp_key not in implicitly_linked_mes:
+                        implicitly_linked_mes[imp_key] = {
+                            'me1': inf.getId(),
+                            'name1': inf.getName(),
+                            'me2': me_num,
+                            'name2': a['name'],
+                            'inst': inf.getInstance()
+                        }
 
         self.output += "\n\n"
         for x in mes_with_pointers:
             for p in x['pointers']:
-                new_line = '\t"{} ({}) [{}-{}]" -> "{} ({}) [{}-{}]"\n'.format(x['name'], x['inst'], x['me'], x['inst'], p['name'], p['inst'], p['me'], p['inst'])
+                name1 = "{}".format(x['name'])
+                inst1 = "({})".format(x['inst'])
+                idx1 = "[{}-{}]".format(x['me'], x['inst'])
+                name1 = breakStr(name1) + "\\n" + inst1 + "\\n" + idx1
+
+                name2 = "{}".format(p['name'])
+                inst2 = "({})".format(p['inst'])
+                idx2 = "[{}-{}]".format(p['me'], p['inst'])
+                name2 = breakStr(name2) + "\\n" + inst2 + "\\n" + idx2
+
+                new_line = '\t"{}" -> "{}"\n'.format(name1, name2)
                 if new_line not in self.output:
                     self.output += new_line
+
+        self.output += "\n"
+
+        for il in implicitly_linked_mes.values():
+            name1 = "{}".format(il['name1'])
+            inst1 = "({})".format(il['inst'])
+            idx1 = "[{}-{}]".format(il['me1'], il['inst'])
+            name1 = breakStr(name1) + "\\n" + inst1 + "\\n" + idx1
+
+            name2 = "{}".format(il['name2'], il['inst'])
+            inst2 = "({})".format(il['inst'])
+            idx2 = "[{}-{}]".format(il['me2'], il['inst'])
+            name2 = breakStr(name2) + "\\n" + inst2 + "\\n" + idx2
+
+            new_line = '\t"{}" -> "{}" [arrowhead=none, arrowtail=none, style=dotted]\n'.format(name1, name2)
+            if new_line not in self.output:
+                self.output += new_line
 
         self.output += "}\n"
 

@@ -58,7 +58,7 @@
 	{attname="PPPoE Filter", length=1, setbycreate=false},
 	{attname="Power Control", length=1, setbycreate=false}},
 
-[24] = { me_class_name = "Ethernet PM History Data",
+[24] = { me_class_name = "Ethernet PM History Data", imp_link=(11),
 	{ attname="Interval End Time", length=1, setbycreate=false }, -- 1
 	{ attname="Threshold Data Id", length=2, setbycreate=true }, --2
 	{ attname="FCS errors Drop events", length=4, setbycreate=false }, -- 3
@@ -95,7 +95,7 @@
 	{ attname="Unknown MAC address discard", length=1, setbycreate=true },
 	{ attname="MAC learning depth", length=1, setbycreate=true }},
 
-[47] = { me_class_name = "MAC bridge port configuration data",
+[47] = { me_class_name = "MAC bridge port configuration data", imp_link=(48, 49, 52, 84, 311, 321, 322),
 	{ attname="Bridge id pointer", length=2, setbycreate=true },
 	{ attname="Port num", length=1, setbycreate=true },
 	{ attname="TP type", length=1, setbycreate=true },
@@ -109,19 +109,19 @@
 	{ attname="Outbound TD pointer", length=2, setbycreate=false },
 	{ attname="Inbound TD pointer", length=2, setbycreate=false }},
 
-[48] = { me_class_name = "MAC bridge port designation data",
+[48] = { me_class_name = "MAC bridge port designation data", imp_link=(47),
 	{ attname="Designated bridge root cost port", length=24, setbycreate=false },
 	{ attname="Port state", length=1, setbycreate=false }},
 
-[49] = { me_class_name = "MAC bridge port filter table data",
+[49] = { me_class_name = "MAC bridge port filter table data", imp_link=(47),
 	{ attname="MAC filter table", length=8, setbycreate=false }},
 
-[51] = { me_class_name = "MAC Bridge PM History Data",
+[51] = { me_class_name = "MAC Bridge PM History Data", imp_link=(45),
 	{ attname="Interval end time", length=1, setbycreate=false },
 	{ attname="Threshold data id", length=2, setbycreate=true },
 	{ attname="Bridge learning entry discard count", length=4, setbycreate=false }},
 
-[52] = { me_class_name = "MAC Bridge Port PM History Data",
+[52] = { me_class_name = "MAC Bridge Port PM History Data", imp_link=(47),
 	{ attname="Interval end time", length=1, setbycreate=false },
 	{ attname="Threshold data id", length=2, setbycreate=true },
 	{ attname="Forwarded frame counter", length=4, setbycreate=false },	
@@ -179,12 +179,12 @@
 	{attname="ARC Interval", length=1, setbycreate=false},
 	{attname="Power Control", length=1, setbycreate=false}},
 	
-[84] = { me_class_name = "VLAN tagging filter data",
+[84] = { me_class_name = "VLAN tagging filter data", imp_link=(47),
 	{attname="VLAN filter list", length=24, setbycreate=true},
 	{attname="Forward operation", length=1, setbycreate=true},
 	{attname="Number of entries", length=1, setbycreate=true}},
 
-[89] = { me_class_name = "Ethernet PM History Data 2",
+[89] = { me_class_name = "Ethernet PM History Data 2", imp_link=(11),
 	{ attname="Interval end time", length=1, setbycreate=false },
 	{ attname="Threshold data id", length=2, setbycreate=true },
 	{ attname="PPPoE filtered frame counter", length=4, setbycreate=false }},
@@ -289,7 +289,7 @@
 	{ attname="Signalling code", length=1, setbycreate=true }},
 	
 -- ADD by Maycon at 2020-05-07	
-[141] = { me_class_name = "VoIP line status",
+[141] = { me_class_name = "VoIP line status", imp_link=(53),
 	{ attname="voip codec used", length=2, setbycreate=false },
 	{ attname="voip voice server status", length=1, setbycreate=false },
 	{ attname="voip port session type", length=1, setbycreate=false },
@@ -387,7 +387,7 @@
 	{ attname="Revertive ind", length=1, setbycreate=true },
 	{ attname="Wait to restore time", length=1, setbycreate=true }},
 
-[160] = { me_class_name = "Equipment extension package",
+[160] = { me_class_name = "Equipment extension package", imp_link=(256, 5),
 	{ attname="Environmental sense", length=2, setbycreate=false },
 	{ attname="Contact closure output", length=2, setbycreate=false }},
 
@@ -415,7 +415,7 @@
 	{ attname="Pointer to Larg String ME Pointer for Username", length=2, setbycreate=false },
 	{ attname="Pointer to Larg String ME Pointer for Service Name", length=2, setbycreate=false }},
 
-[255] = { me_class_name = "Ethernet performance monitoring history data 4",
+[255] = { me_class_name = "Ethernet performance monitoring history data 4", imp_link=(11),
 	{ attname="interval_end_time", length=1, setbycreate=false },
 	{ attname="threshold_data_1_2_id", length=2, setbycreate=true },
 	{ attname="association_type", length=1, setbycreate=true },
@@ -484,7 +484,7 @@
 	{ attname="Lower transmit power threshold", length=1, setbycreate=false },
 	{ attname="Upper transmit power threshold", length=1, setbycreate=false }},
 
-[264] = { me_class_name = "UNI-G",
+[264] = { me_class_name = "UNI-G", imp_link=(11),
 	{ attname="Config option status", length=2, setbycreate=false },
 	{ attname="Administrative state", length=1, setbycreate=false }},
 	
@@ -498,7 +498,7 @@
 	{ attname="GAL profile pointer", length=2, setbycreate=true },
 	{ attname="GAL loopback configuration", length=1, setbycreate=false }},
 
-[267] = { me_class_name = "GEM Port PM History Data",
+[267] = { me_class_name = "GEM Port PM History Data", imp_link=(268),
 	{ attname="Interval end time", length=1, setbycreate=false },
 	{ attname="Threshold data id", length=2, setbycreate=true },
 	{ attname="Lost packets", length=4, setbycreate=false },
@@ -509,7 +509,7 @@
 	{ attname="Impaired blocks", length=4, setbycreate=false },
 	{ attname="Transmitted packets", length=5, setbycreate=false }},
 
-[268] = { me_class_name = "GEM Port Network CTP",
+[268] = { me_class_name = "GEM Port Network CTP", imp_link=(267),
 	{ attname="Port id value", length=2, setbycreate=true },
 	{ attname="T-CONT pointer", length=2, setbycreate=true },
 	{ attname="Direction", length=1, setbycreate=true },
@@ -525,7 +525,7 @@
 [272] = { me_class_name = "GAL Ethernet profile",
 	{ attname="Maximum GEM payload size", length=2, setbycreate=true }},
 
-[273] = { me_class_name = "Threshold Data 1",
+[273] = { me_class_name = "Threshold Data 1", imp_link=(274),
 	{attname="Threshold value 1", length=4, setbycreate=true},
 	{attname="Threshold value 2", length=4, setbycreate=true},
 	{attname="Threshold value 3", length=4, setbycreate=true},
@@ -534,7 +534,7 @@
 	{attname="Threshold value 6", length=4, setbycreate=true},
 	{attname="Threshold value 7", length=4, setbycreate=true}},
 
-[274] = { me_class_name = "Threshold Data 2",
+[274] = { me_class_name = "Threshold Data 2", imp_link=(273),
 	{attname="Threshold value 8", length=4,  setbycreate=true},
 	{attname="Threshold value 9", length=4,  setbycreate=true},
 	{attname="Threshold value 10", length=4,  setbycreate=true},
@@ -550,7 +550,7 @@
 	{ attname="Buffer underflows", length=4, setbycreate=false },
 	{ attname="Buffer overflows", length=4, setbycreate=false }},
 
-[276] = { me_class_name = "GAL Ethernet PM History Data",
+[276] = { me_class_name = "GAL Ethernet PM History Data", imp_link=(266, 281),
 	{ attname="Interval end time", length=1, setbycreate=false },
 	{ attname="Threshold data id", length=2, setbycreate=true },
 	{ attname="Discarded frames", length=4, setbycreate=false }},
@@ -624,7 +624,7 @@
 	{ attname="Shared secret auth3", length=25, setbycreate=false }, -- 8
 	{ attname="OLT proxy address", length=4, setbycreate=false }}, -- 9
 
-[296] = { me_class_name = "Ethernet PM History Data 3",
+[296] = { me_class_name = "Ethernet PM History Data 3", imp_link=(11),
 	{ attname="Interval End Time", length=1, setbycreate=false },
 	{ attname="Threshold Data Id", length=2, setbycreate=true },
 	{ attname="Drop events", length=4, setbycreate=false },
@@ -669,21 +669,21 @@
 	{ attname="Query max response time", length=4, setbycreate=true },		
 	{ attname="Last member query interval", length=4, setbycreate=false }},
 
-[310] = { me_class_name = "Multicast subscriber config info",
+[310] = { me_class_name = "Multicast subscriber config info", imp_link=(47, 130),
 	{ attname="ME type", length=1, setbycreate=true },
 	{ attname="Multicast operations profile pointer", length=2, setbycreate=true },
 	{ attname="Max simultaneous groups", length=2, setbycreate=true },
 	{ attname="Max multicast bandwidth", length=4, setbycreate=true },
 	{ attname="Bandwidth enforcement", length=1, setbycreate=true }},	
 	
-[311] = { me_class_name = "Multicast Subscriber Monitor",
+[311] = { me_class_name = "Multicast Subscriber Monitor", imp_link=(47, 130),
 	{ attname="ME type", length=1, setbycreate=true },
 	{ attname="Current multicast bandwidth", length=4, setbycreate=false },
 	{ attname="Max Join messages counter", length=4, setbycreate=false },
 	{ attname="Bandwidth exceeded counter", length=4, setbycreate=false },
 	{ attname="Active group list table", length=24, setbycreate=false }},	
 
-[312] = { me_class_name = "FEC PM History Data",
+[312] = { me_class_name = "FEC PM History Data", imp_link=(263),
 	{ attname="Interval end time", length=1, setbycreate=false },
 	{ attname="Threshold data id", length=2, setbycreate=true },
 	{ attname="Corrected bytes", length=4, setbycreate=false },
@@ -725,7 +725,7 @@
 	{ attname="Packets 512 to 1023 Octets", length=4, setbycreate=false },
 	{ attname="Packets 1024 to 1518 Octets", length=4, setbycreate=false }},
 
-[322] = { me_class_name = "Ethernet Frame PM History Data US",
+[322] = { me_class_name = "Ethernet Frame PM History Data US", imp_link=(47),
 	{ attname="Interval End Time", length=1, setbycreate=false },
 	{ attname="Threshold Data Id", length=2, setbycreate=true },
 	{ attname="Drop events", length=4, setbycreate=false },
@@ -758,7 +758,7 @@
 	{ attname="Associated tag", length=2, setbycreate=false }},
 
 -- ADD by Maycon at 2020-05-08	
-[341] = { me_class_name = "GEM port network CTP performance monitoring history data",	
+[341] = { me_class_name = "GEM port network CTP performance monitoring history data", imp_link=(268),
 	{ attname="Interval end time", length=1, setbycreate=true }, -- 1
 	{ attname="Threshold data ID", length=2, setbycreate=true }, -- 2
 	{ attname="Transmitted GEM frames", length=4, setbycreate=false }, -- 3

@@ -256,6 +256,9 @@ for match in me_block_pattern.finditer(text):
         name_str = m.group(1).lower().replace(' ', '_').replace('-', '_')
         attributes.append({'name_str': name_str, 'name': m.group(1), 'length': m.group(2), 'setbycreate': m.group(3)})
 
+    imp_link_match = re.search(r'imp_link=\((.+)\)', match.group())
+    imp_link = "[{}]".format(imp_link_match.group(1).strip().rstrip(',')) if imp_link_match else "[]"
+
     # TODO ME NAME with '-' (ANI-G, T-CONT)
     classname = me_name[:me_name.find('-')].strip().title().replace(' ', '') if '-' in me_name else me_name.strip().title().replace(' ', '')
     mes[me_id_int] = classname
@@ -264,7 +267,8 @@ for match in me_block_pattern.finditer(text):
 class {}(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, {}, instance)
-        self.name = \"{}\"\n""".format(classname, me_id, classname)
+        self.name = \"{}\"
+        self.imp_link = {}\n""".format(classname, me_id, classname, imp_link)
 
     for attr in attributes:
         set_by_create = "True" if "true" in attr['setbycreate'].lower() else "False"
@@ -277,7 +281,11 @@ class {}(ManagedEntity):
 
     line = line[0:-1] # Remove last blank line
     line += """
-        )\n\n"""
+        )\n"""
+
+    line += """
+    def getImplicitlyLinked(self):
+        return self.imp_link\n\n"""
 
     if me_id_int in mes_specific_methods.keys():
         line += mes_specific_methods[me_id_int]

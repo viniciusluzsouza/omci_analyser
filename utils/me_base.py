@@ -223,11 +223,15 @@ class OntData(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 2, instance)
         self.name = "OntData"
+        self.imp_link = []
         self.mib_data_sync = MeAttribute("MIB Data Sync", 1, False, False, None)
 
         self.attributes = (
             self.mib_data_sync,
         )
+
+    def getImplicitlyLinked(self):
+        return self.imp_link
 
     def setPointers(self):
         pass
@@ -237,6 +241,7 @@ class PonIfLineCard(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 4, instance)
         self.name = "PonIfLineCard"
+        self.imp_link = []
         self.not_identified = MeAttribute("Not_identified", 4, False, False, None)
         self.not_identified = MeAttribute("Not_identified", 4, False, False, None)
         self.not_identified = MeAttribute("Not_identified", 4, False, False, None)
@@ -253,6 +258,9 @@ class PonIfLineCard(ManagedEntity):
             self.not_identified,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -261,6 +269,7 @@ class Cardholder(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 5, instance)
         self.name = "Cardholder"
+        self.imp_link = []
         self.actual_plug_in_unit_type = MeAttribute("Actual Plug-in Unit Type", 1, False, False, None)
         self.expected_plug_in_unit_type = MeAttribute("Expected Plug-in Unit Type", 1, False, False, None)
         self.expected_port_count = MeAttribute("Expected Port Count", 1, False, False, None)
@@ -279,6 +288,9 @@ class Cardholder(ManagedEntity):
             self.invoke_protection_switch,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -287,6 +299,7 @@ class CircuitPack(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 6, instance)
         self.name = "CircuitPack"
+        self.imp_link = []
         self.type = MeAttribute("Type", 1, True, False, None)
         self.number_of_ports = MeAttribute("Number of ports", 1, False, False, None)
         self.serial_number = MeAttribute("Serial Number", 8, False, False, None)
@@ -319,6 +332,9 @@ class CircuitPack(ManagedEntity):
             self.power_shed_override,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -327,6 +343,7 @@ class SoftwareImage(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 7, instance)
         self.name = "SoftwareImage"
+        self.imp_link = []
         self.version = MeAttribute("Version", 14, False, False, None)
         self.is_committed = MeAttribute("Is committed", 1, False, False, None)
         self.is_active = MeAttribute("Is active", 1, False, False, None)
@@ -339,6 +356,9 @@ class SoftwareImage(ManagedEntity):
             self.is_valid,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -347,6 +367,7 @@ class PptpEthernetUni(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 11, instance)
         self.name = "PptpEthernetUni"
+        self.imp_link = []
         self.expected_type = MeAttribute("Expected Type", 1, False, False, None)
         self.sensed_type = MeAttribute("Sensed Type", 1, False, False, None)
         self.auto_detection_configuration = MeAttribute("Auto Detection Configuration", 1, False, False, None)
@@ -381,6 +402,9 @@ class PptpEthernetUni(ManagedEntity):
             self.power_control,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -389,6 +413,7 @@ class EthernetPmHistoryData(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 24, instance)
         self.name = "EthernetPmHistoryData"
+        self.imp_link = [11]
         self.interval_end_time = MeAttribute("Interval End Time", 1, False, False, None)
         self.threshold_data_id = MeAttribute("Threshold Data Id", 2, True, False, None)
         self.fcs_errors_drop_events = MeAttribute("FCS errors Drop events", 4, False, False, None)
@@ -425,6 +450,9 @@ class EthernetPmHistoryData(ManagedEntity):
             self.internal_mac_receive_error_counter,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -433,11 +461,15 @@ class PonPhysicalPathTerminationPoint(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 40, instance)
         self.name = "PonPhysicalPathTerminationPoint"
+        self.imp_link = []
         self.not_identified = MeAttribute("Not_identified", 4, False, False, None)
 
         self.attributes = (
             self.not_identified,
         )
+
+    def getImplicitlyLinked(self):
+        return self.imp_link
 
     def setPointers(self):
         pass
@@ -447,11 +479,15 @@ class VendorSpecific(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 44, instance)
         self.name = "VendorSpecific"
+        self.imp_link = []
         self.sub_entity = MeAttribute("Sub-Entity", 1, True, False, None)
 
         self.attributes = (
             self.sub_entity,
         )
+
+    def getImplicitlyLinked(self):
+        return self.imp_link
 
     def setPointers(self):
         pass
@@ -461,6 +497,7 @@ class MacBridgeServiceProfile(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 45, instance)
         self.name = "MacBridgeServiceProfile"
+        self.imp_link = []
         self.spanning_tree_ind = MeAttribute("Spanning tree ind", 1, True, False, None)
         self.learning_ind = MeAttribute("Learning ind", 1, True, False, None)
         self.port_bridging_ind = MeAttribute("Port bridging ind", 1, True, False, None)
@@ -483,6 +520,9 @@ class MacBridgeServiceProfile(ManagedEntity):
             self.mac_learning_depth,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -491,6 +531,7 @@ class MacBridgePortConfigurationData(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 47, instance)
         self.name = "MacBridgePortConfigurationData"
+        self.imp_link = [48, 49, 52, 84, 311, 321, 322]
         self.bridge_id_pointer = MeAttribute("Bridge id pointer", 2, True, False, None)
         self.port_num = MeAttribute("Port num", 1, True, False, None)
         self.tp_type = MeAttribute("TP type", 1, True, False, None)
@@ -518,6 +559,9 @@ class MacBridgePortConfigurationData(ManagedEntity):
             self.outbound_td_pointer,
             self.inbound_td_pointer,
         )
+
+    def getImplicitlyLinked(self):
+        return self.imp_link
 
     def setPointers(self):
         tp_type = self.tp_type.getValue()
@@ -558,6 +602,7 @@ class MacBridgePortDesignationData(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 48, instance)
         self.name = "MacBridgePortDesignationData"
+        self.imp_link = [47]
         self.designated_bridge_root_cost_port = MeAttribute("Designated bridge root cost port", 24, False, False, None)
         self.port_state = MeAttribute("Port state", 1, False, False, None)
 
@@ -565,6 +610,9 @@ class MacBridgePortDesignationData(ManagedEntity):
             self.designated_bridge_root_cost_port,
             self.port_state,
         )
+
+    def getImplicitlyLinked(self):
+        return self.imp_link
 
     def setPointers(self):
         pass
@@ -574,11 +622,15 @@ class MacBridgePortFilterTableData(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 49, instance)
         self.name = "MacBridgePortFilterTableData"
+        self.imp_link = [47]
         self.mac_filter_table = MeAttribute("MAC filter table", 8, False, False, None)
 
         self.attributes = (
             self.mac_filter_table,
         )
+
+    def getImplicitlyLinked(self):
+        return self.imp_link
 
     def setPointers(self):
         pass
@@ -588,6 +640,7 @@ class MacBridgePmHistoryData(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 51, instance)
         self.name = "MacBridgePmHistoryData"
+        self.imp_link = [45]
         self.interval_end_time = MeAttribute("Interval end time", 1, False, False, None)
         self.threshold_data_id = MeAttribute("Threshold data id", 2, True, False, None)
         self.bridge_learning_entry_discard_count = MeAttribute("Bridge learning entry discard count", 4, False, False, None)
@@ -598,6 +651,9 @@ class MacBridgePmHistoryData(ManagedEntity):
             self.bridge_learning_entry_discard_count,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -606,6 +662,7 @@ class MacBridgePortPmHistoryData(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 52, instance)
         self.name = "MacBridgePortPmHistoryData"
+        self.imp_link = [47]
         self.interval_end_time = MeAttribute("Interval end time", 1, False, False, None)
         self.threshold_data_id = MeAttribute("Threshold data id", 2, True, False, None)
         self.forwarded_frame_counter = MeAttribute("Forwarded frame counter", 4, False, False, None)
@@ -624,6 +681,9 @@ class MacBridgePortPmHistoryData(ManagedEntity):
             self.received_and_discarded_counter,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -632,6 +692,7 @@ class PhysicalPathTerminationPointPotsUni(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 53, instance)
         self.name = "PhysicalPathTerminationPointPotsUni"
+        self.imp_link = []
         self.administrative_state = MeAttribute("Administrative state", 1, False, False, None)
         self.deprecated = MeAttribute("Deprecated", 2, False, False, None)
         self.arc = MeAttribute("ARC", 1, False, False, None)
@@ -660,6 +721,9 @@ class PhysicalPathTerminationPointPotsUni(ManagedEntity):
             self.nominal_feed_voltage,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -668,6 +732,7 @@ class VoiceServiceProfile(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 58, instance)
         self.name = "VoiceServiceProfile"
+        self.imp_link = []
         self.announcement_type = MeAttribute("Announcement type", 1, True, False, None)
         self.jitter_target = MeAttribute("Jitter target", 2, True, False, None)
         self.jitter_buffer_max = MeAttribute("Jitter buffer max", 2, True, False, None)
@@ -700,6 +765,9 @@ class VoiceServiceProfile(ManagedEntity):
             self.network_specific_extensions_pointer,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         self.network_specific_extensions_pointer.setPointer([137])
 
@@ -708,6 +776,7 @@ class MacBridgePortFilterPreassignTable(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 79, instance)
         self.name = "MacBridgePortFilterPreassignTable"
+        self.imp_link = []
         self.ipv4_multicast_filtering = MeAttribute("IPv4 multicast filtering", 1, False, False, None)
         self.ipv6_multicast_filtering = MeAttribute("IPv6 multicast filtering", 1, False, False, None)
         self.ipv4_broadcast_filtering = MeAttribute("IPv4 broadcast filtering", 1, False, False, None)
@@ -730,6 +799,9 @@ class MacBridgePortFilterPreassignTable(ManagedEntity):
             self.arp_filtering,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -738,6 +810,7 @@ class PptpVideoUni(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 82, instance)
         self.name = "PptpVideoUni"
+        self.imp_link = []
         self.administrative_state = MeAttribute("Administrative State", 1, False, False, None)
         self.operational_state = MeAttribute("Operational State", 1, False, False, None)
         self.arc = MeAttribute("ARC", 1, False, False, None)
@@ -752,6 +825,9 @@ class PptpVideoUni(ManagedEntity):
             self.power_control,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -760,6 +836,7 @@ class VlanTaggingFilterData(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 84, instance)
         self.name = "VlanTaggingFilterData"
+        self.imp_link = [47]
         self.vlan_filter_list = MeAttribute("VLAN filter list", 24, True, False, None)
         self.forward_operation = MeAttribute("Forward operation", 1, True, False, None)
         self.number_of_entries = MeAttribute("Number of entries", 1, True, False, None)
@@ -770,6 +847,9 @@ class VlanTaggingFilterData(ManagedEntity):
             self.number_of_entries,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -778,6 +858,7 @@ class EthernetPmHistoryData2(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 89, instance)
         self.name = "EthernetPmHistoryData2"
+        self.imp_link = [11]
         self.interval_end_time = MeAttribute("Interval end time", 1, False, False, None)
         self.threshold_data_id = MeAttribute("Threshold data id", 2, True, False, None)
         self.pppoe_filtered_frame_counter = MeAttribute("PPPoE filtered frame counter", 4, False, False, None)
@@ -788,6 +869,9 @@ class EthernetPmHistoryData2(ManagedEntity):
             self.pppoe_filtered_frame_counter,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -796,6 +880,7 @@ class PptpVideoAni(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 90, instance)
         self.name = "PptpVideoAni"
+        self.imp_link = []
         self.administrative_state = MeAttribute("Administrative State", 1, False, False, None)
         self.operational_state = MeAttribute("Operational State", 1, False, False, None)
         self.arc = MeAttribute("ARC", 1, False, False, None)
@@ -832,6 +917,9 @@ class PptpVideoAni(ManagedEntity):
             self.video_upper_optical_threshold,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -840,6 +928,7 @@ class Ieee8021PMapperServiceProfile(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 130, instance)
         self.name = "Ieee8021PMapperServiceProfile"
+        self.imp_link = []
         self.tp_pointer = MeAttribute("TP Pointer", 2, True, False, None)
         self.interwork_tp_pointer_for_p_bit_priority_0 = MeAttribute("Interwork TP pointer for P-bit priority 0", 2, True, False, None)
         self.interwork_tp_pointer_for_p_bit_priority_1 = MeAttribute("Interwork TP pointer for P-bit priority 1", 2, True, False, None)
@@ -869,6 +958,9 @@ class Ieee8021PMapperServiceProfile(ManagedEntity):
             self.default_p_bit_marking,
             self.tp_type,
         )
+
+    def getImplicitlyLinked(self):
+        return self.imp_link
 
     def setPointers(self):
         tp_type = self.tp_type.getValue()
@@ -906,6 +998,7 @@ class Olt(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 131, instance)
         self.name = "Olt"
+        self.imp_link = []
         self.olt_vendor_id = MeAttribute("OLT vendor id", 4, False, False, None)
         self.equipment_id = MeAttribute("Equipment id", 20, False, False, None)
         self.olt_version = MeAttribute("OLT version", 14, False, False, None)
@@ -916,6 +1009,9 @@ class Olt(ManagedEntity):
             self.olt_version,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -924,6 +1020,7 @@ class OntPowerShedding(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 133, instance)
         self.name = "OntPowerShedding"
+        self.imp_link = []
         self.restore_power_timer_reset_interval = MeAttribute("Restore power timer reset interval", 2, False, False, None)
         self.data_class_shedding_interval = MeAttribute("Data class shedding interval", 2, False, False, None)
         self.voice_class_shedding_interval = MeAttribute("Voice class shedding interval", 2, False, False, None)
@@ -950,6 +1047,9 @@ class OntPowerShedding(ManagedEntity):
             self.shedding_status,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -958,6 +1058,7 @@ class IpHostConfigData(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 134, instance)
         self.name = "IpHostConfigData"
+        self.imp_link = []
         self.ip_options = MeAttribute("IP options", 1, False, False, None)
         self.mac_address = MeAttribute("MAC address", 6, False, False, None)
         self.ont_identifier = MeAttribute("Ont identifier", 25, False, False, None)
@@ -992,6 +1093,9 @@ class IpHostConfigData(ManagedEntity):
             self.host_name,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -1000,6 +1104,7 @@ class TcpUdpConfigData(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 136, instance)
         self.name = "TcpUdpConfigData"
+        self.imp_link = []
         self.port_id = MeAttribute("Port ID", 2, True, False, None)
         self.protocol = MeAttribute("Protocol", 1, True, False, None)
         self.tos_diffserv_field = MeAttribute("TOS diffserv field", 1, True, False, None)
@@ -1012,6 +1117,9 @@ class TcpUdpConfigData(ManagedEntity):
             self.ip_host_pointer,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         self.ip_host_pointer.setPointer([134,347])
 
@@ -1020,6 +1128,7 @@ class NetworkAddress(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 137, instance)
         self.name = "NetworkAddress"
+        self.imp_link = []
         self.security_pointer = MeAttribute("Security pointer", 2, True, False, None)
         self.address_pointer = MeAttribute("Address pointer", 2, True, False, None)
 
@@ -1027,6 +1136,9 @@ class NetworkAddress(ManagedEntity):
             self.security_pointer,
             self.address_pointer,
         )
+
+    def getImplicitlyLinked(self):
+        return self.imp_link
 
     def setPointers(self):
         self.security_pointer.setPointer([148])
@@ -1037,6 +1149,7 @@ class VoipConfigData(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 138, instance)
         self.name = "VoipConfigData"
+        self.imp_link = []
         self.available_signalling_protocols = MeAttribute("Available signalling protocols", 1, False, False, None)
         self.signalling_protocol_used = MeAttribute("Signalling protocol used", 1, False, False, None)
         self.available_voip_configuration_methods = MeAttribute("Available VoIP configuration methods", 4, False, False, None)
@@ -1057,6 +1170,9 @@ class VoipConfigData(ManagedEntity):
             self.profile_version,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         self.voip_configuration_address_pointer.setPointer([137])
 
@@ -1065,6 +1181,7 @@ class VoipVoiceCtp(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 139, instance)
         self.name = "VoipVoiceCtp"
+        self.imp_link = []
         self.user_protocol_pointer = MeAttribute("User protocol pointer", 2, True, False, None)
         self.pptp_pointer = MeAttribute("PPTP pointer", 2, True, False, None)
         self.voip_media_profile_pointer = MeAttribute("VoIP media profile pointer", 2, True, False, None)
@@ -1077,6 +1194,9 @@ class VoipVoiceCtp(ManagedEntity):
             self.signalling_code,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         self.user_protocol_pointer.setPointer([153, 155])
         self.pptp_pointer.setPointer([53])
@@ -1087,6 +1207,7 @@ class VoipLineStatus(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 141, instance)
         self.name = "VoipLineStatus"
+        self.imp_link = [53]
         self.voip_codec_used = MeAttribute("voip codec used", 2, False, False, None)
         self.voip_voice_server_status = MeAttribute("voip voice server status", 1, False, False, None)
         self.voip_port_session_type = MeAttribute("voip port session type", 1, False, False, None)
@@ -1109,6 +1230,9 @@ class VoipLineStatus(ManagedEntity):
             self.emergency_call_status,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -1117,6 +1241,7 @@ class VoipMediaProfile(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 142, instance)
         self.name = "VoipMediaProfile"
+        self.imp_link = []
         self.fax_mode = MeAttribute("Fax mode", 1, True, False, None)
         self.voice_service_profile_pointer = MeAttribute("Voice service profile pointer", 2, True, False, None)
         self.codec_selection_first_order = MeAttribute("Codec selection first order", 1, True, False, None)
@@ -1153,6 +1278,9 @@ class VoipMediaProfile(ManagedEntity):
             self.rtp_profile_pointer,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         self.voice_service_profile_pointer.setPointer([58])
         self.rtp_profile_pointer.setPointer([143])
@@ -1162,6 +1290,7 @@ class RtpProfileData(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 143, instance)
         self.name = "RtpProfileData"
+        self.imp_link = []
         self.local_port_min = MeAttribute("Local port min", 2, True, False, None)
         self.local_port_max = MeAttribute("Local port max", 2, True, False, None)
         self.dscp_mark = MeAttribute("DSCP mark", 1, True, False, None)
@@ -1182,6 +1311,9 @@ class RtpProfileData(ManagedEntity):
             self.ip_host_config_pointer,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         self.ip_host_config_pointer.setPointer([134, 347])
 
@@ -1190,6 +1322,7 @@ class AuthenticationSecurityMethod(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 148, instance)
         self.name = "AuthenticationSecurityMethod"
+        self.imp_link = []
         self.validation_scheme = MeAttribute("Validation scheme", 1, False, False, None)
         self.username_1 = MeAttribute("Username 1", 25, False, False, None)
         self.password = MeAttribute("Password", 25, False, False, None)
@@ -1204,6 +1337,9 @@ class AuthenticationSecurityMethod(ManagedEntity):
             self.username_2,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -1212,6 +1348,7 @@ class SipAgentConfigData(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 150, instance)
         self.name = "SipAgentConfigData"
+        self.imp_link = []
         self.proxy_server_address_pointer = MeAttribute("Proxy server address pointer", 2, True, False, None)
         self.outbound_proxy_address_pointer = MeAttribute("Outbound proxy address pointer", 2, True, False, None)
         self.primary_sip_dns = MeAttribute("Primary SIP DNS", 4, True, False, None)
@@ -1246,6 +1383,9 @@ class SipAgentConfigData(ManagedEntity):
             self.redundant_sip_agent_pointer,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         self.proxy_server_address_pointer.setPointer([157])
         self.outbound_proxy_address_pointer.setPointer([157])
@@ -1257,6 +1397,7 @@ class SipUserData(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 153, instance)
         self.name = "SipUserData"
+        self.imp_link = []
         self.sip_agent_pointer = MeAttribute("SIP agent pointer", 2, True, False, None)
         self.user_part_aor = MeAttribute("User part AOR", 2, True, False, None)
         self.sip_display_name = MeAttribute("SIP display name", 25, False, False, None)
@@ -1285,6 +1426,9 @@ class SipUserData(ManagedEntity):
             self.roh_timer,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         self.sip_agent_pointer.setPointer([150])
         self.network_dial_plan_pointer.setPointer([145])
@@ -1297,11 +1441,15 @@ class LargeString(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 157, instance)
         self.name = "LargeString"
+        self.imp_link = []
         self.number_of_parts = MeAttribute("Number of parts", 1, False, False, None)
 
         self.attributes = (
             self.number_of_parts,
         )
+
+    def getImplicitlyLinked(self):
+        return self.imp_link
 
     def setPointers(self):
         pass
@@ -1311,6 +1459,7 @@ class OntRemoteDebug(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 158, instance)
         self.name = "OntRemoteDebug"
+        self.imp_link = []
         self.command_format = MeAttribute("Command format", 1, False, False, None)
         self.command = MeAttribute("Command", 25, False, False, None)
         self.reply_table = MeAttribute("Reply table", 4, False, False, None)
@@ -1321,6 +1470,9 @@ class OntRemoteDebug(ManagedEntity):
             self.reply_table,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -1329,6 +1481,7 @@ class EquipmentProtectionProfile(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 159, instance)
         self.name = "EquipmentProtectionProfile"
+        self.imp_link = []
         self.protect_slot_1,protect_slot_2 = MeAttribute("Protect slot 1,protect slot 2", 2, True, False, None)
         self.working_slot_1,working_slot_2,working_slot_3,working_slot_4,working_slot_5,working_slot_6,working_slot_7,working_slot_8 = MeAttribute("working slot 1,working slot 2,working slot 3,working slot 4,working slot 5,working slot 6,working slot 7,working slot 8", 8, True, False, None)
         self.protect_status_1,protect_status_2 = MeAttribute("Protect status 1,protect status 2", 2, False, False, None)
@@ -1343,6 +1496,9 @@ class EquipmentProtectionProfile(ManagedEntity):
             self.wait_to_restore_time,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -1351,6 +1507,7 @@ class EquipmentExtensionPackage(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 160, instance)
         self.name = "EquipmentExtensionPackage"
+        self.imp_link = [256, 5]
         self.environmental_sense = MeAttribute("Environmental sense", 2, False, False, None)
         self.contact_closure_output = MeAttribute("Contact closure output", 2, False, False, None)
 
@@ -1358,6 +1515,9 @@ class EquipmentExtensionPackage(ManagedEntity):
             self.environmental_sense,
             self.contact_closure_output,
         )
+
+    def getImplicitlyLinked(self):
+        return self.imp_link
 
     def setPointers(self):
         pass
@@ -1367,6 +1527,7 @@ class ExtendedVlanTaggingOperationConfigurationData(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 171, instance)
         self.name = "ExtendedVlanTaggingOperationConfigurationData"
+        self.imp_link = []
         self.association_type = MeAttribute("Association type", 1, True, False, None)
         self.received_frame_vlan_tagging_operation_table_max_size = MeAttribute("Received frame VLAN tagging operation table max size", 2, False, False, None)
         self.input_tpid = MeAttribute("Input TPID", 2, False, False, None)
@@ -1386,6 +1547,9 @@ class ExtendedVlanTaggingOperationConfigurationData(ManagedEntity):
             self.associated_me_pointer,
             self.dscp_to_p_bit_mapping,
         )
+
+    def getImplicitlyLinked(self):
+        return self.imp_link
 
     def setPointers(self):
         ass_type = self.association_type.getValue()
@@ -1420,6 +1584,7 @@ class PppoeByGcom(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 250, instance)
         self.name = "PppoeByGcom"
+        self.imp_link = []
         self.nat = MeAttribute("NAT", 1, True, False, None)
         self.auth = MeAttribute("Auth", 1, True, False, None)
         self.connect = MeAttribute("Connect", 1, True, False, None)
@@ -1446,6 +1611,9 @@ class PppoeByGcom(ManagedEntity):
             self.pointer_to_larg_string_me_pointer_for_service_name,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         self.pointer_to_ip_host_config_data_me.setPointer([134, 347])
         self.pointer_to_larg_string_me_pointer_for_username.setPointer([157])
@@ -1456,6 +1624,7 @@ class EthernetPerformanceMonitoringHistoryData4(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 255, instance)
         self.name = "EthernetPerformanceMonitoringHistoryData4"
+        self.imp_link = [11]
         self.interval_end_time = MeAttribute("interval_end_time", 1, False, False, None)
         self.threshold_data_1_2_id = MeAttribute("threshold_data_1_2_id", 2, True, False, None)
         self.association_type = MeAttribute("association_type", 1, True, False, None)
@@ -1486,6 +1655,9 @@ class EthernetPerformanceMonitoringHistoryData4(ManagedEntity):
             self.received_error_counter,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -1494,6 +1666,7 @@ class Ont(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 256, instance)
         self.name = "Ont"
+        self.imp_link = []
         self.vendor_id = MeAttribute("Vendor Id", 4, False, False, None)
         self.version = MeAttribute("Version", 14, False, False, None)
         self.serial_nr = MeAttribute("Serial Nr", 8, False, False, None)
@@ -1514,6 +1687,9 @@ class Ont(ManagedEntity):
             self.operational_state,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -1522,6 +1698,7 @@ class Ont2(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 257, instance)
         self.name = "Ont2"
+        self.imp_link = []
         self.equipment_id = MeAttribute("Equipment id", 20, False, False, None)
         self.omcc_version = MeAttribute("OMCC version", 1, False, False, None)
         self.vendor_product_code = MeAttribute("Vendor product code", 2, False, False, None)
@@ -1546,6 +1723,9 @@ class Ont2(ManagedEntity):
             self.sysup_time,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -1554,6 +1734,7 @@ class PonTcAdapter(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 261, instance)
         self.name = "PonTcAdapter"
+        self.imp_link = []
         self.not_identified = MeAttribute("Not_identified", 4, False, False, None)
         self.not_identified = MeAttribute("Not_identified", 4, False, False, None)
         self.not_identified = MeAttribute("Not_identified", 4, False, False, None)
@@ -1570,6 +1751,9 @@ class PonTcAdapter(ManagedEntity):
             self.not_identified,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -1578,6 +1762,7 @@ class Tcont(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 262, instance)
         self.name = "Tcont"
+        self.imp_link = []
         self.alloc_id = MeAttribute("Alloc-id", 2, False, False, None)
         self.mode_indicator = MeAttribute("Mode indicator", 1, False, False, None)
         self.policy = MeAttribute("Policy", 1, False, False, None)
@@ -1588,6 +1773,9 @@ class Tcont(ManagedEntity):
             self.policy,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -1596,6 +1784,7 @@ class Anig(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 263, instance)
         self.name = "Anig"
+        self.imp_link = []
         self.sr_indication = MeAttribute("SR indication", 1, False, False, None)
         self.total_t_cont_number = MeAttribute("Total T-CONT number", 2, False, False, None)
         self.gem_block_length = MeAttribute("GEM block length", 2, False, False, None)
@@ -1632,6 +1821,9 @@ class Anig(ManagedEntity):
             self.upper_transmit_power_threshold,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -1640,6 +1832,7 @@ class Uni(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 264, instance)
         self.name = "Uni"
+        self.imp_link = [11]
         self.config_option_status = MeAttribute("Config option status", 2, False, False, None)
         self.administrative_state = MeAttribute("Administrative state", 1, False, False, None)
 
@@ -1647,6 +1840,9 @@ class Uni(ManagedEntity):
             self.config_option_status,
             self.administrative_state,
         )
+
+    def getImplicitlyLinked(self):
+        return self.imp_link
 
     def setPointers(self):
         pass
@@ -1656,6 +1852,7 @@ class GemInterworkingTerminationPoint(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 266, instance)
         self.name = "GemInterworkingTerminationPoint"
+        self.imp_link = []
         self.gem_port_network_ctp_connectivity_pointer = MeAttribute("GEM port network CTP connectivity pointer", 2, True, False, None)
         self.interworking_option = MeAttribute("Interworking option", 1, True, False, None)
         self.service_profile_pointer = MeAttribute("Service profile pointer", 2, True, False, None)
@@ -1675,6 +1872,9 @@ class GemInterworkingTerminationPoint(ManagedEntity):
             self.gal_profile_pointer,
             self.gal_loopback_configuration,
         )
+
+    def getImplicitlyLinked(self):
+        return self.imp_link
 
     def setPointers(self):
         iw_option = self.interworking_option.getValue()
@@ -1711,6 +1911,7 @@ class GemPortPmHistoryData(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 267, instance)
         self.name = "GemPortPmHistoryData"
+        self.imp_link = [268]
         self.interval_end_time = MeAttribute("Interval end time", 1, False, False, None)
         self.threshold_data_id = MeAttribute("Threshold data id", 2, True, False, None)
         self.lost_packets = MeAttribute("Lost packets", 4, False, False, None)
@@ -1733,6 +1934,9 @@ class GemPortPmHistoryData(ManagedEntity):
             self.transmitted_packets,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -1741,6 +1945,7 @@ class GemPortNetworkCtp(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 268, instance)
         self.name = "GemPortNetworkCtp"
+        self.imp_link = [267]
         self.port_id_value = MeAttribute("Port id value", 2, True, False, None)
         self.t_cont_pointer = MeAttribute("T-CONT pointer", 2, True, False, None)
         self.direction = MeAttribute("Direction", 1, True, False, None)
@@ -1761,6 +1966,9 @@ class GemPortNetworkCtp(ManagedEntity):
             self.encryption_state,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         self.t_cont_pointer.setPointer([262])
         self.traffic_management_pointer_for_upstream.setPointer([277, 262])
@@ -1772,11 +1980,15 @@ class GalTdmProfile(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 271, instance)
         self.name = "GalTdmProfile"
+        self.imp_link = []
         self.gem_frame_loss_integration_period = MeAttribute("GEM frame loss integration period", 2, True, False, None)
 
         self.attributes = (
             self.gem_frame_loss_integration_period,
         )
+
+    def getImplicitlyLinked(self):
+        return self.imp_link
 
     def setPointers(self):
         pass
@@ -1786,11 +1998,15 @@ class GalEthernetProfile(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 272, instance)
         self.name = "GalEthernetProfile"
+        self.imp_link = []
         self.maximum_gem_payload_size = MeAttribute("Maximum GEM payload size", 2, True, False, None)
 
         self.attributes = (
             self.maximum_gem_payload_size,
         )
+
+    def getImplicitlyLinked(self):
+        return self.imp_link
 
     def setPointers(self):
         pass
@@ -1800,6 +2016,7 @@ class ThresholdData1(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 273, instance)
         self.name = "ThresholdData1"
+        self.imp_link = [274]
         self.threshold_value_1 = MeAttribute("Threshold value 1", 4, True, False, None)
         self.threshold_value_2 = MeAttribute("Threshold value 2", 4, True, False, None)
         self.threshold_value_3 = MeAttribute("Threshold value 3", 4, True, False, None)
@@ -1818,6 +2035,9 @@ class ThresholdData1(ManagedEntity):
             self.threshold_value_7,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -1826,6 +2046,7 @@ class ThresholdData2(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 274, instance)
         self.name = "ThresholdData2"
+        self.imp_link = [273]
         self.threshold_value_8 = MeAttribute("Threshold value 8", 4, True, False, None)
         self.threshold_value_9 = MeAttribute("Threshold value 9", 4, True, False, None)
         self.threshold_value_10 = MeAttribute("Threshold value 10", 4, True, False, None)
@@ -1844,6 +2065,9 @@ class ThresholdData2(ManagedEntity):
             self.threshold_value_14,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -1852,6 +2076,7 @@ class GalTdmPmHistoryData(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 275, instance)
         self.name = "GalTdmPmHistoryData"
+        self.imp_link = []
         self.interval_end_time = MeAttribute("Interval end time", 1, False, False, None)
         self.threshold_data_id = MeAttribute("Threshold data id", 2, True, False, None)
         self.gem_frame_loss = MeAttribute("GEM frame loss", 4, False, False, None)
@@ -1866,6 +2091,9 @@ class GalTdmPmHistoryData(ManagedEntity):
             self.buffer_overflows,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -1874,6 +2102,7 @@ class GalEthernetPmHistoryData(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 276, instance)
         self.name = "GalEthernetPmHistoryData"
+        self.imp_link = [266, 281]
         self.interval_end_time = MeAttribute("Interval end time", 1, False, False, None)
         self.threshold_data_id = MeAttribute("Threshold data id", 2, True, False, None)
         self.discarded_frames = MeAttribute("Discarded frames", 4, False, False, None)
@@ -1884,6 +2113,9 @@ class GalEthernetPmHistoryData(ManagedEntity):
             self.discarded_frames,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -1892,6 +2124,7 @@ class PriorityQueue(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 277, instance)
         self.name = "PriorityQueue"
+        self.imp_link = []
         self.queue_configuration_option = MeAttribute("Queue Configuration Option", 1, False, False, None)
         self.maximum_queue_size = MeAttribute("Maximum Queue Size", 2, False, False, None)
         self.allocated_queue_size = MeAttribute("Allocated Queue Size", 2, False, False, None)
@@ -1920,6 +2153,9 @@ class PriorityQueue(ManagedEntity):
             self.back_pressure_clear_queue_threshold,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         self.traffic_scheduler_g_pointer.setPointer([278])
 
@@ -1928,6 +2164,7 @@ class TrafficScheduler(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 278, instance)
         self.name = "TrafficScheduler"
+        self.imp_link = []
         self.tcont_pointer = MeAttribute("TCONT pointer", 2, False, False, None)
         self.traffic_shed_pointer = MeAttribute("traffic shed pointer", 2, False, False, None)
         self.policy = MeAttribute("policy", 1, False, False, None)
@@ -1940,6 +2177,9 @@ class TrafficScheduler(ManagedEntity):
             self.priority_weight,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         self.tcont_pointer.setPointer([262])
         self.traffic_shed_pointer.setPointer([278])
@@ -1949,6 +2189,7 @@ class ProtectionData(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 279, instance)
         self.name = "ProtectionData"
+        self.imp_link = []
         self.working_ani_g_pointer = MeAttribute("Working ANI-G pointer", 2, False, False, None)
         self.protection_ani_g_pointer = MeAttribute("Protection ANI-G pointer", 2, False, False, None)
         self.protection_type = MeAttribute("Protection type", 2, False, False, None)
@@ -1965,6 +2206,9 @@ class ProtectionData(ManagedEntity):
             self.switching_guard_time,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         self.working_ani_g_pointer.setPointer([263, 313, 315])
         self.protection_ani_g_pointer.setPointer([263, 313, 315])
@@ -1974,6 +2218,7 @@ class MulticastGemInterworkingTerminationPoint(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 281, instance)
         self.name = "MulticastGemInterworkingTerminationPoint"
+        self.imp_link = []
         self.gem_port_network_ctp_connectivity_pointer = MeAttribute("GEM port network CTP connectivity pointer", 2, True, False, None)
         self.interworking_option = MeAttribute("Interworking option", 1, True, False, None)
         self.service_profile_pointer = MeAttribute("Service profile pointer", 2, True, False, None)
@@ -1995,6 +2240,9 @@ class MulticastGemInterworkingTerminationPoint(ManagedEntity):
             self.gal_loopback_configuration,
             self.multicast_address_table,
         )
+
+    def getImplicitlyLinked(self):
+        return self.imp_link
 
     def setPointers(self):
         iw_option = self.interworking_option.getValue()
@@ -2031,6 +2279,7 @@ class Omci(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 287, instance)
         self.name = "Omci"
+        self.imp_link = []
         self.me_type_table = MeAttribute("ME Type Table", 2, False, False, None)
         self.message_type_table = MeAttribute("Message Type Table", 2, False, False, None)
 
@@ -2038,6 +2287,9 @@ class Omci(ManagedEntity):
             self.me_type_table,
             self.message_type_table,
         )
+
+    def getImplicitlyLinked(self):
+        return self.imp_link
 
     def setPointers(self):
         pass
@@ -2047,6 +2299,7 @@ class Dot1XPortExtensionPackage(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 290, instance)
         self.name = "Dot1XPortExtensionPackage"
+        self.imp_link = []
         self.dot1x_enable = MeAttribute("Dot1x Enable", 1, False, False, None)
         self.action_register = MeAttribute("Action Register", 1, False, False, None)
         self.authenticator_pae_state = MeAttribute("Authenticator PAE State", 1, False, False, None)
@@ -2075,6 +2328,9 @@ class Dot1XPortExtensionPackage(ManagedEntity):
             self.key_transmission_enabled,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -2083,6 +2339,7 @@ class Dot1XConfigurationProfile(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 291, instance)
         self.name = "Dot1XConfigurationProfile"
+        self.imp_link = []
         self.circuit_id_prefix = MeAttribute("Circuit ID prefix", 2, False, False, None)
         self.fallback_policy = MeAttribute("Fallback policy", 1, False, False, None)
         self.auth_server_1 = MeAttribute("Auth server 1", 2, False, False, None)
@@ -2105,6 +2362,9 @@ class Dot1XConfigurationProfile(ManagedEntity):
             self.olt_proxy_address,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -2113,6 +2373,7 @@ class EthernetPmHistoryData3(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 296, instance)
         self.name = "EthernetPmHistoryData3"
+        self.imp_link = [11]
         self.interval_end_time = MeAttribute("Interval End Time", 1, False, False, None)
         self.threshold_data_id = MeAttribute("Threshold Data Id", 2, True, False, None)
         self.drop_events = MeAttribute("Drop events", 4, False, False, None)
@@ -2149,6 +2410,9 @@ class EthernetPmHistoryData3(ManagedEntity):
             self.packets_1024_to_1518_octets,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -2157,6 +2421,7 @@ class PortMappingPackage(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 297, instance)
         self.name = "PortMappingPackage"
+        self.imp_link = []
         self.max_ports = MeAttribute("Max ports", 1, False, False, None)
         self.port_list_1 = MeAttribute("Port list 1", 16, False, False, None)
         self.port_list_2 = MeAttribute("Port list 2", 16, False, False, None)
@@ -2179,6 +2444,9 @@ class PortMappingPackage(ManagedEntity):
             self.port_list_8,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -2187,6 +2455,7 @@ class MulticastOperationsProfile(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 309, instance)
         self.name = "MulticastOperationsProfile"
+        self.imp_link = []
         self.igmp_version = MeAttribute("IGMP version", 1, True, False, None)
         self.igmp_function = MeAttribute("IGMP function", 1, True, False, None)
         self.immediate_leave = MeAttribute("Immediate leave", 1, True, False, None)
@@ -2219,6 +2488,9 @@ class MulticastOperationsProfile(ManagedEntity):
             self.last_member_query_interval,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -2227,6 +2499,7 @@ class MulticastSubscriberConfigInfo(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 310, instance)
         self.name = "MulticastSubscriberConfigInfo"
+        self.imp_link = [47, 130]
         self.me_type = MeAttribute("ME type", 1, True, False, None)
         self.multicast_operations_profile_pointer = MeAttribute("Multicast operations profile pointer", 2, True, False, None)
         self.max_simultaneous_groups = MeAttribute("Max simultaneous groups", 2, True, False, None)
@@ -2241,6 +2514,9 @@ class MulticastSubscriberConfigInfo(ManagedEntity):
             self.bandwidth_enforcement,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         self.multicast_operations_profile_pointer.setPointer([309])
 
@@ -2249,6 +2525,7 @@ class MulticastSubscriberMonitor(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 311, instance)
         self.name = "MulticastSubscriberMonitor"
+        self.imp_link = [47, 130]
         self.me_type = MeAttribute("ME type", 1, True, False, None)
         self.current_multicast_bandwidth = MeAttribute("Current multicast bandwidth", 4, False, False, None)
         self.max_join_messages_counter = MeAttribute("Max Join messages counter", 4, False, False, None)
@@ -2263,6 +2540,9 @@ class MulticastSubscriberMonitor(ManagedEntity):
             self.active_group_list_table,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -2271,6 +2551,7 @@ class FecPmHistoryData(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 312, instance)
         self.name = "FecPmHistoryData"
+        self.imp_link = [263]
         self.interval_end_time = MeAttribute("Interval end time", 1, False, False, None)
         self.threshold_data_id = MeAttribute("Threshold data id", 2, True, False, None)
         self.corrected_bytes = MeAttribute("Corrected bytes", 4, False, False, None)
@@ -2289,6 +2570,9 @@ class FecPmHistoryData(ManagedEntity):
             self.fec_seconds,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -2297,6 +2581,7 @@ class FileTransferController(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 318, instance)
         self.name = "FileTransferController"
+        self.imp_link = []
         self.supported_transfer_protocols = MeAttribute("Supported transfer protocols", 2, False, False, None)
         self.file_type = MeAttribute("File type", 2, False, False, None)
         self.file_instance = MeAttribute("File instance", 2, False, False, None)
@@ -2325,6 +2610,9 @@ class FileTransferController(ManagedEntity):
             self.directory_listing_table,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         self.local_file_name_pointer.setPointer([157])
         self.network_address_pointer.setPointer([137])
@@ -2335,6 +2623,7 @@ class EthernetFramePmHistoryDataDs(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 321, instance)
         self.name = "EthernetFramePmHistoryDataDs"
+        self.imp_link = []
         self.interval_end_time = MeAttribute("Interval End Time", 1, False, False, None)
         self.threshold_data_id = MeAttribute("Threshold Data Id", 2, True, False, None)
         self.drop_events = MeAttribute("Drop events", 4, False, False, None)
@@ -2370,6 +2659,9 @@ class EthernetFramePmHistoryDataDs(ManagedEntity):
             self.packets_512_to_1023_octets,
             self.packets_1024_to_1518_octets,
         )
+
+    def getImplicitlyLinked(self):
+        return self.imp_link
 
     def setPointers(self):
         pass
@@ -2379,6 +2671,7 @@ class EthernetFramePmHistoryDataUs(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 322, instance)
         self.name = "EthernetFramePmHistoryDataUs"
+        self.imp_link = [47]
         self.interval_end_time = MeAttribute("Interval End Time", 1, False, False, None)
         self.threshold_data_id = MeAttribute("Threshold Data Id", 2, True, False, None)
         self.drop_events = MeAttribute("Drop events", 4, False, False, None)
@@ -2415,6 +2708,9 @@ class EthernetFramePmHistoryDataUs(ManagedEntity):
             self.packets_1024_to_1518_octets,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -2423,6 +2719,7 @@ class VirtualEthernetInterfacePoint(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 329, instance)
         self.name = "VirtualEthernetInterfacePoint"
+        self.imp_link = []
         self.administrative_state = MeAttribute("Administrative state", 14, False, False, None)
         self.operational_state = MeAttribute("Operational state", 1, False, False, None)
         self.interdomain_name = MeAttribute("Interdomain name", 25, False, False, None)
@@ -2437,6 +2734,9 @@ class VirtualEthernetInterfacePoint(ManagedEntity):
             self.iana_assigned_port,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         self.multicast_operations_profile_pointer.setPointer([136])
 
@@ -2445,6 +2745,7 @@ class BbfTr(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 340, instance)
         self.name = "BbfTr"
+        self.imp_link = []
         self.administrative_state = MeAttribute("Administrative state", 1, False, False, None)
         self.acs_network_address = MeAttribute("ACS network address", 2, False, False, None)
         self.associated_tag = MeAttribute("Associated tag", 2, False, False, None)
@@ -2455,6 +2756,9 @@ class BbfTr(ManagedEntity):
             self.associated_tag,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -2463,6 +2767,7 @@ class GemPortNetworkCtpPerformanceMonitoringHistoryData(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 341, instance)
         self.name = "GemPortNetworkCtpPerformanceMonitoringHistoryData"
+        self.imp_link = [268]
         self.interval_end_time = MeAttribute("Interval end time", 1, True, False, None)
         self.threshold_data_id = MeAttribute("Threshold data ID", 2, True, False, None)
         self.transmitted_gem_frames = MeAttribute("Transmitted GEM frames", 4, False, False, None)
@@ -2481,6 +2786,9 @@ class GemPortNetworkCtpPerformanceMonitoringHistoryData(ManagedEntity):
             self.encryption_key_errors,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -2489,6 +2797,7 @@ class PppoeIntelbrasOlt8820I110Gi(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 65303, instance)
         self.name = "PppoeIntelbrasOlt8820I110Gi"
+        self.imp_link = []
         self.wan_type = MeAttribute("Wan-Type", 1, False, False, None)
         self.user = MeAttribute("User", 25, False, False, None)
         self.password = MeAttribute("Password", 25, False, False, None)
@@ -2503,6 +2812,9 @@ class PppoeIntelbrasOlt8820I110Gi(ManagedEntity):
             self.service_name,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -2511,6 +2823,7 @@ class WanExtendedConfigFh(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 65320, instance)
         self.name = "WanExtendedConfigFh"
+        self.imp_link = []
         self.wan_number = MeAttribute("WAN Number", 2, False, False, None)
         self.wan_index = MeAttribute("WAN Index", 1, False, False, None)
         self.wan_name_1 = MeAttribute("WAN name 1", 16, False, False, None)
@@ -2531,6 +2844,9 @@ class WanExtendedConfigFh(ManagedEntity):
             self.wan_downpir,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -2539,6 +2855,7 @@ class WanProfileFileFh(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 65321, instance)
         self.name = "WanProfileFileFh"
+        self.imp_link = []
         self.create_or_delete_wan_ipv4 = MeAttribute("Create-or-Delete WAN IPV4", 2, False, False, None)
         self.create_or_delete_wan_ipv6 = MeAttribute("Create-or-Delete WAN IPV6", 2, False, False, None)
 
@@ -2546,6 +2863,9 @@ class WanProfileFileFh(ManagedEntity):
             self.create_or_delete_wan_ipv4,
             self.create_or_delete_wan_ipv6,
         )
+
+    def getImplicitlyLinked(self):
+        return self.imp_link
 
     def setPointers(self):
         pass
@@ -2555,6 +2875,7 @@ class WanModeFh(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 65322, instance)
         self.name = "WanModeFh"
+        self.imp_link = []
         self.wan_index = MeAttribute("WAN INDEX", 1, False, False, None)
         self.wan_name_1 = MeAttribute("WAN name 1", 16, False, False, None)
         self.wan_name_2 = MeAttribute("WAN name 2", 16, False, False, None)
@@ -2591,6 +2912,9 @@ class WanModeFh(ManagedEntity):
             self.active_flag,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -2599,6 +2923,7 @@ class WanConfigFh(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 65323, instance)
         self.name = "WanConfigFh"
+        self.imp_link = []
         self.proxy_enable = MeAttribute("Proxy Enable", 1, False, False, None)
         self.userppoe1 = MeAttribute("Userppoe1", 16, False, False, None)
         self.userppoe2 = MeAttribute("Userppoe2", 16, False, False, None)
@@ -2623,6 +2948,9 @@ class WanConfigFh(ManagedEntity):
             self.auto_drop_time,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -2631,6 +2959,7 @@ class WanPortBindFh(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 65324, instance)
         self.name = "WanPortBindFh"
+        self.imp_link = []
         self.lan_bind = MeAttribute("LAN Bind", 1, True, False, None)
         self.ssid_bind = MeAttribute("SSID Bind", 1, True, False, None)
 
@@ -2638,6 +2967,9 @@ class WanPortBindFh(ManagedEntity):
             self.lan_bind,
             self.ssid_bind,
         )
+
+    def getImplicitlyLinked(self):
+        return self.imp_link
 
     def setPointers(self):
         pass
@@ -2647,6 +2979,7 @@ class WanWanProfileFh(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 65329, instance)
         self.name = "WanWanProfileFh"
+        self.imp_link = []
         self.wan_ip_host_ip_addr = MeAttribute("WAN IP HOST IP ADDR", 4, False, False, None)
         self.wan_ip_host_mask = MeAttribute("WAN IP HOST MASK", 4, False, False, None)
         self.wan_ip_host_gateway = MeAttribute("WAN IP HOST Gateway", 4, False, False, None)
@@ -2679,6 +3012,9 @@ class WanWanProfileFh(ManagedEntity):
             self.wan_ip_host_mac_address_source,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -2687,6 +3023,7 @@ class WifiGeneralConfig(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 65326, instance)
         self.name = "WifiGeneralConfig"
+        self.imp_link = []
         self.wifi_std = MeAttribute("wifi_std", 2, False, False, None)
         self.wifi_auth = MeAttribute("wifi_auth", 2, False, False, None)
         self.wifi_cryp = MeAttribute("wifi_cryp", 2, False, False, None)
@@ -2723,6 +3060,9 @@ class WifiGeneralConfig(ManagedEntity):
             self.not_identified,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -2731,6 +3071,7 @@ class WifiAdvanceConfig(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 65327, instance)
         self.name = "WifiAdvanceConfig"
+        self.imp_link = []
         self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
         self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
         self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
@@ -2767,6 +3108,9 @@ class WifiAdvanceConfig(ManagedEntity):
             self.wifi_freq_bandwidth,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -2775,6 +3119,7 @@ class WanExtendedVlanFh(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 65338, instance)
         self.name = "WanExtendedVlanFh"
+        self.imp_link = []
         self.vlan_mode = MeAttribute("VLAN Mode", 1, False, False, None)
         self.tranlation_enable = MeAttribute("Tranlation Enable", 1, False, False, None)
         self.tranlation__vid = MeAttribute("Tranlation  VID", 2, False, False, None)
@@ -2795,6 +3140,9 @@ class WanExtendedVlanFh(ManagedEntity):
             self.slan_cos,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -2803,6 +3151,7 @@ class OnuCapability(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 65529, instance)
         self.name = "OnuCapability"
+        self.imp_link = []
         self.operator_id = MeAttribute("operator_id", 4, False, False, None)
         self.ctc_spec_version = MeAttribute("ctc_spec_version", 1, False, False, None)
         self.onu_type = MeAttribute("onu_type", 1, False, False, None)
@@ -2815,6 +3164,9 @@ class OnuCapability(ManagedEntity):
             self.onu_tx_power_supply_control,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -2823,6 +3175,7 @@ class LoidAuthentication(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 65530, instance)
         self.name = "LoidAuthentication"
+        self.imp_link = []
         self.operator_id = MeAttribute("operator_id", 4, False, False, None)
         self.loid = MeAttribute("loid", 24, False, False, None)
         self.password = MeAttribute("password", 12, False, False, None)
@@ -2835,6 +3188,9 @@ class LoidAuthentication(ManagedEntity):
             self.authentication_status,
         )
 
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
     def setPointers(self):
         pass
 
@@ -2843,6 +3199,7 @@ class Default(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 999999, instance)
         self.name = "Default"
+        self.imp_link = []
         self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
         self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
         self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
@@ -2878,6 +3235,9 @@ class Default(ManagedEntity):
             self.not_identified,
             self.not_identified,
         )
+
+    def getImplicitlyLinked(self):
+        return self.imp_link
 
     def setPointers(self):
         pass
