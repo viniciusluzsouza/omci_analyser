@@ -108,6 +108,9 @@ class OmciPacket:
     def getMeInst(self):
         return self.me_inst
 
+    def getAckReq(self):
+        return self.ar
+
 class Analyser:
     def __init__(self, buffer=[]):
         self.buffer = buffer
@@ -137,6 +140,10 @@ class Analyser:
     def analyse(self):
         # self.me = MeTranslate.getInstance(self.me_id, self.me_inst)
         for pkt in self.packets:
+            # Only analyse downstream packets
+            if pkt.getAckReq() != 0x1:
+                continue
+
             pkt_type = pkt.getType()
             if pkt_type == MessageType.CREATE:
                 # TODO: if already there is the me in list?
@@ -271,6 +278,26 @@ class Analyser:
             new_line = '\t"{}" -> "{}" [arrowhead=none, arrowtail=none, style=dotted]\n'.format(name1, name2)
             if new_line not in self.output:
                 self.output += new_line
+
+        unlinked_mes = []
+        for e in self.entities:
+            name = "{}".format(e.getName())
+            inst = "({})".format(e.getInstance())
+            idx = "[{}-{}]".format(e.getId(), e.getInstance())
+            name = breakStr(name) + "\\n" + inst + "\\n" + idx
+            if name not in self.output and name not in unlinked_mes:
+                unlinked_mes.append(name)
+
+        if len(unlinked_mes):
+            self.output += "\n\n\tsubgraph clusterunlinked {\n"
+            self.output += "\t\tnode[style=filled, fillcolor=gray]\n"
+            self.output += '\t\tlabel="Unlinked MEs"\n'
+            self.output += "\t\tcolor=black\n"
+            self.output += "\t\t"
+            for u in unlinked_mes:
+                self.output += '"{}" '.format(u)
+
+            self.output += "\n\t}\n"
 
         self.output += "}\n"
 
