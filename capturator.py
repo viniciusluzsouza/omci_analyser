@@ -2,7 +2,7 @@ import socket
 import struct
 import binascii
 import os
-
+from pcapfile import savefile
 
 class Capturator:
     MSGTYPE = {
@@ -33,12 +33,10 @@ class Capturator:
         28: "Get Current Data"
     }
 
-    def __init__(self, interface):
+    def __init__(self):
         self.buff = []
         self.buff_omci = []
         self.sock = None
-
-        self.setInterface(interface)
 
     def __del__(self):
         if self.sock:
@@ -92,6 +90,23 @@ class Capturator:
         os.system("text2pcap output/temp.txt output/%s -q" % file_str)
         os.system("rm -rf output/temp.txt")
 
+    @staticmethod
+    def loadDump(file):
+        pkt_buf = []
+        if os.path.isfile(file):
+            try:
+                raw_file = open(file, 'rb')
+                pcapfile = savefile.load_savefile(raw_file, verbose=False)
+                for pkt in pcapfile.packets:
+                    pkt_buf.append((pkt.raw()[14:],))
+
+            except Exception as e:
+                print(str(e))
+        else:
+            print("%s is not a file." % file)
+
+        return pkt_buf
+
     def clearDump(self):
         self.buff = []
         self.buff_omci = []
@@ -102,3 +117,10 @@ class Capturator:
 
     def getBuffer(self):
         return self.buff_omci if self.buff_omci else []
+
+    def hasCapture(self):
+        return True if len(self.buff_omci) else False
+
+    def close(self):
+        self.clearDump()
+        self.closeSock()

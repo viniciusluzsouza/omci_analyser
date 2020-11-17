@@ -1,6 +1,7 @@
 import os
 from capturator import Capturator
 from analyser import Analyser
+from verifier import Verifier
 
 class MainMenu:
     CHOOSE = "Option: "
@@ -11,9 +12,11 @@ class MainMenu:
 #########################################
 
 Choose an option and press ENTER:
-   1) Capturator
-   2) OMCI Analyser
-   3) ME Verifier
+   1) Start Capture
+   2) Load Capture
+   3) Save Capture
+   4) OMCI Analyser
+   5) ME Verifier
 
    0) Exit
 """
@@ -33,9 +36,18 @@ Choose an option and press ENTER:
 
 Choose an option and press ENTER:
    1) Analyse
-   2) Load Capture
-   3) Show Entity
+   2) Show Entity
 
+   0) Back
+"""
+
+    VERIFIER = """
+########### Verifier ###########
+
+Choose an option and press ENTER:
+   1) Check mandatory parameters
+   2) Check ME lenghts
+   
    0) Back
 """
 
@@ -44,8 +56,10 @@ Choose an option and press ENTER:
     INVALID_OPT = "Invalid option\n"
 
     def __init__(self):
-        self.capturator = None
-        self.analyser = None
+        self.capturator = Capturator()
+        self.analyser = Analyser()
+        self.verifier = Verifier()
+        self.loaded_buffer = []
 
     def convertOptWithPrint(self, opt):
         try:
@@ -57,8 +71,7 @@ Choose an option and press ENTER:
 
     def closeCapturator(self):
         if self.capturator:
-            self.capturator.clearDump()
-            self.capturator.closeSock()
+            self.capturator.close()
 
     def askConfirm(self, question):
         while True:
@@ -70,67 +83,50 @@ Choose an option and press ENTER:
             else:
                 print("Reply with [y]es or [n]o")
 
-    def capturatorMenu(self):
-        self.capturator = None
-        self.printTitle = True
-
-        while True:
-            if self.printTitle:
-                print(self.CAPTURATOR)
-
-            try:
-                opt = input(self.CHOOSE)
-
-                opt = self.convertOptWithPrint(opt)
-                if opt is None:
-                    continue
-
-                if opt == 1:
-                    if self.capturator:
-                        if self.askConfirm("The last capture will be lost. Are you sure?"):
-                            self.closeCapturator()
-                        else:
-                            self.printTitle = True
-                            continue
-
-                    interface = input("Interface to capture: ")
-                    self.capturator = Capturator(interface)
-                    print("\nStarting capture. Press CTRL + C to stop.\n")
-                    print("#############################################\n")
-                    self.capturator.createSock()
-                    self.capturator.start()
-
-                elif opt == 2:
-                    if self.capturator:
-                        file = input("File to export: ")
-                        self.capturator.saveDump(file)
-                        self.closeCapturator()
-                        self.printTitle = True
-                        print("Saved sucessfully! See folder output.\n")
-                    else:
-                        print("Capturator not initialized!")
-
-                elif opt == 0:
-                    # self.closeCapturator()
-                    break
-
+    def startCapture(self):
+        try:
+            if self.capturator.hasCapture():
+                if self.askConfirm("The last capture will be lost. Are you sure?"):
+                    self.closeCapturator()
                 else:
-                    print(self.INVALID_OPT)
-                    self.printTitle = False
+                    return
 
-                self.printTitle = False
+            interface = input("Interface to capture: ")
+            self.capturator.setInterface(interface)
 
-            except NameError as e:
-                self.printTitle = True
-                print(str(e))
+            print("\nStarting capture. Press CTRL + C to stop.\n")
+            print("#############################################\n")
+            self.capturator.createSock()
+            self.capturator.start()
 
-            except KeyboardInterrupt:
-                self.printTitle = True
-                print("\nCapture stoppped")
+        except NameError as e:
+            print(str(e))
 
-            except Exception as e:
-                print(str(e))
-                self.printTitle = False
+        except KeyboardInterrupt:
+            self.capturator.closeSock()
+            print("\nCapture stoppped!\n")
+
+        except Exception as e:
+            print(str(e))
+
+    def loadCapture(self):
+        while True:
+            file = input("Inform the file with location: ")
+            if file != "":
+                break
+
+        buf = Capturator.loadDump(file)
+        if len(buf):
+            self.loaded_buffer = buf
+            print("Capture successfully loaded!")
+
+    def saveCapture(self):
+        if self.capturator and self.capturator.hasCapture():
+            file = input("File to export: ")
+            self.capturator.saveDump(file)
+            print("Saved sucessfully! See folder output.\n")
+        else:
+            print("Nothing to save!")
 
     def analyserMenu(self):
         if not self.analyser:
@@ -147,14 +143,14 @@ Choose an option and press ENTER:
                     continue
 
                 if opt == 1:
-                    if self.capturator and len(self.capturator.getBuffer()):
+                    buf = None
+                    if self.loaded_buffer and len(self.loaded_buffer):
+                        buf = self.loaded_buffer
+                    elif self.capturator and self.capturator.hasCapture():
                         buf = self.capturator.getBuffer()
-                    else:
-                        buf = self.analyser.getBuffer()
 
                     if buf:
                         self.analyser.setBuffer(buf)
-                        self.analyser.translateAll()
                         self.analyser.analyse()
                         if self.askConfirm("Show the output?"):
                             print("\n%s" % self.analyser.getOutput())
@@ -171,21 +167,15 @@ Choose an option and press ENTER:
                         print("There is no capture to analyse. Start a capture or load one!")
 
                 elif opt == 2:
-                    while True:
-                        file = input("Inform the file with location: ")
-                        if file != "":
-                            break
+                    if self.analyser.hasEntities():
+                        while True:
+                            entity = input("Inform the entity identifier. E.g: [45-0] (0 to exit): ")
+                            if entity == '0':
+                                break
 
-                    if self.analyser.loadBuffer(file):
-                        print("Capture successfully loaded!")
-
-                elif opt == 3:
-                    while True:
-                        entity = input("Inform the entity identifier. E.g: [45-0] (0 to exit): ")
-                        if entity == '0':
-                            break
-
-                        self.analyser.showEntity(entity)
+                            self.analyser.showEntity(entity)
+                    else:
+                        print("You should run analyser before!")
 
                 elif opt == 0:
                     break
@@ -202,8 +192,36 @@ Choose an option and press ENTER:
 
 
     def verifierMenu(self):
-        print(self.NOT_IMPLEMENTED)
-        return
+        while True:
+            print(self.VERIFIER)
+
+            try:
+                opt = input(self.CHOOSE)
+                opt = self.convertOptWithPrint(opt)
+                if opt is None:
+                    continue
+
+                if opt == 1:
+                    if self.analyser.hasEntities():
+                        self.verifier.setEntityBuf(self.analyser.getEntities())
+                    elif self.loaded_buffer and len(self.loaded_buffer):
+                        self.verifier.setPacketBuffer(self.loaded_buffer)
+                    elif self.capturator and self.capturator.hasCapture():
+                        self.verifier.setPacketBuffer(self.capturator.getBuffer())
+                    else:
+                        print("Nothing to verify!")
+
+                    self.verifier.verify()
+
+                elif opt == 2:
+                    print(self.NOT_IMPLEMENTED)
+                elif opt == 0:
+                    break
+                else:
+                    print(self.INVALID_OPT)
+
+            except Exception as e:
+                print(str(e))
 
     def start(self):
         self.printTitle = True
@@ -220,10 +238,14 @@ Choose an option and press ENTER:
                     continue
 
                 if opt == 1:
-                    self.capturatorMenu()
+                    self.startCapture()
                 elif opt == 2:
-                    self.analyserMenu()
+                    self.loadCapture()
                 elif opt == 3:
+                    self.saveCapture()
+                elif opt == 4:
+                    self.analyserMenu()
+                elif opt == 5:
                     self.verifierMenu()
                 elif opt == 0:
                     break

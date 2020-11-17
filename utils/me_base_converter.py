@@ -238,7 +238,7 @@ mes_classes = """
 ##################################################"""
 
 me_block_pattern = re.compile(
-    r'\[(\d+)\]...{\s+me_class_name\s+=\s+"(.+)"(.+[\n].+attname="(.+)".+length=(\d+).+setbycreate=(\w+))*')
+    r'\[(\d+)\]...{\s+me_class_name\s+=\s+"(.+)"(.+[\n].+attname="(.+)".+length=(\d+).+setbycreate=(\w+).+mandatory=(\w+))*')
 
 me_dict = "    me_dict = {\n"
 
@@ -251,10 +251,10 @@ for match in me_block_pattern.finditer(text):
     me_dict += '        {}: "{}",\n'.format(me_id_int, me_name[:me_name.find('-')].strip() if '-' in me_name else me_name.strip())
 
     attributes = []
-    me_attr_pattern = re.compile(r'attname="(.+)".+length=(\d+).+setbycreate=(\w+)')
+    me_attr_pattern = re.compile(r'attname="(.+)".+length=(\d+).+setbycreate=(\w+).+mandatory=(\w+)')
     for m in me_attr_pattern.finditer(match.group()):
         name_str = m.group(1).lower().replace(' ', '_').replace('-', '_')
-        attributes.append({'name_str': name_str, 'name': m.group(1), 'length': m.group(2), 'setbycreate': m.group(3)})
+        attributes.append({'name_str': name_str, 'name': m.group(1), 'length': m.group(2), 'setbycreate': m.group(3), 'mandatory': m.group(4)})
 
     imp_link_match = re.search(r'imp_link=\((.+)\)', match.group())
     imp_link = "[{}]".format(imp_link_match.group(1).strip().rstrip(',')) if imp_link_match else "[]"
@@ -272,8 +272,9 @@ class {}(ManagedEntity):
 
     for attr in attributes:
         set_by_create = "True" if "true" in attr['setbycreate'].lower() else "False"
+        mandatory = "True" if "true" in attr['mandatory'].lower() else "False"
         # is_pointer = "True" if "pointer" in str(attr['name']).lower() else "False"
-        line += "        self.{} = MeAttribute(\"{}\", {}, {}, False, {})\n".format(attr['name_str'], attr['name'], attr['length'], set_by_create, "None")
+        line += "        self.{} = MeAttribute(\"{}\", {}, {}, {}, {})\n".format(attr['name_str'], attr['name'], attr['length'], set_by_create, mandatory, "None")
 
     line += "\n        self.attributes = (\n"
     for attr in attributes:
@@ -323,7 +324,10 @@ class MeAttribute:
         return self.setbycreate
 
     def getLength(self):
-        return self.length\n
+        return self.length
+
+    def isMandatory(self):
+        return self.mandatory\n
 """
 
 mes_translate = """

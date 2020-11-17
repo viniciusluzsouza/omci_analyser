@@ -1,933 +1,933 @@
 [2] = { me_class_name = "ONT Data",
-	{ attname="MIB Data Sync", length=1, setbycreate=false }},
+	{ attname="MIB Data Sync", length=1, setbycreate=false, mandatory=true }},
 -- ADD by Maycon at 2020-08-05	
 
 [4] = { me_class_name = "PON IF line card - Doesn't documented at ITU-T file G.984.4",
-	{ attname="Not_identified", length=4, setbycreate=false },
-	{ attname="Not_identified", length=4, setbycreate=false },
-	{ attname="Not_identified", length=4, setbycreate=false },
-	{ attname="Not_identified", length=4, setbycreate=false },
-	{ attname="Not_identified", length=4, setbycreate=false },
-	{ attname="Not_identified", length=4, setbycreate=false }},
+	{ attname="Not_identified", length=4, setbycreate=false, mandatory=false },
+	{ attname="Not_identified", length=4, setbycreate=false, mandatory=false },
+	{ attname="Not_identified", length=4, setbycreate=false, mandatory=false },
+	{ attname="Not_identified", length=4, setbycreate=false, mandatory=false },
+	{ attname="Not_identified", length=4, setbycreate=false, mandatory=false },
+	{ attname="Not_identified", length=4, setbycreate=false, mandatory=false }},
 	
 [5] = { me_class_name = "Cardholder",
-	{ attname="Actual Plug-in Unit Type", length=1, setbycreate=false },
-	{ attname="Expected Plug-in Unit Type", length=1, setbycreate=false },
-	{ attname="Expected Port Count", length=1, setbycreate=false },
-	{ attname="Expected Equipment Id", length=20, setbycreate=false },
-	{ attname="Actual Equipment Id", length=20, setbycreate=false },
-	{ attname="Protection Profile Pointer", length=1, setbycreate=false },
-	{ attname="Invoke Protection Switch", length=1, setbycreate=false }},
+	{ attname="Actual Plug-in Unit Type", length=1, setbycreate=false, mandatory=true },
+	{ attname="Expected Plug-in Unit Type", length=1, setbycreate=false, mandatory=true },
+	{ attname="Expected Port Count", length=1, setbycreate=false, mandatory=false },
+	{ attname="Expected Equipment Id", length=20, setbycreate=false, mandatory=false },
+	{ attname="Actual Equipment Id", length=20, setbycreate=false, mandatory=false },
+	{ attname="Protection Profile Pointer", length=1, setbycreate=false, mandatory=false },
+	{ attname="Invoke Protection Switch", length=1, setbycreate=false, mandatory=false }},
 
 [6] = { me_class_name = "Circuit Pack",
-	{ attname="Type", length=1, setbycreate=true },
-	{ attname="Number of ports", length=1, setbycreate=false },
-	{ attname="Serial Number", length=8, setbycreate=false },
-	{ attname="Version", length=14, setbycreate=false },
-	{ attname="Vendor Id", length=4, setbycreate=false },
-	{ attname="Administrative State", length=1, setbycreate=true },
-	{ attname="Operational State", length=1, setbycreate=false },
-	{ attname="Bridged or IP Ind", length=1, setbycreate=false },
-	{ attname="Equipment Id", length=20, setbycreate=false },
-	{ attname="Card Configuration", length=1, setbycreate=true },
-	{ attname="Total T-CONT Buffer Number", length=1, setbycreate=false },
-	{ attname="Total Priority Queue Number", length=1, setbycreate=false },
-	{ attname="Total Traffic Scheduler Number", length=1, setbycreate=false },
-	{ attname="Power Shed Override", length=4, setbycreate=false }},
+	{ attname="Type", length=1, setbycreate=true, mandatory=true },
+	{ attname="Number of ports", length=1, setbycreate=false, mandatory=false },
+	{ attname="Serial Number", length=8, setbycreate=false, mandatory=true },
+	{ attname="Version", length=14, setbycreate=false, mandatory=true },
+	{ attname="Vendor Id", length=4, setbycreate=false, mandatory=false },
+	{ attname="Administrative State", length=1, setbycreate=true, mandatory=true },
+	{ attname="Operational State", length=1, setbycreate=false, mandatory=false },
+	{ attname="Bridged or IP Ind", length=1, setbycreate=false, mandatory=false },
+	{ attname="Equipment Id", length=20, setbycreate=false, mandatory=false },
+	{ attname="Card Configuration", length=1, setbycreate=true, mandatory=false },
+	{ attname="Total T-CONT Buffer Number", length=1, setbycreate=false, mandatory=false },
+	{ attname="Total Priority Queue Number", length=1, setbycreate=false, mandatory=false },
+	{ attname="Total Traffic Scheduler Number", length=1, setbycreate=false, mandatory=false },
+	{ attname="Power Shed Override", length=4, setbycreate=false, mandatory=false }},
 
 [7] = { me_class_name = "Software Image",
-	{ attname="Version", length=14, setbycreate=false },
-	{ attname="Is committed", length=1, setbycreate=false },
-	{ attname="Is active", length=1, setbycreate=false },
-	{ attname="Is valid", length=1, setbycreate=false }},
+	{ attname="Version", length=14, setbycreate=false, mandatory=true },
+	{ attname="Is committed", length=1, setbycreate=false, mandatory=true },
+	{ attname="Is active", length=1, setbycreate=false, mandatory=true },
+	{ attname="Is valid", length=1, setbycreate=false, mandatory=true }},
 
 [11] = { me_class_name = "PPTP Ethernet UNI",
-	{attname="Expected Type", length=1, setbycreate=false},
-	{attname="Sensed Type", length=1, setbycreate=false},
-	{attname="Auto Detection Configuration", length=1, setbycreate=false},
-	{attname="Ethernet Loopback Configuration",	length=1, setbycreate=false},
-	{attname="Administrative State", length=1, setbycreate=false},
-	{attname="Operational State", length=1, setbycreate=false},
-	{attname="Configuration Ind", length=1, setbycreate=false},
-	{attname="Max Frame Size", length=2, setbycreate=false},
-	{attname="DTE or DCE", length=1, setbycreate=false},
-	{attname="Pause Time", length=2, setbycreate=false},
-	{attname="Bridged or IP Ind", length=1, setbycreate=false},
-	{attname="ARC", length=1, setbycreate=false},
-	{attname="ARC Interval", length=1, setbycreate=false},
-	{attname="PPPoE Filter", length=1, setbycreate=false},
-	{attname="Power Control", length=1, setbycreate=false}},
+	{attname="Expected Type", length=1, setbycreate=false, mandatory=true },
+	{attname="Sensed Type", length=1, setbycreate=false, mandatory=false },
+	{attname="Auto Detection Configuration", length=1, setbycreate=false, mandatory=false },
+	{attname="Ethernet Loopback Configuration",	length=1, setbycreate=false, mandatory=true },
+	{attname="Administrative State", length=1, setbycreate=false, mandatory=true },
+	{attname="Operational State", length=1, setbycreate=false, mandatory=false},
+	{attname="Configuration Ind", length=1, setbycreate=false, mandatory=true },
+	{attname="Max Frame Size", length=2, setbycreate=false, mandatory=true },
+	{attname="DTE or DCE", length=1, setbycreate=false, mandatory=true },
+	{attname="Pause Time", length=2, setbycreate=false, mandatory=false },
+	{attname="Bridged or IP Ind", length=1, setbycreate=false, mandatory=false },
+	{attname="ARC", length=1, setbycreate=false, mandatory=false },
+	{attname="ARC Interval", length=1, setbycreate=false, mandatory=false },
+	{attname="PPPoE Filter", length=1, setbycreate=false, mandatory=false },
+	{attname="Power Control", length=1, setbycreate=false, mandatory=false }},
 
 [24] = { me_class_name = "Ethernet PM History Data", imp_link=(11),
-	{ attname="Interval End Time", length=1, setbycreate=false }, -- 1
-	{ attname="Threshold Data Id", length=2, setbycreate=true }, --2
-	{ attname="FCS errors Drop events", length=4, setbycreate=false }, -- 3
-	{ attname="Excessive Collision Counter", length=4, setbycreate=false }, -- 4
-	{ attname="Late Collision Counter", length=4, setbycreate=false }, -- 5
-	{ attname="Frames too long", length=4, setbycreate=false },
-	{ attname="Buffer overflows on Receive", length=4, setbycreate=false },
-	{ attname="Buffer overflows on Transmit", length=4, setbycreate=false },	
-	{ attname="Single Collision Frame Counter", length=4, setbycreate=false },	
-	{ attname="Multiple Collisions Frame Counter", length=4, setbycreate=false },
-	{ attname="SQE counter", length=4, setbycreate=false },
-	{ attname="Deferred Transmission Counter", length=4, setbycreate=false },
-	{ attname="Internal MAC Transmit Error Counter", length=4, setbycreate=false },
-	{ attname="Carrier Sense Error Counter", length=4, setbycreate=false },
-	{ attname="Alignment Error Counter", length=4, setbycreate=false },
-	{ attname="Internal MAC Receive Error Counter", length=4, setbycreate=false}},
+	{ attname="Interval End Time", length=1, setbycreate=false, mandatory=true }, -- 1
+	{ attname="Threshold Data Id", length=2, setbycreate=true, mandatory=true }, --2
+	{ attname="FCS errors Drop events", length=4, setbycreate=false, mandatory=true }, -- 3
+	{ attname="Excessive Collision Counter", length=4, setbycreate=false, mandatory=true }, -- 4
+	{ attname="Late Collision Counter", length=4, setbycreate=false, mandatory=true }, -- 5
+	{ attname="Frames too long", length=4, setbycreate=false, mandatory=true },
+	{ attname="Buffer overflows on Receive", length=4, setbycreate=false, mandatory=true },
+	{ attname="Buffer overflows on Transmit", length=4, setbycreate=false, mandatory=true },	
+	{ attname="Single Collision Frame Counter", length=4, setbycreate=false, mandatory=true },	
+	{ attname="Multiple Collisions Frame Counter", length=4, setbycreate=false, mandatory=true },
+	{ attname="SQE counter", length=4, setbycreate=false, mandatory=true },
+	{ attname="Deferred Transmission Counter", length=4, setbycreate=false, mandatory=true },
+	{ attname="Internal MAC Transmit Error Counter", length=4, setbycreate=false, mandatory=true },
+	{ attname="Carrier Sense Error Counter", length=4, setbycreate=false, mandatory=true },
+	{ attname="Alignment Error Counter", length=4, setbycreate=false, mandatory=true },
+	{ attname="Internal MAC Receive Error Counter", length=4, setbycreate=false, mandatory=true }},
 	
 -- ADD by Maycon at 2020-08-05	
 [40] = { me_class_name = "PON physical path termination point - Doesn't documented at ITU-T file G.984.4",
-	{ attname="Not_identified", length=4, setbycreate=false }},
+	{ attname="Not_identified", length=4, setbycreate=false, mandatory=false }},
 	
 [44] = { me_class_name = "Vendor Specific",
-	{ attname="Sub-Entity", length=1, setbycreate=true },
+	{ attname="Sub-Entity", length=1, setbycreate=true, mandatory=false },
 	subentity_attr = {}},
 	
 [45] = { me_class_name = "MAC Bridge Service Profile",
-	{ attname="Spanning tree ind", length=1, setbycreate=true },
-	{ attname="Learning ind", length=1, setbycreate=true },
-	{ attname="Port bridging ind", length=1, setbycreate=true },
-	{ attname="Priority", length=2, setbycreate=true },
-	{ attname="Max age", length=2, setbycreate=true },
-	{ attname="Hello time", length=2, setbycreate=true },
-	{ attname="Forward delay", length=2, setbycreate=true },
-	{ attname="Unknown MAC address discard", length=1, setbycreate=true },
-	{ attname="MAC learning depth", length=1, setbycreate=true }},
+	{ attname="Spanning tree ind", length=1, setbycreate=true, mandatory=true },
+	{ attname="Learning ind", length=1, setbycreate=true, mandatory=true },
+	{ attname="Port bridging ind", length=1, setbycreate=true, mandatory=true },
+	{ attname="Priority", length=2, setbycreate=true, mandatory=true },
+	{ attname="Max age", length=2, setbycreate=true, mandatory=true },
+	{ attname="Hello time", length=2, setbycreate=true, mandatory=true },
+	{ attname="Forward delay", length=2, setbycreate=true, mandatory=true },
+	{ attname="Unknown MAC address discard", length=1, setbycreate=true, mandatory=true },
+	{ attname="MAC learning depth", length=1, setbycreate=true, mandatory=false }},
 
 [47] = { me_class_name = "MAC bridge port configuration data", imp_link=(48, 49, 52, 84, 311, 321, 322),
-	{ attname="Bridge id pointer", length=2, setbycreate=true },
-	{ attname="Port num", length=1, setbycreate=true },
-	{ attname="TP type", length=1, setbycreate=true },
-	{ attname="TP pointer", length=2, setbycreate=true },
-	{ attname="Port priority", length=2, setbycreate=true },
-	{ attname="Port path cost", length=2, setbycreate=true },
-	{ attname="Port spanning tree ind", length=1, setbycreate=true },
-	{ attname="Encapsulation method", length=1, setbycreate=true },
-	{ attname="LAN FCS ind", length=1, setbycreate=true },
-	{ attname="Port MAC address", length=6, setbycreate=false },
-	{ attname="Outbound TD pointer", length=2, setbycreate=false },
-	{ attname="Inbound TD pointer", length=2, setbycreate=false }},
+	{ attname="Bridge id pointer", length=2, setbycreate=true, mandatory=true },
+	{ attname="Port num", length=1, setbycreate=true, mandatory=true },
+	{ attname="TP type", length=1, setbycreate=true, mandatory=true },
+	{ attname="TP pointer", length=2, setbycreate=true, mandatory=true },
+	{ attname="Port priority", length=2, setbycreate=true, mandatory=false },
+	{ attname="Port path cost", length=2, setbycreate=true, mandatory=true },
+	{ attname="Port spanning tree ind", length=1, setbycreate=true, mandatory=true },
+	{ attname="Encapsulation method", length=1, setbycreate=true, mandatory=false },
+	{ attname="LAN FCS ind", length=1, setbycreate=true, mandatory=false },
+	{ attname="Port MAC address", length=6, setbycreate=false, mandatory=false },
+	{ attname="Outbound TD pointer", length=2, setbycreate=false, mandatory=false },
+	{ attname="Inbound TD pointer", length=2, setbycreate=false, mandatory=false }},
 
 [48] = { me_class_name = "MAC bridge port designation data", imp_link=(47),
-	{ attname="Designated bridge root cost port", length=24, setbycreate=false },
-	{ attname="Port state", length=1, setbycreate=false }},
+	{ attname="Designated bridge root cost port", length=24, setbycreate=false, mandatory=true },
+	{ attname="Port state", length=1, setbycreate=false, mandatory=true }},
 
 [49] = { me_class_name = "MAC bridge port filter table data", imp_link=(47),
-	{ attname="MAC filter table", length=8, setbycreate=false }},
+	{ attname="MAC filter table", length=8, setbycreate=false, mandatory=true }},
 
 [51] = { me_class_name = "MAC Bridge PM History Data", imp_link=(45),
-	{ attname="Interval end time", length=1, setbycreate=false },
-	{ attname="Threshold data id", length=2, setbycreate=true },
-	{ attname="Bridge learning entry discard count", length=4, setbycreate=false }},
+	{ attname="Interval end time", length=1, setbycreate=false, mandatory=true },
+	{ attname="Threshold data id", length=2, setbycreate=true, mandatory=true },
+	{ attname="Bridge learning entry discard count", length=4, setbycreate=false, mandatory=true }},
 
 [52] = { me_class_name = "MAC Bridge Port PM History Data", imp_link=(47),
-	{ attname="Interval end time", length=1, setbycreate=false },
-	{ attname="Threshold data id", length=2, setbycreate=true },
-	{ attname="Forwarded frame counter", length=4, setbycreate=false },	
-	{ attname="Delay exceeded discard counter", length=4, setbycreate=false },	
-	{ attname="MTU exceeded discard counter", length=4, setbycreate=false },	
-	{ attname="Received frame counter", length=4, setbycreate=false },	
-	{ attname="Received and discarded counter", length=4, setbycreate=false }},	
+	{ attname="Interval end time", length=1, setbycreate=false, mandatory=true },
+	{ attname="Threshold data id", length=2, setbycreate=true, mandatory=true },
+	{ attname="Forwarded frame counter", length=4, setbycreate=false, mandatory=true },	
+	{ attname="Delay exceeded discard counter", length=4, setbycreate=false, mandatory=true },	
+	{ attname="MTU exceeded discard counter", length=4, setbycreate=false, mandatory=true },	
+	{ attname="Received frame counter", length=4, setbycreate=false, mandatory=true },	
+	{ attname="Received and discarded counter", length=4, setbycreate=false, mandatory=true }},	
 	
 [53] = { me_class_name = "Physical path termination point POTS UNI",
-	{ attname="Administrative state", length=1, setbycreate=false },
-	{ attname="Deprecated", length=2, setbycreate=false },
-	{ attname="ARC", length=1, setbycreate=false },	
-	{ attname="ARC interval", length=1, setbycreate=false },	
-	{ attname="Impedance", length=1, setbycreate=false },
-	{ attname="Transmission path", length=1, setbycreate=false },		
-	{ attname="Rx gain", length=1, setbycreate=false },
-	{ attname="Tx gain", length=1, setbycreate=false },
-	{ attname="Operational state", length=1, setbycreate=false },
-	{ attname="Hook state", length=1, setbycreate=false },
-	{ attname="POTS holdover time", length=2, setbycreate=false },	
-	{ attname="Nominal feed voltage", length=1, setbycreate=false }},
+	{ attname="Administrative state", length=1, setbycreate=false, mandatory=true },
+	{ attname="Deprecated", length=2, setbycreate=false, mandatory=false },
+	{ attname="ARC", length=1, setbycreate=false, mandatory=false },	
+	{ attname="ARC interval", length=1, setbycreate=false, mandatory=false },	
+	{ attname="Impedance", length=1, setbycreate=false, mandatory=false },
+	{ attname="Transmission path", length=1, setbycreate=false, mandatory=false },		
+	{ attname="Rx gain", length=1, setbycreate=false, mandatory=false },
+	{ attname="Tx gain", length=1, setbycreate=false, mandatory=false },
+	{ attname="Operational state", length=1, setbycreate=false, mandatory=false },
+	{ attname="Hook state", length=1, setbycreate=false, mandatory=false },
+	{ attname="POTS holdover time", length=2, setbycreate=false, mandatory=false },	
+	{ attname="Nominal feed voltage", length=1, setbycreate=false, mandatory=false }},
 
 -- ADD by Maycon at 2020-05-11	
 [58] = { me_class_name = "Voice service profile",
-	{ attname="Announcement type", length=1, setbycreate=true },
-	{ attname="Jitter target", length=2, setbycreate=true },
-	{ attname="Jitter buffer max", length=2, setbycreate=true },
-	{ attname="Echo cancel ind", length=1, setbycreate=true },
-	{ attname="PSTN protocol variant", length=2, setbycreate=true },
-	{ attname="DTMF digit levels", length=2, setbycreate=true },
-	{ attname="DTMF digit duration", length=2, setbycreate=true },
-	{ attname="Hook flash minimum time", length=2, setbycreate=true },
-	{ attname="Hook flash maximum time", length=2, setbycreate=true },
-	{ attname="Tone pattern table", length=20, setbycreate=false },	
-	{ attname="Tone event table", length=7, setbycreate=false },	
-	{ attname="Ringing pattern table", length=5, setbycreate=false },	
-	{ attname="Ringing event table", length=7, setbycreate=false },	
-	{ attname="Network specific extensions pointer", length=2, setbycreate=true }},	
+	{ attname="Announcement type", length=1, setbycreate=true, mandatory=true },
+	{ attname="Jitter target", length=2, setbycreate=true, mandatory=false },
+	{ attname="Jitter buffer max", length=2, setbycreate=true, mandatory=false },
+	{ attname="Echo cancel ind", length=1, setbycreate=true, mandatory=true },
+	{ attname="PSTN protocol variant", length=2, setbycreate=true, mandatory=false },
+	{ attname="DTMF digit levels", length=2, setbycreate=true, mandatory=false },
+	{ attname="DTMF digit duration", length=2, setbycreate=true, mandatory=false },
+	{ attname="Hook flash minimum time", length=2, setbycreate=true, mandatory=false },
+	{ attname="Hook flash maximum time", length=2, setbycreate=true, mandatory=false },
+	{ attname="Tone pattern table", length=20, setbycreate=false, mandatory=false },	
+	{ attname="Tone event table", length=7, setbycreate=false, mandatory=false },	
+	{ attname="Ringing pattern table", length=5, setbycreate=false, mandatory=false },	
+	{ attname="Ringing event table", length=7, setbycreate=false, mandatory=false },	
+	{ attname="Network specific extensions pointer", length=2, setbycreate=true, mandatory=false }},	
 
 [79] = { me_class_name = "MAC bridge port filter preassign table",
-	{ attname="IPv4 multicast filtering", length=1, setbycreate=false },
-	{ attname="IPv6 multicast filtering", length=1, setbycreate=false },
-	{ attname="IPv4 broadcast filtering", length=1, setbycreate=false },
-	{ attname="RARP filtering", length=1, setbycreate=false },
-	{ attname="IPX filtering", length=1, setbycreate=false },
-	{ attname="NetBEUI filtering", length=1, setbycreate=false },
-	{ attname="AppleTalk filtering", length=1, setbycreate=false },
-	{ attname="Bridge management information filtering", length=1, setbycreate=false },
-	{ attname="ARP filtering", length=1, setbycreate=false }},
+	{ attname="IPv4 multicast filtering", length=1, setbycreate=false, mandatory=true },
+	{ attname="IPv6 multicast filtering", length=1, setbycreate=false, mandatory=true },
+	{ attname="IPv4 broadcast filtering", length=1, setbycreate=false, mandatory=true },
+	{ attname="RARP filtering", length=1, setbycreate=false, mandatory=true },
+	{ attname="IPX filtering", length=1, setbycreate=false, mandatory=true },
+	{ attname="NetBEUI filtering", length=1, setbycreate=false, mandatory=true },
+	{ attname="AppleTalk filtering", length=1, setbycreate=false, mandatory=true },
+	{ attname="Bridge management information filtering", length=1, setbycreate=false, mandatory=true },
+	{ attname="ARP filtering", length=1, setbycreate=false, mandatory=true }},
 
 [82] = { me_class_name = "PPTP Video UNI",
-	{attname="Administrative State", length=1, setbycreate=false},
-	{attname="Operational State", length=1, setbycreate=false},
-	{attname="ARC",	length=1, setbycreate=false},
-	{attname="ARC Interval", length=1, setbycreate=false},
-	{attname="Power Control", length=1, setbycreate=false}},
+	{attname="Administrative State", length=1, setbycreate=false, mandatory=true },
+	{attname="Operational State", length=1, setbycreate=false, mandatory=false },
+	{attname="ARC",	length=1, setbycreate=false, mandatory=false },
+	{attname="ARC Interval", length=1, setbycreate=false, mandatory=false },
+	{attname="Power Control", length=1, setbycreate=false, mandatory=false }},
 	
 [84] = { me_class_name = "VLAN tagging filter data", imp_link=(47),
-	{attname="VLAN filter list", length=24, setbycreate=true},
-	{attname="Forward operation", length=1, setbycreate=true},
-	{attname="Number of entries", length=1, setbycreate=true}},
+	{attname="VLAN filter list", length=24, setbycreate=true, mandatory=true },
+	{attname="Forward operation", length=1, setbycreate=true, mandatory=true },
+	{attname="Number of entries", length=1, setbycreate=true, mandatory=true }},
 
 [89] = { me_class_name = "Ethernet PM History Data 2", imp_link=(11),
-	{ attname="Interval end time", length=1, setbycreate=false },
-	{ attname="Threshold data id", length=2, setbycreate=true },
-	{ attname="PPPoE filtered frame counter", length=4, setbycreate=false }},
+	{ attname="Interval end time", length=1, setbycreate=false, mandatory=true },
+	{ attname="Threshold data id", length=2, setbycreate=true, mandatory=true },
+	{ attname="PPPoE filtered frame counter", length=4, setbycreate=false, mandatory=true }},
 	
 [90] = { me_class_name = "PPTP Video ANI",
-	{attname="Administrative State", length=1, setbycreate=false},
-	{attname="Operational State", length=1, setbycreate=false},
-	{attname="ARC",	length=1, setbycreate=false},
-	{attname="ARC Interval", length=1, setbycreate=false},
-	{attname="Frequency Range Low", length=1, setbycreate=false},
-	{attname="Frequency Range High", length=1, setbycreate=false},
-	{attname="Signal Capability", length=1, setbycreate=false},
-	{attname="Optical Signal Level", length=1, setbycreate=false},
-	{attname="Pilot Signal Level", length=1, setbycreate=false},
-	{attname="Signal Level min", length=1, setbycreate=false},
-	{attname="Signal Level max", length=1, setbycreate=false},
-	{attname="Pilot Frequency", length=4, setbycreate=false},
-	{attname="AGC Mode", length=1, setbycreate=false},
-	{attname="AGC Setting", length=1, setbycreate=false},	
-	{attname="Video Lower Optical Threshold", length=1, setbycreate=false},
-	{attname="Video Upper Optical Threshold", length=1, setbycreate=false}},
+	{attname="Administrative State", length=1, setbycreate=false, mandatory=true },
+	{attname="Operational State", length=1, setbycreate=false, mandatory=false },
+	{attname="ARC",	length=1, setbycreate=false, mandatory=false},
+	{attname="ARC Interval", length=1, setbycreate=false, mandatory=false},
+	{attname="Frequency Range Low", length=1, setbycreate=false, mandatory=true },
+	{attname="Frequency Range High", length=1, setbycreate=false, mandatory=true },
+	{attname="Signal Capability", length=1, setbycreate=false, mandatory=true },
+	{attname="Optical Signal Level", length=1, setbycreate=false, mandatory=false },
+	{attname="Pilot Signal Level", length=1, setbycreate=false, mandatory=false },
+	{attname="Signal Level min", length=1, setbycreate=false, mandatory=true },
+	{attname="Signal Level max", length=1, setbycreate=false, mandatory=true },
+	{attname="Pilot Frequency", length=4, setbycreate=false, mandatory=false },
+	{attname="AGC Mode", length=1, setbycreate=false, mandatory=false },
+	{attname="AGC Setting", length=1, setbycreate=false, mandatory=false },	
+	{attname="Video Lower Optical Threshold", length=1, setbycreate=false, mandatory=false },
+	{attname="Video Upper Optical Threshold", length=1, setbycreate=false, mandatory=false }},
  
 [130] = { me_class_name = "IEEE 8021P Mapper Service Profile",
-	{attname="TP Pointer", length=2,  setbycreate=true},
-	{attname="Interwork TP pointer for P-bit priority 0", length=2, setbycreate=true},
-	{attname="Interwork TP pointer for P-bit priority 1", length=2, setbycreate=true},
-	{attname="Interwork TP pointer for P-bit priority 2", length=2, setbycreate=true},
-	{attname="Interwork TP pointer for P-bit priority 3", length=2, setbycreate=true},
-	{attname="Interwork TP pointer for P-bit priority 4", length=2, setbycreate=true},
-	{attname="Interwork TP pointer for P-bit priority 5", length=2, setbycreate=true},
-	{attname="Interwork TP pointer for P-bit priority 6", length=2, setbycreate=true},
-	{attname="Interwork TP pointer for P-bit priority 7", length=2, setbycreate=true},
-	{attname="Unmarked frame option", length=1,  setbycreate=true},
-	{attname="DSCP to P-bit mapping", length=24, setbycreate=false},
-	{attname="Default P-bit marking", length=1,  setbycreate=true},
-	{attname="TP Type", length=1,  setbycreate=true}},
+	{attname="TP Pointer", length=2,  setbycreate=true, mandatory=true },
+	{attname="Interwork TP pointer for P-bit priority 0", length=2, setbycreate=true, mandatory=true },
+	{attname="Interwork TP pointer for P-bit priority 1", length=2, setbycreate=true, mandatory=true },
+	{attname="Interwork TP pointer for P-bit priority 2", length=2, setbycreate=true, mandatory=true },
+	{attname="Interwork TP pointer for P-bit priority 3", length=2, setbycreate=true, mandatory=true },
+	{attname="Interwork TP pointer for P-bit priority 4", length=2, setbycreate=true, mandatory=true },
+	{attname="Interwork TP pointer for P-bit priority 5", length=2, setbycreate=true, mandatory=true },
+	{attname="Interwork TP pointer for P-bit priority 6", length=2, setbycreate=true, mandatory=true },
+	{attname="Interwork TP pointer for P-bit priority 7", length=2, setbycreate=true, mandatory=true },
+	{attname="Unmarked frame option", length=1,  setbycreate=true, mandatory=true },
+	{attname="DSCP to P-bit mapping", length=24, setbycreate=false, mandatory=true },
+	{attname="Default P-bit marking", length=1,  setbycreate=true, mandatory=true },
+	{attname="TP Type", length=1,  setbycreate=true, mandatory=false }},
 
 [131] = { me_class_name = "OLT-G",
-	{attname="OLT vendor id", length=4, setbycreate=false},
-	{attname="Equipment id", length=20, setbycreate=false},
-	{attname="OLT version",	length=14, setbycreate=false}},
+	{attname="OLT vendor id", length=4, setbycreate=false, mandatory=true },
+	{attname="Equipment id", length=20, setbycreate=false, mandatory=true },
+	{attname="OLT version",	length=14, setbycreate=false, mandatory=true }},
 
 [133] = { me_class_name = "ONT Power Shedding",
-	{ attname="Restore power timer reset interval", length=2, setbycreate=false },
-	{ attname="Data class shedding interval", length=2, setbycreate=false },
-	{ attname="Voice class shedding interval", length=2, setbycreate=false },
-	{ attname="Video overlay class shedding interval", length=2, setbycreate=false },
-	{ attname="Video return class shedding interval", length=2, setbycreate=false },
-	{ attname="DSL class shedding interval", length=2, setbycreate=false },
-	{ attname="ATM class shedding interval", length=2, setbycreate=false },
-	{ attname="CES class shedding interval", length=2, setbycreate=false },
-	{ attname="Frame class shedding interval", length=2, setbycreate=false },
-	{ attname="SONET class shedding interval", length=2, setbycreate=false },
-	{ attname="Shedding status", length=2, setbycreate=false }},
+	{ attname="Restore power timer reset interval", length=2, setbycreate=false, mandatory=true },
+	{ attname="Data class shedding interval", length=2, setbycreate=false, mandatory=true },
+	{ attname="Voice class shedding interval", length=2, setbycreate=false, mandatory=true },
+	{ attname="Video overlay class shedding interval", length=2, setbycreate=false, mandatory=true },
+	{ attname="Video return class shedding interval", length=2, setbycreate=false, mandatory=true },
+	{ attname="DSL class shedding interval", length=2, setbycreate=false, mandatory=true },
+	{ attname="ATM class shedding interval", length=2, setbycreate=false, mandatory=true },
+	{ attname="CES class shedding interval", length=2, setbycreate=false, mandatory=true },
+	{ attname="Frame class shedding interval", length=2, setbycreate=false, mandatory=true },
+	{ attname="SONET class shedding interval", length=2, setbycreate=false, mandatory=true },
+	{ attname="Shedding status", length=2, setbycreate=false, mandatory=false }},
 
 -- ADD by Maycon at 2020-05-07		
 [134] = { me_class_name = "IP host config data",
-	{ attname="IP options", length=1, setbycreate=false },
-	{ attname="MAC address", length=6, setbycreate=false },
-	{ attname="Ont identifier", length=25, setbycreate=false },
-	{ attname="IP address", length=4, setbycreate=false },
-	{ attname="Mask", length=4, setbycreate=false },
-	{ attname="Gateway", length=4, setbycreate=false },
-	{ attname="Primary DNS", length=4, setbycreate=false },
-	{ attname="Secondary DNS", length=4, setbycreate=false },
-	{ attname="Current address", length=4, setbycreate=false },
-	{ attname="Current mask", length=4, setbycreate=false },
-	{ attname="Current gateway", length=4, setbycreate=false },
-	{ attname="Current primary DNS", length=4, setbycreate=false },
-	{ attname="Current secondary DNS", length=4, setbycreate=false },
-	{ attname="Domain name", length=25, setbycreate=false },
-	{ attname="Host name", length=25, setbycreate=false }},
+	{ attname="IP options", length=1, setbycreate=false, mandatory=true },
+	{ attname="MAC address", length=6, setbycreate=false, mandatory=true },
+	{ attname="Ont identifier", length=25, setbycreate=false, mandatory=true },
+	{ attname="IP address", length=4, setbycreate=false, mandatory=true },
+	{ attname="Mask", length=4, setbycreate=false, mandatory=true },
+	{ attname="Gateway", length=4, setbycreate=false, mandatory=true },
+	{ attname="Primary DNS", length=4, setbycreate=false, mandatory=true },
+	{ attname="Secondary DNS", length=4, setbycreate=false, mandatory=true },
+	{ attname="Current address", length=4, setbycreate=false, mandatory=false },
+	{ attname="Current mask", length=4, setbycreate=false, mandatory=false },
+	{ attname="Current gateway", length=4, setbycreate=false, mandatory=false },
+	{ attname="Current primary DNS", length=4, setbycreate=false, mandatory=false },
+	{ attname="Current secondary DNS", length=4, setbycreate=false, mandatory=false },
+	{ attname="Domain name", length=25, setbycreate=false, mandatory=true },
+	{ attname="Host name", length=25, setbycreate=false, mandatory=true }},
 
 -- ADD by Maycon at 2020-05-07		
 [136] = { me_class_name = "TCP UDP config data",
-	{ attname="Port ID", length=2, setbycreate=true },
-	{ attname="Protocol", length=1, setbycreate=true },
-	{ attname="TOS diffserv field", length=1, setbycreate=true },
-	{ attname="IP host pointer", length=2, setbycreate=true }},	
+	{ attname="Port ID", length=2, setbycreate=true, mandatory=true },
+	{ attname="Protocol", length=1, setbycreate=true, mandatory=true },
+	{ attname="TOS diffserv field", length=1, setbycreate=true, mandatory=true },
+	{ attname="IP host pointer", length=2, setbycreate=true, mandatory=true }},	
 	
 -- ADD by Maycon at 2020-05-07		
 [137] = { me_class_name = "Network address",
-	{ attname="Security pointer", length=2, setbycreate=true },
-	{ attname="Address pointer", length=2, setbycreate=true }},		
+	{ attname="Security pointer", length=2, setbycreate=true, mandatory=true },
+	{ attname="Address pointer", length=2, setbycreate=true, mandatory=true }},		
 	
 -- ADD by Maycon at 2020-05-07		
 [138] = { me_class_name = "VoIP config data",
-	{ attname="Available signalling protocols", length=1, setbycreate=false },
-	{ attname="Signalling protocol used", length=1, setbycreate=false },
-	{ attname="Available VoIP configuration methods", length=4, setbycreate=false },
-	{ attname="VoIP configuration method used", length=1, setbycreate=false },
-	{ attname="VoIP configuration address pointer", length=2, setbycreate=false },
-	{ attname="VoIP configuration state", length=1, setbycreate=false },
-	{ attname="Retrieve profile", length=1, setbycreate=false },
-	{ attname="Profile version", length=25, setbycreate=false }},	
+	{ attname="Available signalling protocols", length=1, setbycreate=false, mandatory=true },
+	{ attname="Signalling protocol used", length=1, setbycreate=false, mandatory=true },
+	{ attname="Available VoIP configuration methods", length=4, setbycreate=false, mandatory=true },
+	{ attname="VoIP configuration method used", length=1, setbycreate=false, mandatory=true },
+	{ attname="VoIP configuration address pointer", length=2, setbycreate=false, mandatory=true },
+	{ attname="VoIP configuration state", length=1, setbycreate=false, mandatory=true },
+	{ attname="Retrieve profile", length=1, setbycreate=false, mandatory=true },
+	{ attname="Profile version", length=25, setbycreate=false, mandatory=true }},	
 	
 -- ADD by Maycon at 2020-05-11		
 [139] = { me_class_name = "VoIP voice CTP",
-	{ attname="User protocol pointer", length=2, setbycreate=true },
-	{ attname="PPTP pointer", length=2, setbycreate=true },
-	{ attname="VoIP media profile pointer", length=2, setbycreate=true },
-	{ attname="Signalling code", length=1, setbycreate=true }},
+	{ attname="User protocol pointer", length=2, setbycreate=true, mandatory=true },
+	{ attname="PPTP pointer", length=2, setbycreate=true, mandatory=true },
+	{ attname="VoIP media profile pointer", length=2, setbycreate=true, mandatory=true },
+	{ attname="Signalling code", length=1, setbycreate=true, mandatory=true }},
 	
 -- ADD by Maycon at 2020-05-07	
 [141] = { me_class_name = "VoIP line status", imp_link=(53),
-	{ attname="voip codec used", length=2, setbycreate=false },
-	{ attname="voip voice server status", length=1, setbycreate=false },
-	{ attname="voip port session type", length=1, setbycreate=false },
-	{ attname="voip call 1 packetperiod", length=2, setbycreate=false },
-	{ attname="voip call 2 packetperiod", length=2, setbycreate=false },
-	{ attname="voip call 1 dest addr", length=25, setbycreate=false },
-	{ attname="voip call 2 dest addr", length=25, setbycreate=false },
-	{ attname="Voip line state", length=1, setbycreate=false },
-	{ attname="Emergency call status", length=1, setbycreate=false }},
+	{ attname="voip codec used", length=2, setbycreate=false, mandatory=true },
+	{ attname="voip voice server status", length=1, setbycreate=false, mandatory=true },
+	{ attname="voip port session type", length=1, setbycreate=false, mandatory=true },
+	{ attname="voip call 1 packetperiod", length=2, setbycreate=false, mandatory=true },
+	{ attname="voip call 2 packetperiod", length=2, setbycreate=false, mandatory=true },
+	{ attname="voip call 1 dest addr", length=25, setbycreate=false, mandatory=true },
+	{ attname="voip call 2 dest addr", length=25, setbycreate=false, mandatory=true },
+	{ attname="Voip line state", length=1, setbycreate=false, mandatory=false },
+	{ attname="Emergency call status", length=1, setbycreate=false, mandatory=false }},
 	
 -- ADD by Maycon at 2020-05-11	Update 2020-07-09
 [142] = { me_class_name = "VoIP media profile",
-	{ attname="Fax mode", length=1, setbycreate=true }, -- 1 
-	{ attname="Voice service profile pointer", length=2, setbycreate=true }, -- 2
-	{ attname="Codec selection first order", length=1, setbycreate=true }, -- 3
-	{ attname="Packet period selection first order", length=1, setbycreate=true }, -- 4
-	{ attname="Silence suppression first order", length=1, setbycreate=true }, -- 5
-	{ attname="Codec selection second order", length=1, setbycreate=true }, -- 6
-	{ attname="Packet period selection second order", length=1, setbycreate=true }, -- 7
-	{ attname="Silence suppression second order", length=1, setbycreate=true }, -- 8
-	{ attname="Codec selection third order", length=1, setbycreate=true }, -- 9
-	{ attname="Packet period selection third order", length=1, setbycreate=true }, -- 10
-	{ attname="Silence suppression fourth order", length=1, setbycreate=true }, -- 11
-	{ attname="Codec selection fourth order", length=1, setbycreate=true }, -- 12
-	{ attname="Packet period selection fourth order", length=1, setbycreate=true }, -- 13
-	{ attname="Silence suppression fourth order", length=1, setbycreate=true }, -- 14
-	{ attname="OOB DTMF", length=1, setbycreate=true }, -- 15
-	{ attname="RTP profile pointer", length=2, setbycreate=true }}, -- 16
+	{ attname="Fax mode", length=1, setbycreate=true, mandatory=true }, -- 1 
+	{ attname="Voice service profile pointer", length=2, setbycreate=true, mandatory=true }, -- 2
+	{ attname="Codec selection first order", length=1, setbycreate=true, mandatory=true }, -- 3
+	{ attname="Packet period selection first order", length=1, setbycreate=true, mandatory=true }, -- 4
+	{ attname="Silence suppression first order", length=1, setbycreate=true, mandatory=true }, -- 5
+	{ attname="Codec selection second order", length=1, setbycreate=true, mandatory=true }, -- 6
+	{ attname="Packet period selection second order", length=1, setbycreate=true, mandatory=true }, -- 7
+	{ attname="Silence suppression second order", length=1, setbycreate=true, mandatory=true }, -- 8
+	{ attname="Codec selection third order", length=1, setbycreate=true, mandatory=true }, -- 9
+	{ attname="Packet period selection third order", length=1, setbycreate=true, mandatory=true }, -- 10
+	{ attname="Silence suppression fourth order", length=1, setbycreate=true, mandatory=true }, -- 11
+	{ attname="Codec selection fourth order", length=1, setbycreate=true, mandatory=true }, -- 12
+	{ attname="Packet period selection fourth order", length=1, setbycreate=true, mandatory=true }, -- 13
+	{ attname="Silence suppression fourth order", length=1, setbycreate=true, mandatory=true }, -- 14
+	{ attname="OOB DTMF", length=1, setbycreate=true, mandatory=true }, -- 15
+	{ attname="RTP profile pointer", length=2, setbycreate=true, mandatory=true }}, -- 16
 
 -- ADD by Maycon at 2020-05-11	
 [143] = { me_class_name = "RTP profile data",
-	{ attname="Local port min", length=2, setbycreate=true },
-	{ attname="Local port max", length=2, setbycreate=true },
-	{ attname="DSCP mark", length=1, setbycreate=true },
-	{ attname="Piggyback events", length=1, setbycreate=true },
-	{ attname="Tone events", length=1, setbycreate=true },
-	{ attname="DTMF events", length=1, setbycreate=true },
-	{ attname="CAS events", length=1, setbycreate=true },
-	{ attname="IP host config pointer", length=2, setbycreate=false }},
+	{ attname="Local port min", length=2, setbycreate=true, mandatory=true },
+	{ attname="Local port max", length=2, setbycreate=true, mandatory=false },
+	{ attname="DSCP mark", length=1, setbycreate=true, mandatory=true },
+	{ attname="Piggyback events", length=1, setbycreate=true, mandatory=true },
+	{ attname="Tone events", length=1, setbycreate=true, mandatory=true },
+	{ attname="DTMF events", length=1, setbycreate=true, mandatory=true },
+	{ attname="CAS events", length=1, setbycreate=true, mandatory=true },
+	{ attname="IP host config pointer", length=2, setbycreate=false, mandatory=false }},
 
 -- ADD by Maycon at 2020-05-11		
 [148] = { me_class_name = "Authentication security method",
-	{ attname="Validation scheme", length=1, setbycreate=false },
-	{ attname="Username 1", length=25, setbycreate=false },
-	{ attname="Password", length=25, setbycreate=false },
-	{ attname="Realm", length=25, setbycreate=false },
-	{ attname="Username 2", length=25, setbycreate=false }},
+	{ attname="Validation scheme", length=1, setbycreate=false, mandatory=true },
+	{ attname="Username 1", length=25, setbycreate=false, mandatory=true },
+	{ attname="Password", length=25, setbycreate=false, mandatory=true },
+	{ attname="Realm", length=25, setbycreate=false, mandatory=true },
+	{ attname="Username 2", length=25, setbycreate=false, mandatory=false }},
 
 -- ADD by Maycon at 2020-05-11	
 [150] = { me_class_name = "SIP agent config data",
-	{ attname="Proxy server address pointer", length=2, setbycreate=true},
-	{ attname="Outbound proxy address pointer", length=2, setbycreate=true},
-	{ attname="Primary SIP DNS", length=4, setbycreate=true},
-	{ attname="Secondary SIP DNS", length=4, setbycreate=true},
-	{ attname="TCP UDP pointer", length=2, setbycreate=false},
-	{ attname="SIP reg exp time", length=4, setbycreate=false},
-	{ attname="SIP rereg head start time", length=4, setbycreate=false},
-	{ attname="Host part URI", length=2, setbycreate=true},
-	{ attname="SIP status", length=1, setbycreate=false},
-	{ attname="SIP registrar", length=2, setbycreate=true},
-	{ attname="Softswitch", length=4, setbycreate=true},
-	{ attname="SIP response table", length=5, setbycreate=false},
-	{ attname="SIP option transmit control", length=1, setbycreate=true},
-	{ attname="SIP URI format", length=1, setbycreate=true},
-	{ attname="Redundant SIP agent pointer", length=2, setbycreate=true }},	
+	{ attname="Proxy server address pointer", length=2, setbycreate=true, mandatory=true },
+	{ attname="Outbound proxy address pointer", length=2, setbycreate=true, mandatory=true },
+	{ attname="Primary SIP DNS", length=4, setbycreate=true, mandatory=true },
+	{ attname="Secondary SIP DNS", length=4, setbycreate=true, mandatory=true },
+	{ attname="TCP UDP pointer", length=2, setbycreate=false, mandatory=true },
+	{ attname="SIP reg exp time", length=4, setbycreate=false, mandatory=true },
+	{ attname="SIP rereg head start time", length=4, setbycreate=false, mandatory=true },
+	{ attname="Host part URI", length=2, setbycreate=true, mandatory=true },
+	{ attname="SIP status", length=1, setbycreate=false, mandatory=true },
+	{ attname="SIP registrar", length=2, setbycreate=true, mandatory=true },
+	{ attname="Softswitch", length=4, setbycreate=true, mandatory=true },
+	{ attname="SIP response table", length=5, setbycreate=false, mandatory=false },
+	{ attname="SIP option transmit control", length=1, setbycreate=true, mandatory=false },
+	{ attname="SIP URI format", length=1, setbycreate=true, mandatory=false },
+	{ attname="Redundant SIP agent pointer", length=2, setbycreate=true, mandatory=false }},	
 	
 -- ADD by Maycon at 2020-05-07	
 [153] = { me_class_name = "SIP user data",
-	{ attname="SIP agent pointer", length=2, setbycreate=true}, -- 1
-	{ attname="User part AOR", length=2, setbycreate=true }, -- 2
-	{ attname="SIP display name", length=25, setbycreate=false }, -- 3
-	{ attname="Username and password", length=2, setbycreate=true }, -- 4
-	{ attname="Voicemail server SIP URI", length=2, setbycreate=true }, -- 5
-	{ attname="Voicemail subscription expiration time", length=4, setbycreate=true }, -- 6
-	{ attname="Network dial plan pointer", length=2, setbycreate=true }, -- 7
-	{ attname="Application services profile pointer", length=2, setbycreate=true }, -- 8
-	{ attname="Feature code pointer", length=2, setbycreate=true }, -- 9
-	{ attname="PPTP pointer", length=2, setbycreate=true }, -- 10
-	{ attname="Release timer", length=1, setbycreate=false }, -- 11
-	{ attname="ROH timer", length=1, setbycreate=false }}, -- 12
+	{ attname="SIP agent pointer", length=2, setbycreate=true, mandatory=true }, -- 1
+	{ attname="User part AOR", length=2, setbycreate=true, mandatory=true }, -- 2
+	{ attname="SIP display name", length=25, setbycreate=false, mandatory=true }, -- 3
+	{ attname="Username and password", length=2, setbycreate=true, mandatory=true }, -- 4
+	{ attname="Voicemail server SIP URI", length=2, setbycreate=true, mandatory=true }, -- 5
+	{ attname="Voicemail subscription expiration time", length=4, setbycreate=true, mandatory=true }, -- 6
+	{ attname="Network dial plan pointer", length=2, setbycreate=true, mandatory=true }, -- 7
+	{ attname="Application services profile pointer", length=2, setbycreate=true, mandatory=true }, -- 8
+	{ attname="Feature code pointer", length=2, setbycreate=true, mandatory=true }, -- 9
+	{ attname="PPTP pointer", length=2, setbycreate=true, mandatory=true }, -- 10
+	{ attname="Release timer", length=1, setbycreate=false, mandatory=false }, -- 11
+	{ attname="ROH timer", length=1, setbycreate=false, mandatory=false }}, -- 12
 
 -- ADD by Maycon at 2020-05-07	
 [157] = { me_class_name = "Large string",
-	{ attname="Number of parts", length=1, setbycreate=false}}, -- 1	
+	{ attname="Number of parts", length=1, setbycreate=false, mandatory=true }}, -- 1	
 
 [158] = { me_class_name = "ONT remote debug",
-	{ attname="Command format", length=1, setbycreate=false },
-	{ attname="Command", length=25, setbycreate=false },
-	{ attname="Reply table", length=4, setbycreate=false }},
+	{ attname="Command format", length=1, setbycreate=false, mandatory=true },
+	{ attname="Command", length=25, setbycreate=false, mandatory=true },
+	{ attname="Reply table", length=4, setbycreate=false, mandatory=true }},
 
 [159] = { me_class_name = "Equipment protection profile",
-	{ attname="Protect slot 1,protect slot 2", length=2, setbycreate=true },
-	{ attname="working slot 1,working slot 2,working slot 3,working slot 4,working slot 5,working slot 6,working slot 7,working slot 8", length=8, setbycreate=true },
-	{ attname="Protect status 1,protect status 2", length=2, setbycreate=false },
-	{ attname="Revertive ind", length=1, setbycreate=true },
-	{ attname="Wait to restore time", length=1, setbycreate=true }},
+	{ attname="Protect slot 1,protect slot 2", length=2, setbycreate=true, mandatory=false },
+	{ attname="working slot 1,working slot 2,working slot 3,working slot 4,working slot 5,working slot 6,working slot 7,working slot 8", length=8, setbycreate=true, mandatory=false },
+	{ attname="Protect status 1,protect status 2", length=2, setbycreate=false, mandatory=false },
+	{ attname="Revertive ind", length=1, setbycreate=true, mandatory=false },
+	{ attname="Wait to restore time", length=1, setbycreate=true, mandatory=false }},
 
 [160] = { me_class_name = "Equipment extension package", imp_link=(256, 5),
-	{ attname="Environmental sense", length=2, setbycreate=false },
-	{ attname="Contact closure output", length=2, setbycreate=false }},
+	{ attname="Environmental sense", length=2, setbycreate=false, mandatory=false },
+	{ attname="Contact closure output", length=2, setbycreate=false, mandatory=false }},
 
 [171] = { me_class_name = "Extended VLAN tagging operation configuration data",
-	{ attname="Association type", length=1, setbycreate=true },
-	{ attname="Received frame VLAN tagging operation table max size", length=2, setbycreate=false },
-	{ attname="Input TPID", length=2, setbycreate=false },
-	{ attname="Output TPID", length=2, setbycreate=false },	
-	{ attname="Downstream mode", length=1, setbycreate=false },
-	{ attname="Received frame VLAN tagging operation table", length=16, setbycreate=false },
-	{ attname="Associated ME pointer", length=2, setbycreate=true },
-	{ attname="DSCP to P-bit mapping", length=24, setbycreate=false }},
+	{ attname="Association type", length=1, setbycreate=true, mandatory=true },
+	{ attname="Received frame VLAN tagging operation table max size", length=2, setbycreate=false, mandatory=true },
+	{ attname="Input TPID", length=2, setbycreate=false, mandatory=true },
+	{ attname="Output TPID", length=2, setbycreate=false, mandatory=true },	
+	{ attname="Downstream mode", length=1, setbycreate=false, mandatory=true },
+	{ attname="Received frame VLAN tagging operation table", length=16, setbycreate=false, mandatory=true },
+	{ attname="Associated ME pointer", length=2, setbycreate=true, mandatory=true },
+	{ attname="DSCP to P-bit mapping", length=24, setbycreate=false, mandatory=false }},
 	
 -- ADD by Maycon at 2020-05-25	
 [250] = { me_class_name = "PPPoE BY GCOM",
-	{ attname="NAT", length=1, setbycreate=true }, -- NAT =>  enable 1 disable 0,  ver documentação da GCOM ZTE
-	{ attname="Auth", length=1, setbycreate=true }, -- Auth => auto 0 chap 1 pap 2, ver documentação da GCOM ZTE
-	{ attname="Connect", length=1, setbycreate=true },
-	{ attname="Release Time", length=2, setbycreate=true },	
-	{ attname="Username", length=25, setbycreate=false },
-	{ attname="Password", length=25, setbycreate=false },
-	{ attname="Attribute7", length=1, setbycreate=false },
-	{ attname="Attribute8", length=1, setbycreate=false },
-	{ attname="Pointer to IP Host Config Data ME", length=2, setbycreate=false },
-	{ attname="Pointer to Larg String ME Pointer for Username", length=2, setbycreate=false },
-	{ attname="Pointer to Larg String ME Pointer for Service Name", length=2, setbycreate=false }},
+	{ attname="NAT", length=1, setbycreate=true, mandatory=false }, -- NAT =>  enable 1 disable 0,  ver documentação da GCOM ZTE
+	{ attname="Auth", length=1, setbycreate=true, mandatory=false }, -- Auth => auto 0 chap 1 pap 2, ver documentação da GCOM ZTE
+	{ attname="Connect", length=1, setbycreate=true, mandatory=false },
+	{ attname="Release Time", length=2, setbycreate=true, mandatory=false },	
+	{ attname="Username", length=25, setbycreate=false, mandatory=false },
+	{ attname="Password", length=25, setbycreate=false, mandatory=false },
+	{ attname="Attribute7", length=1, setbycreate=false, mandatory=false },
+	{ attname="Attribute8", length=1, setbycreate=false, mandatory=false },
+	{ attname="Pointer to IP Host Config Data ME", length=2, setbycreate=false, mandatory=false },
+	{ attname="Pointer to Larg String ME Pointer for Username", length=2, setbycreate=false, mandatory=false },
+	{ attname="Pointer to Larg String ME Pointer for Service Name", length=2, setbycreate=false, mandatory=false }},
 
 [255] = { me_class_name = "Ethernet performance monitoring history data 4", imp_link=(11),
-	{ attname="interval_end_time", length=1, setbycreate=false },
-	{ attname="threshold_data_1_2_id", length=2, setbycreate=true },
-	{ attname="association_type", length=1, setbycreate=true },
-	{ attname="transmitted_traffic", length=4, setbycreate=false },
-	{ attname="received_traffic", length=4, setbycreate=false },
-	{ attname="transmitted_rate", length=4, setbycreate=false },
-	{ attname="received_rate", length=4, setbycreate=false },
-	{ attname="transmitted_octets", length=4, setbycreate=false },
-	{ attname="received_octets", length=4, setbycreate=false },
-	{ attname="transmitted_discarded_counter", length=4, setbycreate=false },
-	{ attname="received_discarded_counter", length=4, setbycreate=false },
-	{ attname="transmitted_error_counter", length=4, setbycreate=false },
-	{ attname="received_error_counter", length=4, setbycreate=false }},	
+	{ attname="interval_end_time", length=1, setbycreate=false, mandatory=false },
+	{ attname="threshold_data_1_2_id", length=2, setbycreate=true, mandatory=false },
+	{ attname="association_type", length=1, setbycreate=true, mandatory=false },
+	{ attname="transmitted_traffic", length=4, setbycreate=false, mandatory=false },
+	{ attname="received_traffic", length=4, setbycreate=false, mandatory=false },
+	{ attname="transmitted_rate", length=4, setbycreate=false, mandatory=false },
+	{ attname="received_rate", length=4, setbycreate=false, mandatory=false },
+	{ attname="transmitted_octets", length=4, setbycreate=false, mandatory=false },
+	{ attname="received_octets", length=4, setbycreate=false, mandatory=false },
+	{ attname="transmitted_discarded_counter", length=4, setbycreate=false, mandatory=false },
+	{ attname="received_discarded_counter", length=4, setbycreate=false, mandatory=false },
+	{ attname="transmitted_error_counter", length=4, setbycreate=false, mandatory=false },
+	{ attname="received_error_counter", length=4, setbycreate=false, mandatory=false }},	
 	
 [256] = { me_class_name = "ONT-G",
-	{ attname="Vendor Id", length=4, setbycreate=false },
-	{ attname="Version", length=14, setbycreate=false },
-	{ attname="Serial Nr", length=8, setbycreate=false },
-	{ attname="Traffic management option", length=1, setbycreate=false },
-	{ attname="VP VC cross connection function option", length=1, setbycreate=false },
-	{ attname="Battery backup", length=1, setbycreate=false },
-	{ attname="Administrative State", length=1, setbycreate=false },
-	{ attname="Operational State", length=1, setbycreate=false }},
+	{ attname="Vendor Id", length=4, setbycreate=false, mandatory=true },
+	{ attname="Version", length=14, setbycreate=false, mandatory=true },
+	{ attname="Serial Nr", length=8, setbycreate=false, mandatory=true },
+	{ attname="Traffic management option", length=1, setbycreate=false, mandatory=true },
+	{ attname="VP VC cross connection function option", length=1, setbycreate=false, mandatory=false },
+	{ attname="Battery backup", length=1, setbycreate=false, mandatory=true },
+	{ attname="Administrative State", length=1, setbycreate=false, mandatory=true },
+	{ attname="Operational State", length=1, setbycreate=false, mandatory=false }},
 
 [257] = { me_class_name = "ONT2-G",
-	{ attname="Equipment id", length=20, setbycreate=false },
-	{ attname="OMCC version", length=1, setbycreate=false },
-	{ attname="Vendor product code", length=2, setbycreate=false },
-	{ attname="Security capability", length=1, setbycreate=false },
-	{ attname="Security mode", length=1, setbycreate=false },
-	{ attname="Total priority queue number", length=2, setbycreate=false },
-	{ attname="Total traffic scheduler number", length=1, setbycreate=false },
-	{ attname="Mode", length=1, setbycreate=false },
-	{ attname="Total GEM port-ID number", length=2, setbycreate=false },
-	{ attname="SysUp Time", length=4, setbycreate=false }},
+	{ attname="Equipment id", length=20, setbycreate=false, mandatory=false },
+	{ attname="OMCC version", length=1, setbycreate=false, mandatory=true },
+	{ attname="Vendor product code", length=2, setbycreate=false, mandatory=false },
+	{ attname="Security capability", length=1, setbycreate=false, mandatory=true },
+	{ attname="Security mode", length=1, setbycreate=false, mandatory=true },
+	{ attname="Total priority queue number", length=2, setbycreate=false, mandatory=true },
+	{ attname="Total traffic scheduler number", length=1, setbycreate=false, mandatory=true },
+	{ attname="Mode", length=1, setbycreate=false, mandatory=true },
+	{ attname="Total GEM port-ID number", length=2, setbycreate=false, mandatory=false },
+	{ attname="SysUp Time", length=4, setbycreate=false, mandatory=false }},
 	
 -- ADD by Maycon at 2020-08-05	
 [261] = { me_class_name = "PON TC adapter-G - Doesn't documented at ITU-T file G.984.4",
-	{ attname="Not_identified", length=4, setbycreate=false },
-	{ attname="Not_identified", length=4, setbycreate=false },
-	{ attname="Not_identified", length=4, setbycreate=false },
-	{ attname="Not_identified", length=4, setbycreate=false },
-	{ attname="Not_identified", length=4, setbycreate=false },
-	{ attname="Not_identified", length=4, setbycreate=false }},
+	{ attname="Not_identified", length=4, setbycreate=false, mandatory=false },
+	{ attname="Not_identified", length=4, setbycreate=false, mandatory=false },
+	{ attname="Not_identified", length=4, setbycreate=false, mandatory=false },
+	{ attname="Not_identified", length=4, setbycreate=false, mandatory=false },
+	{ attname="Not_identified", length=4, setbycreate=false, mandatory=false },
+	{ attname="Not_identified", length=4, setbycreate=false, mandatory=false }},
 
 [262] = { me_class_name = "TCONT",
-	{ attname="Alloc-id", length=2, setbycreate=false },
-	{ attname="Mode indicator", length=1, setbycreate=false },
-	{ attname="Policy", length=1, setbycreate=false }},
+	{ attname="Alloc-id", length=2, setbycreate=false, mandatory=true },
+	{ attname="Mode indicator", length=1, setbycreate=false, mandatory=true },
+	{ attname="Policy", length=1, setbycreate=false, mandatory=true }},
 
 [263] = { me_class_name = "ANIG",
-	{ attname="SR indication", length=1, setbycreate=false },
-	{ attname="Total T-CONT number", length=2, setbycreate=false },
-	{ attname="GEM block length", length=2, setbycreate=false },
-	{ attname="Piggyback DBA reporting", length=1, setbycreate=false },
-	{ attname="Whole ONT DBA reporting", length=1, setbycreate=false },
-	{ attname="SF threshold", length=1, setbycreate=false },
-	{ attname="SD threshold", length=1, setbycreate=false },
-	{ attname="ARC", length=1, setbycreate=false },
-	{ attname="ARC interval", length=1, setbycreate=false },
-	{ attname="Optical signal level", length=2, setbycreate=false },
-	{ attname="Lower optical threshold", length=1, setbycreate=false },
-	{ attname="Upper optical threshold", length=1, setbycreate=false },
-	{ attname="ONT response time", length=2, setbycreate=false },
-	{ attname="Transmit optical level", length=2, setbycreate=false },
-	{ attname="Lower transmit power threshold", length=1, setbycreate=false },
-	{ attname="Upper transmit power threshold", length=1, setbycreate=false }},
+	{ attname="SR indication", length=1, setbycreate=false, mandatory=true },
+	{ attname="Total T-CONT number", length=2, setbycreate=false, mandatory=true },
+	{ attname="GEM block length", length=2, setbycreate=false, mandatory=true },
+	{ attname="Piggyback DBA reporting", length=1, setbycreate=false, mandatory=true },
+	{ attname="Whole ONT DBA reporting", length=1, setbycreate=false, mandatory=true },
+	{ attname="SF threshold", length=1, setbycreate=false, mandatory=true },
+	{ attname="SD threshold", length=1, setbycreate=false, mandatory=true },
+	{ attname="ARC", length=1, setbycreate=false, mandatory=false },
+	{ attname="ARC interval", length=1, setbycreate=false, mandatory=false },
+	{ attname="Optical signal level", length=2, setbycreate=false, mandatory=false },
+	{ attname="Lower optical threshold", length=1, setbycreate=false, mandatory=false },
+	{ attname="Upper optical threshold", length=1, setbycreate=false, mandatory=false },
+	{ attname="ONT response time", length=2, setbycreate=false, mandatory=false },
+	{ attname="Transmit optical level", length=2, setbycreate=false, mandatory=false },
+	{ attname="Lower transmit power threshold", length=1, setbycreate=false, mandatory=false },
+	{ attname="Upper transmit power threshold", length=1, setbycreate=false, mandatory=false }},
 
 [264] = { me_class_name = "UNI-G", imp_link=(11),
-	{ attname="Config option status", length=2, setbycreate=false },
-	{ attname="Administrative state", length=1, setbycreate=false }},
+	{ attname="Config option status", length=2, setbycreate=false, mandatory=true },
+	{ attname="Administrative state", length=1, setbycreate=false, mandatory=true }},
 	
 [266] = { me_class_name = "GEM interworking Termination Point",
-	{ attname="GEM port network CTP connectivity pointer", length=2, setbycreate=true },
-	{ attname="Interworking option", length=1, setbycreate=true },
-	{ attname="Service profile pointer", length=2, setbycreate=true },
-	{ attname="Interworking termination point pointer", length=2, setbycreate=true },
-	{ attname="PPTP counter", length=1, setbycreate=false },
-	{ attname="Operational state", length=1, setbycreate=false },
-	{ attname="GAL profile pointer", length=2, setbycreate=true },
-	{ attname="GAL loopback configuration", length=1, setbycreate=false }},
+	{ attname="GEM port network CTP connectivity pointer", length=2, setbycreate=true, mandatory=true },
+	{ attname="Interworking option", length=1, setbycreate=true, mandatory=true },
+	{ attname="Service profile pointer", length=2, setbycreate=true, mandatory=true },
+	{ attname="Interworking termination point pointer", length=2, setbycreate=true, mandatory=true },
+	{ attname="PPTP counter", length=1, setbycreate=false, mandatory=false },
+	{ attname="Operational state", length=1, setbycreate=false, mandatory=false },
+	{ attname="GAL profile pointer", length=2, setbycreate=true, mandatory=true },
+	{ attname="GAL loopback configuration", length=1, setbycreate=false, mandatory=true }},
 
 [267] = { me_class_name = "GEM Port PM History Data", imp_link=(268),
-	{ attname="Interval end time", length=1, setbycreate=false },
-	{ attname="Threshold data id", length=2, setbycreate=true },
-	{ attname="Lost packets", length=4, setbycreate=false },
-	{ attname="Misinserted packets", length=4, setbycreate=false },
-	{ attname="Received packets", length=5, setbycreate=false },
-	{ attname="Received blocks", length=5, setbycreate=false },
-	{ attname="Transmitted blocks", length=5, setbycreate=false },
-	{ attname="Impaired blocks", length=4, setbycreate=false },
-	{ attname="Transmitted packets", length=5, setbycreate=false }},
+	{ attname="Interval end time", length=1, setbycreate=false, mandatory=true },
+	{ attname="Threshold data id", length=2, setbycreate=true, mandatory=true },
+	{ attname="Lost packets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Misinserted packets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Received packets", length=5, setbycreate=false, mandatory=true },
+	{ attname="Received blocks", length=5, setbycreate=false, mandatory=true },
+	{ attname="Transmitted blocks", length=5, setbycreate=false, mandatory=true },
+	{ attname="Impaired blocks", length=4, setbycreate=false, mandatory=true },
+	{ attname="Transmitted packets", length=5, setbycreate=false, mandatory=true }},
 
 [268] = { me_class_name = "GEM Port Network CTP", imp_link=(267),
-	{ attname="Port id value", length=2, setbycreate=true },
-	{ attname="T-CONT pointer", length=2, setbycreate=true },
-	{ attname="Direction", length=1, setbycreate=true },
-	{ attname="Traffic management pointer for upstream", length=2, setbycreate=true },
-	{ attname="Traffic descriptor profile pointer", length=2, setbycreate=true },
-	{ attname="UNI counter", length=1, setbycreate=false },
-	{ attname="Priority queue pointer for downstream", length=2, setbycreate=true },
-	{ attname="Encryption state", length=1, setbycreate=false }},
+	{ attname="Port id value", length=2, setbycreate=true, mandatory=true },
+	{ attname="T-CONT pointer", length=2, setbycreate=true, mandatory=true },
+	{ attname="Direction", length=1, setbycreate=true, mandatory=true },
+	{ attname="Traffic management pointer for upstream", length=2, setbycreate=true, mandatory=true },
+	{ attname="Traffic descriptor profile pointer", length=2, setbycreate=true, mandatory=false },
+	{ attname="UNI counter", length=1, setbycreate=false, mandatory=false },
+	{ attname="Priority queue pointer for downstream", length=2, setbycreate=true, mandatory=true },
+	{ attname="Encryption state", length=1, setbycreate=false, mandatory=false }},
 
 [271] = { me_class_name = "GAL TDM profile",
-	{ attname="GEM frame loss integration period", length=2, setbycreate=true }},
+	{ attname="GEM frame loss integration period", length=2, setbycreate=true, mandatory=true }},
 
 [272] = { me_class_name = "GAL Ethernet profile",
-	{ attname="Maximum GEM payload size", length=2, setbycreate=true }},
+	{ attname="Maximum GEM payload size", length=2, setbycreate=true, mandatory=true }},
 
 [273] = { me_class_name = "Threshold Data 1", imp_link=(274),
-	{attname="Threshold value 1", length=4, setbycreate=true},
-	{attname="Threshold value 2", length=4, setbycreate=true},
-	{attname="Threshold value 3", length=4, setbycreate=true},
-	{attname="Threshold value 4", length=4, setbycreate=true},
-	{attname="Threshold value 5", length=4, setbycreate=true},
-	{attname="Threshold value 6", length=4, setbycreate=true},
-	{attname="Threshold value 7", length=4, setbycreate=true}},
+	{attname="Threshold value 1", length=4, setbycreate=true, mandatory=true },
+	{attname="Threshold value 2", length=4, setbycreate=true, mandatory=true },
+	{attname="Threshold value 3", length=4, setbycreate=true, mandatory=true },
+	{attname="Threshold value 4", length=4, setbycreate=true, mandatory=true },
+	{attname="Threshold value 5", length=4, setbycreate=true, mandatory=true },
+	{attname="Threshold value 6", length=4, setbycreate=true, mandatory=true },
+	{attname="Threshold value 7", length=4, setbycreate=true, mandatory=true }},
 
 [274] = { me_class_name = "Threshold Data 2", imp_link=(273),
-	{attname="Threshold value 8", length=4,  setbycreate=true},
-	{attname="Threshold value 9", length=4,  setbycreate=true},
-	{attname="Threshold value 10", length=4,  setbycreate=true},
-	{attname="Threshold value 11", length=4,  setbycreate=true},
-	{attname="Threshold value 12", length=4,  setbycreate=true},
-	{attname="Threshold value 13", length=4,  setbycreate=true},
-	{attname="Threshold value 14", length=4,  setbycreate=true}},
+	{attname="Threshold value 8", length=4,  setbycreate=true, mandatory=true },
+	{attname="Threshold value 9", length=4,  setbycreate=true, mandatory=true },
+	{attname="Threshold value 10", length=4,  setbycreate=true, mandatory=true },
+	{attname="Threshold value 11", length=4,  setbycreate=true, mandatory=true },
+	{attname="Threshold value 12", length=4,  setbycreate=true, mandatory=true },
+	{attname="Threshold value 13", length=4,  setbycreate=true, mandatory=true },
+	{attname="Threshold value 14", length=4,  setbycreate=true, mandatory=true }},
 
 [275] = { me_class_name = "GAL TDM PM History Data",
-	{ attname="Interval end time", length=1, setbycreate=false },
-	{ attname="Threshold data id", length=2, setbycreate=true },
-	{ attname="GEM frame loss", length=4, setbycreate=false },
-	{ attname="Buffer underflows", length=4, setbycreate=false },
-	{ attname="Buffer overflows", length=4, setbycreate=false }},
+	{ attname="Interval end time", length=1, setbycreate=false, mandatory=true },
+	{ attname="Threshold data id", length=2, setbycreate=true, mandatory=true },
+	{ attname="GEM frame loss", length=4, setbycreate=false, mandatory=true },
+	{ attname="Buffer underflows", length=4, setbycreate=false, mandatory=true },
+	{ attname="Buffer overflows", length=4, setbycreate=false, mandatory=true }},
 
 [276] = { me_class_name = "GAL Ethernet PM History Data", imp_link=(266, 281),
-	{ attname="Interval end time", length=1, setbycreate=false },
-	{ attname="Threshold data id", length=2, setbycreate=true },
-	{ attname="Discarded frames", length=4, setbycreate=false }},
+	{ attname="Interval end time", length=1, setbycreate=false, mandatory=true },
+	{ attname="Threshold data id", length=2, setbycreate=true, mandatory=true },
+	{ attname="Discarded frames", length=4, setbycreate=false, mandatory=true }},
 
 [277] = { me_class_name = "Priority queue-G",
-	{attname="Queue Configuration Option", length=1, setbycreate=false},
-	{attname="Maximum Queue Size", length=2, setbycreate=false},
-	{attname="Allocated Queue Size", length=2, setbycreate=false},
-	{attname="Discard-block Counter Reset Interval",length=2,  setbycreate=false},
-	{attname="Threshold Value For Discarded Blocks Due To Buffer Overflow",	length=2,  setbycreate=false},
-	{attname="Related Port", length=4,  setbycreate=false},
-	{attname="Traffic Scheduler-G Pointer", length=2, setbycreate=false},
-	{attname="Weight", length=1, setbycreate=false},
-	{attname="Back Pressure Operation", length=2, setbycreate=false},
-	{attname="Back Pressure Time", length=4, setbycreate=false},
-	{attname="Back Pressure Occur Queue Threshold",	length=2, setbycreate=false},
-	{attname="Back Pressure Clear Queue Threshold",	length=2, setbycreate=false}},
+	{attname="Queue Configuration Option", length=1, setbycreate=false, mandatory=true },
+	{attname="Maximum Queue Size", length=2, setbycreate=false, mandatory=true },
+	{attname="Allocated Queue Size", length=2, setbycreate=false, mandatory=true },
+	{attname="Discard-block Counter Reset Interval",length=2,  setbycreate=false, mandatory=false },
+	{attname="Threshold Value For Discarded Blocks Due To Buffer Overflow",	length=2,  setbycreate=false, mandatory=false },
+	{attname="Related Port", length=4,  setbycreate=false, mandatory=true },
+	{attname="Traffic Scheduler-G Pointer", length=2, setbycreate=false, mandatory=true },
+	{attname="Weight", length=1, setbycreate=false, mandatory=true },
+	{attname="Back Pressure Operation", length=2, setbycreate=false, mandatory=true },
+	{attname="Back Pressure Time", length=4, setbycreate=false, mandatory=true },
+	{attname="Back Pressure Occur Queue Threshold",	length=2, setbycreate=false, mandatory=true },
+	{attname="Back Pressure Clear Queue Threshold",	length=2, setbycreate=false, mandatory=true }},
 
 [278] = { me_class_name = "Traffic Scheduler-G",
-	{ attname="TCONT pointer", length=2, setbycreate=false },
-	{ attname="traffic shed pointer", length=2, setbycreate=false },
-	{ attname="policy", length=1, setbycreate=false },
-	{ attname="priority weight", length=1, setbycreate=false }},
+	{ attname="TCONT pointer", length=2, setbycreate=false, mandatory=true },
+	{ attname="traffic shed pointer", length=2, setbycreate=false, mandatory=true },
+	{ attname="policy", length=1, setbycreate=false, mandatory=true },
+	{ attname="priority weight", length=1, setbycreate=false, mandatory=true }},
 	
 [279] = { me_class_name = "Protection data",
-	{ attname="Working ANI-G pointer", length=2, setbycreate=false },
-	{ attname="Protection ANI-G pointer", length=2, setbycreate=false },
-	{ attname="Protection type", length=2, setbycreate=false },
-	{ attname="Revertive ind", length=1, setbycreate=false },
-	{ attname="Wait to restore time", length=1, setbycreate=false },
-	{ attname="Switching guard time", length=2, setbycreate=false }},
+	{ attname="Working ANI-G pointer", length=2, setbycreate=false, mandatory=true },
+	{ attname="Protection ANI-G pointer", length=2, setbycreate=false, mandatory=true },
+	{ attname="Protection type", length=2, setbycreate=false, mandatory=true },
+	{ attname="Revertive ind", length=1, setbycreate=false, mandatory=true },
+	{ attname="Wait to restore time", length=1, setbycreate=false, mandatory=true },
+	{ attname="Switching guard time", length=2, setbycreate=false, mandatory=false }},
 
 [281] = { me_class_name = "Multicast GEM interworking termination point",
-	{ attname="GEM port network CTP connectivity pointer", length=2, setbycreate=true },
-	{ attname="Interworking option", length=1, setbycreate=true },
-	{ attname="Service profile pointer", length=2, setbycreate=true },
-	{ attname="Interworking termination point pointer", length=2, setbycreate=true },
-	{ attname="PPTP counter", length=1, setbycreate=false },
-	{ attname="Operational state", length=1, setbycreate=false },
-	{ attname="GAL profile pointer", length=2, setbycreate=true },
-	{ attname="GAL loopback configuration", length=1, setbycreate=true },
-	{ attname="Multicast address table", length=12, setbycreate=false }},
+	{ attname="GEM port network CTP connectivity pointer", length=2, setbycreate=true, mandatory=true },
+	{ attname="Interworking option", length=1, setbycreate=true, mandatory=true },
+	{ attname="Service profile pointer", length=2, setbycreate=true, mandatory=true },
+	{ attname="Interworking termination point pointer", length=2, setbycreate=true, mandatory=true },
+	{ attname="PPTP counter", length=1, setbycreate=false, mandatory=false },
+	{ attname="Operational state", length=1, setbycreate=false, mandatory=false },
+	{ attname="GAL profile pointer", length=2, setbycreate=true, mandatory=true },
+	{ attname="GAL loopback configuration", length=1, setbycreate=true, mandatory=true },
+	{ attname="Multicast address table", length=12, setbycreate=false, mandatory=true }},
 
 [287] = { me_class_name = "OMCI",
-	{ attname="ME Type Table", length=2, setbycreate=false },
-	{ attname="Message Type Table", length=2, setbycreate=false }},
+	{ attname="ME Type Table", length=2, setbycreate=false, mandatory=true },
+	{ attname="Message Type Table", length=2, setbycreate=false, mandatory=true }},
 
 [290] = { me_class_name = "Dot1X Port Extension Package",
-	{ attname="Dot1x Enable", length=1, setbycreate=false },
-	{ attname="Action Register", length=1, setbycreate=false },
-	{ attname="Authenticator PAE State", length=1, setbycreate=false },
-	{ attname="Backend Authentication State", length=1, setbycreate=false },
-	{ attname="Admin Controlled Directions", length=1, setbycreate=false },
-	{ attname="Operational Controlled Directions", length=1, setbycreate=false },
-	{ attname="Authenticator Controlled Port Status", length=1, setbycreate=false },
-	{ attname="Quiet Period", length=2, setbycreate=false },
-	{ attname="Server Timeout Period", length=2, setbycreate=false },
-	{ attname="Reauthentication Period", length=2, setbycreate=false },
-	{ attname="Reauthentication Enabled", length=1, setbycreate=false },
-	{ attname="Key transmission Enabled", length=1, setbycreate=false }},
+	{ attname="Dot1x Enable", length=1, setbycreate=false, mandatory=true },
+	{ attname="Action Register", length=1, setbycreate=false, mandatory=true },
+	{ attname="Authenticator PAE State", length=1, setbycreate=false, mandatory=false },
+	{ attname="Backend Authentication State", length=1, setbycreate=false, mandatory=false },
+	{ attname="Admin Controlled Directions", length=1, setbycreate=false, mandatory=false },
+	{ attname="Operational Controlled Directions", length=1, setbycreate=false, mandatory=false },
+	{ attname="Authenticator Controlled Port Status", length=1, setbycreate=false, mandatory=false },
+	{ attname="Quiet Period", length=2, setbycreate=false, mandatory=false },
+	{ attname="Server Timeout Period", length=2, setbycreate=false, mandatory=false },
+	{ attname="Reauthentication Period", length=2, setbycreate=false, mandatory=false },
+	{ attname="Reauthentication Enabled", length=1, setbycreate=false, mandatory=false },
+	{ attname="Key transmission Enabled", length=1, setbycreate=false, mandatory=false }},
 	
 -- ADD by Maycon at 2020-08-05
 [291] = { me_class_name = "Dot1X configuration profile",
-	{ attname="Circuit ID prefix", length=2, setbycreate=false }, -- 1 
-	{ attname="Fallback policy", length=1, setbycreate=false }, -- 2
-	{ attname="Auth server 1", length=2, setbycreate=false }, -- 3
-	{ attname="Shared secret auth1", length=25, setbycreate=false }, -- 4
-	{ attname="Auth server 2", length=2, setbycreate=false }, -- 5
-	{ attname="Shared secret auth2", length=25, setbycreate=false }, -- 6
-	{ attname="Auth server 3", length=2, setbycreate=false }, -- 7
-	{ attname="Shared secret auth3", length=25, setbycreate=false }, -- 8
-	{ attname="OLT proxy address", length=4, setbycreate=false }}, -- 9
+	{ attname="Circuit ID prefix", length=2, setbycreate=false, mandatory=true }, -- 1 
+	{ attname="Fallback policy", length=1, setbycreate=false, mandatory=true }, -- 2
+	{ attname="Auth server 1", length=2, setbycreate=false, mandatory=true }, -- 3
+	{ attname="Shared secret auth1", length=25, setbycreate=false, mandatory=true }, -- 4
+	{ attname="Auth server 2", length=2, setbycreate=false, mandatory=false }, -- 5
+	{ attname="Shared secret auth2", length=25, setbycreate=false, mandatory=false }, -- 6
+	{ attname="Auth server 3", length=2, setbycreate=false, mandatory=false }, -- 7
+	{ attname="Shared secret auth3", length=25, setbycreate=false, mandatory=false }, -- 8
+	{ attname="OLT proxy address", length=4, setbycreate=false, mandatory=false }}, -- 9
 
 [296] = { me_class_name = "Ethernet PM History Data 3", imp_link=(11),
-	{ attname="Interval End Time", length=1, setbycreate=false },
-	{ attname="Threshold Data Id", length=2, setbycreate=true },
-	{ attname="Drop events", length=4, setbycreate=false },
-	{ attname="Octets", length=4, setbycreate=false },
-	{ attname="Packets", length=4, setbycreate=false },
-	{ attname="Broadcast Packets", length=4, setbycreate=false },
-	{ attname="Multicast Packets", length=4, setbycreate=false },
-	{ attname="Undersize Packets", length=4, setbycreate=false },	
-	{ attname="Fragments", length=4, setbycreate=false },	
-	{ attname="Jabbers", length=4, setbycreate=false },	
-	{ attname="Packets 64 Octets", length=4, setbycreate=false },
-	{ attname="Packets 65 to 127 Octets", length=4, setbycreate=false },
-	{ attname="Packets 128 to 255 Octets", length=4, setbycreate=false },
-	{ attname="Packets 256 to 511 Octets", length=4, setbycreate=false },
-	{ attname="Packets 512 to 1023 Octets", length=4, setbycreate=false },
-	{ attname="Packets 1024 to 1518 Octets", length=4, setbycreate=false }},
+	{ attname="Interval End Time", length=1, setbycreate=false, mandatory=true },
+	{ attname="Threshold Data Id", length=2, setbycreate=true, mandatory=true },
+	{ attname="Drop events", length=4, setbycreate=false, mandatory=true },
+	{ attname="Octets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Packets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Broadcast Packets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Multicast Packets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Undersize Packets", length=4, setbycreate=false, mandatory=true },	
+	{ attname="Fragments", length=4, setbycreate=false, mandatory=true },	
+	{ attname="Jabbers", length=4, setbycreate=false, mandatory=true },	
+	{ attname="Packets 64 Octets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Packets 65 to 127 Octets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Packets 128 to 255 Octets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Packets 256 to 511 Octets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Packets 512 to 1023 Octets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Packets 1024 to 1518 Octets", length=4, setbycreate=false, mandatory=true }},
 	
 [297] = { me_class_name = "Port mapping package-G",
-	{ attname="Max ports", length=1, setbycreate=false },
-	{ attname="Port list 1", length=16, setbycreate=false },
-	{ attname="Port list 2", length=16, setbycreate=false },
-	{ attname="Port list 3", length=16, setbycreate=false },
-	{ attname="Port list 4", length=16, setbycreate=false },
-	{ attname="Port list 5", length=16, setbycreate=false },
-	{ attname="Port list 6", length=16, setbycreate=false },
-	{ attname="Port list 7", length=16, setbycreate=false },
-	{ attname="Port list 8", length=16, setbycreate=false }},
+	{ attname="Max ports", length=1, setbycreate=false, mandatory=true },
+	{ attname="Port list 1", length=16, setbycreate=false, mandatory=true },
+	{ attname="Port list 2", length=16, setbycreate=false, mandatory=false },
+	{ attname="Port list 3", length=16, setbycreate=false, mandatory=false },
+	{ attname="Port list 4", length=16, setbycreate=false, mandatory=false },
+	{ attname="Port list 5", length=16, setbycreate=false, mandatory=false },
+	{ attname="Port list 6", length=16, setbycreate=false, mandatory=false },
+	{ attname="Port list 7", length=16, setbycreate=false, mandatory=false },
+	{ attname="Port list 8", length=16, setbycreate=false, mandatory=false }},
 
 [309] = { me_class_name = "Multicast operations profile",
-	{ attname="IGMP version", length=1, setbycreate=true },
-	{ attname="IGMP function", length=1, setbycreate=true },
-	{ attname="Immediate leave", length=1, setbycreate=true },
-	{ attname="Upstream IGMP TCI", length=2, setbycreate=true },
-	{ attname="Upstream IGMP tag control", length=1, setbycreate=true },
-	{ attname="Upstream IGMP rate", length=4, setbycreate=true },
-	{ attname="Dynamic access control list table", length=24, setbycreate=false },
-	{ attname="Static access control list table", length=24, setbycreate=false },	
-	{ attname="Lost groups list table", length=10, setbycreate=false },		
-	{ attname="Robustness", length=1, setbycreate=true },	
-	{ attname="Querier IP address", length=4, setbycreate=true },		
-	{ attname="Query interval", length=4, setbycreate=true },		
-	{ attname="Query max response time", length=4, setbycreate=true },		
-	{ attname="Last member query interval", length=4, setbycreate=false }},
+	{ attname="IGMP version", length=1, setbycreate=true, mandatory=true },
+	{ attname="IGMP function", length=1, setbycreate=true, mandatory=true },
+	{ attname="Immediate leave", length=1, setbycreate=true, mandatory=true },
+	{ attname="Upstream IGMP TCI", length=2, setbycreate=true, mandatory=false },
+	{ attname="Upstream IGMP tag control", length=1, setbycreate=true, mandatory=false },
+	{ attname="Upstream IGMP rate", length=4, setbycreate=true, mandatory=false },
+	{ attname="Dynamic access control list table", length=24, setbycreate=false, mandatory=true },
+	{ attname="Static access control list table", length=24, setbycreate=false, mandatory=true },	
+	{ attname="Lost groups list table", length=10, setbycreate=false, mandatory=false },		
+	{ attname="Robustness", length=1, setbycreate=true, mandatory=false },	
+	{ attname="Querier IP address", length=4, setbycreate=true, mandatory=false },		
+	{ attname="Query interval", length=4, setbycreate=true, mandatory=false },		
+	{ attname="Query max response time", length=4, setbycreate=true, mandatory=false },		
+	{ attname="Last member query interval", length=4, setbycreate=false, mandatory=false }},
 
 [310] = { me_class_name = "Multicast subscriber config info", imp_link=(47, 130),
-	{ attname="ME type", length=1, setbycreate=true },
-	{ attname="Multicast operations profile pointer", length=2, setbycreate=true },
-	{ attname="Max simultaneous groups", length=2, setbycreate=true },
-	{ attname="Max multicast bandwidth", length=4, setbycreate=true },
-	{ attname="Bandwidth enforcement", length=1, setbycreate=true }},	
+	{ attname="ME type", length=1, setbycreate=true, mandatory=true },
+	{ attname="Multicast operations profile pointer", length=2, setbycreate=true, mandatory=true },
+	{ attname="Max simultaneous groups", length=2, setbycreate=true, mandatory=false },
+	{ attname="Max multicast bandwidth", length=4, setbycreate=true, mandatory=false },
+	{ attname="Bandwidth enforcement", length=1, setbycreate=true, mandatory=false }},	
 	
 [311] = { me_class_name = "Multicast Subscriber Monitor", imp_link=(47, 130),
-	{ attname="ME type", length=1, setbycreate=true },
-	{ attname="Current multicast bandwidth", length=4, setbycreate=false },
-	{ attname="Max Join messages counter", length=4, setbycreate=false },
-	{ attname="Bandwidth exceeded counter", length=4, setbycreate=false },
-	{ attname="Active group list table", length=24, setbycreate=false }},	
+	{ attname="ME type", length=1, setbycreate=true, mandatory=true },
+	{ attname="Current multicast bandwidth", length=4, setbycreate=false, mandatory=false },
+	{ attname="Max Join messages counter", length=4, setbycreate=false, mandatory=false },
+	{ attname="Bandwidth exceeded counter", length=4, setbycreate=false, mandatory=false },
+	{ attname="Active group list table", length=24, setbycreate=false, mandatory=true }},	
 
 [312] = { me_class_name = "FEC PM History Data", imp_link=(263),
-	{ attname="Interval end time", length=1, setbycreate=false },
-	{ attname="Threshold data id", length=2, setbycreate=true },
-	{ attname="Corrected bytes", length=4, setbycreate=false },
-	{ attname="Corrected code words", length=4, setbycreate=false },
-	{ attname="Uncorrectable code words", length=4, setbycreate=false },
-	{ attname="Total code words", length=4, setbycreate=false },
-	{ attname="FEC seconds", length=2, setbycreate=false }},
+	{ attname="Interval end time", length=1, setbycreate=false, mandatory=true },
+	{ attname="Threshold data id", length=2, setbycreate=true, mandatory=true },
+	{ attname="Corrected bytes", length=4, setbycreate=false, mandatory=true },
+	{ attname="Corrected code words", length=4, setbycreate=false, mandatory=true },
+	{ attname="Uncorrectable code words", length=4, setbycreate=false, mandatory=true },
+	{ attname="Total code words", length=4, setbycreate=false, mandatory=true },
+	{ attname="FEC seconds", length=2, setbycreate=false, mandatory=true }},
 
 -- ADD by Marcus 2020-05-25	
 [318] = { me_class_name = "File transfer controller",
-	{ attname="Supported transfer protocols", length=2, setbycreate=false },
-	{ attname="File type", length=2, setbycreate=false },
-	{ attname="File instance", length=2, setbycreate=false },
-	{ attname="Local file name pointer", length=2, setbycreate=false },
-	{ attname="Network address pointer", length=2, setbycreate=false },
-	{ attname="File transfer trigger", length=1, setbycreate=false },
-	{ attname="File transfer status", length=1, setbycreate=false },
-	{ attname="GEM IWTP pointer", length=2, setbycreate=false },	
-	{ attname="Undersize Packets", length=2, setbycreate=false },	
-	{ attname="VLAN", length=2, setbycreate=false },
-	{ attname="File size", length=4, setbycreate=false },
-	{ attname="Directory listing table", length=25, setbycreate=false }},
+	{ attname="Supported transfer protocols", length=2, setbycreate=false, mandatory=true },
+	{ attname="File type", length=2, setbycreate=false, mandatory=true },
+	{ attname="File instance", length=2, setbycreate=false, mandatory=true },
+	{ attname="Local file name pointer", length=2, setbycreate=false, mandatory=true },
+	{ attname="Network address pointer", length=2, setbycreate=false, mandatory=true },
+	{ attname="File transfer trigger", length=1, setbycreate=false, mandatory=true },
+	{ attname="File transfer status", length=1, setbycreate=false, mandatory=true },
+	{ attname="GEM IWTP pointer", length=2, setbycreate=false, mandatory=false },	
+	{ attname="Undersize Packets", length=2, setbycreate=false, mandatory=false },	
+	{ attname="VLAN", length=2, setbycreate=false, mandatory=false },
+	{ attname="File size", length=4, setbycreate=false, mandatory=false },
+	{ attname="Directory listing table", length=25, setbycreate=false, mandatory=false }},
 
 [321] = { me_class_name = "Ethernet Frame PM History Data DS",
-	{ attname="Interval End Time", length=1, setbycreate=false },
-	{ attname="Threshold Data Id", length=2, setbycreate=true },
-	{ attname="Drop events", length=4, setbycreate=false },
-	{ attname="Octets", length=4, setbycreate=false },
-	{ attname="Packets", length=4, setbycreate=false },
-	{ attname="Broadcast Packets", length=4, setbycreate=false },
-	{ attname="Multicast Packets", length=4, setbycreate=false },
-	{ attname="CRC Errored Packets", length=4, setbycreate=false },	
-	{ attname="Undersize Packets", length=4, setbycreate=false },	
-	{ attname="Oversize Packets", length=4, setbycreate=false },
-	{ attname="Packets 64 Octets", length=4, setbycreate=false },
-	{ attname="Packets 65 to 127 Octets", length=4, setbycreate=false },
-	{ attname="Packets 128 to 255 Octets", length=4, setbycreate=false },
-	{ attname="Packets 256 to 511 Octets", length=4, setbycreate=false },
-	{ attname="Packets 512 to 1023 Octets", length=4, setbycreate=false },
-	{ attname="Packets 1024 to 1518 Octets", length=4, setbycreate=false }},
+	{ attname="Interval End Time", length=1, setbycreate=false, mandatory=true },
+	{ attname="Threshold Data Id", length=2, setbycreate=true, mandatory=true },
+	{ attname="Drop events", length=4, setbycreate=false, mandatory=true },
+	{ attname="Octets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Packets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Broadcast Packets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Multicast Packets", length=4, setbycreate=false, mandatory=true },
+	{ attname="CRC Errored Packets", length=4, setbycreate=false, mandatory=true },	
+	{ attname="Undersize Packets", length=4, setbycreate=false, mandatory=true },	
+	{ attname="Oversize Packets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Packets 64 Octets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Packets 65 to 127 Octets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Packets 128 to 255 Octets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Packets 256 to 511 Octets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Packets 512 to 1023 Octets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Packets 1024 to 1518 Octets", length=4, setbycreate=false, mandatory=true }},
 
 [322] = { me_class_name = "Ethernet Frame PM History Data US", imp_link=(47),
-	{ attname="Interval End Time", length=1, setbycreate=false },
-	{ attname="Threshold Data Id", length=2, setbycreate=true },
-	{ attname="Drop events", length=4, setbycreate=false },
-	{ attname="Octets", length=4, setbycreate=false },
-	{ attname="Packets", length=4, setbycreate=false },
-	{ attname="Broadcast Packets", length=4, setbycreate=false },
-	{ attname="Multicast Packets", length=4, setbycreate=false },
-	{ attname="CRC Errored Packets", length=4, setbycreate=false },	
-	{ attname="Undersize Packets", length=4, setbycreate=false },	
-	{ attname="Oversize Packets", length=4, setbycreate=false },
-	{ attname="Packets 64 Octets", length=4, setbycreate=false },
-	{ attname="Packets 65 to 127 Octets", length=4, setbycreate=false },
-	{ attname="Packets 128 to 255 Octets", length=4, setbycreate=false },
-	{ attname="Packets 256 to 511 Octets", length=4, setbycreate=false },
-	{ attname="Packets 512 to 1023 Octets", length=4, setbycreate=false },
-	{ attname="Packets 1024 to 1518 Octets", length=4, setbycreate=false }},
+	{ attname="Interval End Time", length=1, setbycreate=false, mandatory=true },
+	{ attname="Threshold Data Id", length=2, setbycreate=true, mandatory=true },
+	{ attname="Drop events", length=4, setbycreate=false, mandatory=true },
+	{ attname="Octets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Packets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Broadcast Packets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Multicast Packets", length=4, setbycreate=false, mandatory=true },
+	{ attname="CRC Errored Packets", length=4, setbycreate=false, mandatory=true },	
+	{ attname="Undersize Packets", length=4, setbycreate=false, mandatory=true },	
+	{ attname="Oversize Packets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Packets 64 Octets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Packets 65 to 127 Octets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Packets 128 to 255 Octets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Packets 256 to 511 Octets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Packets 512 to 1023 Octets", length=4, setbycreate=false, mandatory=true },
+	{ attname="Packets 1024 to 1518 Octets", length=4, setbycreate=false, mandatory=true }},
 
 -- ADD by Maycon at 2020-05-07		
 [329] = { me_class_name = "Virtual Ethernet interface point",
-	{ attname="Administrative state", length=14, setbycreate=false },
-	{ attname="Operational state", length=1, setbycreate=false },
-	{ attname="Interdomain name", length=25, setbycreate=false },
-	{ attname="TCP UDP pointer", length=2, setbycreate=false },
-	{ attname="IANA assigned port", length=2, setbycreate=false }},
+	{ attname="Administrative state", length=14, setbycreate=false, mandatory=true },
+	{ attname="Operational state", length=1, setbycreate=false, mandatory=false },
+	{ attname="Interdomain name", length=25, setbycreate=false, mandatory=false },
+	{ attname="TCP UDP pointer", length=2, setbycreate=false, mandatory=false },
+	{ attname="IANA assigned port", length=2, setbycreate=false, mandatory=true }},
 
 -- ADD by Maycon at 2020-05-07	
 [340] = { me_class_name = "BBF TR-069 management server",	
-	{ attname="Administrative state", length=1, setbycreate=false },
-	{ attname="ACS network address", length=2, setbycreate=false },
-	{ attname="Associated tag", length=2, setbycreate=false }},
+	{ attname="Administrative state", length=1, setbycreate=false, mandatory=true },
+	{ attname="ACS network address", length=2, setbycreate=false, mandatory=true },
+	{ attname="Associated tag", length=2, setbycreate=false, mandatory=true }},
 
 -- ADD by Maycon at 2020-05-08	
 [341] = { me_class_name = "GEM port network CTP performance monitoring history data", imp_link=(268),
-	{ attname="Interval end time", length=1, setbycreate=true }, -- 1
-	{ attname="Threshold data ID", length=2, setbycreate=true }, -- 2
-	{ attname="Transmitted GEM frames", length=4, setbycreate=false }, -- 3
-	{ attname="Received GEM frames", length=4, setbycreate=false }, -- 4
-	{ attname="Received payload bytes", length=8, setbycreate=false }, -- 5
-	{ attname="Transmitted payload bytes", length=8, setbycreate=false }, -- 6
-	{ attname="Encryption key errors", length=4, setbycreate=false }}, -- 7
+	{ attname="Interval end time", length=1, setbycreate=true, mandatory=true }, -- 1
+	{ attname="Threshold data ID", length=2, setbycreate=true, mandatory=true }, -- 2
+	{ attname="Transmitted GEM frames", length=4, setbycreate=false, mandatory=true }, -- 3
+	{ attname="Received GEM frames", length=4, setbycreate=false, mandatory=true }, -- 4
+	{ attname="Received payload bytes", length=8, setbycreate=false, mandatory=true }, -- 5
+	{ attname="Transmitted payload bytes", length=8, setbycreate=false, mandatory=true }, -- 6
+	{ attname="Encryption key errors", length=4, setbycreate=false, mandatory=false }}, -- 7
 
 -- ADD by Maycon at 2020-05-29
 [65303] = { me_class_name = "PPPoE INTELBRAS OLT 8820i 110Gi",
-	{ attname="Wan-Type", length=1, setbycreate=false },
-	{ attname="User", length=25, setbycreate=false },
-	{ attname="Password", length=25, setbycreate=false },
-	{ attname="MPPE", length=1, setbycreate=false },
-	{ attname="Service Name", length=25, setbycreate=false }},
+	{ attname="Wan-Type", length=1, setbycreate=false, mandatory=false },
+	{ attname="User", length=25, setbycreate=false, mandatory=false },
+	{ attname="Password", length=25, setbycreate=false, mandatory=false },
+	{ attname="MPPE", length=1, setbycreate=false, mandatory=false },
+	{ attname="Service Name", length=25, setbycreate=false, mandatory=false }},
 
 -- ADD by Marcus at 2020-07-03
 [65320] = { me_class_name = "Wan Extended Config FH",
-	{ attname="WAN Number", length=2, setbycreate=false },
-	{ attname="WAN Index", length=1, setbycreate=false },
-	{ attname="WAN name 1", length=16, setbycreate=false },
-	{ attname="WAN name 2 DNS", length=16, setbycreate=false },
-	{ attname="WAN name 3 DNS", length=16, setbycreate=false },
-	{ attname="WAN name 4", length=16, setbycreate=false },
-	{ attname="WAN UPPIR", length=4, setbycreate=false },
-	{ attname="WAN DOWNPIR", length=4, setbycreate=false }},
+	{ attname="WAN Number", length=2, setbycreate=false, mandatory=false },
+	{ attname="WAN Index", length=1, setbycreate=false, mandatory=false },
+	{ attname="WAN name 1", length=16, setbycreate=false, mandatory=false },
+	{ attname="WAN name 2 DNS", length=16, setbycreate=false, mandatory=false },
+	{ attname="WAN name 3 DNS", length=16, setbycreate=false, mandatory=false },
+	{ attname="WAN name 4", length=16, setbycreate=false, mandatory=false },
+	{ attname="WAN UPPIR", length=4, setbycreate=false, mandatory=false },
+	{ attname="WAN DOWNPIR", length=4, setbycreate=false, mandatory=false }},
 
 [65321] = { me_class_name = "WAN Profile File FH",
-	{ attname="Create-or-Delete WAN IPV4", length=2, setbycreate=false },
-	{ attname="Create-or-Delete WAN IPV6", length=2, setbycreate=false }},
+	{ attname="Create-or-Delete WAN IPV4", length=2, setbycreate=false, mandatory=false },
+	{ attname="Create-or-Delete WAN IPV6", length=2, setbycreate=false, mandatory=false }},
 	
 -- ADD by Maycon at 2020-07-01
 [65322] = { me_class_name = "WAN Mode FH",
-	{ attname="WAN INDEX", length=1, setbycreate=false }, -- 1
-	{ attname="WAN name 1", length=16, setbycreate=false }, -- 2
-	{ attname="WAN name 2", length=16, setbycreate=false }, -- 3
-	{ attname="WAN name 3", length=16, setbycreate=false }, -- 4
-	{ attname="WAN name 4", length=16, setbycreate=false }, -- 5
-	{ attname="WAN Conected Mode", length=1, setbycreate=false }, -- 6
-	{ attname="WAN Conected Type", length=1, setbycreate=false }, -- 7
-	{ attname="VLAN", length=2, setbycreate=true }, -- 8
-	{ attname="COS", length=2, setbycreate=true }, -- 10
-	{ attname="NAT", length=1, setbycreate=true },
-	{ attname="IP MODE", length=1, setbycreate=true },
-	{ attname="QoS Enable", length=1, setbycreate=true },
-	{ attname="Conect Status", length=1, setbycreate=true },
-	{ attname="GEM PORT POINT", length=2, setbycreate=true },
-	{ attname="DHCP REMOTE ID", length=10, setbycreate=true },
-	{ attname="ACTIVE FLAG", length=1, setbycreate=false }},
+	{ attname="WAN INDEX", length=1, setbycreate=false, mandatory=false }, -- 1
+	{ attname="WAN name 1", length=16, setbycreate=false, mandatory=false }, -- 2
+	{ attname="WAN name 2", length=16, setbycreate=false, mandatory=false }, -- 3
+	{ attname="WAN name 3", length=16, setbycreate=false, mandatory=false }, -- 4
+	{ attname="WAN name 4", length=16, setbycreate=false, mandatory=false }, -- 5
+	{ attname="WAN Conected Mode", length=1, setbycreate=false, mandatory=false }, -- 6
+	{ attname="WAN Conected Type", length=1, setbycreate=false, mandatory=false }, -- 7
+	{ attname="VLAN", length=2, setbycreate=true, mandatory=false }, -- 8
+	{ attname="COS", length=2, setbycreate=true, mandatory=false }, -- 10
+	{ attname="NAT", length=1, setbycreate=true, mandatory=false },
+	{ attname="IP MODE", length=1, setbycreate=true, mandatory=false },
+	{ attname="QoS Enable", length=1, setbycreate=true, mandatory=false },
+	{ attname="Conect Status", length=1, setbycreate=true, mandatory=false },
+	{ attname="GEM PORT POINT", length=2, setbycreate=true, mandatory=false },
+	{ attname="DHCP REMOTE ID", length=10, setbycreate=true, mandatory=false },
+	{ attname="ACTIVE FLAG", length=1, setbycreate=false, mandatory=false }},
 	
 	
 -- ADD by Maycon at 2020-07-01
 [65323] = { me_class_name = "WAN CONFIG FH",
-	{ attname="Proxy Enable", length=1, setbycreate=false }, --1
-	{ attname="Userppoe1", length=16, setbycreate=false }, --2
-	{ attname="Userppoe2", length=16, setbycreate=false }, --3
-	{ attname="Passwordppoe1", length=16, setbycreate=false }, --4
-	{ attname="Passwordppoe2", length=16, setbycreate=false }, --5
-	{ attname="Service Name 1", length=16, setbycreate=false }, --6
-	{ attname="Service Name 2", length=16, setbycreate=false }, --7 
-	{ attname="Dail Parther", length=1, setbycreate=true }, --8
-	{ attname="Authentic Mode", length=1, setbycreate=true }, --9
-	{ attname="Auto Drop Time", length=2, setbycreate=true }},	--10
+	{ attname="Proxy Enable", length=1, setbycreate=false, mandatory=false }, --1
+	{ attname="Userppoe1", length=16, setbycreate=false, mandatory=false }, --2
+	{ attname="Userppoe2", length=16, setbycreate=false, mandatory=false }, --3
+	{ attname="Passwordppoe1", length=16, setbycreate=false, mandatory=false }, --4
+	{ attname="Passwordppoe2", length=16, setbycreate=false, mandatory=false }, --5
+	{ attname="Service Name 1", length=16, setbycreate=false, mandatory=false }, --6
+	{ attname="Service Name 2", length=16, setbycreate=false, mandatory=false }, --7 
+	{ attname="Dail Parther", length=1, setbycreate=true, mandatory=false }, --8
+	{ attname="Authentic Mode", length=1, setbycreate=true, mandatory=false }, --9
+	{ attname="Auto Drop Time", length=2, setbycreate=true, mandatory=false }},	--10
 	
 	
  -- ADD by Maycon at 2020-07-01
 [65324] = { me_class_name = "WAN PORT BIND FH",
-	{ attname="LAN Bind", length=1, setbycreate=true },
-	{ attname="SSID Bind", length=1, setbycreate=true }},	
+	{ attname="LAN Bind", length=1, setbycreate=true, mandatory=false },
+	{ attname="SSID Bind", length=1, setbycreate=true, mandatory=false }},	
 
 -- ADD by Marcus at 2020-07-03
 [65329] = { me_class_name = "WAN WAN Profile FH",
-	{ attname="WAN IP HOST IP ADDR", length=4, setbycreate=false },
-	{ attname="WAN IP HOST MASK", length=4, setbycreate=false },
-	{ attname="WAN IP HOST Gateway", length=4, setbycreate=false },
-	{ attname="WAN IP HOST Primary DNS", length=4, setbycreate=false },
-	{ attname="WAN IP HOST Secondary DNS", length=4, setbycreate=false },
-	{ attname="WAN IP HOST Static IPv6", length=19, setbycreate=false },
-	{ attname="WAN IP HOST IPv6 Gateway", length=19, setbycreate=false },
-	{ attname="WAN IP HOST IPV6 Primary DNS Static IPv6", length=19, setbycreate=false },
-	{ attname="WAN IP HOST IPV6 Secondary DNS Static IPv6", length=19, setbycreate=false },
-	{ attname="WAN IP HOST WAN Protocol", length=1, setbycreate=false },
-	{ attname="WAN IP HOST Static Prefix", length=19, setbycreate=false },
-	{ attname="WAN IP HOST Prefix Pool", length=19, setbycreate=false },
-	{ attname="WAN IP HOST Address Source", length=1, setbycreate=false },
-	{ attname="WAN IP HOST MAC Address Source", length=6, setbycreate=false }},
+	{ attname="WAN IP HOST IP ADDR", length=4, setbycreate=false, mandatory=false },
+	{ attname="WAN IP HOST MASK", length=4, setbycreate=false, mandatory=false },
+	{ attname="WAN IP HOST Gateway", length=4, setbycreate=false, mandatory=false },
+	{ attname="WAN IP HOST Primary DNS", length=4, setbycreate=false, mandatory=false },
+	{ attname="WAN IP HOST Secondary DNS", length=4, setbycreate=false, mandatory=false },
+	{ attname="WAN IP HOST Static IPv6", length=19, setbycreate=false, mandatory=false },
+	{ attname="WAN IP HOST IPv6 Gateway", length=19, setbycreate=false, mandatory=false },
+	{ attname="WAN IP HOST IPV6 Primary DNS Static IPv6", length=19, setbycreate=false, mandatory=false },
+	{ attname="WAN IP HOST IPV6 Secondary DNS Static IPv6", length=19, setbycreate=false, mandatory=false },
+	{ attname="WAN IP HOST WAN Protocol", length=1, setbycreate=false, mandatory=false },
+	{ attname="WAN IP HOST Static Prefix", length=19, setbycreate=false, mandatory=false },
+	{ attname="WAN IP HOST Prefix Pool", length=19, setbycreate=false, mandatory=false },
+	{ attname="WAN IP HOST Address Source", length=1, setbycreate=false, mandatory=false },
+	{ attname="WAN IP HOST MAC Address Source", length=6, setbycreate=false, mandatory=false }},
 	
 -- ADD by Maycon at 2020-07-029
 [65326] = { me_class_name = "Wifi General Config",
-	{ attname="wifi_std", length=2, setbycreate=false }, -- 1 
-	{ attname="wifi_auth", length=2, setbycreate=false }, -- 2
-	{ attname="wifi_cryp", length=2, setbycreate=false }, -- 3
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 4
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 5
-	{ attname="wifi_pass", length=25, setbycreate=false }, -- 6
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 7
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 8
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 9
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 10
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 11
-	{ attname="wifi_ssid", length=25, setbycreate=false }, -- 12
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 13
-	{ attname="wifi_enabled", length=1, setbycreate=false }, -- 14
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 15
-	{ attname="Not_identified", length=2, setbycreate=false }}, -- 16
+	{ attname="wifi_std", length=2, setbycreate=false, mandatory=false }, -- 1 
+	{ attname="wifi_auth", length=2, setbycreate=false, mandatory=false }, -- 2
+	{ attname="wifi_cryp", length=2, setbycreate=false, mandatory=false }, -- 3
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 4
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 5
+	{ attname="wifi_pass", length=25, setbycreate=false, mandatory=false }, -- 6
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 7
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 8
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 9
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 10
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 11
+	{ attname="wifi_ssid", length=25, setbycreate=false, mandatory=false }, -- 12
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 13
+	{ attname="wifi_enabled", length=1, setbycreate=false, mandatory=false }, -- 14
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 15
+	{ attname="Not_identified", length=2, setbycreate=false, mandatory=false }}, -- 16
 	
 
 -- ADD by Maycon at 2020-07-029
 [65327] = { me_class_name = "Wifi Advance Config",
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 1 
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 2
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 3
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 4
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 5
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 6
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 7
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 8
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 9
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 10
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 11
-	{ attname="wifi_channel", length=1, setbycreate=false }, -- 12
-	{ attname="wifi_tx_pwr", length=1, setbycreate=false }, -- 13
-	{ attname="wifi_country", length=1, setbycreate=false }, -- 14
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 15
-	{ attname="wifi_freq_bandwidth", length=1, setbycreate=false }}, -- 16
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 1 
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 2
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 3
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 4
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 5
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 6
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 7
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 8
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 9
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 10
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 11
+	{ attname="wifi_channel", length=1, setbycreate=false, mandatory=false }, -- 12
+	{ attname="wifi_tx_pwr", length=1, setbycreate=false, mandatory=false }, -- 13
+	{ attname="wifi_country", length=1, setbycreate=false, mandatory=false }, -- 14
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 15
+	{ attname="wifi_freq_bandwidth", length=1, setbycreate=false, mandatory=false }}, -- 16
 	
 	
 --ME 65328
 
 -- ADD by Maycon at 2020-07-01
 [65338] = { me_class_name = "WAN Extended VLAN FH",
-	{ attname="VLAN Mode", length=1, setbycreate=false },
-	{ attname="Tranlation Enable", length=1, setbycreate=false },
-	{ attname="Tranlation  VID", length=2, setbycreate=false },
-	{ attname="VLAN CoS", length=2, setbycreate=false },
-	{ attname="QinQ Enable", length=1, setbycreate=false },
-	{ attname="VLAN TPID", length=2, setbycreate=false },
-	{ attname="SLAN ID", length=2, setbycreate=false },
-	{ attname="SLAN CoS", length=2, setbycreate=false }},	
+	{ attname="VLAN Mode", length=1, setbycreate=false, mandatory=false },
+	{ attname="Tranlation Enable", length=1, setbycreate=false, mandatory=false },
+	{ attname="Tranlation  VID", length=2, setbycreate=false, mandatory=false },
+	{ attname="VLAN CoS", length=2, setbycreate=false, mandatory=false },
+	{ attname="QinQ Enable", length=1, setbycreate=false, mandatory=false },
+	{ attname="VLAN TPID", length=2, setbycreate=false, mandatory=false },
+	{ attname="SLAN ID", length=2, setbycreate=false, mandatory=false },
+	{ attname="SLAN CoS", length=2, setbycreate=false, mandatory=false }},	
 
 [65529] = { me_class_name = "ONU Capability",
-	{ attname="operator_id", length=4, setbycreate=false },
-	{ attname="ctc_spec_version", length=1, setbycreate=false },
-	{ attname="onu_type", length=1, setbycreate=false },
-	{ attname="onu_tx_power_supply_control", length=1, setbycreate=false }},
+	{ attname="operator_id", length=4, setbycreate=false, mandatory=false },
+	{ attname="ctc_spec_version", length=1, setbycreate=false, mandatory=false },
+	{ attname="onu_type", length=1, setbycreate=false, mandatory=false },
+	{ attname="onu_tx_power_supply_control", length=1, setbycreate=false, mandatory=false }},
 
 [65530] = { me_class_name = "LOID Authentication",
-	{ attname="operator_id", length=4, setbycreate=false },
-	{ attname="loid", length=24, setbycreate=false },
-	{ attname="password", length=12, setbycreate=false },	
-	{ attname="authentication_status", length=1, setbycreate=false }},
+	{ attname="operator_id", length=4, setbycreate=false, mandatory=false },
+	{ attname="loid", length=24, setbycreate=false, mandatory=false },
+	{ attname="password", length=12, setbycreate=false, mandatory=false },	
+	{ attname="authentication_status", length=1, setbycreate=false, mandatory=false }},
 	
 -- ADD by Maycon at 2020-07-029
 [999999] = { me_class_name = "DEFAULT",
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 1 
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 2
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 3
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 4
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 5
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 6
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 7
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 8
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 9
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 10
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 11
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 12
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 13
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 14
-	{ attname="Not_identified", length=1, setbycreate=false }, -- 15
-	{ attname="Not_identified", length=1, setbycreate=false }}, -- 16
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 1 
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 2
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 3
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 4
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 5
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 6
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 7
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 8
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 9
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 10
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 11
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 12
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 13
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 14
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }, -- 15
+	{ attname="Not_identified", length=1, setbycreate=false, mandatory=false }}, -- 16
 }
 

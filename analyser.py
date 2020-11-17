@@ -118,12 +118,6 @@ class Analyser:
         self.entities = []
         self.output = ""
 
-    def translateAll(self):
-        for raw_pkt in self.buffer:
-            pkt = OmciPacket(raw_pkt)
-            pkt.translate()
-            self.packets.append(pkt)
-
     def printPackets(self):
         for p in self.packets:
             p.printout()
@@ -137,9 +131,21 @@ class Analyser:
 
         return None
 
-    def analyse(self):
+    @staticmethod
+    def translateToPackets(buf):
+        packets = []
+        for raw_pkt in buf:
+            pkt = OmciPacket(raw_pkt)
+            pkt.translate()
+            packets.append(pkt)
+
+        return packets
+
+    @staticmethod
+    def translatePacketsToEntities(pkts):
+        entities = []
         # self.me = MeTranslate.getInstance(self.me_id, self.me_inst)
-        for pkt in self.packets:
+        for pkt in pkts:
             # Only analyse downstream packets
             if pkt.getAckReq() != 0x1:
                 continue
@@ -149,10 +155,10 @@ class Analyser:
                 # TODO: if already there is the me in list?
                 me = MeTranslate.getInstance(pkt.getMeId(), pkt.getMeInst())
                 me.create(pkt.getPkt()[0])
-                self.entities.append(me)
+                entities.append(me)
             elif pkt_type == MessageType.SET:
                 exist = False
-                for e in self.entities:
+                for e in entities:
                     if pkt.getMeId() == e.getId and pkt.getMeInst == e.getInstance():
                         e.setAttributes(pkt.getPkt()[0])
                         exist = True
@@ -160,7 +166,32 @@ class Analyser:
                 if not exist:
                     me = MeTranslate.getInstance(pkt.getMeId(), pkt.getMeInst())
                     me.setAttributes(pkt.getPkt()[0])
-                    self.entities.append(me)
+                    entities.append(me)
+
+        return entities
+
+    @staticmethod
+    def translateAndCreateEntities(buf):
+        pkts = Analyser.translateToPackets(buf)
+        return Analyser.translatePacketsToEntities(pkts)
+
+    def translateToMyself(self):
+        if not self.buffer or not len(self.buffer):
+            return False
+
+        translated_packets = Analyser.translateToPackets(self.buffer)
+        translated_entities = Analyser.translatePacketsToEntities(translated_packets)
+        if not len(translated_entities):
+            return False
+
+        self.packets = translated_packets
+        self.entities = translated_entities
+        return True
+
+    def analyse(self):
+        if not self.translateToMyself():
+            print("Nothing to analyse ...")
+            return
 
         for e in self.entities:
             e.setPointers()
@@ -320,23 +351,23 @@ class Analyser:
     def getBuffer(self):
         return self.buffer
 
-    def loadBuffer(self, file):
-        if not os.path.isfile(file):
-            print("%s is not a file." % file)
-            return False
-
-        try:
-            raw_file = open(file, 'rb')
-            pcapfile = savefile.load_savefile(raw_file, verbose=False)
-            self.buffer = []
-            for pkt in pcapfile.packets:
-                self.buffer.append((pkt.raw()[14:],))
-
-        except Exception as e:
-            print(str(e))
-            return False
-
-        return True
+    # def loadBuffer(self, file):
+    #     if not os.path.isfile(file):
+    #         print("%s is not a file." % file)
+    #         return False
+    #
+    #     try:
+    #         raw_file = open(file, 'rb')
+    #         pcapfile = savefile.load_savefile(raw_file, verbose=False)
+    #         self.buffer = []
+    #         for pkt in pcapfile.packets:
+    #             self.buffer.append((pkt.raw()[14:],))
+    #
+    #     except Exception as e:
+    #         print(str(e))
+    #         return False
+    #
+    #     return True
 
     def showEntity(self, entity):
         me = 0
@@ -359,3 +390,9 @@ class Analyser:
             print("Entity doesnt exist")
         else:
             e.printBeauty()
+
+    def getEntities(self):
+        return self.entities
+
+    def hasEntities(self):
+        return True if len(self.entities) else False
