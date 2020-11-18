@@ -1079,7 +1079,7 @@ class TcpUdpConfigData(ManagedEntity):
         self.port_id = MeAttribute("Port ID", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
         self.protocol = MeAttribute("Protocol", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
         self.tos_diffserv_field = MeAttribute("TOS diffserv field", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
-        self.ip_host_pointer = MeAttribute("IP host pointer", 2, True, True, MeAttribute.READ_PERMISSION, None)
+        self.ip_host_pointer = MeAttribute("IP host pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.port_id,

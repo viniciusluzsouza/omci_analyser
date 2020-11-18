@@ -263,7 +263,7 @@
 	{ attname="Port ID", length=2, setbycreate=true, mandatory=true, perm=rw },
 	{ attname="Protocol", length=1, setbycreate=true, mandatory=true, perm=rw },
 	{ attname="TOS diffserv field", length=1, setbycreate=true, mandatory=true, perm=rw },
-	{ attname="IP host pointer", length=2, setbycreate=true, mandatory=true, perm=r }},	
+	{ attname="IP host pointer", length=2, setbycreate=true, mandatory=true, perm=rw }},	
 	
 -- ADD by Maycon at 2020-05-07		
 [137] = { me_class_name = "Network address",

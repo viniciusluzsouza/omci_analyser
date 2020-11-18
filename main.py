@@ -15,8 +15,9 @@ Choose an option and press ENTER:
    1) Start Capture
    2) Load Capture
    3) Save Capture
-   4) OMCI Analyser
-   5) ME Verifier
+   4) Analyse
+   5) Show Entity (ME)
+   6) ME Verifier
 
    0) Exit
 """
@@ -150,64 +151,47 @@ Choose an option and press ENTER:
 
         return buf
 
-    def analyserMenu(self):
-        if not self.analyser:
-            self.analyser = Analyser()
+    def showEntity(self):
+        buf = self.checkLastCapture()
+        if buf:
+            self.analyser.setBuffer(buf)
+            self.analyser.translateToMyself()
 
-        while True:
-            print(self.ANALYSER)
+            if self.analyser.hasEntities():
+                while True:
+                    entity = input("Inform the entity identifier. E.g: [45-0] (0 to exit): ")
+                    if entity == '0':
+                        break
 
-            try:
-                opt = input(self.CHOOSE)
+                    self.analyser.showEntity(entity)
 
-                opt = self.convertOptWithPrint(opt)
-                if opt is None:
-                    continue
+    def analyse(self):
+        try:
+            buf = self.checkLastCapture()
+            if buf:
+                self.analyser.setBuffer(buf)
+                self.analyser.analyse()
+                if self.askConfirm("Show the output?"):
+                    print("\n%s" % self.analyser.getOutput())
 
-                if opt == 1:
-                    buf = self.checkLastCapture()
-                    if buf:
-                        self.analyser.setBuffer(buf)
-                        self.analyser.analyse()
-                        if self.askConfirm("Show the output?"):
-                            print("\n%s" % self.analyser.getOutput())
+                if self.askConfirm("Generate .png?"):
+                    while True:
+                        pngfile = input("File name: ")
+                        if pngfile != "":
+                            break
+                    self.analyser.generateImage(pngfile)
+                    print("Generated on folder output.")
 
-                        if self.askConfirm("Generate .png?"):
-                            while True:
-                                pngfile = input("File name: ")
-                                if pngfile != "":
-                                    break
-                            self.analyser.generateImage(pngfile)
-                            print("Generated on folder output.")
-
-                elif opt == 2:
-                    buf = self.checkLastCapture()
-                    if buf:
-                        self.analyser.setBuffer(buf)
-                        self.analyser.translateToMyself()
-
-                        if self.analyser.hasEntities():
-                            while True:
-                                entity = input("Inform the entity identifier. E.g: [45-0] (0 to exit): ")
-                                if entity == '0':
-                                    break
-
-                                self.analyser.showEntity(entity)
-
-                elif opt == 0:
-                    break
-
-                else:
-                    print(self.INVALID_OPT)
-                    self.printTitle = False
-
-                self.printTitle = False
-
-            except Exception as e:
-                print(str(e))
-                self.printTitle = False
+        except Exception as e:
+            print(str(e))
 
     def verifierMenu(self):
+        buf = self.checkLastCapture()
+        if buf:
+            self.verifier.setPacketBuffer(buf)
+        else:
+            return
+
         while True:
             print(self.VERIFIER)
 
@@ -216,12 +200,6 @@ Choose an option and press ENTER:
                 opt = self.convertOptWithPrint(opt)
                 if opt is None:
                     continue
-
-                buf = self.checkLastCapture()
-                if buf:
-                    self.verifier.setPacketBuffer(buf)
-                else:
-                    break
 
                 if opt == 1:
                     self.verifier.verifyMandatoryAttributes()
@@ -261,8 +239,10 @@ Choose an option and press ENTER:
                 elif opt == 3:
                     self.saveCapture()
                 elif opt == 4:
-                    self.analyserMenu()
+                    self.analyse()
                 elif opt == 5:
+                    self.showEntity()
+                elif opt == 6:
                     self.verifierMenu()
                 elif opt == 0:
                     break
