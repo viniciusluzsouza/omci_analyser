@@ -1,12 +1,17 @@
 
 class MeAttribute:
-    def __init__(self, name, length, setbycreate, mandatory, points_to=None, value=None):
+    READ_PERMISSION = 1
+    WRITE_PERMISSION = 2
+    READ_WRITE_PERMISSION = 3
+
+    def __init__(self, name, length, setbycreate, mandatory, permissions, points_to=None, value=None):
         self.name = name
         self.length = length
         self.setbycreate = setbycreate
         self.mandatory = mandatory
         self.points_to = points_to
         self.value = value
+        self.permissions = permissions
 
     def getName(self):
         return self.name
@@ -31,6 +36,9 @@ class MeAttribute:
 
     def isMandatory(self):
         return self.mandatory
+
+    def getPermissions(self):
+        return self.permissions
 
 class ManagedEntity:
     me_dict = {
@@ -227,10 +235,8 @@ class OntData(ManagedEntity):
         ManagedEntity.__init__(self, 2, instance)
         self.name = "OntData"
         self.imp_link = []
-        self.mib_data_sync = MeAttribute("MIB Data Sync", 1, False, True, None)
 
         self.attributes = (
-            self.mib_data_sync,
         )
 
     def getImplicitlyLinked(self):
@@ -245,20 +251,8 @@ class PonIfLineCard(ManagedEntity):
         ManagedEntity.__init__(self, 4, instance)
         self.name = "PonIfLineCard"
         self.imp_link = []
-        self.not_identified = MeAttribute("Not_identified", 4, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 4, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 4, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 4, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 4, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 4, False, False, None)
 
         self.attributes = (
-            self.not_identified,
-            self.not_identified,
-            self.not_identified,
-            self.not_identified,
-            self.not_identified,
-            self.not_identified,
         )
 
     def getImplicitlyLinked(self):
@@ -273,13 +267,13 @@ class Cardholder(ManagedEntity):
         ManagedEntity.__init__(self, 5, instance)
         self.name = "Cardholder"
         self.imp_link = []
-        self.actual_plug_in_unit_type = MeAttribute("Actual Plug-in Unit Type", 1, False, True, None)
-        self.expected_plug_in_unit_type = MeAttribute("Expected Plug-in Unit Type", 1, False, True, None)
-        self.expected_port_count = MeAttribute("Expected Port Count", 1, False, False, None)
-        self.expected_equipment_id = MeAttribute("Expected Equipment Id", 20, False, False, None)
-        self.actual_equipment_id = MeAttribute("Actual Equipment Id", 20, False, False, None)
-        self.protection_profile_pointer = MeAttribute("Protection Profile Pointer", 1, False, False, None)
-        self.invoke_protection_switch = MeAttribute("Invoke Protection Switch", 1, False, False, None)
+        self.actual_plug_in_unit_type = MeAttribute("Actual Plug-in Unit Type", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.expected_plug_in_unit_type = MeAttribute("Expected Plug-in Unit Type", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.expected_port_count = MeAttribute("Expected Port Count", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.expected_equipment_id = MeAttribute("Expected Equipment Id", 20, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.actual_equipment_id = MeAttribute("Actual Equipment Id", 20, False, False, MeAttribute.READ_PERMISSION, None)
+        self.protection_profile_pointer = MeAttribute("Protection Profile Pointer", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.invoke_protection_switch = MeAttribute("Invoke Protection Switch", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.actual_plug_in_unit_type,
@@ -303,20 +297,20 @@ class CircuitPack(ManagedEntity):
         ManagedEntity.__init__(self, 6, instance)
         self.name = "CircuitPack"
         self.imp_link = []
-        self.type = MeAttribute("Type", 1, True, True, None)
-        self.number_of_ports = MeAttribute("Number of ports", 1, False, False, None)
-        self.serial_number = MeAttribute("Serial Number", 8, False, True, None)
-        self.version = MeAttribute("Version", 14, False, True, None)
-        self.vendor_id = MeAttribute("Vendor Id", 4, False, False, None)
-        self.administrative_state = MeAttribute("Administrative State", 1, True, True, None)
-        self.operational_state = MeAttribute("Operational State", 1, False, False, None)
-        self.bridged_or_ip_ind = MeAttribute("Bridged or IP Ind", 1, False, False, None)
-        self.equipment_id = MeAttribute("Equipment Id", 20, False, False, None)
-        self.card_configuration = MeAttribute("Card Configuration", 1, True, False, None)
-        self.total_t_cont_buffer_number = MeAttribute("Total T-CONT Buffer Number", 1, False, False, None)
-        self.total_priority_queue_number = MeAttribute("Total Priority Queue Number", 1, False, False, None)
-        self.total_traffic_scheduler_number = MeAttribute("Total Traffic Scheduler Number", 1, False, False, None)
-        self.power_shed_override = MeAttribute("Power Shed Override", 4, False, False, None)
+        self.type = MeAttribute("Type", 1, True, True, MeAttribute.READ_PERMISSION, None)
+        self.number_of_ports = MeAttribute("Number of ports", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.serial_number = MeAttribute("Serial Number", 8, False, True, MeAttribute.READ_PERMISSION, None)
+        self.version = MeAttribute("Version", 14, False, True, MeAttribute.READ_PERMISSION, None)
+        self.vendor_id = MeAttribute("Vendor Id", 4, False, False, MeAttribute.READ_PERMISSION, None)
+        self.administrative_state = MeAttribute("Administrative State", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.operational_state = MeAttribute("Operational State", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.bridged_or_ip_ind = MeAttribute("Bridged or IP Ind", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.equipment_id = MeAttribute("Equipment Id", 20, False, False, MeAttribute.READ_PERMISSION, None)
+        self.card_configuration = MeAttribute("Card Configuration", 1, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.total_t_cont_buffer_number = MeAttribute("Total T-CONT Buffer Number", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.total_priority_queue_number = MeAttribute("Total Priority Queue Number", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.total_traffic_scheduler_number = MeAttribute("Total Traffic Scheduler Number", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.power_shed_override = MeAttribute("Power Shed Override", 4, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.type,
@@ -347,10 +341,10 @@ class SoftwareImage(ManagedEntity):
         ManagedEntity.__init__(self, 7, instance)
         self.name = "SoftwareImage"
         self.imp_link = []
-        self.version = MeAttribute("Version", 14, False, True, None)
-        self.is_committed = MeAttribute("Is committed", 1, False, True, None)
-        self.is_active = MeAttribute("Is active", 1, False, True, None)
-        self.is_valid = MeAttribute("Is valid", 1, False, True, None)
+        self.version = MeAttribute("Version", 14, False, True, MeAttribute.READ_PERMISSION, None)
+        self.is_committed = MeAttribute("Is committed", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.is_active = MeAttribute("Is active", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.is_valid = MeAttribute("Is valid", 1, False, True, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.version,
@@ -371,21 +365,21 @@ class PptpEthernetUni(ManagedEntity):
         ManagedEntity.__init__(self, 11, instance)
         self.name = "PptpEthernetUni"
         self.imp_link = []
-        self.expected_type = MeAttribute("Expected Type", 1, False, True, None)
-        self.sensed_type = MeAttribute("Sensed Type", 1, False, False, None)
-        self.auto_detection_configuration = MeAttribute("Auto Detection Configuration", 1, False, False, None)
-        self.ethernet_loopback_configuration = MeAttribute("Ethernet Loopback Configuration", 1, False, True, None)
-        self.administrative_state = MeAttribute("Administrative State", 1, False, True, None)
-        self.operational_state = MeAttribute("Operational State", 1, False, False, None)
-        self.configuration_ind = MeAttribute("Configuration Ind", 1, False, True, None)
-        self.max_frame_size = MeAttribute("Max Frame Size", 2, False, True, None)
-        self.dte_or_dce = MeAttribute("DTE or DCE", 1, False, True, None)
-        self.pause_time = MeAttribute("Pause Time", 2, False, False, None)
-        self.bridged_or_ip_ind = MeAttribute("Bridged or IP Ind", 1, False, False, None)
-        self.arc = MeAttribute("ARC", 1, False, False, None)
-        self.arc_interval = MeAttribute("ARC Interval", 1, False, False, None)
-        self.pppoe_filter = MeAttribute("PPPoE Filter", 1, False, False, None)
-        self.power_control = MeAttribute("Power Control", 1, False, False, None)
+        self.expected_type = MeAttribute("Expected Type", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.sensed_type = MeAttribute("Sensed Type", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.auto_detection_configuration = MeAttribute("Auto Detection Configuration", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.ethernet_loopback_configuration = MeAttribute("Ethernet Loopback Configuration", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.administrative_state = MeAttribute("Administrative State", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.operational_state = MeAttribute("Operational State", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.configuration_ind = MeAttribute("Configuration Ind", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.max_frame_size = MeAttribute("Max Frame Size", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.dte_or_dce = MeAttribute("DTE or DCE", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.pause_time = MeAttribute("Pause Time", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.bridged_or_ip_ind = MeAttribute("Bridged or IP Ind", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.arc = MeAttribute("ARC", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.arc_interval = MeAttribute("ARC Interval", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.pppoe_filter = MeAttribute("PPPoE Filter", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.power_control = MeAttribute("Power Control", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.expected_type,
@@ -417,22 +411,22 @@ class EthernetPmHistoryData(ManagedEntity):
         ManagedEntity.__init__(self, 24, instance)
         self.name = "EthernetPmHistoryData"
         self.imp_link = [11]
-        self.interval_end_time = MeAttribute("Interval End Time", 1, False, True, None)
-        self.threshold_data_id = MeAttribute("Threshold Data Id", 2, True, True, None)
-        self.fcs_errors_drop_events = MeAttribute("FCS errors Drop events", 4, False, True, None)
-        self.excessive_collision_counter = MeAttribute("Excessive Collision Counter", 4, False, True, None)
-        self.late_collision_counter = MeAttribute("Late Collision Counter", 4, False, True, None)
-        self.frames_too_long = MeAttribute("Frames too long", 4, False, True, None)
-        self.buffer_overflows_on_receive = MeAttribute("Buffer overflows on Receive", 4, False, True, None)
-        self.buffer_overflows_on_transmit = MeAttribute("Buffer overflows on Transmit", 4, False, True, None)
-        self.single_collision_frame_counter = MeAttribute("Single Collision Frame Counter", 4, False, True, None)
-        self.multiple_collisions_frame_counter = MeAttribute("Multiple Collisions Frame Counter", 4, False, True, None)
-        self.sqe_counter = MeAttribute("SQE counter", 4, False, True, None)
-        self.deferred_transmission_counter = MeAttribute("Deferred Transmission Counter", 4, False, True, None)
-        self.internal_mac_transmit_error_counter = MeAttribute("Internal MAC Transmit Error Counter", 4, False, True, None)
-        self.carrier_sense_error_counter = MeAttribute("Carrier Sense Error Counter", 4, False, True, None)
-        self.alignment_error_counter = MeAttribute("Alignment Error Counter", 4, False, True, None)
-        self.internal_mac_receive_error_counter = MeAttribute("Internal MAC Receive Error Counter", 4, False, True, None)
+        self.interval_end_time = MeAttribute("Interval End Time", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.threshold_data_id = MeAttribute("Threshold Data Id", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.fcs_errors_drop_events = MeAttribute("FCS errors Drop events", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.excessive_collision_counter = MeAttribute("Excessive Collision Counter", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.late_collision_counter = MeAttribute("Late Collision Counter", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.frames_too_long = MeAttribute("Frames too long", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.buffer_overflows_on_receive = MeAttribute("Buffer overflows on Receive", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.buffer_overflows_on_transmit = MeAttribute("Buffer overflows on Transmit", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.single_collision_frame_counter = MeAttribute("Single Collision Frame Counter", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.multiple_collisions_frame_counter = MeAttribute("Multiple Collisions Frame Counter", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.sqe_counter = MeAttribute("SQE counter", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.deferred_transmission_counter = MeAttribute("Deferred Transmission Counter", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.internal_mac_transmit_error_counter = MeAttribute("Internal MAC Transmit Error Counter", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.carrier_sense_error_counter = MeAttribute("Carrier Sense Error Counter", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.alignment_error_counter = MeAttribute("Alignment Error Counter", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.internal_mac_receive_error_counter = MeAttribute("Internal MAC Receive Error Counter", 4, False, True, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.interval_end_time,
@@ -465,7 +459,7 @@ class PonPhysicalPathTerminationPoint(ManagedEntity):
         ManagedEntity.__init__(self, 40, instance)
         self.name = "PonPhysicalPathTerminationPoint"
         self.imp_link = []
-        self.not_identified = MeAttribute("Not_identified", 4, False, False, None)
+        self.not_identified = MeAttribute("Not_identified", 4, False, False, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.not_identified,
@@ -483,7 +477,7 @@ class VendorSpecific(ManagedEntity):
         ManagedEntity.__init__(self, 44, instance)
         self.name = "VendorSpecific"
         self.imp_link = []
-        self.sub_entity = MeAttribute("Sub-Entity", 1, True, False, None)
+        self.sub_entity = MeAttribute("Sub-Entity", 1, True, False, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.sub_entity,
@@ -501,15 +495,15 @@ class MacBridgeServiceProfile(ManagedEntity):
         ManagedEntity.__init__(self, 45, instance)
         self.name = "MacBridgeServiceProfile"
         self.imp_link = []
-        self.spanning_tree_ind = MeAttribute("Spanning tree ind", 1, True, True, None)
-        self.learning_ind = MeAttribute("Learning ind", 1, True, True, None)
-        self.port_bridging_ind = MeAttribute("Port bridging ind", 1, True, True, None)
-        self.priority = MeAttribute("Priority", 2, True, True, None)
-        self.max_age = MeAttribute("Max age", 2, True, True, None)
-        self.hello_time = MeAttribute("Hello time", 2, True, True, None)
-        self.forward_delay = MeAttribute("Forward delay", 2, True, True, None)
-        self.unknown_mac_address_discard = MeAttribute("Unknown MAC address discard", 1, True, True, None)
-        self.mac_learning_depth = MeAttribute("MAC learning depth", 1, True, False, None)
+        self.spanning_tree_ind = MeAttribute("Spanning tree ind", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.learning_ind = MeAttribute("Learning ind", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.port_bridging_ind = MeAttribute("Port bridging ind", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.priority = MeAttribute("Priority", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.max_age = MeAttribute("Max age", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.hello_time = MeAttribute("Hello time", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.forward_delay = MeAttribute("Forward delay", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.unknown_mac_address_discard = MeAttribute("Unknown MAC address discard", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.mac_learning_depth = MeAttribute("MAC learning depth", 1, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.spanning_tree_ind,
@@ -535,18 +529,18 @@ class MacBridgePortConfigurationData(ManagedEntity):
         ManagedEntity.__init__(self, 47, instance)
         self.name = "MacBridgePortConfigurationData"
         self.imp_link = [48, 49, 52, 84, 311, 321, 322]
-        self.bridge_id_pointer = MeAttribute("Bridge id pointer", 2, True, True, None)
-        self.port_num = MeAttribute("Port num", 1, True, True, None)
-        self.tp_type = MeAttribute("TP type", 1, True, True, None)
-        self.tp_pointer = MeAttribute("TP pointer", 2, True, True, None)
-        self.port_priority = MeAttribute("Port priority", 2, True, False, None)
-        self.port_path_cost = MeAttribute("Port path cost", 2, True, True, None)
-        self.port_spanning_tree_ind = MeAttribute("Port spanning tree ind", 1, True, True, None)
-        self.encapsulation_method = MeAttribute("Encapsulation method", 1, True, False, None)
-        self.lan_fcs_ind = MeAttribute("LAN FCS ind", 1, True, False, None)
-        self.port_mac_address = MeAttribute("Port MAC address", 6, False, False, None)
-        self.outbound_td_pointer = MeAttribute("Outbound TD pointer", 2, False, False, None)
-        self.inbound_td_pointer = MeAttribute("Inbound TD pointer", 2, False, False, None)
+        self.bridge_id_pointer = MeAttribute("Bridge id pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.port_num = MeAttribute("Port num", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.tp_type = MeAttribute("TP type", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.tp_pointer = MeAttribute("TP pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.port_priority = MeAttribute("Port priority", 2, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.port_path_cost = MeAttribute("Port path cost", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.port_spanning_tree_ind = MeAttribute("Port spanning tree ind", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.encapsulation_method = MeAttribute("Encapsulation method", 1, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.lan_fcs_ind = MeAttribute("LAN FCS ind", 1, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.port_mac_address = MeAttribute("Port MAC address", 6, False, False, MeAttribute.READ_PERMISSION, None)
+        self.outbound_td_pointer = MeAttribute("Outbound TD pointer", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.inbound_td_pointer = MeAttribute("Inbound TD pointer", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.bridge_id_pointer,
@@ -606,8 +600,8 @@ class MacBridgePortDesignationData(ManagedEntity):
         ManagedEntity.__init__(self, 48, instance)
         self.name = "MacBridgePortDesignationData"
         self.imp_link = [47]
-        self.designated_bridge_root_cost_port = MeAttribute("Designated bridge root cost port", 24, False, True, None)
-        self.port_state = MeAttribute("Port state", 1, False, True, None)
+        self.designated_bridge_root_cost_port = MeAttribute("Designated bridge root cost port", 24, False, True, MeAttribute.READ_PERMISSION, None)
+        self.port_state = MeAttribute("Port state", 1, False, True, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.designated_bridge_root_cost_port,
@@ -626,7 +620,7 @@ class MacBridgePortFilterTableData(ManagedEntity):
         ManagedEntity.__init__(self, 49, instance)
         self.name = "MacBridgePortFilterTableData"
         self.imp_link = [47]
-        self.mac_filter_table = MeAttribute("MAC filter table", 8, False, True, None)
+        self.mac_filter_table = MeAttribute("MAC filter table", 8, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.mac_filter_table,
@@ -644,9 +638,9 @@ class MacBridgePmHistoryData(ManagedEntity):
         ManagedEntity.__init__(self, 51, instance)
         self.name = "MacBridgePmHistoryData"
         self.imp_link = [45]
-        self.interval_end_time = MeAttribute("Interval end time", 1, False, True, None)
-        self.threshold_data_id = MeAttribute("Threshold data id", 2, True, True, None)
-        self.bridge_learning_entry_discard_count = MeAttribute("Bridge learning entry discard count", 4, False, True, None)
+        self.interval_end_time = MeAttribute("Interval end time", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.threshold_data_id = MeAttribute("Threshold data id", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.bridge_learning_entry_discard_count = MeAttribute("Bridge learning entry discard count", 4, False, True, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.interval_end_time,
@@ -666,13 +660,13 @@ class MacBridgePortPmHistoryData(ManagedEntity):
         ManagedEntity.__init__(self, 52, instance)
         self.name = "MacBridgePortPmHistoryData"
         self.imp_link = [47]
-        self.interval_end_time = MeAttribute("Interval end time", 1, False, True, None)
-        self.threshold_data_id = MeAttribute("Threshold data id", 2, True, True, None)
-        self.forwarded_frame_counter = MeAttribute("Forwarded frame counter", 4, False, True, None)
-        self.delay_exceeded_discard_counter = MeAttribute("Delay exceeded discard counter", 4, False, True, None)
-        self.mtu_exceeded_discard_counter = MeAttribute("MTU exceeded discard counter", 4, False, True, None)
-        self.received_frame_counter = MeAttribute("Received frame counter", 4, False, True, None)
-        self.received_and_discarded_counter = MeAttribute("Received and discarded counter", 4, False, True, None)
+        self.interval_end_time = MeAttribute("Interval end time", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.threshold_data_id = MeAttribute("Threshold data id", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.forwarded_frame_counter = MeAttribute("Forwarded frame counter", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.delay_exceeded_discard_counter = MeAttribute("Delay exceeded discard counter", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.mtu_exceeded_discard_counter = MeAttribute("MTU exceeded discard counter", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.received_frame_counter = MeAttribute("Received frame counter", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.received_and_discarded_counter = MeAttribute("Received and discarded counter", 4, False, True, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.interval_end_time,
@@ -696,18 +690,18 @@ class PhysicalPathTerminationPointPotsUni(ManagedEntity):
         ManagedEntity.__init__(self, 53, instance)
         self.name = "PhysicalPathTerminationPointPotsUni"
         self.imp_link = []
-        self.administrative_state = MeAttribute("Administrative state", 1, False, True, None)
-        self.deprecated = MeAttribute("Deprecated", 2, False, False, None)
-        self.arc = MeAttribute("ARC", 1, False, False, None)
-        self.arc_interval = MeAttribute("ARC interval", 1, False, False, None)
-        self.impedance = MeAttribute("Impedance", 1, False, False, None)
-        self.transmission_path = MeAttribute("Transmission path", 1, False, False, None)
-        self.rx_gain = MeAttribute("Rx gain", 1, False, False, None)
-        self.tx_gain = MeAttribute("Tx gain", 1, False, False, None)
-        self.operational_state = MeAttribute("Operational state", 1, False, False, None)
-        self.hook_state = MeAttribute("Hook state", 1, False, False, None)
-        self.pots_holdover_time = MeAttribute("POTS holdover time", 2, False, False, None)
-        self.nominal_feed_voltage = MeAttribute("Nominal feed voltage", 1, False, False, None)
+        self.administrative_state = MeAttribute("Administrative state", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.deprecated = MeAttribute("Deprecated", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.arc = MeAttribute("ARC", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.arc_interval = MeAttribute("ARC interval", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.impedance = MeAttribute("Impedance", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.transmission_path = MeAttribute("Transmission path", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.rx_gain = MeAttribute("Rx gain", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.tx_gain = MeAttribute("Tx gain", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.operational_state = MeAttribute("Operational state", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.hook_state = MeAttribute("Hook state", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.pots_holdover_time = MeAttribute("POTS holdover time", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.nominal_feed_voltage = MeAttribute("Nominal feed voltage", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.administrative_state,
@@ -736,20 +730,20 @@ class VoiceServiceProfile(ManagedEntity):
         ManagedEntity.__init__(self, 58, instance)
         self.name = "VoiceServiceProfile"
         self.imp_link = []
-        self.announcement_type = MeAttribute("Announcement type", 1, True, True, None)
-        self.jitter_target = MeAttribute("Jitter target", 2, True, False, None)
-        self.jitter_buffer_max = MeAttribute("Jitter buffer max", 2, True, False, None)
-        self.echo_cancel_ind = MeAttribute("Echo cancel ind", 1, True, True, None)
-        self.pstn_protocol_variant = MeAttribute("PSTN protocol variant", 2, True, False, None)
-        self.dtmf_digit_levels = MeAttribute("DTMF digit levels", 2, True, False, None)
-        self.dtmf_digit_duration = MeAttribute("DTMF digit duration", 2, True, False, None)
-        self.hook_flash_minimum_time = MeAttribute("Hook flash minimum time", 2, True, False, None)
-        self.hook_flash_maximum_time = MeAttribute("Hook flash maximum time", 2, True, False, None)
-        self.tone_pattern_table = MeAttribute("Tone pattern table", 20, False, False, None)
-        self.tone_event_table = MeAttribute("Tone event table", 7, False, False, None)
-        self.ringing_pattern_table = MeAttribute("Ringing pattern table", 5, False, False, None)
-        self.ringing_event_table = MeAttribute("Ringing event table", 7, False, False, None)
-        self.network_specific_extensions_pointer = MeAttribute("Network specific extensions pointer", 2, True, False, None)
+        self.announcement_type = MeAttribute("Announcement type", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.jitter_target = MeAttribute("Jitter target", 2, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.jitter_buffer_max = MeAttribute("Jitter buffer max", 2, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.echo_cancel_ind = MeAttribute("Echo cancel ind", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.pstn_protocol_variant = MeAttribute("PSTN protocol variant", 2, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.dtmf_digit_levels = MeAttribute("DTMF digit levels", 2, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.dtmf_digit_duration = MeAttribute("DTMF digit duration", 2, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.hook_flash_minimum_time = MeAttribute("Hook flash minimum time", 2, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.hook_flash_maximum_time = MeAttribute("Hook flash maximum time", 2, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.tone_pattern_table = MeAttribute("Tone pattern table", 20, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.tone_event_table = MeAttribute("Tone event table", 7, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.ringing_pattern_table = MeAttribute("Ringing pattern table", 5, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.ringing_event_table = MeAttribute("Ringing event table", 7, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.network_specific_extensions_pointer = MeAttribute("Network specific extensions pointer", 2, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.announcement_type,
@@ -780,15 +774,15 @@ class MacBridgePortFilterPreassignTable(ManagedEntity):
         ManagedEntity.__init__(self, 79, instance)
         self.name = "MacBridgePortFilterPreassignTable"
         self.imp_link = []
-        self.ipv4_multicast_filtering = MeAttribute("IPv4 multicast filtering", 1, False, True, None)
-        self.ipv6_multicast_filtering = MeAttribute("IPv6 multicast filtering", 1, False, True, None)
-        self.ipv4_broadcast_filtering = MeAttribute("IPv4 broadcast filtering", 1, False, True, None)
-        self.rarp_filtering = MeAttribute("RARP filtering", 1, False, True, None)
-        self.ipx_filtering = MeAttribute("IPX filtering", 1, False, True, None)
-        self.netbeui_filtering = MeAttribute("NetBEUI filtering", 1, False, True, None)
-        self.appletalk_filtering = MeAttribute("AppleTalk filtering", 1, False, True, None)
-        self.bridge_management_information_filtering = MeAttribute("Bridge management information filtering", 1, False, True, None)
-        self.arp_filtering = MeAttribute("ARP filtering", 1, False, True, None)
+        self.ipv4_multicast_filtering = MeAttribute("IPv4 multicast filtering", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.ipv6_multicast_filtering = MeAttribute("IPv6 multicast filtering", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.ipv4_broadcast_filtering = MeAttribute("IPv4 broadcast filtering", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.rarp_filtering = MeAttribute("RARP filtering", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.ipx_filtering = MeAttribute("IPX filtering", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.netbeui_filtering = MeAttribute("NetBEUI filtering", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.appletalk_filtering = MeAttribute("AppleTalk filtering", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.bridge_management_information_filtering = MeAttribute("Bridge management information filtering", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.arp_filtering = MeAttribute("ARP filtering", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.ipv4_multicast_filtering,
@@ -814,11 +808,11 @@ class PptpVideoUni(ManagedEntity):
         ManagedEntity.__init__(self, 82, instance)
         self.name = "PptpVideoUni"
         self.imp_link = []
-        self.administrative_state = MeAttribute("Administrative State", 1, False, True, None)
-        self.operational_state = MeAttribute("Operational State", 1, False, False, None)
-        self.arc = MeAttribute("ARC", 1, False, False, None)
-        self.arc_interval = MeAttribute("ARC Interval", 1, False, False, None)
-        self.power_control = MeAttribute("Power Control", 1, False, False, None)
+        self.administrative_state = MeAttribute("Administrative State", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.operational_state = MeAttribute("Operational State", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.arc = MeAttribute("ARC", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.arc_interval = MeAttribute("ARC Interval", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.power_control = MeAttribute("Power Control", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.administrative_state,
@@ -840,9 +834,9 @@ class VlanTaggingFilterData(ManagedEntity):
         ManagedEntity.__init__(self, 84, instance)
         self.name = "VlanTaggingFilterData"
         self.imp_link = [47]
-        self.vlan_filter_list = MeAttribute("VLAN filter list", 24, True, True, None)
-        self.forward_operation = MeAttribute("Forward operation", 1, True, True, None)
-        self.number_of_entries = MeAttribute("Number of entries", 1, True, True, None)
+        self.vlan_filter_list = MeAttribute("VLAN filter list", 24, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.forward_operation = MeAttribute("Forward operation", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.number_of_entries = MeAttribute("Number of entries", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.vlan_filter_list,
@@ -862,9 +856,9 @@ class EthernetPmHistoryData2(ManagedEntity):
         ManagedEntity.__init__(self, 89, instance)
         self.name = "EthernetPmHistoryData2"
         self.imp_link = [11]
-        self.interval_end_time = MeAttribute("Interval end time", 1, False, True, None)
-        self.threshold_data_id = MeAttribute("Threshold data id", 2, True, True, None)
-        self.pppoe_filtered_frame_counter = MeAttribute("PPPoE filtered frame counter", 4, False, True, None)
+        self.interval_end_time = MeAttribute("Interval end time", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.threshold_data_id = MeAttribute("Threshold data id", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.pppoe_filtered_frame_counter = MeAttribute("PPPoE filtered frame counter", 4, False, True, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.interval_end_time,
@@ -884,22 +878,22 @@ class PptpVideoAni(ManagedEntity):
         ManagedEntity.__init__(self, 90, instance)
         self.name = "PptpVideoAni"
         self.imp_link = []
-        self.administrative_state = MeAttribute("Administrative State", 1, False, True, None)
-        self.operational_state = MeAttribute("Operational State", 1, False, False, None)
-        self.arc = MeAttribute("ARC", 1, False, False, None)
-        self.arc_interval = MeAttribute("ARC Interval", 1, False, False, None)
-        self.frequency_range_low = MeAttribute("Frequency Range Low", 1, False, True, None)
-        self.frequency_range_high = MeAttribute("Frequency Range High", 1, False, True, None)
-        self.signal_capability = MeAttribute("Signal Capability", 1, False, True, None)
-        self.optical_signal_level = MeAttribute("Optical Signal Level", 1, False, False, None)
-        self.pilot_signal_level = MeAttribute("Pilot Signal Level", 1, False, False, None)
-        self.signal_level_min = MeAttribute("Signal Level min", 1, False, True, None)
-        self.signal_level_max = MeAttribute("Signal Level max", 1, False, True, None)
-        self.pilot_frequency = MeAttribute("Pilot Frequency", 4, False, False, None)
-        self.agc_mode = MeAttribute("AGC Mode", 1, False, False, None)
-        self.agc_setting = MeAttribute("AGC Setting", 1, False, False, None)
-        self.video_lower_optical_threshold = MeAttribute("Video Lower Optical Threshold", 1, False, False, None)
-        self.video_upper_optical_threshold = MeAttribute("Video Upper Optical Threshold", 1, False, False, None)
+        self.administrative_state = MeAttribute("Administrative State", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.operational_state = MeAttribute("Operational State", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.arc = MeAttribute("ARC", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.arc_interval = MeAttribute("ARC Interval", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.frequency_range_low = MeAttribute("Frequency Range Low", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.frequency_range_high = MeAttribute("Frequency Range High", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.signal_capability = MeAttribute("Signal Capability", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.optical_signal_level = MeAttribute("Optical Signal Level", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.pilot_signal_level = MeAttribute("Pilot Signal Level", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.signal_level_min = MeAttribute("Signal Level min", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.signal_level_max = MeAttribute("Signal Level max", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.pilot_frequency = MeAttribute("Pilot Frequency", 4, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.agc_mode = MeAttribute("AGC Mode", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.agc_setting = MeAttribute("AGC Setting", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.video_lower_optical_threshold = MeAttribute("Video Lower Optical Threshold", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.video_upper_optical_threshold = MeAttribute("Video Upper Optical Threshold", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.administrative_state,
@@ -932,34 +926,8 @@ class Ieee8021PMapperServiceProfile(ManagedEntity):
         ManagedEntity.__init__(self, 130, instance)
         self.name = "Ieee8021PMapperServiceProfile"
         self.imp_link = []
-        self.tp_pointer = MeAttribute("TP Pointer", 2, True, True, None)
-        self.interwork_tp_pointer_for_p_bit_priority_0 = MeAttribute("Interwork TP pointer for P-bit priority 0", 2, True, True, None)
-        self.interwork_tp_pointer_for_p_bit_priority_1 = MeAttribute("Interwork TP pointer for P-bit priority 1", 2, True, True, None)
-        self.interwork_tp_pointer_for_p_bit_priority_2 = MeAttribute("Interwork TP pointer for P-bit priority 2", 2, True, True, None)
-        self.interwork_tp_pointer_for_p_bit_priority_3 = MeAttribute("Interwork TP pointer for P-bit priority 3", 2, True, True, None)
-        self.interwork_tp_pointer_for_p_bit_priority_4 = MeAttribute("Interwork TP pointer for P-bit priority 4", 2, True, True, None)
-        self.interwork_tp_pointer_for_p_bit_priority_5 = MeAttribute("Interwork TP pointer for P-bit priority 5", 2, True, True, None)
-        self.interwork_tp_pointer_for_p_bit_priority_6 = MeAttribute("Interwork TP pointer for P-bit priority 6", 2, True, True, None)
-        self.interwork_tp_pointer_for_p_bit_priority_7 = MeAttribute("Interwork TP pointer for P-bit priority 7", 2, True, True, None)
-        self.unmarked_frame_option = MeAttribute("Unmarked frame option", 1, True, True, None)
-        self.dscp_to_p_bit_mapping = MeAttribute("DSCP to P-bit mapping", 24, False, True, None)
-        self.default_p_bit_marking = MeAttribute("Default P-bit marking", 1, True, True, None)
-        self.tp_type = MeAttribute("TP Type", 1, True, False, None)
 
         self.attributes = (
-            self.tp_pointer,
-            self.interwork_tp_pointer_for_p_bit_priority_0,
-            self.interwork_tp_pointer_for_p_bit_priority_1,
-            self.interwork_tp_pointer_for_p_bit_priority_2,
-            self.interwork_tp_pointer_for_p_bit_priority_3,
-            self.interwork_tp_pointer_for_p_bit_priority_4,
-            self.interwork_tp_pointer_for_p_bit_priority_5,
-            self.interwork_tp_pointer_for_p_bit_priority_6,
-            self.interwork_tp_pointer_for_p_bit_priority_7,
-            self.unmarked_frame_option,
-            self.dscp_to_p_bit_mapping,
-            self.default_p_bit_marking,
-            self.tp_type,
         )
 
     def getImplicitlyLinked(self):
@@ -1002,9 +970,9 @@ class Olt(ManagedEntity):
         ManagedEntity.__init__(self, 131, instance)
         self.name = "Olt"
         self.imp_link = []
-        self.olt_vendor_id = MeAttribute("OLT vendor id", 4, False, True, None)
-        self.equipment_id = MeAttribute("Equipment id", 20, False, True, None)
-        self.olt_version = MeAttribute("OLT version", 14, False, True, None)
+        self.olt_vendor_id = MeAttribute("OLT vendor id", 4, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.equipment_id = MeAttribute("Equipment id", 20, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.olt_version = MeAttribute("OLT version", 14, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.olt_vendor_id,
@@ -1024,17 +992,17 @@ class OntPowerShedding(ManagedEntity):
         ManagedEntity.__init__(self, 133, instance)
         self.name = "OntPowerShedding"
         self.imp_link = []
-        self.restore_power_timer_reset_interval = MeAttribute("Restore power timer reset interval", 2, False, True, None)
-        self.data_class_shedding_interval = MeAttribute("Data class shedding interval", 2, False, True, None)
-        self.voice_class_shedding_interval = MeAttribute("Voice class shedding interval", 2, False, True, None)
-        self.video_overlay_class_shedding_interval = MeAttribute("Video overlay class shedding interval", 2, False, True, None)
-        self.video_return_class_shedding_interval = MeAttribute("Video return class shedding interval", 2, False, True, None)
-        self.dsl_class_shedding_interval = MeAttribute("DSL class shedding interval", 2, False, True, None)
-        self.atm_class_shedding_interval = MeAttribute("ATM class shedding interval", 2, False, True, None)
-        self.ces_class_shedding_interval = MeAttribute("CES class shedding interval", 2, False, True, None)
-        self.frame_class_shedding_interval = MeAttribute("Frame class shedding interval", 2, False, True, None)
-        self.sonet_class_shedding_interval = MeAttribute("SONET class shedding interval", 2, False, True, None)
-        self.shedding_status = MeAttribute("Shedding status", 2, False, False, None)
+        self.restore_power_timer_reset_interval = MeAttribute("Restore power timer reset interval", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.data_class_shedding_interval = MeAttribute("Data class shedding interval", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.voice_class_shedding_interval = MeAttribute("Voice class shedding interval", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.video_overlay_class_shedding_interval = MeAttribute("Video overlay class shedding interval", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.video_return_class_shedding_interval = MeAttribute("Video return class shedding interval", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.dsl_class_shedding_interval = MeAttribute("DSL class shedding interval", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.atm_class_shedding_interval = MeAttribute("ATM class shedding interval", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.ces_class_shedding_interval = MeAttribute("CES class shedding interval", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.frame_class_shedding_interval = MeAttribute("Frame class shedding interval", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.sonet_class_shedding_interval = MeAttribute("SONET class shedding interval", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.shedding_status = MeAttribute("Shedding status", 2, False, False, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.restore_power_timer_reset_interval,
@@ -1062,21 +1030,21 @@ class IpHostConfigData(ManagedEntity):
         ManagedEntity.__init__(self, 134, instance)
         self.name = "IpHostConfigData"
         self.imp_link = []
-        self.ip_options = MeAttribute("IP options", 1, False, True, None)
-        self.mac_address = MeAttribute("MAC address", 6, False, True, None)
-        self.ont_identifier = MeAttribute("Ont identifier", 25, False, True, None)
-        self.ip_address = MeAttribute("IP address", 4, False, True, None)
-        self.mask = MeAttribute("Mask", 4, False, True, None)
-        self.gateway = MeAttribute("Gateway", 4, False, True, None)
-        self.primary_dns = MeAttribute("Primary DNS", 4, False, True, None)
-        self.secondary_dns = MeAttribute("Secondary DNS", 4, False, True, None)
-        self.current_address = MeAttribute("Current address", 4, False, False, None)
-        self.current_mask = MeAttribute("Current mask", 4, False, False, None)
-        self.current_gateway = MeAttribute("Current gateway", 4, False, False, None)
-        self.current_primary_dns = MeAttribute("Current primary DNS", 4, False, False, None)
-        self.current_secondary_dns = MeAttribute("Current secondary DNS", 4, False, False, None)
-        self.domain_name = MeAttribute("Domain name", 25, False, True, None)
-        self.host_name = MeAttribute("Host name", 25, False, True, None)
+        self.ip_options = MeAttribute("IP options", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.mac_address = MeAttribute("MAC address", 6, False, True, MeAttribute.READ_PERMISSION, None)
+        self.ont_identifier = MeAttribute("Ont identifier", 25, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.ip_address = MeAttribute("IP address", 4, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.mask = MeAttribute("Mask", 4, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.gateway = MeAttribute("Gateway", 4, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.primary_dns = MeAttribute("Primary DNS", 4, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.secondary_dns = MeAttribute("Secondary DNS", 4, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.current_address = MeAttribute("Current address", 4, False, False, MeAttribute.READ_PERMISSION, None)
+        self.current_mask = MeAttribute("Current mask", 4, False, False, MeAttribute.READ_PERMISSION, None)
+        self.current_gateway = MeAttribute("Current gateway", 4, False, False, MeAttribute.READ_PERMISSION, None)
+        self.current_primary_dns = MeAttribute("Current primary DNS", 4, False, False, MeAttribute.READ_PERMISSION, None)
+        self.current_secondary_dns = MeAttribute("Current secondary DNS", 4, False, False, MeAttribute.READ_PERMISSION, None)
+        self.domain_name = MeAttribute("Domain name", 25, False, True, MeAttribute.READ_PERMISSION, None)
+        self.host_name = MeAttribute("Host name", 25, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.ip_options,
@@ -1108,10 +1076,10 @@ class TcpUdpConfigData(ManagedEntity):
         ManagedEntity.__init__(self, 136, instance)
         self.name = "TcpUdpConfigData"
         self.imp_link = []
-        self.port_id = MeAttribute("Port ID", 2, True, True, None)
-        self.protocol = MeAttribute("Protocol", 1, True, True, None)
-        self.tos_diffserv_field = MeAttribute("TOS diffserv field", 1, True, True, None)
-        self.ip_host_pointer = MeAttribute("IP host pointer", 2, True, True, None)
+        self.port_id = MeAttribute("Port ID", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.protocol = MeAttribute("Protocol", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.tos_diffserv_field = MeAttribute("TOS diffserv field", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.ip_host_pointer = MeAttribute("IP host pointer", 2, True, True, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.port_id,
@@ -1132,8 +1100,8 @@ class NetworkAddress(ManagedEntity):
         ManagedEntity.__init__(self, 137, instance)
         self.name = "NetworkAddress"
         self.imp_link = []
-        self.security_pointer = MeAttribute("Security pointer", 2, True, True, None)
-        self.address_pointer = MeAttribute("Address pointer", 2, True, True, None)
+        self.security_pointer = MeAttribute("Security pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.address_pointer = MeAttribute("Address pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.security_pointer,
@@ -1153,14 +1121,14 @@ class VoipConfigData(ManagedEntity):
         ManagedEntity.__init__(self, 138, instance)
         self.name = "VoipConfigData"
         self.imp_link = []
-        self.available_signalling_protocols = MeAttribute("Available signalling protocols", 1, False, True, None)
-        self.signalling_protocol_used = MeAttribute("Signalling protocol used", 1, False, True, None)
-        self.available_voip_configuration_methods = MeAttribute("Available VoIP configuration methods", 4, False, True, None)
-        self.voip_configuration_method_used = MeAttribute("VoIP configuration method used", 1, False, True, None)
-        self.voip_configuration_address_pointer = MeAttribute("VoIP configuration address pointer", 2, False, True, None)
-        self.voip_configuration_state = MeAttribute("VoIP configuration state", 1, False, True, None)
-        self.retrieve_profile = MeAttribute("Retrieve profile", 1, False, True, None)
-        self.profile_version = MeAttribute("Profile version", 25, False, True, None)
+        self.available_signalling_protocols = MeAttribute("Available signalling protocols", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.signalling_protocol_used = MeAttribute("Signalling protocol used", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.available_voip_configuration_methods = MeAttribute("Available VoIP configuration methods", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.voip_configuration_method_used = MeAttribute("VoIP configuration method used", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.voip_configuration_address_pointer = MeAttribute("VoIP configuration address pointer", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.voip_configuration_state = MeAttribute("VoIP configuration state", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.retrieve_profile = MeAttribute("Retrieve profile", 1, False, True, MeAttribute.WRITE_PERMISSION, None)
+        self.profile_version = MeAttribute("Profile version", 25, False, True, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.available_signalling_protocols,
@@ -1185,10 +1153,10 @@ class VoipVoiceCtp(ManagedEntity):
         ManagedEntity.__init__(self, 139, instance)
         self.name = "VoipVoiceCtp"
         self.imp_link = []
-        self.user_protocol_pointer = MeAttribute("User protocol pointer", 2, True, True, None)
-        self.pptp_pointer = MeAttribute("PPTP pointer", 2, True, True, None)
-        self.voip_media_profile_pointer = MeAttribute("VoIP media profile pointer", 2, True, True, None)
-        self.signalling_code = MeAttribute("Signalling code", 1, True, True, None)
+        self.user_protocol_pointer = MeAttribute("User protocol pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.pptp_pointer = MeAttribute("PPTP pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.voip_media_profile_pointer = MeAttribute("VoIP media profile pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.signalling_code = MeAttribute("Signalling code", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.user_protocol_pointer,
@@ -1211,15 +1179,15 @@ class VoipLineStatus(ManagedEntity):
         ManagedEntity.__init__(self, 141, instance)
         self.name = "VoipLineStatus"
         self.imp_link = [53]
-        self.voip_codec_used = MeAttribute("voip codec used", 2, False, True, None)
-        self.voip_voice_server_status = MeAttribute("voip voice server status", 1, False, True, None)
-        self.voip_port_session_type = MeAttribute("voip port session type", 1, False, True, None)
-        self.voip_call_1_packetperiod = MeAttribute("voip call 1 packetperiod", 2, False, True, None)
-        self.voip_call_2_packetperiod = MeAttribute("voip call 2 packetperiod", 2, False, True, None)
-        self.voip_call_1_dest_addr = MeAttribute("voip call 1 dest addr", 25, False, True, None)
-        self.voip_call_2_dest_addr = MeAttribute("voip call 2 dest addr", 25, False, True, None)
-        self.voip_line_state = MeAttribute("Voip line state", 1, False, False, None)
-        self.emergency_call_status = MeAttribute("Emergency call status", 1, False, False, None)
+        self.voip_codec_used = MeAttribute("voip codec used", 2, False, True, MeAttribute.READ_PERMISSION, None)
+        self.voip_voice_server_status = MeAttribute("voip voice server status", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.voip_port_session_type = MeAttribute("voip port session type", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.voip_call_1_packetperiod = MeAttribute("voip call 1 packetperiod", 2, False, True, MeAttribute.READ_PERMISSION, None)
+        self.voip_call_2_packetperiod = MeAttribute("voip call 2 packetperiod", 2, False, True, MeAttribute.READ_PERMISSION, None)
+        self.voip_call_1_dest_addr = MeAttribute("voip call 1 dest addr", 25, False, True, MeAttribute.READ_PERMISSION, None)
+        self.voip_call_2_dest_addr = MeAttribute("voip call 2 dest addr", 25, False, True, MeAttribute.READ_PERMISSION, None)
+        self.voip_line_state = MeAttribute("Voip line state", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.emergency_call_status = MeAttribute("Emergency call status", 1, False, False, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.voip_codec_used,
@@ -1245,22 +1213,22 @@ class VoipMediaProfile(ManagedEntity):
         ManagedEntity.__init__(self, 142, instance)
         self.name = "VoipMediaProfile"
         self.imp_link = []
-        self.fax_mode = MeAttribute("Fax mode", 1, True, True, None)
-        self.voice_service_profile_pointer = MeAttribute("Voice service profile pointer", 2, True, True, None)
-        self.codec_selection_first_order = MeAttribute("Codec selection first order", 1, True, True, None)
-        self.packet_period_selection_first_order = MeAttribute("Packet period selection first order", 1, True, True, None)
-        self.silence_suppression_first_order = MeAttribute("Silence suppression first order", 1, True, True, None)
-        self.codec_selection_second_order = MeAttribute("Codec selection second order", 1, True, True, None)
-        self.packet_period_selection_second_order = MeAttribute("Packet period selection second order", 1, True, True, None)
-        self.silence_suppression_second_order = MeAttribute("Silence suppression second order", 1, True, True, None)
-        self.codec_selection_third_order = MeAttribute("Codec selection third order", 1, True, True, None)
-        self.packet_period_selection_third_order = MeAttribute("Packet period selection third order", 1, True, True, None)
-        self.silence_suppression_fourth_order = MeAttribute("Silence suppression fourth order", 1, True, True, None)
-        self.codec_selection_fourth_order = MeAttribute("Codec selection fourth order", 1, True, True, None)
-        self.packet_period_selection_fourth_order = MeAttribute("Packet period selection fourth order", 1, True, True, None)
-        self.silence_suppression_fourth_order = MeAttribute("Silence suppression fourth order", 1, True, True, None)
-        self.oob_dtmf = MeAttribute("OOB DTMF", 1, True, True, None)
-        self.rtp_profile_pointer = MeAttribute("RTP profile pointer", 2, True, True, None)
+        self.fax_mode = MeAttribute("Fax mode", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.voice_service_profile_pointer = MeAttribute("Voice service profile pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.codec_selection_first_order = MeAttribute("Codec selection first order", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.packet_period_selection_first_order = MeAttribute("Packet period selection first order", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.silence_suppression_first_order = MeAttribute("Silence suppression first order", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.codec_selection_second_order = MeAttribute("Codec selection second order", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.packet_period_selection_second_order = MeAttribute("Packet period selection second order", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.silence_suppression_second_order = MeAttribute("Silence suppression second order", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.codec_selection_third_order = MeAttribute("Codec selection third order", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.packet_period_selection_third_order = MeAttribute("Packet period selection third order", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.silence_suppression_fourth_order = MeAttribute("Silence suppression fourth order", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.codec_selection_fourth_order = MeAttribute("Codec selection fourth order", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.packet_period_selection_fourth_order = MeAttribute("Packet period selection fourth order", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.silence_suppression_fourth_order = MeAttribute("Silence suppression fourth order", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.oob_dtmf = MeAttribute("OOB DTMF", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.rtp_profile_pointer = MeAttribute("RTP profile pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.fax_mode,
@@ -1294,14 +1262,14 @@ class RtpProfileData(ManagedEntity):
         ManagedEntity.__init__(self, 143, instance)
         self.name = "RtpProfileData"
         self.imp_link = []
-        self.local_port_min = MeAttribute("Local port min", 2, True, True, None)
-        self.local_port_max = MeAttribute("Local port max", 2, True, False, None)
-        self.dscp_mark = MeAttribute("DSCP mark", 1, True, True, None)
-        self.piggyback_events = MeAttribute("Piggyback events", 1, True, True, None)
-        self.tone_events = MeAttribute("Tone events", 1, True, True, None)
-        self.dtmf_events = MeAttribute("DTMF events", 1, True, True, None)
-        self.cas_events = MeAttribute("CAS events", 1, True, True, None)
-        self.ip_host_config_pointer = MeAttribute("IP host config pointer", 2, False, False, None)
+        self.local_port_min = MeAttribute("Local port min", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.local_port_max = MeAttribute("Local port max", 2, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.dscp_mark = MeAttribute("DSCP mark", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.piggyback_events = MeAttribute("Piggyback events", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.tone_events = MeAttribute("Tone events", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.dtmf_events = MeAttribute("DTMF events", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.cas_events = MeAttribute("CAS events", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.ip_host_config_pointer = MeAttribute("IP host config pointer", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.local_port_min,
@@ -1326,11 +1294,11 @@ class AuthenticationSecurityMethod(ManagedEntity):
         ManagedEntity.__init__(self, 148, instance)
         self.name = "AuthenticationSecurityMethod"
         self.imp_link = []
-        self.validation_scheme = MeAttribute("Validation scheme", 1, False, True, None)
-        self.username_1 = MeAttribute("Username 1", 25, False, True, None)
-        self.password = MeAttribute("Password", 25, False, True, None)
-        self.realm = MeAttribute("Realm", 25, False, True, None)
-        self.username_2 = MeAttribute("Username 2", 25, False, False, None)
+        self.validation_scheme = MeAttribute("Validation scheme", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.username_1 = MeAttribute("Username 1", 25, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.password = MeAttribute("Password", 25, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.realm = MeAttribute("Realm", 25, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.username_2 = MeAttribute("Username 2", 25, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.validation_scheme,
@@ -1352,21 +1320,21 @@ class SipAgentConfigData(ManagedEntity):
         ManagedEntity.__init__(self, 150, instance)
         self.name = "SipAgentConfigData"
         self.imp_link = []
-        self.proxy_server_address_pointer = MeAttribute("Proxy server address pointer", 2, True, True, None)
-        self.outbound_proxy_address_pointer = MeAttribute("Outbound proxy address pointer", 2, True, True, None)
-        self.primary_sip_dns = MeAttribute("Primary SIP DNS", 4, True, True, None)
-        self.secondary_sip_dns = MeAttribute("Secondary SIP DNS", 4, True, True, None)
-        self.tcp_udp_pointer = MeAttribute("TCP UDP pointer", 2, False, True, None)
-        self.sip_reg_exp_time = MeAttribute("SIP reg exp time", 4, False, True, None)
-        self.sip_rereg_head_start_time = MeAttribute("SIP rereg head start time", 4, False, True, None)
-        self.host_part_uri = MeAttribute("Host part URI", 2, True, True, None)
-        self.sip_status = MeAttribute("SIP status", 1, False, True, None)
-        self.sip_registrar = MeAttribute("SIP registrar", 2, True, True, None)
-        self.softswitch = MeAttribute("Softswitch", 4, True, True, None)
-        self.sip_response_table = MeAttribute("SIP response table", 5, False, False, None)
-        self.sip_option_transmit_control = MeAttribute("SIP option transmit control", 1, True, False, None)
-        self.sip_uri_format = MeAttribute("SIP URI format", 1, True, False, None)
-        self.redundant_sip_agent_pointer = MeAttribute("Redundant SIP agent pointer", 2, True, False, None)
+        self.proxy_server_address_pointer = MeAttribute("Proxy server address pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.outbound_proxy_address_pointer = MeAttribute("Outbound proxy address pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.primary_sip_dns = MeAttribute("Primary SIP DNS", 4, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.secondary_sip_dns = MeAttribute("Secondary SIP DNS", 4, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.tcp_udp_pointer = MeAttribute("TCP UDP pointer", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.sip_reg_exp_time = MeAttribute("SIP reg exp time", 4, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.sip_rereg_head_start_time = MeAttribute("SIP rereg head start time", 4, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.host_part_uri = MeAttribute("Host part URI", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.sip_status = MeAttribute("SIP status", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.sip_registrar = MeAttribute("SIP registrar", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.softswitch = MeAttribute("Softswitch", 4, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.sip_response_table = MeAttribute("SIP response table", 5, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.sip_option_transmit_control = MeAttribute("SIP option transmit control", 1, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.sip_uri_format = MeAttribute("SIP URI format", 1, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.redundant_sip_agent_pointer = MeAttribute("Redundant SIP agent pointer", 2, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.proxy_server_address_pointer,
@@ -1401,18 +1369,18 @@ class SipUserData(ManagedEntity):
         ManagedEntity.__init__(self, 153, instance)
         self.name = "SipUserData"
         self.imp_link = []
-        self.sip_agent_pointer = MeAttribute("SIP agent pointer", 2, True, True, None)
-        self.user_part_aor = MeAttribute("User part AOR", 2, True, True, None)
-        self.sip_display_name = MeAttribute("SIP display name", 25, False, True, None)
-        self.username_and_password = MeAttribute("Username and password", 2, True, True, None)
-        self.voicemail_server_sip_uri = MeAttribute("Voicemail server SIP URI", 2, True, True, None)
-        self.voicemail_subscription_expiration_time = MeAttribute("Voicemail subscription expiration time", 4, True, True, None)
-        self.network_dial_plan_pointer = MeAttribute("Network dial plan pointer", 2, True, True, None)
-        self.application_services_profile_pointer = MeAttribute("Application services profile pointer", 2, True, True, None)
-        self.feature_code_pointer = MeAttribute("Feature code pointer", 2, True, True, None)
-        self.pptp_pointer = MeAttribute("PPTP pointer", 2, True, True, None)
-        self.release_timer = MeAttribute("Release timer", 1, False, False, None)
-        self.roh_timer = MeAttribute("ROH timer", 1, False, False, None)
+        self.sip_agent_pointer = MeAttribute("SIP agent pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.user_part_aor = MeAttribute("User part AOR", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.sip_display_name = MeAttribute("SIP display name", 25, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.username_and_password = MeAttribute("Username and password", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.voicemail_server_sip_uri = MeAttribute("Voicemail server SIP URI", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.voicemail_subscription_expiration_time = MeAttribute("Voicemail subscription expiration time", 4, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.network_dial_plan_pointer = MeAttribute("Network dial plan pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.application_services_profile_pointer = MeAttribute("Application services profile pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.feature_code_pointer = MeAttribute("Feature code pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.pptp_pointer = MeAttribute("PPTP pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.release_timer = MeAttribute("Release timer", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.roh_timer = MeAttribute("ROH timer", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.sip_agent_pointer,
@@ -1445,7 +1413,7 @@ class LargeString(ManagedEntity):
         ManagedEntity.__init__(self, 157, instance)
         self.name = "LargeString"
         self.imp_link = []
-        self.number_of_parts = MeAttribute("Number of parts", 1, False, True, None)
+        self.number_of_parts = MeAttribute("Number of parts", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.number_of_parts,
@@ -1463,9 +1431,9 @@ class OntRemoteDebug(ManagedEntity):
         ManagedEntity.__init__(self, 158, instance)
         self.name = "OntRemoteDebug"
         self.imp_link = []
-        self.command_format = MeAttribute("Command format", 1, False, True, None)
-        self.command = MeAttribute("Command", 25, False, True, None)
-        self.reply_table = MeAttribute("Reply table", 4, False, True, None)
+        self.command_format = MeAttribute("Command format", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.command = MeAttribute("Command", 25, False, True, MeAttribute.WRITE_PERMISSION, None)
+        self.reply_table = MeAttribute("Reply table", 4, False, True, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.command_format,
@@ -1485,16 +1453,16 @@ class EquipmentProtectionProfile(ManagedEntity):
         ManagedEntity.__init__(self, 159, instance)
         self.name = "EquipmentProtectionProfile"
         self.imp_link = []
-        self.protect_slot_1,protect_slot_2 = MeAttribute("Protect slot 1,protect slot 2", 2, True, False, None)
-        self.working_slot_1,working_slot_2,working_slot_3,working_slot_4,working_slot_5,working_slot_6,working_slot_7,working_slot_8 = MeAttribute("working slot 1,working slot 2,working slot 3,working slot 4,working slot 5,working slot 6,working slot 7,working slot 8", 8, True, False, None)
-        self.protect_status_1,protect_status_2 = MeAttribute("Protect status 1,protect status 2", 2, False, False, None)
-        self.revertive_ind = MeAttribute("Revertive ind", 1, True, False, None)
-        self.wait_to_restore_time = MeAttribute("Wait to restore time", 1, True, False, None)
+        self.protect_slot_1_2 = MeAttribute("Protect slot 1 2", 2, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.working_slot_1_2_3_4_5_6_7_8 = MeAttribute("working slot 1 2 3 4 5 6 7 8", 8, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.protect_status_1_2 = MeAttribute("Protect status 1 2", 2, False, False, MeAttribute.READ_PERMISSION, None)
+        self.revertive_ind = MeAttribute("Revertive ind", 1, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wait_to_restore_time = MeAttribute("Wait to restore time", 1, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
-            self.protect_slot_1,protect_slot_2,
-            self.working_slot_1,working_slot_2,working_slot_3,working_slot_4,working_slot_5,working_slot_6,working_slot_7,working_slot_8,
-            self.protect_status_1,protect_status_2,
+            self.protect_slot_1_2,
+            self.working_slot_1_2_3_4_5_6_7_8,
+            self.protect_status_1_2,
             self.revertive_ind,
             self.wait_to_restore_time,
         )
@@ -1511,8 +1479,8 @@ class EquipmentExtensionPackage(ManagedEntity):
         ManagedEntity.__init__(self, 160, instance)
         self.name = "EquipmentExtensionPackage"
         self.imp_link = [256, 5]
-        self.environmental_sense = MeAttribute("Environmental sense", 2, False, False, None)
-        self.contact_closure_output = MeAttribute("Contact closure output", 2, False, False, None)
+        self.environmental_sense = MeAttribute("Environmental sense", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.contact_closure_output = MeAttribute("Contact closure output", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.environmental_sense,
@@ -1531,14 +1499,14 @@ class ExtendedVlanTaggingOperationConfigurationData(ManagedEntity):
         ManagedEntity.__init__(self, 171, instance)
         self.name = "ExtendedVlanTaggingOperationConfigurationData"
         self.imp_link = []
-        self.association_type = MeAttribute("Association type", 1, True, True, None)
-        self.received_frame_vlan_tagging_operation_table_max_size = MeAttribute("Received frame VLAN tagging operation table max size", 2, False, True, None)
-        self.input_tpid = MeAttribute("Input TPID", 2, False, True, None)
-        self.output_tpid = MeAttribute("Output TPID", 2, False, True, None)
-        self.downstream_mode = MeAttribute("Downstream mode", 1, False, True, None)
-        self.received_frame_vlan_tagging_operation_table = MeAttribute("Received frame VLAN tagging operation table", 16, False, True, None)
-        self.associated_me_pointer = MeAttribute("Associated ME pointer", 2, True, True, None)
-        self.dscp_to_p_bit_mapping = MeAttribute("DSCP to P-bit mapping", 24, False, False, None)
+        self.association_type = MeAttribute("Association type", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.received_frame_vlan_tagging_operation_table_max_size = MeAttribute("Received frame VLAN tagging operation table max size", 2, False, True, MeAttribute.READ_PERMISSION, None)
+        self.input_tpid = MeAttribute("Input TPID", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.output_tpid = MeAttribute("Output TPID", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.downstream_mode = MeAttribute("Downstream mode", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.received_frame_vlan_tagging_operation_table = MeAttribute("Received frame VLAN tagging operation table", 16, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.associated_me_pointer = MeAttribute("Associated ME pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.dscp_to_p_bit_mapping = MeAttribute("DSCP to P-bit mapping", 24, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.association_type,
@@ -1588,17 +1556,13 @@ class PppoeByGcom(ManagedEntity):
         ManagedEntity.__init__(self, 250, instance)
         self.name = "PppoeByGcom"
         self.imp_link = []
-        self.nat = MeAttribute("NAT", 1, True, False, None)
-        self.auth = MeAttribute("Auth", 1, True, False, None)
-        self.connect = MeAttribute("Connect", 1, True, False, None)
-        self.release_time = MeAttribute("Release Time", 2, True, False, None)
-        self.username = MeAttribute("Username", 25, False, False, None)
-        self.password = MeAttribute("Password", 25, False, False, None)
-        self.attribute7 = MeAttribute("Attribute7", 1, False, False, None)
-        self.attribute8 = MeAttribute("Attribute8", 1, False, False, None)
-        self.pointer_to_ip_host_config_data_me = MeAttribute("Pointer to IP Host Config Data ME", 2, False, False, None)
-        self.pointer_to_larg_string_me_pointer_for_username = MeAttribute("Pointer to Larg String ME Pointer for Username", 2, False, False, None)
-        self.pointer_to_larg_string_me_pointer_for_service_name = MeAttribute("Pointer to Larg String ME Pointer for Service Name", 2, False, False, None)
+        self.nat = MeAttribute("NAT", 1, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.auth = MeAttribute("Auth", 1, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.connect = MeAttribute("Connect", 1, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.release_time = MeAttribute("Release Time", 2, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.username = MeAttribute("Username", 25, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.password = MeAttribute("Password", 25, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.attribute7 = MeAttribute("Attribute7", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.nat,
@@ -1608,10 +1572,6 @@ class PppoeByGcom(ManagedEntity):
             self.username,
             self.password,
             self.attribute7,
-            self.attribute8,
-            self.pointer_to_ip_host_config_data_me,
-            self.pointer_to_larg_string_me_pointer_for_username,
-            self.pointer_to_larg_string_me_pointer_for_service_name,
         )
 
     def getImplicitlyLinked(self):
@@ -1628,19 +1588,19 @@ class EthernetPerformanceMonitoringHistoryData4(ManagedEntity):
         ManagedEntity.__init__(self, 255, instance)
         self.name = "EthernetPerformanceMonitoringHistoryData4"
         self.imp_link = [11]
-        self.interval_end_time = MeAttribute("interval_end_time", 1, False, False, None)
-        self.threshold_data_1_2_id = MeAttribute("threshold_data_1_2_id", 2, True, False, None)
-        self.association_type = MeAttribute("association_type", 1, True, False, None)
-        self.transmitted_traffic = MeAttribute("transmitted_traffic", 4, False, False, None)
-        self.received_traffic = MeAttribute("received_traffic", 4, False, False, None)
-        self.transmitted_rate = MeAttribute("transmitted_rate", 4, False, False, None)
-        self.received_rate = MeAttribute("received_rate", 4, False, False, None)
-        self.transmitted_octets = MeAttribute("transmitted_octets", 4, False, False, None)
-        self.received_octets = MeAttribute("received_octets", 4, False, False, None)
-        self.transmitted_discarded_counter = MeAttribute("transmitted_discarded_counter", 4, False, False, None)
-        self.received_discarded_counter = MeAttribute("received_discarded_counter", 4, False, False, None)
-        self.transmitted_error_counter = MeAttribute("transmitted_error_counter", 4, False, False, None)
-        self.received_error_counter = MeAttribute("received_error_counter", 4, False, False, None)
+        self.interval_end_time = MeAttribute("interval_end_time", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.threshold_data_1_2_id = MeAttribute("threshold_data_1_2_id", 2, True, False, MeAttribute.READ_PERMISSION, None)
+        self.association_type = MeAttribute("association_type", 1, True, False, MeAttribute.READ_PERMISSION, None)
+        self.transmitted_traffic = MeAttribute("transmitted_traffic", 4, False, False, MeAttribute.READ_PERMISSION, None)
+        self.received_traffic = MeAttribute("received_traffic", 4, False, False, MeAttribute.READ_PERMISSION, None)
+        self.transmitted_rate = MeAttribute("transmitted_rate", 4, False, False, MeAttribute.READ_PERMISSION, None)
+        self.received_rate = MeAttribute("received_rate", 4, False, False, MeAttribute.READ_PERMISSION, None)
+        self.transmitted_octets = MeAttribute("transmitted_octets", 4, False, False, MeAttribute.READ_PERMISSION, None)
+        self.received_octets = MeAttribute("received_octets", 4, False, False, MeAttribute.READ_PERMISSION, None)
+        self.transmitted_discarded_counter = MeAttribute("transmitted_discarded_counter", 4, False, False, MeAttribute.READ_PERMISSION, None)
+        self.received_discarded_counter = MeAttribute("received_discarded_counter", 4, False, False, MeAttribute.READ_PERMISSION, None)
+        self.transmitted_error_counter = MeAttribute("transmitted_error_counter", 4, False, False, MeAttribute.READ_PERMISSION, None)
+        self.received_error_counter = MeAttribute("received_error_counter", 4, False, False, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.interval_end_time,
@@ -1670,14 +1630,14 @@ class Ont(ManagedEntity):
         ManagedEntity.__init__(self, 256, instance)
         self.name = "Ont"
         self.imp_link = []
-        self.vendor_id = MeAttribute("Vendor Id", 4, False, True, None)
-        self.version = MeAttribute("Version", 14, False, True, None)
-        self.serial_nr = MeAttribute("Serial Nr", 8, False, True, None)
-        self.traffic_management_option = MeAttribute("Traffic management option", 1, False, True, None)
-        self.vp_vc_cross_connection_function_option = MeAttribute("VP VC cross connection function option", 1, False, False, None)
-        self.battery_backup = MeAttribute("Battery backup", 1, False, True, None)
-        self.administrative_state = MeAttribute("Administrative State", 1, False, True, None)
-        self.operational_state = MeAttribute("Operational State", 1, False, False, None)
+        self.vendor_id = MeAttribute("Vendor Id", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.version = MeAttribute("Version", 14, False, True, MeAttribute.READ_PERMISSION, None)
+        self.serial_nr = MeAttribute("Serial Nr", 8, False, True, MeAttribute.READ_PERMISSION, None)
+        self.traffic_management_option = MeAttribute("Traffic management option", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.vp_vc_cross_connection_function_option = MeAttribute("VP VC cross connection function option", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.battery_backup = MeAttribute("Battery backup", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.administrative_state = MeAttribute("Administrative State", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.operational_state = MeAttribute("Operational State", 1, False, False, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.vendor_id,
@@ -1702,16 +1662,16 @@ class Ont2(ManagedEntity):
         ManagedEntity.__init__(self, 257, instance)
         self.name = "Ont2"
         self.imp_link = []
-        self.equipment_id = MeAttribute("Equipment id", 20, False, False, None)
-        self.omcc_version = MeAttribute("OMCC version", 1, False, True, None)
-        self.vendor_product_code = MeAttribute("Vendor product code", 2, False, False, None)
-        self.security_capability = MeAttribute("Security capability", 1, False, True, None)
-        self.security_mode = MeAttribute("Security mode", 1, False, True, None)
-        self.total_priority_queue_number = MeAttribute("Total priority queue number", 2, False, True, None)
-        self.total_traffic_scheduler_number = MeAttribute("Total traffic scheduler number", 1, False, True, None)
-        self.mode = MeAttribute("Mode", 1, False, True, None)
-        self.total_gem_port_id_number = MeAttribute("Total GEM port-ID number", 2, False, False, None)
-        self.sysup_time = MeAttribute("SysUp Time", 4, False, False, None)
+        self.equipment_id = MeAttribute("Equipment id", 20, False, False, MeAttribute.READ_PERMISSION, None)
+        self.omcc_version = MeAttribute("OMCC version", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.vendor_product_code = MeAttribute("Vendor product code", 2, False, False, MeAttribute.READ_PERMISSION, None)
+        self.security_capability = MeAttribute("Security capability", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.security_mode = MeAttribute("Security mode", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.total_priority_queue_number = MeAttribute("Total priority queue number", 2, False, True, MeAttribute.READ_PERMISSION, None)
+        self.total_traffic_scheduler_number = MeAttribute("Total traffic scheduler number", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.mode = MeAttribute("Mode", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.total_gem_port_id_number = MeAttribute("Total GEM port-ID number", 2, False, False, MeAttribute.READ_PERMISSION, None)
+        self.sysup_time = MeAttribute("SysUp Time", 4, False, False, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.equipment_id,
@@ -1738,12 +1698,12 @@ class PonTcAdapter(ManagedEntity):
         ManagedEntity.__init__(self, 261, instance)
         self.name = "PonTcAdapter"
         self.imp_link = []
-        self.not_identified = MeAttribute("Not_identified", 4, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 4, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 4, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 4, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 4, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 4, False, False, None)
+        self.not_identified = MeAttribute("Not_identified", 4, False, False, MeAttribute.READ_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 4, False, False, MeAttribute.READ_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 4, False, False, MeAttribute.READ_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 4, False, False, MeAttribute.READ_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 4, False, False, MeAttribute.READ_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 4, False, False, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.not_identified,
@@ -1766,9 +1726,9 @@ class Tcont(ManagedEntity):
         ManagedEntity.__init__(self, 262, instance)
         self.name = "Tcont"
         self.imp_link = []
-        self.alloc_id = MeAttribute("Alloc-id", 2, False, True, None)
-        self.mode_indicator = MeAttribute("Mode indicator", 1, False, True, None)
-        self.policy = MeAttribute("Policy", 1, False, True, None)
+        self.alloc_id = MeAttribute("Alloc-id", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.mode_indicator = MeAttribute("Mode indicator", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.policy = MeAttribute("Policy", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.alloc_id,
@@ -1788,22 +1748,22 @@ class Anig(ManagedEntity):
         ManagedEntity.__init__(self, 263, instance)
         self.name = "Anig"
         self.imp_link = []
-        self.sr_indication = MeAttribute("SR indication", 1, False, True, None)
-        self.total_t_cont_number = MeAttribute("Total T-CONT number", 2, False, True, None)
-        self.gem_block_length = MeAttribute("GEM block length", 2, False, True, None)
-        self.piggyback_dba_reporting = MeAttribute("Piggyback DBA reporting", 1, False, True, None)
-        self.whole_ont_dba_reporting = MeAttribute("Whole ONT DBA reporting", 1, False, True, None)
-        self.sf_threshold = MeAttribute("SF threshold", 1, False, True, None)
-        self.sd_threshold = MeAttribute("SD threshold", 1, False, True, None)
-        self.arc = MeAttribute("ARC", 1, False, False, None)
-        self.arc_interval = MeAttribute("ARC interval", 1, False, False, None)
-        self.optical_signal_level = MeAttribute("Optical signal level", 2, False, False, None)
-        self.lower_optical_threshold = MeAttribute("Lower optical threshold", 1, False, False, None)
-        self.upper_optical_threshold = MeAttribute("Upper optical threshold", 1, False, False, None)
-        self.ont_response_time = MeAttribute("ONT response time", 2, False, False, None)
-        self.transmit_optical_level = MeAttribute("Transmit optical level", 2, False, False, None)
-        self.lower_transmit_power_threshold = MeAttribute("Lower transmit power threshold", 1, False, False, None)
-        self.upper_transmit_power_threshold = MeAttribute("Upper transmit power threshold", 1, False, False, None)
+        self.sr_indication = MeAttribute("SR indication", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.total_t_cont_number = MeAttribute("Total T-CONT number", 2, False, True, MeAttribute.READ_PERMISSION, None)
+        self.gem_block_length = MeAttribute("GEM block length", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.piggyback_dba_reporting = MeAttribute("Piggyback DBA reporting", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.whole_ont_dba_reporting = MeAttribute("Whole ONT DBA reporting", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.sf_threshold = MeAttribute("SF threshold", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.sd_threshold = MeAttribute("SD threshold", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.arc = MeAttribute("ARC", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.arc_interval = MeAttribute("ARC interval", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.optical_signal_level = MeAttribute("Optical signal level", 2, False, False, MeAttribute.READ_PERMISSION, None)
+        self.lower_optical_threshold = MeAttribute("Lower optical threshold", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.upper_optical_threshold = MeAttribute("Upper optical threshold", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.ont_response_time = MeAttribute("ONT response time", 2, False, False, MeAttribute.READ_PERMISSION, None)
+        self.transmit_optical_level = MeAttribute("Transmit optical level", 2, False, False, MeAttribute.READ_PERMISSION, None)
+        self.lower_transmit_power_threshold = MeAttribute("Lower transmit power threshold", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.upper_transmit_power_threshold = MeAttribute("Upper transmit power threshold", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.sr_indication,
@@ -1836,8 +1796,8 @@ class Uni(ManagedEntity):
         ManagedEntity.__init__(self, 264, instance)
         self.name = "Uni"
         self.imp_link = [11]
-        self.config_option_status = MeAttribute("Config option status", 2, False, True, None)
-        self.administrative_state = MeAttribute("Administrative state", 1, False, True, None)
+        self.config_option_status = MeAttribute("Config option status", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.administrative_state = MeAttribute("Administrative state", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.config_option_status,
@@ -1856,14 +1816,14 @@ class GemInterworkingTerminationPoint(ManagedEntity):
         ManagedEntity.__init__(self, 266, instance)
         self.name = "GemInterworkingTerminationPoint"
         self.imp_link = []
-        self.gem_port_network_ctp_connectivity_pointer = MeAttribute("GEM port network CTP connectivity pointer", 2, True, True, None)
-        self.interworking_option = MeAttribute("Interworking option", 1, True, True, None)
-        self.service_profile_pointer = MeAttribute("Service profile pointer", 2, True, True, None)
-        self.interworking_termination_point_pointer = MeAttribute("Interworking termination point pointer", 2, True, True, None)
-        self.pptp_counter = MeAttribute("PPTP counter", 1, False, False, None)
-        self.operational_state = MeAttribute("Operational state", 1, False, False, None)
-        self.gal_profile_pointer = MeAttribute("GAL profile pointer", 2, True, True, None)
-        self.gal_loopback_configuration = MeAttribute("GAL loopback configuration", 1, False, True, None)
+        self.gem_port_network_ctp_connectivity_pointer = MeAttribute("GEM port network CTP connectivity pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.interworking_option = MeAttribute("Interworking option", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.service_profile_pointer = MeAttribute("Service profile pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.interworking_termination_point_pointer = MeAttribute("Interworking termination point pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.pptp_counter = MeAttribute("PPTP counter", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.operational_state = MeAttribute("Operational state", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.gal_profile_pointer = MeAttribute("GAL profile pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.gal_loopback_configuration = MeAttribute("GAL loopback configuration", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.gem_port_network_ctp_connectivity_pointer,
@@ -1915,15 +1875,15 @@ class GemPortPmHistoryData(ManagedEntity):
         ManagedEntity.__init__(self, 267, instance)
         self.name = "GemPortPmHistoryData"
         self.imp_link = [268]
-        self.interval_end_time = MeAttribute("Interval end time", 1, False, True, None)
-        self.threshold_data_id = MeAttribute("Threshold data id", 2, True, True, None)
-        self.lost_packets = MeAttribute("Lost packets", 4, False, True, None)
-        self.misinserted_packets = MeAttribute("Misinserted packets", 4, False, True, None)
-        self.received_packets = MeAttribute("Received packets", 5, False, True, None)
-        self.received_blocks = MeAttribute("Received blocks", 5, False, True, None)
-        self.transmitted_blocks = MeAttribute("Transmitted blocks", 5, False, True, None)
-        self.impaired_blocks = MeAttribute("Impaired blocks", 4, False, True, None)
-        self.transmitted_packets = MeAttribute("Transmitted packets", 5, False, True, None)
+        self.interval_end_time = MeAttribute("Interval end time", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.threshold_data_id = MeAttribute("Threshold data id", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.lost_packets = MeAttribute("Lost packets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.misinserted_packets = MeAttribute("Misinserted packets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.received_packets = MeAttribute("Received packets", 5, False, True, MeAttribute.READ_PERMISSION, None)
+        self.received_blocks = MeAttribute("Received blocks", 5, False, True, MeAttribute.READ_PERMISSION, None)
+        self.transmitted_blocks = MeAttribute("Transmitted blocks", 5, False, True, MeAttribute.READ_PERMISSION, None)
+        self.impaired_blocks = MeAttribute("Impaired blocks", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.transmitted_packets = MeAttribute("Transmitted packets", 5, False, True, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.interval_end_time,
@@ -1949,14 +1909,14 @@ class GemPortNetworkCtp(ManagedEntity):
         ManagedEntity.__init__(self, 268, instance)
         self.name = "GemPortNetworkCtp"
         self.imp_link = [267]
-        self.port_id_value = MeAttribute("Port id value", 2, True, True, None)
-        self.t_cont_pointer = MeAttribute("T-CONT pointer", 2, True, True, None)
-        self.direction = MeAttribute("Direction", 1, True, True, None)
-        self.traffic_management_pointer_for_upstream = MeAttribute("Traffic management pointer for upstream", 2, True, True, None)
-        self.traffic_descriptor_profile_pointer = MeAttribute("Traffic descriptor profile pointer", 2, True, False, None)
-        self.uni_counter = MeAttribute("UNI counter", 1, False, False, None)
-        self.priority_queue_pointer_for_downstream = MeAttribute("Priority queue pointer for downstream", 2, True, True, None)
-        self.encryption_state = MeAttribute("Encryption state", 1, False, False, None)
+        self.port_id_value = MeAttribute("Port id value", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.t_cont_pointer = MeAttribute("T-CONT pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.direction = MeAttribute("Direction", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.traffic_management_pointer_for_upstream = MeAttribute("Traffic management pointer for upstream", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.traffic_descriptor_profile_pointer = MeAttribute("Traffic descriptor profile pointer", 2, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.uni_counter = MeAttribute("UNI counter", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.priority_queue_pointer_for_downstream = MeAttribute("Priority queue pointer for downstream", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.encryption_state = MeAttribute("Encryption state", 1, False, False, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.port_id_value,
@@ -1984,7 +1944,7 @@ class GalTdmProfile(ManagedEntity):
         ManagedEntity.__init__(self, 271, instance)
         self.name = "GalTdmProfile"
         self.imp_link = []
-        self.gem_frame_loss_integration_period = MeAttribute("GEM frame loss integration period", 2, True, True, None)
+        self.gem_frame_loss_integration_period = MeAttribute("GEM frame loss integration period", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.gem_frame_loss_integration_period,
@@ -2002,7 +1962,7 @@ class GalEthernetProfile(ManagedEntity):
         ManagedEntity.__init__(self, 272, instance)
         self.name = "GalEthernetProfile"
         self.imp_link = []
-        self.maximum_gem_payload_size = MeAttribute("Maximum GEM payload size", 2, True, True, None)
+        self.maximum_gem_payload_size = MeAttribute("Maximum GEM payload size", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.maximum_gem_payload_size,
@@ -2020,13 +1980,13 @@ class ThresholdData1(ManagedEntity):
         ManagedEntity.__init__(self, 273, instance)
         self.name = "ThresholdData1"
         self.imp_link = [274]
-        self.threshold_value_1 = MeAttribute("Threshold value 1", 4, True, True, None)
-        self.threshold_value_2 = MeAttribute("Threshold value 2", 4, True, True, None)
-        self.threshold_value_3 = MeAttribute("Threshold value 3", 4, True, True, None)
-        self.threshold_value_4 = MeAttribute("Threshold value 4", 4, True, True, None)
-        self.threshold_value_5 = MeAttribute("Threshold value 5", 4, True, True, None)
-        self.threshold_value_6 = MeAttribute("Threshold value 6", 4, True, True, None)
-        self.threshold_value_7 = MeAttribute("Threshold value 7", 4, True, True, None)
+        self.threshold_value_1 = MeAttribute("Threshold value 1", 4, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_value_2 = MeAttribute("Threshold value 2", 4, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_value_3 = MeAttribute("Threshold value 3", 4, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_value_4 = MeAttribute("Threshold value 4", 4, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_value_5 = MeAttribute("Threshold value 5", 4, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_value_6 = MeAttribute("Threshold value 6", 4, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_value_7 = MeAttribute("Threshold value 7", 4, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.threshold_value_1,
@@ -2050,13 +2010,13 @@ class ThresholdData2(ManagedEntity):
         ManagedEntity.__init__(self, 274, instance)
         self.name = "ThresholdData2"
         self.imp_link = [273]
-        self.threshold_value_8 = MeAttribute("Threshold value 8", 4, True, True, None)
-        self.threshold_value_9 = MeAttribute("Threshold value 9", 4, True, True, None)
-        self.threshold_value_10 = MeAttribute("Threshold value 10", 4, True, True, None)
-        self.threshold_value_11 = MeAttribute("Threshold value 11", 4, True, True, None)
-        self.threshold_value_12 = MeAttribute("Threshold value 12", 4, True, True, None)
-        self.threshold_value_13 = MeAttribute("Threshold value 13", 4, True, True, None)
-        self.threshold_value_14 = MeAttribute("Threshold value 14", 4, True, True, None)
+        self.threshold_value_8 = MeAttribute("Threshold value 8", 4, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_value_9 = MeAttribute("Threshold value 9", 4, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_value_10 = MeAttribute("Threshold value 10", 4, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_value_11 = MeAttribute("Threshold value 11", 4, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_value_12 = MeAttribute("Threshold value 12", 4, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_value_13 = MeAttribute("Threshold value 13", 4, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_value_14 = MeAttribute("Threshold value 14", 4, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.threshold_value_8,
@@ -2080,11 +2040,11 @@ class GalTdmPmHistoryData(ManagedEntity):
         ManagedEntity.__init__(self, 275, instance)
         self.name = "GalTdmPmHistoryData"
         self.imp_link = []
-        self.interval_end_time = MeAttribute("Interval end time", 1, False, True, None)
-        self.threshold_data_id = MeAttribute("Threshold data id", 2, True, True, None)
-        self.gem_frame_loss = MeAttribute("GEM frame loss", 4, False, True, None)
-        self.buffer_underflows = MeAttribute("Buffer underflows", 4, False, True, None)
-        self.buffer_overflows = MeAttribute("Buffer overflows", 4, False, True, None)
+        self.interval_end_time = MeAttribute("Interval end time", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.threshold_data_id = MeAttribute("Threshold data id", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.gem_frame_loss = MeAttribute("GEM frame loss", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.buffer_underflows = MeAttribute("Buffer underflows", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.buffer_overflows = MeAttribute("Buffer overflows", 4, False, True, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.interval_end_time,
@@ -2106,9 +2066,9 @@ class GalEthernetPmHistoryData(ManagedEntity):
         ManagedEntity.__init__(self, 276, instance)
         self.name = "GalEthernetPmHistoryData"
         self.imp_link = [266, 281]
-        self.interval_end_time = MeAttribute("Interval end time", 1, False, True, None)
-        self.threshold_data_id = MeAttribute("Threshold data id", 2, True, True, None)
-        self.discarded_frames = MeAttribute("Discarded frames", 4, False, True, None)
+        self.interval_end_time = MeAttribute("Interval end time", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.threshold_data_id = MeAttribute("Threshold data id", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.discarded_frames = MeAttribute("Discarded frames", 4, False, True, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.interval_end_time,
@@ -2128,18 +2088,18 @@ class PriorityQueue(ManagedEntity):
         ManagedEntity.__init__(self, 277, instance)
         self.name = "PriorityQueue"
         self.imp_link = []
-        self.queue_configuration_option = MeAttribute("Queue Configuration Option", 1, False, True, None)
-        self.maximum_queue_size = MeAttribute("Maximum Queue Size", 2, False, True, None)
-        self.allocated_queue_size = MeAttribute("Allocated Queue Size", 2, False, True, None)
-        self.discard_block_counter_reset_interval = MeAttribute("Discard-block Counter Reset Interval", 2, False, False, None)
-        self.threshold_value_for_discarded_blocks_due_to_buffer_overflow = MeAttribute("Threshold Value For Discarded Blocks Due To Buffer Overflow", 2, False, False, None)
-        self.related_port = MeAttribute("Related Port", 4, False, True, None)
-        self.traffic_scheduler_g_pointer = MeAttribute("Traffic Scheduler-G Pointer", 2, False, True, None)
-        self.weight = MeAttribute("Weight", 1, False, True, None)
-        self.back_pressure_operation = MeAttribute("Back Pressure Operation", 2, False, True, None)
-        self.back_pressure_time = MeAttribute("Back Pressure Time", 4, False, True, None)
-        self.back_pressure_occur_queue_threshold = MeAttribute("Back Pressure Occur Queue Threshold", 2, False, True, None)
-        self.back_pressure_clear_queue_threshold = MeAttribute("Back Pressure Clear Queue Threshold", 2, False, True, None)
+        self.queue_configuration_option = MeAttribute("Queue Configuration Option", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.maximum_queue_size = MeAttribute("Maximum Queue Size", 2, False, True, MeAttribute.READ_PERMISSION, None)
+        self.allocated_queue_size = MeAttribute("Allocated Queue Size", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.discard_block_counter_reset_interval = MeAttribute("Discard-block Counter Reset Interval", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_value_for_discarded_blocks_due_to_buffer_overflow = MeAttribute("Threshold Value For Discarded Blocks Due To Buffer Overflow", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.related_port = MeAttribute("Related Port", 4, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.traffic_scheduler_g_pointer = MeAttribute("Traffic Scheduler-G Pointer", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.weight = MeAttribute("Weight", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.back_pressure_operation = MeAttribute("Back Pressure Operation", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.back_pressure_time = MeAttribute("Back Pressure Time", 4, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.back_pressure_occur_queue_threshold = MeAttribute("Back Pressure Occur Queue Threshold", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.back_pressure_clear_queue_threshold = MeAttribute("Back Pressure Clear Queue Threshold", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.queue_configuration_option,
@@ -2168,10 +2128,10 @@ class TrafficScheduler(ManagedEntity):
         ManagedEntity.__init__(self, 278, instance)
         self.name = "TrafficScheduler"
         self.imp_link = []
-        self.tcont_pointer = MeAttribute("TCONT pointer", 2, False, True, None)
-        self.traffic_shed_pointer = MeAttribute("traffic shed pointer", 2, False, True, None)
-        self.policy = MeAttribute("policy", 1, False, True, None)
-        self.priority_weight = MeAttribute("priority weight", 1, False, True, None)
+        self.tcont_pointer = MeAttribute("TCONT pointer", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.traffic_shed_pointer = MeAttribute("traffic shed pointer", 2, False, True, MeAttribute.READ_PERMISSION, None)
+        self.policy = MeAttribute("policy", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.priority_weight = MeAttribute("priority weight", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.tcont_pointer,
@@ -2193,12 +2153,12 @@ class ProtectionData(ManagedEntity):
         ManagedEntity.__init__(self, 279, instance)
         self.name = "ProtectionData"
         self.imp_link = []
-        self.working_ani_g_pointer = MeAttribute("Working ANI-G pointer", 2, False, True, None)
-        self.protection_ani_g_pointer = MeAttribute("Protection ANI-G pointer", 2, False, True, None)
-        self.protection_type = MeAttribute("Protection type", 2, False, True, None)
-        self.revertive_ind = MeAttribute("Revertive ind", 1, False, True, None)
-        self.wait_to_restore_time = MeAttribute("Wait to restore time", 1, False, True, None)
-        self.switching_guard_time = MeAttribute("Switching guard time", 2, False, False, None)
+        self.working_ani_g_pointer = MeAttribute("Working ANI-G pointer", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.protection_ani_g_pointer = MeAttribute("Protection ANI-G pointer", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.protection_type = MeAttribute("Protection type", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.revertive_ind = MeAttribute("Revertive ind", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wait_to_restore_time = MeAttribute("Wait to restore time", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.switching_guard_time = MeAttribute("Switching guard time", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.working_ani_g_pointer,
@@ -2222,15 +2182,15 @@ class MulticastGemInterworkingTerminationPoint(ManagedEntity):
         ManagedEntity.__init__(self, 281, instance)
         self.name = "MulticastGemInterworkingTerminationPoint"
         self.imp_link = []
-        self.gem_port_network_ctp_connectivity_pointer = MeAttribute("GEM port network CTP connectivity pointer", 2, True, True, None)
-        self.interworking_option = MeAttribute("Interworking option", 1, True, True, None)
-        self.service_profile_pointer = MeAttribute("Service profile pointer", 2, True, True, None)
-        self.interworking_termination_point_pointer = MeAttribute("Interworking termination point pointer", 2, True, True, None)
-        self.pptp_counter = MeAttribute("PPTP counter", 1, False, False, None)
-        self.operational_state = MeAttribute("Operational state", 1, False, False, None)
-        self.gal_profile_pointer = MeAttribute("GAL profile pointer", 2, True, True, None)
-        self.gal_loopback_configuration = MeAttribute("GAL loopback configuration", 1, True, True, None)
-        self.multicast_address_table = MeAttribute("Multicast address table", 12, False, True, None)
+        self.gem_port_network_ctp_connectivity_pointer = MeAttribute("GEM port network CTP connectivity pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.interworking_option = MeAttribute("Interworking option", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.service_profile_pointer = MeAttribute("Service profile pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.interworking_termination_point_pointer = MeAttribute("Interworking termination point pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.pptp_counter = MeAttribute("PPTP counter", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.operational_state = MeAttribute("Operational state", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.gal_profile_pointer = MeAttribute("GAL profile pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.gal_loopback_configuration = MeAttribute("GAL loopback configuration", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.multicast_address_table = MeAttribute("Multicast address table", 12, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.gem_port_network_ctp_connectivity_pointer,
@@ -2283,8 +2243,8 @@ class Omci(ManagedEntity):
         ManagedEntity.__init__(self, 287, instance)
         self.name = "Omci"
         self.imp_link = []
-        self.me_type_table = MeAttribute("ME Type Table", 2, False, True, None)
-        self.message_type_table = MeAttribute("Message Type Table", 2, False, True, None)
+        self.me_type_table = MeAttribute("ME Type Table", 2, False, True, MeAttribute.READ_PERMISSION, None)
+        self.message_type_table = MeAttribute("Message Type Table", 2, False, True, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.me_type_table,
@@ -2303,18 +2263,18 @@ class Dot1XPortExtensionPackage(ManagedEntity):
         ManagedEntity.__init__(self, 290, instance)
         self.name = "Dot1XPortExtensionPackage"
         self.imp_link = []
-        self.dot1x_enable = MeAttribute("Dot1x Enable", 1, False, True, None)
-        self.action_register = MeAttribute("Action Register", 1, False, True, None)
-        self.authenticator_pae_state = MeAttribute("Authenticator PAE State", 1, False, False, None)
-        self.backend_authentication_state = MeAttribute("Backend Authentication State", 1, False, False, None)
-        self.admin_controlled_directions = MeAttribute("Admin Controlled Directions", 1, False, False, None)
-        self.operational_controlled_directions = MeAttribute("Operational Controlled Directions", 1, False, False, None)
-        self.authenticator_controlled_port_status = MeAttribute("Authenticator Controlled Port Status", 1, False, False, None)
-        self.quiet_period = MeAttribute("Quiet Period", 2, False, False, None)
-        self.server_timeout_period = MeAttribute("Server Timeout Period", 2, False, False, None)
-        self.reauthentication_period = MeAttribute("Reauthentication Period", 2, False, False, None)
-        self.reauthentication_enabled = MeAttribute("Reauthentication Enabled", 1, False, False, None)
-        self.key_transmission_enabled = MeAttribute("Key transmission Enabled", 1, False, False, None)
+        self.dot1x_enable = MeAttribute("Dot1x Enable", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.action_register = MeAttribute("Action Register", 1, False, True, MeAttribute.WRITE_PERMISSION, None)
+        self.authenticator_pae_state = MeAttribute("Authenticator PAE State", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.backend_authentication_state = MeAttribute("Backend Authentication State", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.admin_controlled_directions = MeAttribute("Admin Controlled Directions", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.operational_controlled_directions = MeAttribute("Operational Controlled Directions", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.authenticator_controlled_port_status = MeAttribute("Authenticator Controlled Port Status", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.quiet_period = MeAttribute("Quiet Period", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.server_timeout_period = MeAttribute("Server Timeout Period", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.reauthentication_period = MeAttribute("Reauthentication Period", 2, False, False, MeAttribute.READ_PERMISSION, None)
+        self.reauthentication_enabled = MeAttribute("Reauthentication Enabled", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.key_transmission_enabled = MeAttribute("Key transmission Enabled", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.dot1x_enable,
@@ -2343,15 +2303,15 @@ class Dot1XConfigurationProfile(ManagedEntity):
         ManagedEntity.__init__(self, 291, instance)
         self.name = "Dot1XConfigurationProfile"
         self.imp_link = []
-        self.circuit_id_prefix = MeAttribute("Circuit ID prefix", 2, False, True, None)
-        self.fallback_policy = MeAttribute("Fallback policy", 1, False, True, None)
-        self.auth_server_1 = MeAttribute("Auth server 1", 2, False, True, None)
-        self.shared_secret_auth1 = MeAttribute("Shared secret auth1", 25, False, True, None)
-        self.auth_server_2 = MeAttribute("Auth server 2", 2, False, False, None)
-        self.shared_secret_auth2 = MeAttribute("Shared secret auth2", 25, False, False, None)
-        self.auth_server_3 = MeAttribute("Auth server 3", 2, False, False, None)
-        self.shared_secret_auth3 = MeAttribute("Shared secret auth3", 25, False, False, None)
-        self.olt_proxy_address = MeAttribute("OLT proxy address", 4, False, False, None)
+        self.circuit_id_prefix = MeAttribute("Circuit ID prefix", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.fallback_policy = MeAttribute("Fallback policy", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.auth_server_1 = MeAttribute("Auth server 1", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.shared_secret_auth1 = MeAttribute("Shared secret auth1", 25, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.auth_server_2 = MeAttribute("Auth server 2", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.shared_secret_auth2 = MeAttribute("Shared secret auth2", 25, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.auth_server_3 = MeAttribute("Auth server 3", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.shared_secret_auth3 = MeAttribute("Shared secret auth3", 25, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.olt_proxy_address = MeAttribute("OLT proxy address", 4, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.circuit_id_prefix,
@@ -2377,22 +2337,22 @@ class EthernetPmHistoryData3(ManagedEntity):
         ManagedEntity.__init__(self, 296, instance)
         self.name = "EthernetPmHistoryData3"
         self.imp_link = [11]
-        self.interval_end_time = MeAttribute("Interval End Time", 1, False, True, None)
-        self.threshold_data_id = MeAttribute("Threshold Data Id", 2, True, True, None)
-        self.drop_events = MeAttribute("Drop events", 4, False, True, None)
-        self.octets = MeAttribute("Octets", 4, False, True, None)
-        self.packets = MeAttribute("Packets", 4, False, True, None)
-        self.broadcast_packets = MeAttribute("Broadcast Packets", 4, False, True, None)
-        self.multicast_packets = MeAttribute("Multicast Packets", 4, False, True, None)
-        self.undersize_packets = MeAttribute("Undersize Packets", 4, False, True, None)
-        self.fragments = MeAttribute("Fragments", 4, False, True, None)
-        self.jabbers = MeAttribute("Jabbers", 4, False, True, None)
-        self.packets_64_octets = MeAttribute("Packets 64 Octets", 4, False, True, None)
-        self.packets_65_to_127_octets = MeAttribute("Packets 65 to 127 Octets", 4, False, True, None)
-        self.packets_128_to_255_octets = MeAttribute("Packets 128 to 255 Octets", 4, False, True, None)
-        self.packets_256_to_511_octets = MeAttribute("Packets 256 to 511 Octets", 4, False, True, None)
-        self.packets_512_to_1023_octets = MeAttribute("Packets 512 to 1023 Octets", 4, False, True, None)
-        self.packets_1024_to_1518_octets = MeAttribute("Packets 1024 to 1518 Octets", 4, False, True, None)
+        self.interval_end_time = MeAttribute("Interval End Time", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.threshold_data_id = MeAttribute("Threshold Data Id", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.drop_events = MeAttribute("Drop events", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.octets = MeAttribute("Octets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.packets = MeAttribute("Packets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.broadcast_packets = MeAttribute("Broadcast Packets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.multicast_packets = MeAttribute("Multicast Packets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.undersize_packets = MeAttribute("Undersize Packets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.fragments = MeAttribute("Fragments", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.jabbers = MeAttribute("Jabbers", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.packets_64_octets = MeAttribute("Packets 64 Octets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.packets_65_to_127_octets = MeAttribute("Packets 65 to 127 Octets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.packets_128_to_255_octets = MeAttribute("Packets 128 to 255 Octets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.packets_256_to_511_octets = MeAttribute("Packets 256 to 511 Octets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.packets_512_to_1023_octets = MeAttribute("Packets 512 to 1023 Octets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.packets_1024_to_1518_octets = MeAttribute("Packets 1024 to 1518 Octets", 4, False, True, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.interval_end_time,
@@ -2425,15 +2385,15 @@ class PortMappingPackage(ManagedEntity):
         ManagedEntity.__init__(self, 297, instance)
         self.name = "PortMappingPackage"
         self.imp_link = []
-        self.max_ports = MeAttribute("Max ports", 1, False, True, None)
-        self.port_list_1 = MeAttribute("Port list 1", 16, False, True, None)
-        self.port_list_2 = MeAttribute("Port list 2", 16, False, False, None)
-        self.port_list_3 = MeAttribute("Port list 3", 16, False, False, None)
-        self.port_list_4 = MeAttribute("Port list 4", 16, False, False, None)
-        self.port_list_5 = MeAttribute("Port list 5", 16, False, False, None)
-        self.port_list_6 = MeAttribute("Port list 6", 16, False, False, None)
-        self.port_list_7 = MeAttribute("Port list 7", 16, False, False, None)
-        self.port_list_8 = MeAttribute("Port list 8", 16, False, False, None)
+        self.max_ports = MeAttribute("Max ports", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.port_list_1 = MeAttribute("Port list 1", 16, False, True, MeAttribute.READ_PERMISSION, None)
+        self.port_list_2 = MeAttribute("Port list 2", 16, False, False, MeAttribute.READ_PERMISSION, None)
+        self.port_list_3 = MeAttribute("Port list 3", 16, False, False, MeAttribute.READ_PERMISSION, None)
+        self.port_list_4 = MeAttribute("Port list 4", 16, False, False, MeAttribute.READ_PERMISSION, None)
+        self.port_list_5 = MeAttribute("Port list 5", 16, False, False, MeAttribute.READ_PERMISSION, None)
+        self.port_list_6 = MeAttribute("Port list 6", 16, False, False, MeAttribute.READ_PERMISSION, None)
+        self.port_list_7 = MeAttribute("Port list 7", 16, False, False, MeAttribute.READ_PERMISSION, None)
+        self.port_list_8 = MeAttribute("Port list 8", 16, False, False, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.max_ports,
@@ -2459,20 +2419,20 @@ class MulticastOperationsProfile(ManagedEntity):
         ManagedEntity.__init__(self, 309, instance)
         self.name = "MulticastOperationsProfile"
         self.imp_link = []
-        self.igmp_version = MeAttribute("IGMP version", 1, True, True, None)
-        self.igmp_function = MeAttribute("IGMP function", 1, True, True, None)
-        self.immediate_leave = MeAttribute("Immediate leave", 1, True, True, None)
-        self.upstream_igmp_tci = MeAttribute("Upstream IGMP TCI", 2, True, False, None)
-        self.upstream_igmp_tag_control = MeAttribute("Upstream IGMP tag control", 1, True, False, None)
-        self.upstream_igmp_rate = MeAttribute("Upstream IGMP rate", 4, True, False, None)
-        self.dynamic_access_control_list_table = MeAttribute("Dynamic access control list table", 24, False, True, None)
-        self.static_access_control_list_table = MeAttribute("Static access control list table", 24, False, True, None)
-        self.lost_groups_list_table = MeAttribute("Lost groups list table", 10, False, False, None)
-        self.robustness = MeAttribute("Robustness", 1, True, False, None)
-        self.querier_ip_address = MeAttribute("Querier IP address", 4, True, False, None)
-        self.query_interval = MeAttribute("Query interval", 4, True, False, None)
-        self.query_max_response_time = MeAttribute("Query max response time", 4, True, False, None)
-        self.last_member_query_interval = MeAttribute("Last member query interval", 4, False, False, None)
+        self.igmp_version = MeAttribute("IGMP version", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.igmp_function = MeAttribute("IGMP function", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.immediate_leave = MeAttribute("Immediate leave", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.upstream_igmp_tci = MeAttribute("Upstream IGMP TCI", 2, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.upstream_igmp_tag_control = MeAttribute("Upstream IGMP tag control", 1, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.upstream_igmp_rate = MeAttribute("Upstream IGMP rate", 4, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.dynamic_access_control_list_table = MeAttribute("Dynamic access control list table", 24, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.static_access_control_list_table = MeAttribute("Static access control list table", 24, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.lost_groups_list_table = MeAttribute("Lost groups list table", 10, False, False, MeAttribute.READ_PERMISSION, None)
+        self.robustness = MeAttribute("Robustness", 1, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.querier_ip_address = MeAttribute("Querier IP address", 4, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.query_interval = MeAttribute("Query interval", 4, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.query_max_response_time = MeAttribute("Query max response time", 4, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.last_member_query_interval = MeAttribute("Last member query interval", 4, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.igmp_version,
@@ -2503,11 +2463,11 @@ class MulticastSubscriberConfigInfo(ManagedEntity):
         ManagedEntity.__init__(self, 310, instance)
         self.name = "MulticastSubscriberConfigInfo"
         self.imp_link = [47, 130]
-        self.me_type = MeAttribute("ME type", 1, True, True, None)
-        self.multicast_operations_profile_pointer = MeAttribute("Multicast operations profile pointer", 2, True, True, None)
-        self.max_simultaneous_groups = MeAttribute("Max simultaneous groups", 2, True, False, None)
-        self.max_multicast_bandwidth = MeAttribute("Max multicast bandwidth", 4, True, False, None)
-        self.bandwidth_enforcement = MeAttribute("Bandwidth enforcement", 1, True, False, None)
+        self.me_type = MeAttribute("ME type", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.multicast_operations_profile_pointer = MeAttribute("Multicast operations profile pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.max_simultaneous_groups = MeAttribute("Max simultaneous groups", 2, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.max_multicast_bandwidth = MeAttribute("Max multicast bandwidth", 4, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.bandwidth_enforcement = MeAttribute("Bandwidth enforcement", 1, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.me_type,
@@ -2529,11 +2489,11 @@ class MulticastSubscriberMonitor(ManagedEntity):
         ManagedEntity.__init__(self, 311, instance)
         self.name = "MulticastSubscriberMonitor"
         self.imp_link = [47, 130]
-        self.me_type = MeAttribute("ME type", 1, True, True, None)
-        self.current_multicast_bandwidth = MeAttribute("Current multicast bandwidth", 4, False, False, None)
-        self.max_join_messages_counter = MeAttribute("Max Join messages counter", 4, False, False, None)
-        self.bandwidth_exceeded_counter = MeAttribute("Bandwidth exceeded counter", 4, False, False, None)
-        self.active_group_list_table = MeAttribute("Active group list table", 24, False, True, None)
+        self.me_type = MeAttribute("ME type", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.current_multicast_bandwidth = MeAttribute("Current multicast bandwidth", 4, False, False, MeAttribute.READ_PERMISSION, None)
+        self.max_join_messages_counter = MeAttribute("Max Join messages counter", 4, False, False, MeAttribute.READ_PERMISSION, None)
+        self.bandwidth_exceeded_counter = MeAttribute("Bandwidth exceeded counter", 4, False, False, MeAttribute.READ_PERMISSION, None)
+        self.active_group_list_table = MeAttribute("Active group list table", 24, False, True, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.me_type,
@@ -2555,13 +2515,13 @@ class FecPmHistoryData(ManagedEntity):
         ManagedEntity.__init__(self, 312, instance)
         self.name = "FecPmHistoryData"
         self.imp_link = [263]
-        self.interval_end_time = MeAttribute("Interval end time", 1, False, True, None)
-        self.threshold_data_id = MeAttribute("Threshold data id", 2, True, True, None)
-        self.corrected_bytes = MeAttribute("Corrected bytes", 4, False, True, None)
-        self.corrected_code_words = MeAttribute("Corrected code words", 4, False, True, None)
-        self.uncorrectable_code_words = MeAttribute("Uncorrectable code words", 4, False, True, None)
-        self.total_code_words = MeAttribute("Total code words", 4, False, True, None)
-        self.fec_seconds = MeAttribute("FEC seconds", 2, False, True, None)
+        self.interval_end_time = MeAttribute("Interval end time", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.threshold_data_id = MeAttribute("Threshold data id", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.corrected_bytes = MeAttribute("Corrected bytes", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.corrected_code_words = MeAttribute("Corrected code words", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.uncorrectable_code_words = MeAttribute("Uncorrectable code words", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.total_code_words = MeAttribute("Total code words", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.fec_seconds = MeAttribute("FEC seconds", 2, False, True, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.interval_end_time,
@@ -2585,18 +2545,18 @@ class FileTransferController(ManagedEntity):
         ManagedEntity.__init__(self, 318, instance)
         self.name = "FileTransferController"
         self.imp_link = []
-        self.supported_transfer_protocols = MeAttribute("Supported transfer protocols", 2, False, True, None)
-        self.file_type = MeAttribute("File type", 2, False, True, None)
-        self.file_instance = MeAttribute("File instance", 2, False, True, None)
-        self.local_file_name_pointer = MeAttribute("Local file name pointer", 2, False, True, None)
-        self.network_address_pointer = MeAttribute("Network address pointer", 2, False, True, None)
-        self.file_transfer_trigger = MeAttribute("File transfer trigger", 1, False, True, None)
-        self.file_transfer_status = MeAttribute("File transfer status", 1, False, True, None)
-        self.gem_iwtp_pointer = MeAttribute("GEM IWTP pointer", 2, False, False, None)
-        self.undersize_packets = MeAttribute("Undersize Packets", 2, False, False, None)
-        self.vlan = MeAttribute("VLAN", 2, False, False, None)
-        self.file_size = MeAttribute("File size", 4, False, False, None)
-        self.directory_listing_table = MeAttribute("Directory listing table", 25, False, False, None)
+        self.supported_transfer_protocols = MeAttribute("Supported transfer protocols", 2, False, True, MeAttribute.READ_PERMISSION, None)
+        self.file_type = MeAttribute("File type", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.file_instance = MeAttribute("File instance", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.local_file_name_pointer = MeAttribute("Local file name pointer", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.network_address_pointer = MeAttribute("Network address pointer", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.file_transfer_trigger = MeAttribute("File transfer trigger", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.file_transfer_status = MeAttribute("File transfer status", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.gem_iwtp_pointer = MeAttribute("GEM IWTP pointer", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.undersize_packets = MeAttribute("Undersize Packets", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.vlan = MeAttribute("VLAN", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.file_size = MeAttribute("File size", 4, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.directory_listing_table = MeAttribute("Directory listing table", 25, False, False, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.supported_transfer_protocols,
@@ -2627,22 +2587,22 @@ class EthernetFramePmHistoryDataDs(ManagedEntity):
         ManagedEntity.__init__(self, 321, instance)
         self.name = "EthernetFramePmHistoryDataDs"
         self.imp_link = []
-        self.interval_end_time = MeAttribute("Interval End Time", 1, False, True, None)
-        self.threshold_data_id = MeAttribute("Threshold Data Id", 2, True, True, None)
-        self.drop_events = MeAttribute("Drop events", 4, False, True, None)
-        self.octets = MeAttribute("Octets", 4, False, True, None)
-        self.packets = MeAttribute("Packets", 4, False, True, None)
-        self.broadcast_packets = MeAttribute("Broadcast Packets", 4, False, True, None)
-        self.multicast_packets = MeAttribute("Multicast Packets", 4, False, True, None)
-        self.crc_errored_packets = MeAttribute("CRC Errored Packets", 4, False, True, None)
-        self.undersize_packets = MeAttribute("Undersize Packets", 4, False, True, None)
-        self.oversize_packets = MeAttribute("Oversize Packets", 4, False, True, None)
-        self.packets_64_octets = MeAttribute("Packets 64 Octets", 4, False, True, None)
-        self.packets_65_to_127_octets = MeAttribute("Packets 65 to 127 Octets", 4, False, True, None)
-        self.packets_128_to_255_octets = MeAttribute("Packets 128 to 255 Octets", 4, False, True, None)
-        self.packets_256_to_511_octets = MeAttribute("Packets 256 to 511 Octets", 4, False, True, None)
-        self.packets_512_to_1023_octets = MeAttribute("Packets 512 to 1023 Octets", 4, False, True, None)
-        self.packets_1024_to_1518_octets = MeAttribute("Packets 1024 to 1518 Octets", 4, False, True, None)
+        self.interval_end_time = MeAttribute("Interval End Time", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.threshold_data_id = MeAttribute("Threshold Data Id", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.drop_events = MeAttribute("Drop events", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.octets = MeAttribute("Octets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.packets = MeAttribute("Packets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.broadcast_packets = MeAttribute("Broadcast Packets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.multicast_packets = MeAttribute("Multicast Packets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.crc_errored_packets = MeAttribute("CRC Errored Packets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.undersize_packets = MeAttribute("Undersize Packets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.oversize_packets = MeAttribute("Oversize Packets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.packets_64_octets = MeAttribute("Packets 64 Octets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.packets_65_to_127_octets = MeAttribute("Packets 65 to 127 Octets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.packets_128_to_255_octets = MeAttribute("Packets 128 to 255 Octets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.packets_256_to_511_octets = MeAttribute("Packets 256 to 511 Octets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.packets_512_to_1023_octets = MeAttribute("Packets 512 to 1023 Octets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.packets_1024_to_1518_octets = MeAttribute("Packets 1024 to 1518 Octets", 4, False, True, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.interval_end_time,
@@ -2675,22 +2635,22 @@ class EthernetFramePmHistoryDataUs(ManagedEntity):
         ManagedEntity.__init__(self, 322, instance)
         self.name = "EthernetFramePmHistoryDataUs"
         self.imp_link = [47]
-        self.interval_end_time = MeAttribute("Interval End Time", 1, False, True, None)
-        self.threshold_data_id = MeAttribute("Threshold Data Id", 2, True, True, None)
-        self.drop_events = MeAttribute("Drop events", 4, False, True, None)
-        self.octets = MeAttribute("Octets", 4, False, True, None)
-        self.packets = MeAttribute("Packets", 4, False, True, None)
-        self.broadcast_packets = MeAttribute("Broadcast Packets", 4, False, True, None)
-        self.multicast_packets = MeAttribute("Multicast Packets", 4, False, True, None)
-        self.crc_errored_packets = MeAttribute("CRC Errored Packets", 4, False, True, None)
-        self.undersize_packets = MeAttribute("Undersize Packets", 4, False, True, None)
-        self.oversize_packets = MeAttribute("Oversize Packets", 4, False, True, None)
-        self.packets_64_octets = MeAttribute("Packets 64 Octets", 4, False, True, None)
-        self.packets_65_to_127_octets = MeAttribute("Packets 65 to 127 Octets", 4, False, True, None)
-        self.packets_128_to_255_octets = MeAttribute("Packets 128 to 255 Octets", 4, False, True, None)
-        self.packets_256_to_511_octets = MeAttribute("Packets 256 to 511 Octets", 4, False, True, None)
-        self.packets_512_to_1023_octets = MeAttribute("Packets 512 to 1023 Octets", 4, False, True, None)
-        self.packets_1024_to_1518_octets = MeAttribute("Packets 1024 to 1518 Octets", 4, False, True, None)
+        self.interval_end_time = MeAttribute("Interval End Time", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.threshold_data_id = MeAttribute("Threshold Data Id", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.drop_events = MeAttribute("Drop events", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.octets = MeAttribute("Octets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.packets = MeAttribute("Packets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.broadcast_packets = MeAttribute("Broadcast Packets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.multicast_packets = MeAttribute("Multicast Packets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.crc_errored_packets = MeAttribute("CRC Errored Packets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.undersize_packets = MeAttribute("Undersize Packets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.oversize_packets = MeAttribute("Oversize Packets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.packets_64_octets = MeAttribute("Packets 64 Octets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.packets_65_to_127_octets = MeAttribute("Packets 65 to 127 Octets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.packets_128_to_255_octets = MeAttribute("Packets 128 to 255 Octets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.packets_256_to_511_octets = MeAttribute("Packets 256 to 511 Octets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.packets_512_to_1023_octets = MeAttribute("Packets 512 to 1023 Octets", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.packets_1024_to_1518_octets = MeAttribute("Packets 1024 to 1518 Octets", 4, False, True, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.interval_end_time,
@@ -2723,11 +2683,11 @@ class VirtualEthernetInterfacePoint(ManagedEntity):
         ManagedEntity.__init__(self, 329, instance)
         self.name = "VirtualEthernetInterfacePoint"
         self.imp_link = []
-        self.administrative_state = MeAttribute("Administrative state", 14, False, True, None)
-        self.operational_state = MeAttribute("Operational state", 1, False, False, None)
-        self.interdomain_name = MeAttribute("Interdomain name", 25, False, False, None)
-        self.tcp_udp_pointer = MeAttribute("TCP UDP pointer", 2, False, False, None)
-        self.iana_assigned_port = MeAttribute("IANA assigned port", 2, False, True, None)
+        self.administrative_state = MeAttribute("Administrative state", 14, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.operational_state = MeAttribute("Operational state", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.interdomain_name = MeAttribute("Interdomain name", 25, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.tcp_udp_pointer = MeAttribute("TCP UDP pointer", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.iana_assigned_port = MeAttribute("IANA assigned port", 2, False, True, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.administrative_state,
@@ -2749,9 +2709,9 @@ class BbfTr(ManagedEntity):
         ManagedEntity.__init__(self, 340, instance)
         self.name = "BbfTr"
         self.imp_link = []
-        self.administrative_state = MeAttribute("Administrative state", 1, False, True, None)
-        self.acs_network_address = MeAttribute("ACS network address", 2, False, True, None)
-        self.associated_tag = MeAttribute("Associated tag", 2, False, True, None)
+        self.administrative_state = MeAttribute("Administrative state", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.acs_network_address = MeAttribute("ACS network address", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.associated_tag = MeAttribute("Associated tag", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.administrative_state,
@@ -2771,13 +2731,13 @@ class GemPortNetworkCtpPerformanceMonitoringHistoryData(ManagedEntity):
         ManagedEntity.__init__(self, 341, instance)
         self.name = "GemPortNetworkCtpPerformanceMonitoringHistoryData"
         self.imp_link = [268]
-        self.interval_end_time = MeAttribute("Interval end time", 1, True, True, None)
-        self.threshold_data_id = MeAttribute("Threshold data ID", 2, True, True, None)
-        self.transmitted_gem_frames = MeAttribute("Transmitted GEM frames", 4, False, True, None)
-        self.received_gem_frames = MeAttribute("Received GEM frames", 4, False, True, None)
-        self.received_payload_bytes = MeAttribute("Received payload bytes", 8, False, True, None)
-        self.transmitted_payload_bytes = MeAttribute("Transmitted payload bytes", 8, False, True, None)
-        self.encryption_key_errors = MeAttribute("Encryption key errors", 4, False, False, None)
+        self.interval_end_time = MeAttribute("Interval end time", 1, True, True, MeAttribute.READ_PERMISSION, None)
+        self.threshold_data_id = MeAttribute("Threshold data ID", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.transmitted_gem_frames = MeAttribute("Transmitted GEM frames", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.received_gem_frames = MeAttribute("Received GEM frames", 4, False, True, MeAttribute.READ_PERMISSION, None)
+        self.received_payload_bytes = MeAttribute("Received payload bytes", 8, False, True, MeAttribute.READ_PERMISSION, None)
+        self.transmitted_payload_bytes = MeAttribute("Transmitted payload bytes", 8, False, True, MeAttribute.READ_PERMISSION, None)
+        self.encryption_key_errors = MeAttribute("Encryption key errors", 4, False, False, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.interval_end_time,
@@ -2801,11 +2761,11 @@ class PppoeIntelbrasOlt8820I110Gi(ManagedEntity):
         ManagedEntity.__init__(self, 65303, instance)
         self.name = "PppoeIntelbrasOlt8820I110Gi"
         self.imp_link = []
-        self.wan_type = MeAttribute("Wan-Type", 1, False, False, None)
-        self.user = MeAttribute("User", 25, False, False, None)
-        self.password = MeAttribute("Password", 25, False, False, None)
-        self.mppe = MeAttribute("MPPE", 1, False, False, None)
-        self.service_name = MeAttribute("Service Name", 25, False, False, None)
+        self.wan_type = MeAttribute("Wan-Type", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.user = MeAttribute("User", 25, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.password = MeAttribute("Password", 25, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.mppe = MeAttribute("MPPE", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.service_name = MeAttribute("Service Name", 25, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.wan_type,
@@ -2827,14 +2787,14 @@ class WanExtendedConfigFh(ManagedEntity):
         ManagedEntity.__init__(self, 65320, instance)
         self.name = "WanExtendedConfigFh"
         self.imp_link = []
-        self.wan_number = MeAttribute("WAN Number", 2, False, False, None)
-        self.wan_index = MeAttribute("WAN Index", 1, False, False, None)
-        self.wan_name_1 = MeAttribute("WAN name 1", 16, False, False, None)
-        self.wan_name_2_dns = MeAttribute("WAN name 2 DNS", 16, False, False, None)
-        self.wan_name_3_dns = MeAttribute("WAN name 3 DNS", 16, False, False, None)
-        self.wan_name_4 = MeAttribute("WAN name 4", 16, False, False, None)
-        self.wan_uppir = MeAttribute("WAN UPPIR", 4, False, False, None)
-        self.wan_downpir = MeAttribute("WAN DOWNPIR", 4, False, False, None)
+        self.wan_number = MeAttribute("WAN Number", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_index = MeAttribute("WAN Index", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_name_1 = MeAttribute("WAN name 1", 16, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_name_2_dns = MeAttribute("WAN name 2 DNS", 16, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_name_3_dns = MeAttribute("WAN name 3 DNS", 16, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_name_4 = MeAttribute("WAN name 4", 16, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_uppir = MeAttribute("WAN UPPIR", 4, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_downpir = MeAttribute("WAN DOWNPIR", 4, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.wan_number,
@@ -2859,8 +2819,8 @@ class WanProfileFileFh(ManagedEntity):
         ManagedEntity.__init__(self, 65321, instance)
         self.name = "WanProfileFileFh"
         self.imp_link = []
-        self.create_or_delete_wan_ipv4 = MeAttribute("Create-or-Delete WAN IPV4", 2, False, False, None)
-        self.create_or_delete_wan_ipv6 = MeAttribute("Create-or-Delete WAN IPV6", 2, False, False, None)
+        self.create_or_delete_wan_ipv4 = MeAttribute("Create-or-Delete WAN IPV4", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.create_or_delete_wan_ipv6 = MeAttribute("Create-or-Delete WAN IPV6", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.create_or_delete_wan_ipv4,
@@ -2879,22 +2839,22 @@ class WanModeFh(ManagedEntity):
         ManagedEntity.__init__(self, 65322, instance)
         self.name = "WanModeFh"
         self.imp_link = []
-        self.wan_index = MeAttribute("WAN INDEX", 1, False, False, None)
-        self.wan_name_1 = MeAttribute("WAN name 1", 16, False, False, None)
-        self.wan_name_2 = MeAttribute("WAN name 2", 16, False, False, None)
-        self.wan_name_3 = MeAttribute("WAN name 3", 16, False, False, None)
-        self.wan_name_4 = MeAttribute("WAN name 4", 16, False, False, None)
-        self.wan_conected_mode = MeAttribute("WAN Conected Mode", 1, False, False, None)
-        self.wan_conected_type = MeAttribute("WAN Conected Type", 1, False, False, None)
-        self.vlan = MeAttribute("VLAN", 2, True, False, None)
-        self.cos = MeAttribute("COS", 2, True, False, None)
-        self.nat = MeAttribute("NAT", 1, True, False, None)
-        self.ip_mode = MeAttribute("IP MODE", 1, True, False, None)
-        self.qos_enable = MeAttribute("QoS Enable", 1, True, False, None)
-        self.conect_status = MeAttribute("Conect Status", 1, True, False, None)
-        self.gem_port_point = MeAttribute("GEM PORT POINT", 2, True, False, None)
-        self.dhcp_remote_id = MeAttribute("DHCP REMOTE ID", 10, True, False, None)
-        self.active_flag = MeAttribute("ACTIVE FLAG", 1, False, False, None)
+        self.wan_index = MeAttribute("WAN INDEX", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_name_1 = MeAttribute("WAN name 1", 16, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_name_2 = MeAttribute("WAN name 2", 16, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_name_3 = MeAttribute("WAN name 3", 16, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_name_4 = MeAttribute("WAN name 4", 16, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_conected_mode = MeAttribute("WAN Conected Mode", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_conected_type = MeAttribute("WAN Conected Type", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.vlan = MeAttribute("VLAN", 2, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.cos = MeAttribute("COS", 2, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.nat = MeAttribute("NAT", 1, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.ip_mode = MeAttribute("IP MODE", 1, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.qos_enable = MeAttribute("QoS Enable", 1, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.conect_status = MeAttribute("Conect Status", 1, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.gem_port_point = MeAttribute("GEM PORT POINT", 2, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.dhcp_remote_id = MeAttribute("DHCP REMOTE ID", 10, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.active_flag = MeAttribute("ACTIVE FLAG", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.wan_index,
@@ -2927,16 +2887,16 @@ class WanConfigFh(ManagedEntity):
         ManagedEntity.__init__(self, 65323, instance)
         self.name = "WanConfigFh"
         self.imp_link = []
-        self.proxy_enable = MeAttribute("Proxy Enable", 1, False, False, None)
-        self.userppoe1 = MeAttribute("Userppoe1", 16, False, False, None)
-        self.userppoe2 = MeAttribute("Userppoe2", 16, False, False, None)
-        self.passwordppoe1 = MeAttribute("Passwordppoe1", 16, False, False, None)
-        self.passwordppoe2 = MeAttribute("Passwordppoe2", 16, False, False, None)
-        self.service_name_1 = MeAttribute("Service Name 1", 16, False, False, None)
-        self.service_name_2 = MeAttribute("Service Name 2", 16, False, False, None)
-        self.dail_parther = MeAttribute("Dail Parther", 1, True, False, None)
-        self.authentic_mode = MeAttribute("Authentic Mode", 1, True, False, None)
-        self.auto_drop_time = MeAttribute("Auto Drop Time", 2, True, False, None)
+        self.proxy_enable = MeAttribute("Proxy Enable", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.userppoe1 = MeAttribute("Userppoe1", 16, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.userppoe2 = MeAttribute("Userppoe2", 16, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.passwordppoe1 = MeAttribute("Passwordppoe1", 16, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.passwordppoe2 = MeAttribute("Passwordppoe2", 16, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.service_name_1 = MeAttribute("Service Name 1", 16, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.service_name_2 = MeAttribute("Service Name 2", 16, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.dail_parther = MeAttribute("Dail Parther", 1, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.authentic_mode = MeAttribute("Authentic Mode", 1, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.auto_drop_time = MeAttribute("Auto Drop Time", 2, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.proxy_enable,
@@ -2963,8 +2923,8 @@ class WanPortBindFh(ManagedEntity):
         ManagedEntity.__init__(self, 65324, instance)
         self.name = "WanPortBindFh"
         self.imp_link = []
-        self.lan_bind = MeAttribute("LAN Bind", 1, True, False, None)
-        self.ssid_bind = MeAttribute("SSID Bind", 1, True, False, None)
+        self.lan_bind = MeAttribute("LAN Bind", 1, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.ssid_bind = MeAttribute("SSID Bind", 1, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.lan_bind,
@@ -2983,20 +2943,20 @@ class WanWanProfileFh(ManagedEntity):
         ManagedEntity.__init__(self, 65329, instance)
         self.name = "WanWanProfileFh"
         self.imp_link = []
-        self.wan_ip_host_ip_addr = MeAttribute("WAN IP HOST IP ADDR", 4, False, False, None)
-        self.wan_ip_host_mask = MeAttribute("WAN IP HOST MASK", 4, False, False, None)
-        self.wan_ip_host_gateway = MeAttribute("WAN IP HOST Gateway", 4, False, False, None)
-        self.wan_ip_host_primary_dns = MeAttribute("WAN IP HOST Primary DNS", 4, False, False, None)
-        self.wan_ip_host_secondary_dns = MeAttribute("WAN IP HOST Secondary DNS", 4, False, False, None)
-        self.wan_ip_host_static_ipv6 = MeAttribute("WAN IP HOST Static IPv6", 19, False, False, None)
-        self.wan_ip_host_ipv6_gateway = MeAttribute("WAN IP HOST IPv6 Gateway", 19, False, False, None)
-        self.wan_ip_host_ipv6_primary_dns_static_ipv6 = MeAttribute("WAN IP HOST IPV6 Primary DNS Static IPv6", 19, False, False, None)
-        self.wan_ip_host_ipv6_secondary_dns_static_ipv6 = MeAttribute("WAN IP HOST IPV6 Secondary DNS Static IPv6", 19, False, False, None)
-        self.wan_ip_host_wan_protocol = MeAttribute("WAN IP HOST WAN Protocol", 1, False, False, None)
-        self.wan_ip_host_static_prefix = MeAttribute("WAN IP HOST Static Prefix", 19, False, False, None)
-        self.wan_ip_host_prefix_pool = MeAttribute("WAN IP HOST Prefix Pool", 19, False, False, None)
-        self.wan_ip_host_address_source = MeAttribute("WAN IP HOST Address Source", 1, False, False, None)
-        self.wan_ip_host_mac_address_source = MeAttribute("WAN IP HOST MAC Address Source", 6, False, False, None)
+        self.wan_ip_host_ip_addr = MeAttribute("WAN IP HOST IP ADDR", 4, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_ip_host_mask = MeAttribute("WAN IP HOST MASK", 4, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_ip_host_gateway = MeAttribute("WAN IP HOST Gateway", 4, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_ip_host_primary_dns = MeAttribute("WAN IP HOST Primary DNS", 4, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_ip_host_secondary_dns = MeAttribute("WAN IP HOST Secondary DNS", 4, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_ip_host_static_ipv6 = MeAttribute("WAN IP HOST Static IPv6", 19, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_ip_host_ipv6_gateway = MeAttribute("WAN IP HOST IPv6 Gateway", 19, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_ip_host_ipv6_primary_dns_static_ipv6 = MeAttribute("WAN IP HOST IPV6 Primary DNS Static IPv6", 19, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_ip_host_ipv6_secondary_dns_static_ipv6 = MeAttribute("WAN IP HOST IPV6 Secondary DNS Static IPv6", 19, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_ip_host_wan_protocol = MeAttribute("WAN IP HOST WAN Protocol", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_ip_host_static_prefix = MeAttribute("WAN IP HOST Static Prefix", 19, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_ip_host_prefix_pool = MeAttribute("WAN IP HOST Prefix Pool", 19, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_ip_host_address_source = MeAttribute("WAN IP HOST Address Source", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wan_ip_host_mac_address_source = MeAttribute("WAN IP HOST MAC Address Source", 6, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.wan_ip_host_ip_addr,
@@ -3027,22 +2987,22 @@ class WifiGeneralConfig(ManagedEntity):
         ManagedEntity.__init__(self, 65326, instance)
         self.name = "WifiGeneralConfig"
         self.imp_link = []
-        self.wifi_std = MeAttribute("wifi_std", 2, False, False, None)
-        self.wifi_auth = MeAttribute("wifi_auth", 2, False, False, None)
-        self.wifi_cryp = MeAttribute("wifi_cryp", 2, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.wifi_pass = MeAttribute("wifi_pass", 25, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.wifi_ssid = MeAttribute("wifi_ssid", 25, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.wifi_enabled = MeAttribute("wifi_enabled", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 2, False, False, None)
+        self.wifi_std = MeAttribute("wifi_std", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wifi_auth = MeAttribute("wifi_auth", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wifi_cryp = MeAttribute("wifi_cryp", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wifi_pass = MeAttribute("wifi_pass", 25, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wifi_ssid = MeAttribute("wifi_ssid", 25, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wifi_enabled = MeAttribute("wifi_enabled", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.wifi_std,
@@ -3075,22 +3035,22 @@ class WifiAdvanceConfig(ManagedEntity):
         ManagedEntity.__init__(self, 65327, instance)
         self.name = "WifiAdvanceConfig"
         self.imp_link = []
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.wifi_channel = MeAttribute("wifi_channel", 1, False, False, None)
-        self.wifi_tx_pwr = MeAttribute("wifi_tx_pwr", 1, False, False, None)
-        self.wifi_country = MeAttribute("wifi_country", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.wifi_freq_bandwidth = MeAttribute("wifi_freq_bandwidth", 1, False, False, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wifi_channel = MeAttribute("wifi_channel", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wifi_tx_pwr = MeAttribute("wifi_tx_pwr", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wifi_country = MeAttribute("wifi_country", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.wifi_freq_bandwidth = MeAttribute("wifi_freq_bandwidth", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.not_identified,
@@ -3123,14 +3083,14 @@ class WanExtendedVlanFh(ManagedEntity):
         ManagedEntity.__init__(self, 65338, instance)
         self.name = "WanExtendedVlanFh"
         self.imp_link = []
-        self.vlan_mode = MeAttribute("VLAN Mode", 1, False, False, None)
-        self.tranlation_enable = MeAttribute("Tranlation Enable", 1, False, False, None)
-        self.tranlation__vid = MeAttribute("Tranlation  VID", 2, False, False, None)
-        self.vlan_cos = MeAttribute("VLAN CoS", 2, False, False, None)
-        self.qinq_enable = MeAttribute("QinQ Enable", 1, False, False, None)
-        self.vlan_tpid = MeAttribute("VLAN TPID", 2, False, False, None)
-        self.slan_id = MeAttribute("SLAN ID", 2, False, False, None)
-        self.slan_cos = MeAttribute("SLAN CoS", 2, False, False, None)
+        self.vlan_mode = MeAttribute("VLAN Mode", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.tranlation_enable = MeAttribute("Tranlation Enable", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.tranlation__vid = MeAttribute("Tranlation  VID", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.vlan_cos = MeAttribute("VLAN CoS", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.qinq_enable = MeAttribute("QinQ Enable", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.vlan_tpid = MeAttribute("VLAN TPID", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.slan_id = MeAttribute("SLAN ID", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.slan_cos = MeAttribute("SLAN CoS", 2, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.vlan_mode,
@@ -3155,10 +3115,10 @@ class OnuCapability(ManagedEntity):
         ManagedEntity.__init__(self, 65529, instance)
         self.name = "OnuCapability"
         self.imp_link = []
-        self.operator_id = MeAttribute("operator_id", 4, False, False, None)
-        self.ctc_spec_version = MeAttribute("ctc_spec_version", 1, False, False, None)
-        self.onu_type = MeAttribute("onu_type", 1, False, False, None)
-        self.onu_tx_power_supply_control = MeAttribute("onu_tx_power_supply_control", 1, False, False, None)
+        self.operator_id = MeAttribute("operator_id", 4, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.ctc_spec_version = MeAttribute("ctc_spec_version", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.onu_type = MeAttribute("onu_type", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.onu_tx_power_supply_control = MeAttribute("onu_tx_power_supply_control", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.operator_id,
@@ -3179,10 +3139,10 @@ class LoidAuthentication(ManagedEntity):
         ManagedEntity.__init__(self, 65530, instance)
         self.name = "LoidAuthentication"
         self.imp_link = []
-        self.operator_id = MeAttribute("operator_id", 4, False, False, None)
-        self.loid = MeAttribute("loid", 24, False, False, None)
-        self.password = MeAttribute("password", 12, False, False, None)
-        self.authentication_status = MeAttribute("authentication_status", 1, False, False, None)
+        self.operator_id = MeAttribute("operator_id", 4, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.loid = MeAttribute("loid", 24, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.password = MeAttribute("password", 12, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.authentication_status = MeAttribute("authentication_status", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.operator_id,
@@ -3203,22 +3163,22 @@ class Default(ManagedEntity):
         ManagedEntity.__init__(self, 999999, instance)
         self.name = "Default"
         self.imp_link = []
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
-        self.not_identified = MeAttribute("Not_identified", 1, False, False, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.not_identified,

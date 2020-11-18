@@ -238,7 +238,7 @@ mes_classes = """
 ##################################################"""
 
 me_block_pattern = re.compile(
-    r'\[(\d+)\]...{\s+me_class_name\s+=\s+"(.+)"(.+[\n].+attname="(.+)".+length=(\d+).+setbycreate=(\w+).+mandatory=(\w+))*')
+    r'\[(\d+)\]...{\s+me_class_name\s+=\s+"(.+)"(.+[\n].+attname="(.+)".+length=(\d+).+setbycreate=(\w+).+mandatory=(\w+).+perm=(\w+))*')
 
 me_dict = "    me_dict = {\n"
 
@@ -248,13 +248,15 @@ for match in me_block_pattern.finditer(text):
     me_id_int = int(me_id)
     me_name = match.group(2)
 
-    me_dict += '        {}: "{}",\n'.format(me_id_int, me_name[:me_name.find('-')].strip() if '-' in me_name else me_name.strip())
+    me_dict += '        {}: "{}",\n'.format(me_id_int,
+                                            me_name[:me_name.find('-')].strip() if '-' in me_name else me_name.strip())
 
     attributes = []
-    me_attr_pattern = re.compile(r'attname="(.+)".+length=(\d+).+setbycreate=(\w+).+mandatory=(\w+)')
+    me_attr_pattern = re.compile(r'attname="(.+)".+length=(\d+).+setbycreate=(\w+).+mandatory=(\w+).+perm=(\w+)')
     for m in me_attr_pattern.finditer(match.group()):
         name_str = m.group(1).lower().replace(' ', '_').replace('-', '_')
-        attributes.append({'name_str': name_str, 'name': m.group(1), 'length': m.group(2), 'setbycreate': m.group(3), 'mandatory': m.group(4)})
+        attributes.append({'name_str': name_str, 'name': m.group(1), 'length': m.group(2), 'setbycreate': m.group(3),
+                           'mandatory': m.group(4), 'perm': m.group(5)})
 
     imp_link_match = re.search(r'imp_link=\((.+)\)', match.group())
     imp_link = "[{}]".format(imp_link_match.group(1).strip().rstrip(',')) if imp_link_match else "[]"
@@ -273,8 +275,17 @@ class {}(ManagedEntity):
     for attr in attributes:
         set_by_create = "True" if "true" in attr['setbycreate'].lower() else "False"
         mandatory = "True" if "true" in attr['mandatory'].lower() else "False"
+        perm = attr['perm'].strip().lower()
+        if perm == "rw":
+            permissions = "MeAttribute.READ_WRITE_PERMISSION"
+        elif perm == "w":
+            permissions = "MeAttribute.WRITE_PERMISSION"
+        else:
+            permissions = "MeAttribute.READ_PERMISSION"
         # is_pointer = "True" if "pointer" in str(attr['name']).lower() else "False"
-        line += "        self.{} = MeAttribute(\"{}\", {}, {}, {}, {})\n".format(attr['name_str'], attr['name'], attr['length'], set_by_create, mandatory, "None")
+        line += "        self.{} = MeAttribute(\"{}\", {}, {}, {}, {}, {})\n".format(attr['name_str'], attr['name'],
+                                                                                     attr['length'], set_by_create,
+                                                                                     mandatory, permissions, "None")
 
     line += "\n        self.attributes = (\n"
     for attr in attributes:
@@ -297,13 +308,18 @@ class {}(ManagedEntity):
 
 attr_class = """
 class MeAttribute:
-    def __init__(self, name, length, setbycreate, mandatory, points_to=None, value=None):
+    READ_PERMISSION = 1
+    WRITE_PERMISSION = 2
+    READ_WRITE_PERMISSION = 3
+
+    def __init__(self, name, length, setbycreate, mandatory, permissions, points_to=None, value=None):
         self.name = name
         self.length = length
         self.setbycreate = setbycreate
         self.mandatory = mandatory
         self.points_to = points_to
         self.value = value
+        self.permissions = permissions
 
     def getName(self):
         return self.name
@@ -327,7 +343,10 @@ class MeAttribute:
         return self.length
 
     def isMandatory(self):
-        return self.mandatory\n
+        return self.mandatory
+
+    def getPermissions(self):
+        return self.permissions\n
 """
 
 mes_translate = """

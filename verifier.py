@@ -24,7 +24,7 @@ class Verifier:
         missing_attributes = {}
         for entity in self.buf_entity:
             for attribute in entity.getAttributes():
-                if attribute.isMandatory() and attribute.getValue() is None:
+                if attribute.isMandatory() and attribute.getValue() is None and attribute.getPermissions() != MeAttribute.READ_PERMISSION:
                     me_id = entity.getId()
                     me_inst = entity.getInstance()
                     key = me_id + me_inst
@@ -36,10 +36,12 @@ class Verifier:
                             "attributes": [attribute.getName()]
                         }
                     else:
-                        missing_attributes[key]["attributes"].append(attribute.getName())
+                        attr_name = attribute.getName()
+                        if attr_name not in missing_attributes[key]["attributes"]:
+                            missing_attributes[key]["attributes"].append(attr_name)
 
         if len(missing_attributes):
-            print("Missing Attributes:\n")
+            print("\n\nMissing Attributes:\n")
 
             for me in missing_attributes.values():
                 attr_str = "\n\t" + ";\n\t".join(me["attributes"])
