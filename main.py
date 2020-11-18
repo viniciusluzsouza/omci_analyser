@@ -47,6 +47,7 @@ Choose an option and press ENTER:
 Choose an option and press ENTER:
    1) Check mandatory attributes
    2) Check ME lengths
+   3) Check configured attributes without permission
    
    0) Back
 """
@@ -216,6 +217,9 @@ Choose an option and press ENTER:
 
                 elif opt == 2:
                     self.verifier.verifyEntitiesLength()
+
+                elif opt == 3:
+                    self.verifier.verifySetWithoutPermission()
 
                 elif opt == 0:
                     break

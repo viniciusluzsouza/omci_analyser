@@ -53,6 +53,9 @@ class Verifier:
                 attr_str = "\n\t" + ";\n\t".join(me["attributes"])
                 print("{} ({}) [{}]: {}\n".format(me["me_name"], me["me_id"], me["me_inst"], attr_str))
 
+        else:
+            print("\n\nNot found missing attributes.\n")
+
     def checkAttrLength(self, val):
         count = len(val)
         for v in reversed(val):
@@ -94,3 +97,40 @@ class Verifier:
             for irl in invalid_received_len:
                 expected_str = "\n\tExpected: {}\n\tReceived: {}".format(irl["expected"], irl["received"])
                 print("{} ({}) [{}]: {}\n".format(irl["me_name"], irl["me_id"], irl["me_inst"], expected_str))
+
+        else:
+            print("\n\nNot found conflicting length in MEs sent by OLT.\n")
+
+    def verifySetWithoutPermission(self):
+        if not self.checkBuffer():
+            return
+
+        mes_set_without_permission = {}
+        for entity in self.buf_entity:
+            for attribute in entity.getAttributes():
+                if attribute.getValue() is not None and attribute.getPermissions() == MeAttribute.READ_PERMISSION:
+                    me_id = entity.getId()
+                    me_inst = entity.getInstance()
+                    key = me_id + me_inst
+                    if key not in mes_set_without_permission.keys():
+                        mes_set_without_permission[key] = {
+                            "me_id": me_id,
+                            "me_inst": me_inst,
+                            "me_name": entity.getName(),
+                            "attributes": [attribute.getName()]
+                        }
+                    else:
+                        attr_name = attribute.getName()
+                        if attr_name not in mes_set_without_permission[key]["attributes"]:
+                            mes_set_without_permission[key]["attributes"].append(attr_name)
+
+        if len(mes_set_without_permission):
+            print("\n\nAttributes configured without permission:\n")
+
+            for me in mes_set_without_permission.values():
+                attr_str = "\n\t" + ";\n\t".join(me["attributes"])
+                print("{} ({}) [{}]: {}\n".format(me["me_name"], me["me_id"], me["me_inst"], attr_str))
+
+        else:
+            print("\n\nNot found configured attributes without permission.\n")
+
