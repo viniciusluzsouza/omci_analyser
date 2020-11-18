@@ -159,7 +159,7 @@ class Analyser:
             elif pkt_type == MessageType.SET:
                 exist = False
                 for e in entities:
-                    if pkt.getMeId() == e.getId and pkt.getMeInst == e.getInstance():
+                    if pkt.getMeId() == e.getId() and pkt.getMeInst() == e.getInstance():
                         e.setAttributes(pkt.getPkt()[0])
                         exist = True
 
