@@ -13,13 +13,19 @@ class Verifier:
     def setEntityBuf(self, buf):
         self.buf_entity = buf
 
-    def verify(self):
+    def checkBuffer(self):
         if not len(self.buf_entity):
             if len(self.buf):
                 self.buf_entity = Analyser.translateAndCreateEntities(self.buf)
             else:
                 print("Nothing to verify!")
-                return
+                return False
+
+        return True
+
+    def verifyMandatoryAttributes(self):
+        if not self.checkBuffer():
+            return
 
         missing_attributes = {}
         for entity in self.buf_entity:
@@ -46,3 +52,45 @@ class Verifier:
             for me in missing_attributes.values():
                 attr_str = "\n\t" + ";\n\t".join(me["attributes"])
                 print("{} ({}) [{}]: {}\n".format(me["me_name"], me["me_id"], me["me_inst"], attr_str))
+
+    def checkAttrLength(self, val):
+        count = len(val)
+        for v in reversed(val):
+            if v != 0x00:
+                break
+
+            count = count - 1
+
+        return count
+
+    def verifyEntitiesLength(self):
+        if not self.checkBuffer():
+            return
+
+        invalid_received_len = []
+        for entity in self.buf_entity:
+            expected_len = 0
+            received_len = 0
+            for attribute in entity.getAttributes():
+                val = attribute.getValue()
+                if val is not None:
+                    exp_len = attribute.getLength()
+                    expected_len += exp_len
+                    rec_len = self.checkAttrLength(val)
+                    received_len += rec_len + 1 if rec_len != 0 and rec_len != exp_len else exp_len
+
+            if expected_len != received_len:
+                invalid_received_len.append({
+                    "me_id": entity.getId(),
+                    "me_inst": entity.getInstance(),
+                    "me_name": entity.getName(),
+                    "expected": expected_len,
+                    "received": received_len
+                })
+
+        if len(invalid_received_len):
+            print("\n\nConflicting Lengths:\n")
+
+            for irl in invalid_received_len:
+                expected_str = "\n\tExpected: {}\n\tReceived: {}".format(irl["expected"], irl["received"])
+                print("{} ({}) [{}]: {}\n".format(irl["me_name"], irl["me_id"], irl["me_inst"], expected_str))

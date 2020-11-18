@@ -45,8 +45,8 @@ Choose an option and press ENTER:
 ########### Verifier ###########
 
 Choose an option and press ENTER:
-   1) Check mandatory parameters
-   2) Check ME lenghts
+   1) Check mandatory attributes
+   2) Check ME lengths
    
    0) Back
 """
@@ -201,20 +201,22 @@ Choose an option and press ENTER:
                 if opt is None:
                     continue
 
-                if opt == 1:
-                    if self.analyser.hasEntities():
-                        self.verifier.setEntityBuf(self.analyser.getEntities())
-                    elif self.loaded_buffer and len(self.loaded_buffer):
-                        self.verifier.setPacketBuffer(self.loaded_buffer)
-                    elif self.capturator and self.capturator.hasCapture():
-                        self.verifier.setPacketBuffer(self.capturator.getBuffer())
-                    else:
-                        print("Nothing to verify!")
+                if self.analyser.hasEntities():
+                    self.verifier.setEntityBuf(self.analyser.getEntities())
+                elif self.loaded_buffer and len(self.loaded_buffer):
+                    self.verifier.setPacketBuffer(self.loaded_buffer)
+                elif self.capturator and self.capturator.hasCapture():
+                    self.verifier.setPacketBuffer(self.capturator.getBuffer())
+                else:
+                    print("Nothing to verify!")
+                    continue
 
-                    self.verifier.verify()
+                if opt == 1:
+                    self.verifier.verifyMandatoryAttributes()
 
                 elif opt == 2:
-                    print(self.NOT_IMPLEMENTED)
+                    self.verifier.verifyEntitiesLength()
+
                 elif opt == 0:
                     break
                 else:
