@@ -56,11 +56,16 @@ Choose an option and press ENTER:
 
     INVALID_OPT = "Invalid option\n"
 
+    NOTHING_LOADED = 0
+    LOADED_FROM_CAPTURE = 1
+    LOADED_FROM_FILE = 2
+
     def __init__(self):
         self.capturator = Capturator()
         self.analyser = Analyser()
         self.verifier = Verifier()
         self.loaded_buffer = []
+        self.last_loaded = MainMenu.NOTHING_LOADED
 
     def convertOptWithPrint(self, opt):
         try:
@@ -87,7 +92,7 @@ Choose an option and press ENTER:
     def startCapture(self):
         try:
             if self.capturator.hasCapture():
-                if self.askConfirm("The last capture will be lost. Are you sure?"):
+                if self.askConfirm("If the last capture was not save, it will be lost. Are you sure?"):
                     self.closeCapturator()
                 else:
                     return
@@ -105,6 +110,7 @@ Choose an option and press ENTER:
 
         except KeyboardInterrupt:
             self.capturator.closeSock()
+            self.last_loaded = MainMenu.LOADED_FROM_CAPTURE
             print("\nCapture stoppped!\n")
 
         except Exception as e:
@@ -119,6 +125,7 @@ Choose an option and press ENTER:
         buf = Capturator.loadDump(file)
         if len(buf):
             self.loaded_buffer = buf
+            self.last_loaded = MainMenu.LOADED_FROM_FILE
             print("Capture successfully loaded!")
 
     def saveCapture(self):
@@ -128,6 +135,20 @@ Choose an option and press ENTER:
             print("Saved sucessfully! See folder output.\n")
         else:
             print("Nothing to save!")
+
+    def checkLastCapture(self):
+        buf = None
+        if self.last_loaded == MainMenu.LOADED_FROM_CAPTURE:
+            if self.capturator.hasCapture():
+                buf = self.capturator.getBuffer()
+        elif self.last_loaded == MainMenu.LOADED_FROM_FILE:
+            if len(self.loaded_buffer):
+                buf = self.loaded_buffer
+
+        if buf is None:
+            print("There is no capture to analyse. Start a capture or load one!")
+
+        return buf
 
     def analyserMenu(self):
         if not self.analyser:
@@ -144,12 +165,7 @@ Choose an option and press ENTER:
                     continue
 
                 if opt == 1:
-                    buf = None
-                    if self.loaded_buffer and len(self.loaded_buffer):
-                        buf = self.loaded_buffer
-                    elif self.capturator and self.capturator.hasCapture():
-                        buf = self.capturator.getBuffer()
-
+                    buf = self.checkLastCapture()
                     if buf:
                         self.analyser.setBuffer(buf)
                         self.analyser.analyse()
@@ -164,19 +180,19 @@ Choose an option and press ENTER:
                             self.analyser.generateImage(pngfile)
                             print("Generated on folder output.")
 
-                    else:
-                        print("There is no capture to analyse. Start a capture or load one!")
-
                 elif opt == 2:
-                    if self.analyser.hasEntities():
-                        while True:
-                            entity = input("Inform the entity identifier. E.g: [45-0] (0 to exit): ")
-                            if entity == '0':
-                                break
+                    buf = self.checkLastCapture()
+                    if buf:
+                        self.analyser.setBuffer(buf)
+                        self.analyser.translateToMyself()
 
-                            self.analyser.showEntity(entity)
-                    else:
-                        print("You should run analyser before!")
+                        if self.analyser.hasEntities():
+                            while True:
+                                entity = input("Inform the entity identifier. E.g: [45-0] (0 to exit): ")
+                                if entity == '0':
+                                    break
+
+                                self.analyser.showEntity(entity)
 
                 elif opt == 0:
                     break
@@ -191,7 +207,6 @@ Choose an option and press ENTER:
                 print(str(e))
                 self.printTitle = False
 
-
     def verifierMenu(self):
         while True:
             print(self.VERIFIER)
@@ -202,15 +217,11 @@ Choose an option and press ENTER:
                 if opt is None:
                     continue
 
-                if self.analyser.hasEntities():
-                    self.verifier.setEntityBuf(self.analyser.getEntities())
-                elif self.loaded_buffer and len(self.loaded_buffer):
-                    self.verifier.setPacketBuffer(self.loaded_buffer)
-                elif self.capturator and self.capturator.hasCapture():
-                    self.verifier.setPacketBuffer(self.capturator.getBuffer())
+                buf = self.checkLastCapture()
+                if buf:
+                    self.verifier.setPacketBuffer(buf)
                 else:
-                    print("Nothing to verify!")
-                    continue
+                    break
 
                 if opt == 1:
                     self.verifier.verifyMandatoryAttributes()

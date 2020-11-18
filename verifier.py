@@ -14,12 +14,11 @@ class Verifier:
         self.buf_entity = buf
 
     def checkBuffer(self):
-        if not len(self.buf_entity):
-            if len(self.buf):
-                self.buf_entity = Analyser.translateAndCreateEntities(self.buf)
-            else:
-                print("Nothing to verify!")
-                return False
+        if len(self.buf):
+            self.buf_entity = Analyser.translateAndCreateEntities(self.buf)
+        else:
+            print("Nothing to verify!")
+            return False
 
         return True
 
