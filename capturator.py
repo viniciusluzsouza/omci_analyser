@@ -50,8 +50,10 @@ class Capturator:
         self.interface = interface
 
     def createSock(self):
-        self.sock = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(0x88b5))
-        self.sock.bind((self.interface, 0))
+        if os.system("sudo ip link set {} promisc on".format(self.interface)) == 0:
+            self.sock = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(0x88b5))
+        else:
+            print("Cannot set interface to promiscous mode")
 
     def start(self):
         while True:
@@ -113,6 +115,7 @@ class Capturator:
 
     def closeSock(self):
         if self.sock:
+            os.system("sudo ip link set {} promisc off".format(self.interface))
             self.sock.close()
 
     def getBuffer(self):
@@ -124,3 +127,4 @@ class Capturator:
     def close(self):
         self.clearDump()
         self.closeSock()
+
