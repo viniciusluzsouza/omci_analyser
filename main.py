@@ -49,7 +49,9 @@ Choose an option and press ENTER:
    1) Check mandatory attributes
    2) Check ME lengths
    3) Check configured attributes without permission
-   
+
+   9) Run all and generate report
+
    0) Back
 """
 
@@ -209,6 +211,9 @@ Choose an option and press ENTER:
 
                 elif opt == 3:
                     self.verifier.verifySetWithoutPermission()
+
+                elif opt == 9:
+                    self.verifier.runAllAndGenerateReport()
 
                 elif opt == 0:
                     break

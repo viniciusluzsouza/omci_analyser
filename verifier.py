@@ -22,7 +22,7 @@ class Verifier:
 
         return True
 
-    def verifyMandatoryAttributes(self):
+    def verifyMandatoryAttributes(self, do_print=True):
         if not self.checkBuffer():
             return
 
@@ -46,14 +46,19 @@ class Verifier:
                             missing_attributes[key]["attributes"].append(attr_name)
 
         if len(missing_attributes):
-            print("\n\nMissing Attributes:\n")
+            printout = "\n\nMissing Attributes:\n"
 
             for me in missing_attributes.values():
                 attr_str = "\n\t" + ";\n\t".join(me["attributes"])
-                print("{} ({}) [{}]: {}\n".format(me["me_name"], me["me_id"], me["me_inst"], attr_str))
+                printout += "\n{} ({}) [{}]: {}\n".format(me["me_name"], me["me_id"], me["me_inst"], attr_str)
 
         else:
-            print("\n\nNot found missing attributes.\n")
+            printout = "\n\nNot found missing attributes.\n"
+
+        if do_print:
+            print(printout)
+        else:
+            return printout
 
     def checkAttrLength(self, val):
         count = len(val)
@@ -65,7 +70,7 @@ class Verifier:
 
         return count
 
-    def verifyEntitiesLength(self):
+    def verifyEntitiesLength(self, do_print=True):
         if not self.checkBuffer():
             return
 
@@ -91,16 +96,21 @@ class Verifier:
                 })
 
         if len(invalid_received_len):
-            print("\n\nConflicting Lengths:\n")
+            printout = "\n\nConflicting Lengths:\n"
 
             for irl in invalid_received_len:
                 expected_str = "\n\tExpected: {}\n\tReceived: {}".format(irl["expected"], irl["received"])
-                print("{} ({}) [{}]: {}\n".format(irl["me_name"], irl["me_id"], irl["me_inst"], expected_str))
+                printout += "\n{} ({}) [{}]: {}\n".format(irl["me_name"], irl["me_id"], irl["me_inst"], expected_str)
 
         else:
-            print("\n\nNot found conflicting length in MEs sent by OLT.\n")
+            printout = "\n\nNot found conflicting length in MEs sent by OLT.\n"
 
-    def verifySetWithoutPermission(self):
+        if do_print:
+            print(printout)
+        else:
+            return printout
+
+    def verifySetWithoutPermission(self, do_print=True):
         if not self.checkBuffer():
             return
 
@@ -124,12 +134,56 @@ class Verifier:
                             mes_set_without_permission[key]["attributes"].append(attr_name)
 
         if len(mes_set_without_permission):
-            print("\n\nAttributes configured without permission:\n")
+            printout = "\n\nAttributes configured without permission:\n"
 
             for me in mes_set_without_permission.values():
                 attr_str = "\n\t" + ";\n\t".join(me["attributes"])
-                print("{} ({}) [{}]: {}\n".format(me["me_name"], me["me_id"], me["me_inst"], attr_str))
+                printout += "\n{} ({}) [{}]: {}\n".format(me["me_name"], me["me_id"], me["me_inst"], attr_str)
 
         else:
-            print("\n\nNot found configured attributes without permission.\n")
+            printout = "\n\nNot found configured attributes without permission.\n"
+
+        if do_print:
+            print(printout)
+        else:
+            return printout
+
+    def runAll(self):
+        printout = """
+#################################################
+################ Verifier Output ################
+#################################################
+"""
+
+        printout += "\n#################################################\n"
+        printout += "1) Check mandatory attributes"
+        printout += self.verifyMandatoryAttributes(do_print=False)
+        printout += "\n\n#################################################\n"
+        printout += "2) Check ME lengths"
+        printout += self.verifyEntitiesLength(do_print=False)
+        printout += "\n\n#################################################\n"
+        printout += "3) Check configured attributes without permission"
+        printout += self.verifySetWithoutPermission(do_print=False)
+
+        printout += "\n"
+        return printout
+
+    def runAllAndGenerateReport(self):
+        try:
+            while True:
+                reportfile = input("Report file name: ")
+                if reportfile != "":
+                    break
+
+            output = self.runAll()
+            with open("output/" + reportfile, "w") as f:
+                f.write(output)
+
+            print("Report generated on folder output.")
+
+        except KeyboardInterrupt:
+            return
+        except Exception as e:
+            print(str(e))
+            return
 
