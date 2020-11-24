@@ -1,0 +1,144 @@
+
+#################################################
+################ Verifier Output ################
+#################################################
+
+#################################################
+1) Check mandatory attributes
+
+Missing Attributes:
+
+PptpEthernetUni (11) [257]: 
+	Expected Type;
+	Ethernet Loopback Configuration;
+	Max Frame Size;
+	DTE or DCE
+
+PptpEthernetUni (11) [258]: 
+	Expected Type;
+	Ethernet Loopback Configuration;
+	Max Frame Size;
+	DTE or DCE
+
+PptpEthernetUni (11) [259]: 
+	Expected Type;
+	Ethernet Loopback Configuration;
+	Max Frame Size;
+	DTE or DCE
+
+PptpEthernetUni (11) [260]: 
+	Expected Type;
+	Ethernet Loopback Configuration;
+	Max Frame Size;
+	DTE or DCE
+
+Olt (131) [0]: 
+	Equipment id;
+	OLT version
+
+Tcont (262) [32768]: 
+	Policy
+
+Tcont (262) [32769]: 
+	Policy
+
+Tcont (262) [32770]: 
+	Policy
+
+Tcont (262) [32771]: 
+	Policy
+
+Ieee8021PMapperServiceProfile (130) [25]: 
+	DSCP to P-bit mapping
+
+Ieee8021PMapperServiceProfile (130) [26]: 
+	DSCP to P-bit mapping
+
+Ieee8021PMapperServiceProfile (130) [27]: 
+	DSCP to P-bit mapping
+
+Ieee8021PMapperServiceProfile (130) [28]: 
+	DSCP to P-bit mapping
+
+GemInterworkingTerminationPoint (266) [33048]: 
+	GAL loopback configuration
+
+GemInterworkingTerminationPoint (266) [33049]: 
+	GAL loopback configuration
+
+GemInterworkingTerminationPoint (266) [33050]: 
+	GAL loopback configuration
+
+GemInterworkingTerminationPoint (266) [33051]: 
+	GAL loopback configuration
+
+MulticastOperationsProfile (309) [257]: 
+	Dynamic access control list table;
+	Static access control list table
+
+MulticastOperationsProfile (309) [258]: 
+	Dynamic access control list table;
+	Static access control list table
+
+MulticastOperationsProfile (309) [259]: 
+	Dynamic access control list table;
+	Static access control list table
+
+MulticastOperationsProfile (309) [260]: 
+	Dynamic access control list table;
+	Static access control list table
+
+GemInterworkingTerminationPoint (266) [36861]: 
+	GAL loopback configuration
+
+MulticastGemInterworkingTerminationPoint (281) [36863]: 
+	Multicast address table
+
+
+#################################################
+2) Check ME lengths
+
+Conflicting Lengths:
+
+VlanTaggingFilterData (84) [1]: 
+	Expected: 26
+	Received: 5
+
+VlanTaggingFilterData (84) [2]: 
+	Expected: 26
+	Received: 5
+
+VlanTaggingFilterData (84) [3]: 
+	Expected: 26
+	Received: 5
+
+VlanTaggingFilterData (84) [4]: 
+	Expected: 26
+	Received: 5
+
+
+#################################################
+3) Check configured attributes without permission
+
+Attributes configured without permission:
+
+EthernetPerformanceMonitoringHistoryData4 (255) [32769]: 
+	threshold_data_1_2_id;
+	association_type
+
+EthernetPerformanceMonitoringHistoryData4 (255) [257]: 
+	threshold_data_1_2_id;
+	association_type
+
+EthernetPerformanceMonitoringHistoryData4 (255) [258]: 
+	threshold_data_1_2_id;
+	association_type
+
+EthernetPerformanceMonitoringHistoryData4 (255) [259]: 
+	threshold_data_1_2_id;
+	association_type
+
+EthernetPerformanceMonitoringHistoryData4 (255) [260]: 
+	threshold_data_1_2_id;
+	association_type
+

@@ -1,0 +1,76 @@
+
+#################################################
+################ Verifier Output ################
+#################################################
+
+#################################################
+1) Check mandatory attributes
+
+Missing Attributes:
+
+PptpEthernetUni (11) [257]: 
+	Expected Type;
+	Ethernet Loopback Configuration;
+	Max Frame Size;
+	DTE or DCE
+
+Olt (131) [0]: 
+	Equipment id;
+	OLT version
+
+Tcont (262) [32768]: 
+	Policy
+
+Tcont (262) [32769]: 
+	Policy
+
+Ieee8021PMapperServiceProfile (130) [25]: 
+	DSCP to P-bit mapping
+
+Ieee8021PMapperServiceProfile (130) [26]: 
+	DSCP to P-bit mapping
+
+GemInterworkingTerminationPoint (266) [33024]: 
+	GAL loopback configuration
+
+GemInterworkingTerminationPoint (266) [33025]: 
+	GAL loopback configuration
+
+MulticastOperationsProfile (309) [257]: 
+	Dynamic access control list table;
+	Static access control list table
+
+GemInterworkingTerminationPoint (266) [36861]: 
+	GAL loopback configuration
+
+MulticastGemInterworkingTerminationPoint (281) [36863]: 
+	Multicast address table
+
+
+#################################################
+2) Check ME lengths
+
+Conflicting Lengths:
+
+VlanTaggingFilterData (84) [1]: 
+	Expected: 26
+	Received: 5
+
+VlanTaggingFilterData (84) [2]: 
+	Expected: 26
+	Received: 5
+
+
+#################################################
+3) Check configured attributes without permission
+
+Attributes configured without permission:
+
+EthernetPerformanceMonitoringHistoryData4 (255) [32769]: 
+	threshold_data_1_2_id;
+	association_type
+
+EthernetPerformanceMonitoringHistoryData4 (255) [257]: 
+	threshold_data_1_2_id;
+	association_type
+

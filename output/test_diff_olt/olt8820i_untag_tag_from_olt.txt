@@ -1,0 +1,62 @@
+
+#################################################
+################ Verifier Output ################
+#################################################
+
+#################################################
+1) Check mandatory attributes
+
+Missing Attributes:
+
+Tcont (262) [32768]: 
+	Policy
+
+GemInterworkingTerminationPoint (266) [257]: 
+	GAL loopback configuration
+
+MulticastGemInterworkingTerminationPoint (281) [4094]: 
+	Multicast address table
+
+Tcont (262) [32769]: 
+	Policy
+
+GemInterworkingTerminationPoint (266) [262]: 
+	GAL loopback configuration
+
+
+#################################################
+2) Check ME lengths
+
+Conflicting Lengths:
+
+VlanTaggingFilterData (84) [257]: 
+	Expected: 26
+	Received: 5
+
+VlanTaggingFilterData (84) [8]: 
+	Expected: 26
+	Received: 5
+
+VlanTaggingFilterData (84) [262]: 
+	Expected: 26
+	Received: 7
+
+VlanTaggingFilterData (84) [8]: 
+	Expected: 26
+	Received: 7
+
+
+#################################################
+3) Check configured attributes without permission
+
+Attributes configured without permission:
+
+GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [4094]: 
+	Interval end time
+
+GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [257]: 
+	Interval end time
+
+GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [262]: 
+	Interval end time
+
