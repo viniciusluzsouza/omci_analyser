@@ -3185,8 +3185,8 @@ class LoidAuthentication(ManagedEntity):
 
 
 class Default(ManagedEntity):
-    def __init__(self, instance):
-        ManagedEntity.__init__(self, 999999, instance)
+    def __init__(self, me_id, instance):
+        ManagedEntity.__init__(self, me_id, instance)
         self.name = "Default"
         self.imp_link = []
         self.not_identified = MeAttribute("Not_identified", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
@@ -3413,4 +3413,4 @@ class MeTranslate:
         elif me == 65530:
             return LoidAuthentication(inst)
         else:
-            return Default(inst)
+            return Default(me, inst)

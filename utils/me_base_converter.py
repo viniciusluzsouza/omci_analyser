@@ -266,11 +266,18 @@ for match in me_block_pattern.finditer(text):
     mes[me_id_int] = classname
 
     line = """
-class {}(ManagedEntity):
-    def __init__(self, instance):
+class {}(ManagedEntity):""".format(classname)
+
+    if me_id == '999999':
+        line += """\n    def __init__(self, me_id, instance):
+        ManagedEntity.__init__(self, me_id, instance)
+        self.name = \"{}\"
+        self.imp_link = {}\n""".format(classname, imp_link)
+    else:
+        line += """\n    def __init__(self, instance):
         ManagedEntity.__init__(self, {}, instance)
         self.name = \"{}\"
-        self.imp_link = {}\n""".format(classname, me_id, classname, imp_link)
+        self.imp_link = {}\n""".format(me_id, classname, imp_link)
 
     for attr in attributes:
         set_by_create = "True" if "true" in attr['setbycreate'].lower() else "False"
@@ -353,13 +360,15 @@ mes_translate = """
 class MeTranslate:
     @staticmethod
     def getInstance(me, inst):"""
+
 for i, mk in enumerate(mes.keys()):
     if i == 0:
         mes_translate += "\n        if me == %d:\n            return %s(inst)" % (mk, mes[mk])
     else:
-        mes_translate += (
-                    "\n        elif me == %d:\n            return %s(inst)" % (mk, mes[mk])) if mk != 999999 else (
-                    "\n        else:\n            return %s(inst)\n" % mes[mk])
+        if mk == 999999:
+            mes_translate += "\n        else:\n            return %s(me, inst)\n" % mes[mk]
+        else:
+            mes_translate += "\n        elif me == %d:\n            return %s(inst)" % (mk, mes[mk])
 
 me_dict += "    }\n"
 me_class = "class ManagedEntity:\n"
