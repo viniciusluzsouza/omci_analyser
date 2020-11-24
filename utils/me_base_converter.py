@@ -352,13 +352,14 @@ class MeAttribute:
 mes_translate = """
 class MeTranslate:
     @staticmethod
-    def getInstance(me, inst):
-        if me == 0:
-            return None"""
-for mk in mes.keys():
-    mes_translate += "\n        elif me == %d:\n            return %s(inst)" % (mk, mes[mk])
-
-mes_translate += "\n        else:\n            return None\n"
+    def getInstance(me, inst):"""
+for i, mk in enumerate(mes.keys()):
+    if i == 0:
+        mes_translate += "\n        if me == %d:\n            return %s(inst)" % (mk, mes[mk])
+    else:
+        mes_translate += (
+                    "\n        elif me == %d:\n            return %s(inst)" % (mk, mes[mk])) if mk != 999999 else (
+                    "\n        else:\n            return %s(inst)\n" % mes[mk])
 
 me_dict += "    }\n"
 me_class = "class ManagedEntity:\n"

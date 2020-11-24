@@ -208,7 +208,7 @@
 	{attname="Video Upper Optical Threshold", length=1, setbycreate=false, mandatory=false, perm=rw }},
  
 [130] = { me_class_name = "IEEE 8021P Mapper Service Profile",
-	{attname="TP Pointer", length=2,  setbycreate=true, mandatory=true },
+	{attname="TP Pointer", length=2,  setbycreate=true, mandatory=true, perm=rw },
 	{attname="Interwork TP pointer for P-bit priority 0", length=2, setbycreate=true, mandatory=true, perm=rw },
 	{attname="Interwork TP pointer for P-bit priority 1", length=2, setbycreate=true, mandatory=true, perm=rw },
 	{attname="Interwork TP pointer for P-bit priority 2", length=2, setbycreate=true, mandatory=true, perm=rw },

@@ -926,8 +926,34 @@ class Ieee8021PMapperServiceProfile(ManagedEntity):
         ManagedEntity.__init__(self, 130, instance)
         self.name = "Ieee8021PMapperServiceProfile"
         self.imp_link = []
+        self.tp_pointer = MeAttribute("TP Pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.interwork_tp_pointer_for_p_bit_priority_0 = MeAttribute("Interwork TP pointer for P-bit priority 0", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.interwork_tp_pointer_for_p_bit_priority_1 = MeAttribute("Interwork TP pointer for P-bit priority 1", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.interwork_tp_pointer_for_p_bit_priority_2 = MeAttribute("Interwork TP pointer for P-bit priority 2", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.interwork_tp_pointer_for_p_bit_priority_3 = MeAttribute("Interwork TP pointer for P-bit priority 3", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.interwork_tp_pointer_for_p_bit_priority_4 = MeAttribute("Interwork TP pointer for P-bit priority 4", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.interwork_tp_pointer_for_p_bit_priority_5 = MeAttribute("Interwork TP pointer for P-bit priority 5", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.interwork_tp_pointer_for_p_bit_priority_6 = MeAttribute("Interwork TP pointer for P-bit priority 6", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.interwork_tp_pointer_for_p_bit_priority_7 = MeAttribute("Interwork TP pointer for P-bit priority 7", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.unmarked_frame_option = MeAttribute("Unmarked frame option", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.dscp_to_p_bit_mapping = MeAttribute("DSCP to P-bit mapping", 24, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.default_p_bit_marking = MeAttribute("Default P-bit marking", 1, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.tp_type = MeAttribute("TP Type", 1, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
+            self.tp_pointer,
+            self.interwork_tp_pointer_for_p_bit_priority_0,
+            self.interwork_tp_pointer_for_p_bit_priority_1,
+            self.interwork_tp_pointer_for_p_bit_priority_2,
+            self.interwork_tp_pointer_for_p_bit_priority_3,
+            self.interwork_tp_pointer_for_p_bit_priority_4,
+            self.interwork_tp_pointer_for_p_bit_priority_5,
+            self.interwork_tp_pointer_for_p_bit_priority_6,
+            self.interwork_tp_pointer_for_p_bit_priority_7,
+            self.unmarked_frame_option,
+            self.dscp_to_p_bit_mapping,
+            self.default_p_bit_marking,
+            self.tp_type,
         )
 
     def getImplicitlyLinked(self):
@@ -3208,9 +3234,7 @@ class Default(ManagedEntity):
 class MeTranslate:
     @staticmethod
     def getInstance(me, inst):
-        if me == 0:
-            return None
-        elif me == 2:
+        if me == 2:
             return OntData(inst)
         elif me == 4:
             return PonIfLineCard(inst)
@@ -3388,7 +3412,5 @@ class MeTranslate:
             return OnuCapability(inst)
         elif me == 65530:
             return LoidAuthentication(inst)
-        elif me == 999999:
-            return Default(inst)
         else:
-            return None
+            return Default(inst)
