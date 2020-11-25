@@ -296,7 +296,7 @@ def runCapture(interface, output, orig):
         print(str(e))
         return
     finally:
-        cap.close()
+        cap.closeSock()
 
     if cap.hasCapture():
         if orig.startswith('/'):

@@ -3,6 +3,9 @@ import re
 SET_POINTERS_METHOD = "    def setPointers(self):"
 # pointer_rule="1-11,2-14,3-130,4-134|347,5-266,6-281,7-98,8-117,9-286,11-329,12-162,13-419" },
 mes_specific_methods = {
+    24: SET_POINTERS_METHOD + """
+        self.threshold_data_id_pointer.setPointer([273, 274])\n""",
+
     47: SET_POINTERS_METHOD + """
         tp_type = self.tp_type.getValue()
         tp_type = int.from_bytes(tp_type, 'big') if tp_type is not None else None
@@ -37,8 +40,17 @@ mes_specific_methods = {
         self.outbound_td_pointer.setPointer([280])
         self.inbound_td_pointer.setPointer([280])\n""",
 
+    51: SET_POINTERS_METHOD + """
+        self.threshold_data_id_pointer.setPointer([273])\n""",
+
+    52: SET_POINTERS_METHOD + """
+        self.threshold_data_id_pointer.setPointer([273])\n""",
+
     58: SET_POINTERS_METHOD + """
         self.network_specific_extensions_pointer.setPointer([137])\n""",
+
+    89: SET_POINTERS_METHOD + """
+        self.threshold_data_id_pointer.setPointer([273])\n""",
 
     130: SET_POINTERS_METHOD + """
         tp_type = self.tp_type.getValue()
@@ -97,10 +109,15 @@ mes_specific_methods = {
         self.proxy_server_address_pointer.setPointer([157])
         self.outbound_proxy_address_pointer.setPointer([157])
         self.tcp_udp_pointer.setPointer([136])
+        self.host_part_uri_pointer.setPointer([157])
+        self.sip_registrar_pointer.setPointer([137])
         self.redundant_sip_agent_pointer.setPointer([150])\n""",
 
     153: SET_POINTERS_METHOD + """
         self.sip_agent_pointer.setPointer([150])
+        self.user_part_aor_pointer.setPointer([157])
+        self.username_and_password_pointer.setPointer([148])
+        self.voicemail_server_sip_uri_pointer.setPointer([137])
         self.network_dial_plan_pointer.setPointer([145])
         self.application_services_profile_pointer.setPointer([146])
         self.feature_code_pointer.setPointer([147])
@@ -169,11 +186,20 @@ mes_specific_methods = {
         self.gem_port_network_ctp_connectivity_pointer.setPointer([268])
         self.interworking_termination_point_pointer.setPointer([11, 268, 12])\n""",
 
+    267: SET_POINTERS_METHOD + """
+        self.threshold_data_id_pointer.setPointer([273])\n""",
+
     268: SET_POINTERS_METHOD + """
         self.t_cont_pointer.setPointer([262])
         self.traffic_management_pointer_for_upstream.setPointer([277, 262])
         self.traffic_descriptor_profile_pointer.setPointer([280])
         self.priority_queue_pointer_for_downstream.setPointer([277])\n""",
+
+    275: SET_POINTERS_METHOD + """
+        self.threshold_data_id_pointer.setPointer([273])\n""",
+
+    276: SET_POINTERS_METHOD + """
+        self.threshold_data_id_pointer.setPointer([273])\n""",
 
     277: SET_POINTERS_METHOD + """
         self.traffic_scheduler_g_pointer.setPointer([278])\n""",
@@ -216,16 +242,34 @@ mes_specific_methods = {
         self.gem_port_network_ctp_connectivity_pointer.setPointer([268])
         self.interworking_termination_point_pointer.setPointer([11, 268, 12])\n""",
 
+    296: SET_POINTERS_METHOD + """
+        self.threshold_data_id_pointer.setPointer([273])\n""",
+
     310: SET_POINTERS_METHOD + """
         self.multicast_operations_profile_pointer.setPointer([309])\n""",
+
+    312: SET_POINTERS_METHOD + """
+        self.threshold_data_id_pointer.setPointer([273])\n""",
 
     318: SET_POINTERS_METHOD + """
         self.local_file_name_pointer.setPointer([157])
         self.network_address_pointer.setPointer([137])
         self.gem_iwtp_pointer.setPointer([266])\n""",
 
+    321: SET_POINTERS_METHOD + """
+        self.threshold_data_id_pointer.setPointer([273])\n""",
+
+    322: SET_POINTERS_METHOD + """
+        self.threshold_data_id_pointer.setPointer([273])\n""",
+
     329: SET_POINTERS_METHOD + """
         self.multicast_operations_profile_pointer.setPointer([136])\n""",
+
+    340: SET_POINTERS_METHOD + """
+        self.acs_network_address_pointer.setPointer([137])\n""",
+
+    341: SET_POINTERS_METHOD + """
+        self.threshold_data_id_pointer.setPointer([273])\n""",
 
 }
 

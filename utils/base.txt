@@ -60,7 +60,7 @@
 
 [24] = { me_class_name = "Ethernet PM History Data", imp_link=(11),
 	{ attname="Interval End Time", length=1, setbycreate=false, mandatory=true, perm=r }, -- 1
-	{ attname="Threshold Data Id", length=2, setbycreate=true, mandatory=true, perm=rw }, --2
+	{ attname="Threshold Data Id pointer", length=2, setbycreate=true, mandatory=true, perm=rw }, --2
 	{ attname="FCS errors Drop events", length=4, setbycreate=false, mandatory=true, perm=r }, -- 3
 	{ attname="Excessive Collision Counter", length=4, setbycreate=false, mandatory=true, perm=r }, -- 4
 	{ attname="Late Collision Counter", length=4, setbycreate=false, mandatory=true, perm=r }, -- 5
@@ -118,12 +118,12 @@
 
 [51] = { me_class_name = "MAC Bridge PM History Data", imp_link=(45),
 	{ attname="Interval end time", length=1, setbycreate=false, mandatory=true, perm=r },
-	{ attname="Threshold data id", length=2, setbycreate=true, mandatory=true, perm=rw },
+	{ attname="Threshold data id pointer", length=2, setbycreate=true, mandatory=true, perm=rw },
 	{ attname="Bridge learning entry discard count", length=4, setbycreate=false, mandatory=true, perm=r }},
 
 [52] = { me_class_name = "MAC Bridge Port PM History Data", imp_link=(47),
 	{ attname="Interval end time", length=1, setbycreate=false, mandatory=true, perm=r },
-	{ attname="Threshold data id", length=2, setbycreate=true, mandatory=true, perm=rw },
+	{ attname="Threshold data id pointer", length=2, setbycreate=true, mandatory=true, perm=rw },
 	{ attname="Forwarded frame counter", length=4, setbycreate=false, mandatory=true, perm=r },	
 	{ attname="Delay exceeded discard counter", length=4, setbycreate=false, mandatory=true, perm=r },	
 	{ attname="MTU exceeded discard counter", length=4, setbycreate=false, mandatory=true, perm=r },	
@@ -186,7 +186,7 @@
 
 [89] = { me_class_name = "Ethernet PM History Data 2", imp_link=(11),
 	{ attname="Interval end time", length=1, setbycreate=false, mandatory=true, perm=r },
-	{ attname="Threshold data id", length=2, setbycreate=true, mandatory=true, perm=rw },
+	{ attname="Threshold data id pointer", length=2, setbycreate=true, mandatory=true, perm=rw },
 	{ attname="PPPoE filtered frame counter", length=4, setbycreate=false, mandatory=true, perm=r }},
 	
 [90] = { me_class_name = "PPTP Video ANI",
@@ -347,9 +347,9 @@
 	{ attname="TCP UDP pointer", length=2, setbycreate=false, mandatory=true, perm=rw },
 	{ attname="SIP reg exp time", length=4, setbycreate=false, mandatory=true, perm=rw },
 	{ attname="SIP rereg head start time", length=4, setbycreate=false, mandatory=true, perm=rw },
-	{ attname="Host part URI", length=2, setbycreate=true, mandatory=true, perm=rw },
+	{ attname="Host part URI pointer", length=2, setbycreate=true, mandatory=true, perm=rw },
 	{ attname="SIP status", length=1, setbycreate=false, mandatory=true, perm=r },
-	{ attname="SIP registrar", length=2, setbycreate=true, mandatory=true, perm=rw },
+	{ attname="SIP registrar pointer", length=2, setbycreate=true, mandatory=true, perm=rw },
 	{ attname="Softswitch", length=4, setbycreate=true, mandatory=true, perm=rw },
 	{ attname="SIP response table", length=5, setbycreate=false, mandatory=false, perm=rw },
 	{ attname="SIP option transmit control", length=1, setbycreate=true, mandatory=false, perm=rw },
@@ -359,10 +359,10 @@
 -- ADD by Maycon at 2020-05-07	
 [153] = { me_class_name = "SIP user data",
 	{ attname="SIP agent pointer", length=2, setbycreate=true, mandatory=true, perm=rw }, -- 1
-	{ attname="User part AOR", length=2, setbycreate=true, mandatory=true, perm=rw }, -- 2
+	{ attname="User part AOR pointer", length=2, setbycreate=true, mandatory=true, perm=rw }, -- 2
 	{ attname="SIP display name", length=25, setbycreate=false, mandatory=true, perm=rw }, -- 3
-	{ attname="Username and password", length=2, setbycreate=true, mandatory=true, perm=rw }, -- 4
-	{ attname="Voicemail server SIP URI", length=2, setbycreate=true, mandatory=true, perm=rw }, -- 5
+	{ attname="Username and password pointer", length=2, setbycreate=true, mandatory=true, perm=rw }, -- 4
+	{ attname="Voicemail server SIP URI pointer", length=2, setbycreate=true, mandatory=true, perm=rw }, -- 5
 	{ attname="Voicemail subscription expiration time", length=4, setbycreate=true, mandatory=true, perm=rw }, -- 6
 	{ attname="Network dial plan pointer", length=2, setbycreate=true, mandatory=true, perm=rw }, -- 7
 	{ attname="Application services profile pointer", length=2, setbycreate=true, mandatory=true, perm=rw }, -- 8
@@ -500,7 +500,7 @@
 
 [267] = { me_class_name = "GEM Port PM History Data", imp_link=(268),
 	{ attname="Interval end time", length=1, setbycreate=false, mandatory=true, perm=r },
-	{ attname="Threshold data id", length=2, setbycreate=true, mandatory=true, perm=rw },
+	{ attname="Threshold data id pointer", length=2, setbycreate=true, mandatory=true, perm=rw },
 	{ attname="Lost packets", length=4, setbycreate=false, mandatory=true, perm=r },
 	{ attname="Misinserted packets", length=4, setbycreate=false, mandatory=true, perm=r },
 	{ attname="Received packets", length=5, setbycreate=false, mandatory=true, perm=r },
@@ -545,14 +545,14 @@
 
 [275] = { me_class_name = "GAL TDM PM History Data",
 	{ attname="Interval end time", length=1, setbycreate=false, mandatory=true, perm=r },
-	{ attname="Threshold data id", length=2, setbycreate=true, mandatory=true, perm=rw },
+	{ attname="Threshold data id pointer", length=2, setbycreate=true, mandatory=true, perm=rw },
 	{ attname="GEM frame loss", length=4, setbycreate=false, mandatory=true, perm=r },
 	{ attname="Buffer underflows", length=4, setbycreate=false, mandatory=true, perm=r },
 	{ attname="Buffer overflows", length=4, setbycreate=false, mandatory=true, perm=r }},
 
 [276] = { me_class_name = "GAL Ethernet PM History Data", imp_link=(266, 281),
 	{ attname="Interval end time", length=1, setbycreate=false, mandatory=true, perm=r },
-	{ attname="Threshold data id", length=2, setbycreate=true, mandatory=true, perm=rw },
+	{ attname="Threshold data id pointer", length=2, setbycreate=true, mandatory=true, perm=rw },
 	{ attname="Discarded frames", length=4, setbycreate=false, mandatory=true, perm=r }},
 
 [277] = { me_class_name = "Priority queue-G",
@@ -626,7 +626,7 @@
 
 [296] = { me_class_name = "Ethernet PM History Data 3", imp_link=(11),
 	{ attname="Interval End Time", length=1, setbycreate=false, mandatory=true, perm=r },
-	{ attname="Threshold Data Id", length=2, setbycreate=true, mandatory=true, perm=rw },
+	{ attname="Threshold Data Id pointer", length=2, setbycreate=true, mandatory=true, perm=rw },
 	{ attname="Drop events", length=4, setbycreate=false, mandatory=true, perm=r },
 	{ attname="Octets", length=4, setbycreate=false, mandatory=true, perm=r },
 	{ attname="Packets", length=4, setbycreate=false, mandatory=true, perm=r },
@@ -685,7 +685,7 @@
 
 [312] = { me_class_name = "FEC PM History Data", imp_link=(263),
 	{ attname="Interval end time", length=1, setbycreate=false, mandatory=true, perm=r },
-	{ attname="Threshold data id", length=2, setbycreate=true, mandatory=true, perm=rw },
+	{ attname="Threshold data id pointer", length=2, setbycreate=true, mandatory=true, perm=rw },
 	{ attname="Corrected bytes", length=4, setbycreate=false, mandatory=true, perm=r },
 	{ attname="Corrected code words", length=4, setbycreate=false, mandatory=true, perm=r },
 	{ attname="Uncorrectable code words", length=4, setbycreate=false, mandatory=true, perm=r },
@@ -709,7 +709,7 @@
 
 [321] = { me_class_name = "Ethernet Frame PM History Data DS",
 	{ attname="Interval End Time", length=1, setbycreate=false, mandatory=true, perm=r },
-	{ attname="Threshold Data Id", length=2, setbycreate=true, mandatory=true, perm=rw },
+	{ attname="Threshold Data Id pointer", length=2, setbycreate=true, mandatory=true, perm=rw },
 	{ attname="Drop events", length=4, setbycreate=false, mandatory=true, perm=r },
 	{ attname="Octets", length=4, setbycreate=false, mandatory=true, perm=r },
 	{ attname="Packets", length=4, setbycreate=false, mandatory=true, perm=r },
@@ -727,7 +727,7 @@
 
 [322] = { me_class_name = "Ethernet Frame PM History Data US", imp_link=(47),
 	{ attname="Interval End Time", length=1, setbycreate=false, mandatory=true, perm=r },
-	{ attname="Threshold Data Id", length=2, setbycreate=true, mandatory=true, perm=rw },
+	{ attname="Threshold Data Id pointer", length=2, setbycreate=true, mandatory=true, perm=rw },
 	{ attname="Drop events", length=4, setbycreate=false, mandatory=true, perm=r },
 	{ attname="Octets", length=4, setbycreate=false, mandatory=true, perm=r },
 	{ attname="Packets", length=4, setbycreate=false, mandatory=true, perm=r },
@@ -754,13 +754,13 @@
 -- ADD by Maycon at 2020-05-07	
 [340] = { me_class_name = "BBF TR-069 management server",	
 	{ attname="Administrative state", length=1, setbycreate=false, mandatory=true, perm=rw },
-	{ attname="ACS network address", length=2, setbycreate=false, mandatory=true, perm=rw },
+	{ attname="ACS network address pointer", length=2, setbycreate=false, mandatory=true, perm=rw },
 	{ attname="Associated tag", length=2, setbycreate=false, mandatory=true, perm=rw }},
 
 -- ADD by Maycon at 2020-05-08	
 [341] = { me_class_name = "GEM port network CTP performance monitoring history data", imp_link=(268),
 	{ attname="Interval end time", length=1, setbycreate=true, mandatory=true, perm=r }, -- 1
-	{ attname="Threshold data ID", length=2, setbycreate=true, mandatory=true, perm=rw }, -- 2
+	{ attname="Threshold data ID pointer", length=2, setbycreate=true, mandatory=true, perm=rw }, -- 2
 	{ attname="Transmitted GEM frames", length=4, setbycreate=false, mandatory=true, perm=r }, -- 3
 	{ attname="Received GEM frames", length=4, setbycreate=false, mandatory=true, perm=r }, -- 4
 	{ attname="Received payload bytes", length=8, setbycreate=false, mandatory=true, perm=r }, -- 5

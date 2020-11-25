@@ -412,7 +412,7 @@ class EthernetPmHistoryData(ManagedEntity):
         self.name = "EthernetPmHistoryData"
         self.imp_link = [11]
         self.interval_end_time = MeAttribute("Interval End Time", 1, False, True, MeAttribute.READ_PERMISSION, None)
-        self.threshold_data_id = MeAttribute("Threshold Data Id", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_data_id_pointer = MeAttribute("Threshold Data Id pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
         self.fcs_errors_drop_events = MeAttribute("FCS errors Drop events", 4, False, True, MeAttribute.READ_PERMISSION, None)
         self.excessive_collision_counter = MeAttribute("Excessive Collision Counter", 4, False, True, MeAttribute.READ_PERMISSION, None)
         self.late_collision_counter = MeAttribute("Late Collision Counter", 4, False, True, MeAttribute.READ_PERMISSION, None)
@@ -430,7 +430,7 @@ class EthernetPmHistoryData(ManagedEntity):
 
         self.attributes = (
             self.interval_end_time,
-            self.threshold_data_id,
+            self.threshold_data_id_pointer,
             self.fcs_errors_drop_events,
             self.excessive_collision_counter,
             self.late_collision_counter,
@@ -451,7 +451,7 @@ class EthernetPmHistoryData(ManagedEntity):
         return self.imp_link
 
     def setPointers(self):
-        pass
+        self.threshold_data_id_pointer.setPointer([273, 274])
 
 
 class PonPhysicalPathTerminationPoint(ManagedEntity):
@@ -639,12 +639,12 @@ class MacBridgePmHistoryData(ManagedEntity):
         self.name = "MacBridgePmHistoryData"
         self.imp_link = [45]
         self.interval_end_time = MeAttribute("Interval end time", 1, False, True, MeAttribute.READ_PERMISSION, None)
-        self.threshold_data_id = MeAttribute("Threshold data id", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_data_id_pointer = MeAttribute("Threshold data id pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
         self.bridge_learning_entry_discard_count = MeAttribute("Bridge learning entry discard count", 4, False, True, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.interval_end_time,
-            self.threshold_data_id,
+            self.threshold_data_id_pointer,
             self.bridge_learning_entry_discard_count,
         )
 
@@ -652,7 +652,7 @@ class MacBridgePmHistoryData(ManagedEntity):
         return self.imp_link
 
     def setPointers(self):
-        pass
+        self.threshold_data_id_pointer.setPointer([273])
 
 
 class MacBridgePortPmHistoryData(ManagedEntity):
@@ -661,7 +661,7 @@ class MacBridgePortPmHistoryData(ManagedEntity):
         self.name = "MacBridgePortPmHistoryData"
         self.imp_link = [47]
         self.interval_end_time = MeAttribute("Interval end time", 1, False, True, MeAttribute.READ_PERMISSION, None)
-        self.threshold_data_id = MeAttribute("Threshold data id", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_data_id_pointer = MeAttribute("Threshold data id pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
         self.forwarded_frame_counter = MeAttribute("Forwarded frame counter", 4, False, True, MeAttribute.READ_PERMISSION, None)
         self.delay_exceeded_discard_counter = MeAttribute("Delay exceeded discard counter", 4, False, True, MeAttribute.READ_PERMISSION, None)
         self.mtu_exceeded_discard_counter = MeAttribute("MTU exceeded discard counter", 4, False, True, MeAttribute.READ_PERMISSION, None)
@@ -670,7 +670,7 @@ class MacBridgePortPmHistoryData(ManagedEntity):
 
         self.attributes = (
             self.interval_end_time,
-            self.threshold_data_id,
+            self.threshold_data_id_pointer,
             self.forwarded_frame_counter,
             self.delay_exceeded_discard_counter,
             self.mtu_exceeded_discard_counter,
@@ -682,7 +682,7 @@ class MacBridgePortPmHistoryData(ManagedEntity):
         return self.imp_link
 
     def setPointers(self):
-        pass
+        self.threshold_data_id_pointer.setPointer([273])
 
 
 class PhysicalPathTerminationPointPotsUni(ManagedEntity):
@@ -857,12 +857,12 @@ class EthernetPmHistoryData2(ManagedEntity):
         self.name = "EthernetPmHistoryData2"
         self.imp_link = [11]
         self.interval_end_time = MeAttribute("Interval end time", 1, False, True, MeAttribute.READ_PERMISSION, None)
-        self.threshold_data_id = MeAttribute("Threshold data id", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_data_id_pointer = MeAttribute("Threshold data id pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
         self.pppoe_filtered_frame_counter = MeAttribute("PPPoE filtered frame counter", 4, False, True, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.interval_end_time,
-            self.threshold_data_id,
+            self.threshold_data_id_pointer,
             self.pppoe_filtered_frame_counter,
         )
 
@@ -870,7 +870,7 @@ class EthernetPmHistoryData2(ManagedEntity):
         return self.imp_link
 
     def setPointers(self):
-        pass
+        self.threshold_data_id_pointer.setPointer([273])
 
 
 class PptpVideoAni(ManagedEntity):
@@ -1353,9 +1353,9 @@ class SipAgentConfigData(ManagedEntity):
         self.tcp_udp_pointer = MeAttribute("TCP UDP pointer", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
         self.sip_reg_exp_time = MeAttribute("SIP reg exp time", 4, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
         self.sip_rereg_head_start_time = MeAttribute("SIP rereg head start time", 4, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
-        self.host_part_uri = MeAttribute("Host part URI", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.host_part_uri_pointer = MeAttribute("Host part URI pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
         self.sip_status = MeAttribute("SIP status", 1, False, True, MeAttribute.READ_PERMISSION, None)
-        self.sip_registrar = MeAttribute("SIP registrar", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.sip_registrar_pointer = MeAttribute("SIP registrar pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
         self.softswitch = MeAttribute("Softswitch", 4, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
         self.sip_response_table = MeAttribute("SIP response table", 5, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
         self.sip_option_transmit_control = MeAttribute("SIP option transmit control", 1, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
@@ -1370,9 +1370,9 @@ class SipAgentConfigData(ManagedEntity):
             self.tcp_udp_pointer,
             self.sip_reg_exp_time,
             self.sip_rereg_head_start_time,
-            self.host_part_uri,
+            self.host_part_uri_pointer,
             self.sip_status,
-            self.sip_registrar,
+            self.sip_registrar_pointer,
             self.softswitch,
             self.sip_response_table,
             self.sip_option_transmit_control,
@@ -1387,6 +1387,8 @@ class SipAgentConfigData(ManagedEntity):
         self.proxy_server_address_pointer.setPointer([157])
         self.outbound_proxy_address_pointer.setPointer([157])
         self.tcp_udp_pointer.setPointer([136])
+        self.host_part_uri_pointer.setPointer([157])
+        self.sip_registrar_pointer.setPointer([137])
         self.redundant_sip_agent_pointer.setPointer([150])
 
 
@@ -1396,10 +1398,10 @@ class SipUserData(ManagedEntity):
         self.name = "SipUserData"
         self.imp_link = []
         self.sip_agent_pointer = MeAttribute("SIP agent pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
-        self.user_part_aor = MeAttribute("User part AOR", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.user_part_aor_pointer = MeAttribute("User part AOR pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
         self.sip_display_name = MeAttribute("SIP display name", 25, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
-        self.username_and_password = MeAttribute("Username and password", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
-        self.voicemail_server_sip_uri = MeAttribute("Voicemail server SIP URI", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.username_and_password_pointer = MeAttribute("Username and password pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.voicemail_server_sip_uri_pointer = MeAttribute("Voicemail server SIP URI pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
         self.voicemail_subscription_expiration_time = MeAttribute("Voicemail subscription expiration time", 4, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
         self.network_dial_plan_pointer = MeAttribute("Network dial plan pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
         self.application_services_profile_pointer = MeAttribute("Application services profile pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
@@ -1410,10 +1412,10 @@ class SipUserData(ManagedEntity):
 
         self.attributes = (
             self.sip_agent_pointer,
-            self.user_part_aor,
+            self.user_part_aor_pointer,
             self.sip_display_name,
-            self.username_and_password,
-            self.voicemail_server_sip_uri,
+            self.username_and_password_pointer,
+            self.voicemail_server_sip_uri_pointer,
             self.voicemail_subscription_expiration_time,
             self.network_dial_plan_pointer,
             self.application_services_profile_pointer,
@@ -1428,6 +1430,9 @@ class SipUserData(ManagedEntity):
 
     def setPointers(self):
         self.sip_agent_pointer.setPointer([150])
+        self.user_part_aor_pointer.setPointer([157])
+        self.username_and_password_pointer.setPointer([148])
+        self.voicemail_server_sip_uri_pointer.setPointer([137])
         self.network_dial_plan_pointer.setPointer([145])
         self.application_services_profile_pointer.setPointer([146])
         self.feature_code_pointer.setPointer([147])
@@ -1902,7 +1907,7 @@ class GemPortPmHistoryData(ManagedEntity):
         self.name = "GemPortPmHistoryData"
         self.imp_link = [268]
         self.interval_end_time = MeAttribute("Interval end time", 1, False, True, MeAttribute.READ_PERMISSION, None)
-        self.threshold_data_id = MeAttribute("Threshold data id", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_data_id_pointer = MeAttribute("Threshold data id pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
         self.lost_packets = MeAttribute("Lost packets", 4, False, True, MeAttribute.READ_PERMISSION, None)
         self.misinserted_packets = MeAttribute("Misinserted packets", 4, False, True, MeAttribute.READ_PERMISSION, None)
         self.received_packets = MeAttribute("Received packets", 5, False, True, MeAttribute.READ_PERMISSION, None)
@@ -1913,7 +1918,7 @@ class GemPortPmHistoryData(ManagedEntity):
 
         self.attributes = (
             self.interval_end_time,
-            self.threshold_data_id,
+            self.threshold_data_id_pointer,
             self.lost_packets,
             self.misinserted_packets,
             self.received_packets,
@@ -1927,7 +1932,7 @@ class GemPortPmHistoryData(ManagedEntity):
         return self.imp_link
 
     def setPointers(self):
-        pass
+        self.threshold_data_id_pointer.setPointer([273])
 
 
 class GemPortNetworkCtp(ManagedEntity):
@@ -2067,14 +2072,14 @@ class GalTdmPmHistoryData(ManagedEntity):
         self.name = "GalTdmPmHistoryData"
         self.imp_link = []
         self.interval_end_time = MeAttribute("Interval end time", 1, False, True, MeAttribute.READ_PERMISSION, None)
-        self.threshold_data_id = MeAttribute("Threshold data id", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_data_id_pointer = MeAttribute("Threshold data id pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
         self.gem_frame_loss = MeAttribute("GEM frame loss", 4, False, True, MeAttribute.READ_PERMISSION, None)
         self.buffer_underflows = MeAttribute("Buffer underflows", 4, False, True, MeAttribute.READ_PERMISSION, None)
         self.buffer_overflows = MeAttribute("Buffer overflows", 4, False, True, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.interval_end_time,
-            self.threshold_data_id,
+            self.threshold_data_id_pointer,
             self.gem_frame_loss,
             self.buffer_underflows,
             self.buffer_overflows,
@@ -2084,7 +2089,7 @@ class GalTdmPmHistoryData(ManagedEntity):
         return self.imp_link
 
     def setPointers(self):
-        pass
+        self.threshold_data_id_pointer.setPointer([273])
 
 
 class GalEthernetPmHistoryData(ManagedEntity):
@@ -2093,12 +2098,12 @@ class GalEthernetPmHistoryData(ManagedEntity):
         self.name = "GalEthernetPmHistoryData"
         self.imp_link = [266, 281]
         self.interval_end_time = MeAttribute("Interval end time", 1, False, True, MeAttribute.READ_PERMISSION, None)
-        self.threshold_data_id = MeAttribute("Threshold data id", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_data_id_pointer = MeAttribute("Threshold data id pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
         self.discarded_frames = MeAttribute("Discarded frames", 4, False, True, MeAttribute.READ_PERMISSION, None)
 
         self.attributes = (
             self.interval_end_time,
-            self.threshold_data_id,
+            self.threshold_data_id_pointer,
             self.discarded_frames,
         )
 
@@ -2106,7 +2111,7 @@ class GalEthernetPmHistoryData(ManagedEntity):
         return self.imp_link
 
     def setPointers(self):
-        pass
+        self.threshold_data_id_pointer.setPointer([273])
 
 
 class PriorityQueue(ManagedEntity):
@@ -2364,7 +2369,7 @@ class EthernetPmHistoryData3(ManagedEntity):
         self.name = "EthernetPmHistoryData3"
         self.imp_link = [11]
         self.interval_end_time = MeAttribute("Interval End Time", 1, False, True, MeAttribute.READ_PERMISSION, None)
-        self.threshold_data_id = MeAttribute("Threshold Data Id", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_data_id_pointer = MeAttribute("Threshold Data Id pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
         self.drop_events = MeAttribute("Drop events", 4, False, True, MeAttribute.READ_PERMISSION, None)
         self.octets = MeAttribute("Octets", 4, False, True, MeAttribute.READ_PERMISSION, None)
         self.packets = MeAttribute("Packets", 4, False, True, MeAttribute.READ_PERMISSION, None)
@@ -2382,7 +2387,7 @@ class EthernetPmHistoryData3(ManagedEntity):
 
         self.attributes = (
             self.interval_end_time,
-            self.threshold_data_id,
+            self.threshold_data_id_pointer,
             self.drop_events,
             self.octets,
             self.packets,
@@ -2403,7 +2408,7 @@ class EthernetPmHistoryData3(ManagedEntity):
         return self.imp_link
 
     def setPointers(self):
-        pass
+        self.threshold_data_id_pointer.setPointer([273])
 
 
 class PortMappingPackage(ManagedEntity):
@@ -2542,7 +2547,7 @@ class FecPmHistoryData(ManagedEntity):
         self.name = "FecPmHistoryData"
         self.imp_link = [263]
         self.interval_end_time = MeAttribute("Interval end time", 1, False, True, MeAttribute.READ_PERMISSION, None)
-        self.threshold_data_id = MeAttribute("Threshold data id", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_data_id_pointer = MeAttribute("Threshold data id pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
         self.corrected_bytes = MeAttribute("Corrected bytes", 4, False, True, MeAttribute.READ_PERMISSION, None)
         self.corrected_code_words = MeAttribute("Corrected code words", 4, False, True, MeAttribute.READ_PERMISSION, None)
         self.uncorrectable_code_words = MeAttribute("Uncorrectable code words", 4, False, True, MeAttribute.READ_PERMISSION, None)
@@ -2551,7 +2556,7 @@ class FecPmHistoryData(ManagedEntity):
 
         self.attributes = (
             self.interval_end_time,
-            self.threshold_data_id,
+            self.threshold_data_id_pointer,
             self.corrected_bytes,
             self.corrected_code_words,
             self.uncorrectable_code_words,
@@ -2563,7 +2568,7 @@ class FecPmHistoryData(ManagedEntity):
         return self.imp_link
 
     def setPointers(self):
-        pass
+        self.threshold_data_id_pointer.setPointer([273])
 
 
 class FileTransferController(ManagedEntity):
@@ -2614,7 +2619,7 @@ class EthernetFramePmHistoryDataDs(ManagedEntity):
         self.name = "EthernetFramePmHistoryDataDs"
         self.imp_link = []
         self.interval_end_time = MeAttribute("Interval End Time", 1, False, True, MeAttribute.READ_PERMISSION, None)
-        self.threshold_data_id = MeAttribute("Threshold Data Id", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_data_id_pointer = MeAttribute("Threshold Data Id pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
         self.drop_events = MeAttribute("Drop events", 4, False, True, MeAttribute.READ_PERMISSION, None)
         self.octets = MeAttribute("Octets", 4, False, True, MeAttribute.READ_PERMISSION, None)
         self.packets = MeAttribute("Packets", 4, False, True, MeAttribute.READ_PERMISSION, None)
@@ -2632,7 +2637,7 @@ class EthernetFramePmHistoryDataDs(ManagedEntity):
 
         self.attributes = (
             self.interval_end_time,
-            self.threshold_data_id,
+            self.threshold_data_id_pointer,
             self.drop_events,
             self.octets,
             self.packets,
@@ -2653,7 +2658,7 @@ class EthernetFramePmHistoryDataDs(ManagedEntity):
         return self.imp_link
 
     def setPointers(self):
-        pass
+        self.threshold_data_id_pointer.setPointer([273])
 
 
 class EthernetFramePmHistoryDataUs(ManagedEntity):
@@ -2662,7 +2667,7 @@ class EthernetFramePmHistoryDataUs(ManagedEntity):
         self.name = "EthernetFramePmHistoryDataUs"
         self.imp_link = [47]
         self.interval_end_time = MeAttribute("Interval End Time", 1, False, True, MeAttribute.READ_PERMISSION, None)
-        self.threshold_data_id = MeAttribute("Threshold Data Id", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_data_id_pointer = MeAttribute("Threshold Data Id pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
         self.drop_events = MeAttribute("Drop events", 4, False, True, MeAttribute.READ_PERMISSION, None)
         self.octets = MeAttribute("Octets", 4, False, True, MeAttribute.READ_PERMISSION, None)
         self.packets = MeAttribute("Packets", 4, False, True, MeAttribute.READ_PERMISSION, None)
@@ -2680,7 +2685,7 @@ class EthernetFramePmHistoryDataUs(ManagedEntity):
 
         self.attributes = (
             self.interval_end_time,
-            self.threshold_data_id,
+            self.threshold_data_id_pointer,
             self.drop_events,
             self.octets,
             self.packets,
@@ -2701,7 +2706,7 @@ class EthernetFramePmHistoryDataUs(ManagedEntity):
         return self.imp_link
 
     def setPointers(self):
-        pass
+        self.threshold_data_id_pointer.setPointer([273])
 
 
 class VirtualEthernetInterfacePoint(ManagedEntity):
@@ -2736,12 +2741,12 @@ class BbfTr(ManagedEntity):
         self.name = "BbfTr"
         self.imp_link = []
         self.administrative_state = MeAttribute("Administrative state", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
-        self.acs_network_address = MeAttribute("ACS network address", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.acs_network_address_pointer = MeAttribute("ACS network address pointer", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
         self.associated_tag = MeAttribute("Associated tag", 2, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.administrative_state,
-            self.acs_network_address,
+            self.acs_network_address_pointer,
             self.associated_tag,
         )
 
@@ -2749,7 +2754,7 @@ class BbfTr(ManagedEntity):
         return self.imp_link
 
     def setPointers(self):
-        pass
+        self.acs_network_address_pointer.setPointer([137])
 
 
 class GemPortNetworkCtpPerformanceMonitoringHistoryData(ManagedEntity):
@@ -2758,7 +2763,7 @@ class GemPortNetworkCtpPerformanceMonitoringHistoryData(ManagedEntity):
         self.name = "GemPortNetworkCtpPerformanceMonitoringHistoryData"
         self.imp_link = [268]
         self.interval_end_time = MeAttribute("Interval end time", 1, True, True, MeAttribute.READ_PERMISSION, None)
-        self.threshold_data_id = MeAttribute("Threshold data ID", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_data_id_pointer = MeAttribute("Threshold data ID pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
         self.transmitted_gem_frames = MeAttribute("Transmitted GEM frames", 4, False, True, MeAttribute.READ_PERMISSION, None)
         self.received_gem_frames = MeAttribute("Received GEM frames", 4, False, True, MeAttribute.READ_PERMISSION, None)
         self.received_payload_bytes = MeAttribute("Received payload bytes", 8, False, True, MeAttribute.READ_PERMISSION, None)
@@ -2767,7 +2772,7 @@ class GemPortNetworkCtpPerformanceMonitoringHistoryData(ManagedEntity):
 
         self.attributes = (
             self.interval_end_time,
-            self.threshold_data_id,
+            self.threshold_data_id_pointer,
             self.transmitted_gem_frames,
             self.received_gem_frames,
             self.received_payload_bytes,
@@ -2779,7 +2784,7 @@ class GemPortNetworkCtpPerformanceMonitoringHistoryData(ManagedEntity):
         return self.imp_link
 
     def setPointers(self):
-        pass
+        self.threshold_data_id_pointer.setPointer([273])
 
 
 class PppoeIntelbrasOlt8820I110Gi(ManagedEntity):
