@@ -23,10 +23,6 @@ MulticastGemInterworkingTerminationPoint (281) [4094]:
 
 Conflicting Lengths:
 
-GemPortNetworkCtp (268) [4094]: 
-	Expected: 11
-	Received: 3
-
 GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [4094]: 
 	Expected: 3
 	Received: 2
@@ -35,41 +31,13 @@ Tcont (262) [32768]:
 	Expected: 2
 	Received: 1
 
-MacBridgeServiceProfile (45) [20]: 
-	Expected: 13
-	Received: 1
-
 GemPortNetworkCtp (268) [258]: 
 	Expected: 11
-	Received: 5
+	Received: 9
 
 GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [258]: 
 	Expected: 3
 	Received: 2
-
-GemInterworkingTerminationPoint (266) [258]: 
-	Expected: 9
-	Received: 7
-
-MulticastGemInterworkingTerminationPoint (281) [4094]: 
-	Expected: 10
-	Received: 7
-
-MacBridgePortConfigurationData (47) [258]: 
-	Expected: 13
-	Received: 8
-
-MacBridgePortConfigurationData (47) [20]: 
-	Expected: 13
-	Received: 8
-
-MacBridgePortConfigurationData (47) [28]: 
-	Expected: 13
-	Received: 8
-
-ExtendedVlanTaggingOperationConfigurationData (171) [1025]: 
-	Expected: 24
-	Received: 19
 
 VlanTaggingFilterData (84) [258]: 
 	Expected: 26

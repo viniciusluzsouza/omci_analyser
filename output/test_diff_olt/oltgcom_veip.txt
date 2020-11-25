@@ -61,165 +61,33 @@ MulticastGemInterworkingTerminationPoint (281) [36863]:
 
 Conflicting Lengths:
 
-PptpEthernetUni (11) [257]: 
-	Expected: 2
-	Received: 1
-
-PptpEthernetUni (11) [258]: 
-	Expected: 2
-	Received: 1
-
-PptpEthernetUni (11) [259]: 
-	Expected: 2
-	Received: 1
-
-PptpEthernetUni (11) [260]: 
-	Expected: 2
-	Received: 1
-
 Tcont (262) [32768]: 
 	Expected: 2
 	Received: 1
 
 GemPortNetworkCtp (268) [33048]: 
 	Expected: 11
-	Received: 5
+	Received: 9
 
 MacBridgeServiceProfile (45) [33536]: 
 	Expected: 13
-	Received: 6
-
-Ieee8021PMapperServiceProfile (130) [25]: 
-	Expected: 21
-	Received: 19
+	Received: 10
 
 MacBridgePortConfigurationData (47) [1]: 
 	Expected: 13
-	Received: 7
+	Received: 12
 
 VlanTaggingFilterData (84) [1]: 
 	Expected: 26
 	Received: 4
 
-GemInterworkingTerminationPoint (266) [33048]: 
-	Expected: 9
-	Received: 7
-
 MacBridgePortConfigurationData (47) [281]: 
 	Expected: 13
-	Received: 7
+	Received: 12
 
 ExtendedVlanTaggingOperationConfigurationData (171) [1025]: 
 	Expected: 24
-	Received: 21
-
-MulticastOperationsProfile (309) [281]: 
-	Expected: 23
-	Received: 10
-
-MulticastSubscriberConfigInfo (310) [281]: 
-	Expected: 10
-	Received: 2
-
-MulticastSubscriberMonitor (311) [281]: 
-	Expected: 1
-	Received: 0
-
-GemPortNetworkCtp (268) [36861]: 
-	Expected: 11
-	Received: 3
-
-GemInterworkingTerminationPoint (266) [36861]: 
-	Expected: 9
-	Received: 3
-
-GemPortNetworkCtp (268) [36863]: 
-	Expected: 11
-	Received: 3
-
-MulticastGemInterworkingTerminationPoint (281) [36863]: 
-	Expected: 10
-	Received: 2
-
-EthernetPerformanceMonitoringHistoryData4 (255) [32769]: 
-	Expected: 3
-	Received: 1
-
-EthernetPerformanceMonitoringHistoryData4 (255) [257]: 
-	Expected: 3
-	Received: 0
-
-EthernetPerformanceMonitoringHistoryData4 (255) [258]: 
-	Expected: 3
-	Received: 0
-
-EthernetPerformanceMonitoringHistoryData4 (255) [259]: 
-	Expected: 3
-	Received: 0
-
-EthernetPerformanceMonitoringHistoryData4 (255) [260]: 
-	Expected: 3
-	Received: 0
-
-EthernetPmHistoryData (24) [257]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData2 (89) [257]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData3 (296) [257]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData (24) [258]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData2 (89) [258]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData3 (296) [258]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData (24) [259]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData2 (89) [259]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData3 (296) [259]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData (24) [260]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData2 (89) [260]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData3 (296) [260]: 
-	Expected: 2
-	Received: 0
-
-GemPortPmHistoryData (267) [36861]: 
-	Expected: 2
-	Received: 0
-
-GemPortPmHistoryData (267) [36863]: 
-	Expected: 2
-	Received: 0
-
-GemPortPmHistoryData (267) [33048]: 
-	Expected: 2
-	Received: 0
+	Received: 22
 
 
 #################################################

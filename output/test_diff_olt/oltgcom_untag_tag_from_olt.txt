@@ -52,45 +52,25 @@ MulticastGemInterworkingTerminationPoint (281) [36863]:
 
 Conflicting Lengths:
 
-PptpEthernetUni (11) [257]: 
-	Expected: 2
-	Received: 1
-
 Tcont (262) [32768]: 
 	Expected: 2
 	Received: 1
 
 GemPortNetworkCtp (268) [33024]: 
 	Expected: 11
-	Received: 4
-
-GemPortNetworkCtp (268) [33025]: 
-	Expected: 11
-	Received: 7
+	Received: 8
 
 MacBridgeServiceProfile (45) [1]: 
 	Expected: 13
-	Received: 6
+	Received: 10
 
 Ieee8021PMapperServiceProfile (130) [25]: 
 	Expected: 21
-	Received: 11
-
-MacBridgePortConfigurationData (47) [1]: 
-	Expected: 13
-	Received: 8
+	Received: 13
 
 VlanTaggingFilterData (84) [1]: 
 	Expected: 26
 	Received: 4
-
-Ieee8021PMapperServiceProfile (130) [26]: 
-	Expected: 21
-	Received: 19
-
-MacBridgePortConfigurationData (47) [2]: 
-	Expected: 13
-	Received: 8
 
 VlanTaggingFilterData (84) [2]: 
 	Expected: 26
@@ -98,103 +78,11 @@ VlanTaggingFilterData (84) [2]:
 
 GemInterworkingTerminationPoint (266) [33024]: 
 	Expected: 9
-	Received: 6
-
-GemInterworkingTerminationPoint (266) [33025]: 
-	Expected: 9
-	Received: 7
-
-MacBridgePortConfigurationData (47) [257]: 
-	Expected: 13
 	Received: 8
 
 ExtendedVlanTaggingOperationConfigurationData (171) [257]: 
 	Expected: 24
-	Received: 21
-
-MulticastOperationsProfile (309) [257]: 
-	Expected: 23
-	Received: 10
-
-MulticastSubscriberConfigInfo (310) [257]: 
-	Expected: 10
-	Received: 2
-
-MulticastSubscriberMonitor (311) [257]: 
-	Expected: 1
-	Received: 0
-
-GemPortNetworkCtp (268) [36861]: 
-	Expected: 11
-	Received: 3
-
-GemInterworkingTerminationPoint (266) [36861]: 
-	Expected: 9
-	Received: 3
-
-GemPortNetworkCtp (268) [36863]: 
-	Expected: 11
-	Received: 3
-
-MulticastGemInterworkingTerminationPoint (281) [36863]: 
-	Expected: 10
-	Received: 2
-
-MacBridgePortConfigurationData (47) [32801]: 
-	Expected: 13
-	Received: 9
-
-MacBridgePortConfigurationData (47) [32785]: 
-	Expected: 13
-	Received: 9
-
-EthernetPerformanceMonitoringHistoryData4 (255) [32769]: 
-	Expected: 3
-	Received: 1
-
-EthernetPerformanceMonitoringHistoryData4 (255) [257]: 
-	Expected: 3
-	Received: 0
-
-MacBridgePortPmHistoryData (52) [257]: 
-	Expected: 2
-	Received: 0
-
-EthernetFramePmHistoryDataUs (322) [257]: 
-	Expected: 2
-	Received: 0
-
-EthernetFramePmHistoryDataDs (321) [257]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData (24) [257]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData2 (89) [257]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData3 (296) [257]: 
-	Expected: 2
-	Received: 0
-
-GemPortPmHistoryData (267) [36861]: 
-	Expected: 2
-	Received: 0
-
-GemPortPmHistoryData (267) [36863]: 
-	Expected: 2
-	Received: 0
-
-GemPortPmHistoryData (267) [33024]: 
-	Expected: 2
-	Received: 0
-
-GemPortPmHistoryData (267) [33025]: 
-	Expected: 2
-	Received: 0
+	Received: 22
 
 
 #################################################

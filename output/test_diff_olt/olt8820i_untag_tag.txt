@@ -29,10 +29,6 @@ GemInterworkingTerminationPoint (266) [262]:
 
 Conflicting Lengths:
 
-GemPortNetworkCtp (268) [4094]: 
-	Expected: 11
-	Received: 3
-
 GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [4094]: 
 	Expected: 3
 	Received: 2
@@ -41,41 +37,13 @@ Tcont (262) [32768]:
 	Expected: 2
 	Received: 1
 
-MacBridgeServiceProfile (45) [0]: 
-	Expected: 13
-	Received: 1
-
 GemPortNetworkCtp (268) [257]: 
 	Expected: 11
-	Received: 5
+	Received: 9
 
 GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [257]: 
 	Expected: 3
 	Received: 2
-
-GemInterworkingTerminationPoint (266) [257]: 
-	Expected: 9
-	Received: 5
-
-MulticastGemInterworkingTerminationPoint (281) [4094]: 
-	Expected: 10
-	Received: 5
-
-MacBridgePortConfigurationData (47) [257]: 
-	Expected: 13
-	Received: 6
-
-MacBridgePortConfigurationData (47) [0]: 
-	Expected: 13
-	Received: 6
-
-MacBridgePortConfigurationData (47) [8]: 
-	Expected: 13
-	Received: 6
-
-ExtendedVlanTaggingOperationConfigurationData (171) [257]: 
-	Expected: 24
-	Received: 19
 
 VlanTaggingFilterData (84) [257]: 
 	Expected: 26
@@ -85,41 +53,9 @@ VlanTaggingFilterData (84) [8]:
 	Expected: 26
 	Received: 4
 
-EthernetPmHistoryData (24) [257]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData2 (89) [257]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData3 (296) [257]: 
-	Expected: 2
-	Received: 0
-
-GemPortNetworkCtp (268) [262]: 
-	Expected: 11
-	Received: 7
-
 GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [262]: 
 	Expected: 3
 	Received: 2
-
-GemInterworkingTerminationPoint (266) [262]: 
-	Expected: 9
-	Received: 5
-
-MacBridgePortConfigurationData (47) [262]: 
-	Expected: 13
-	Received: 6
-
-MacBridgePortConfigurationData (47) [0]: 
-	Expected: 13
-	Received: 6
-
-ExtendedVlanTaggingOperationConfigurationData (171) [257]: 
-	Expected: 24
-	Received: 19
 
 VlanTaggingFilterData (84) [262]: 
 	Expected: 26
@@ -128,18 +64,6 @@ VlanTaggingFilterData (84) [262]:
 VlanTaggingFilterData (84) [8]: 
 	Expected: 26
 	Received: 6
-
-EthernetPmHistoryData (24) [257]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData2 (89) [257]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData3 (296) [257]: 
-	Expected: 2
-	Received: 0
 
 
 #################################################

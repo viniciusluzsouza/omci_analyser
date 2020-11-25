@@ -84,8 +84,7 @@ class Verifier:
                     exp_len = attribute.getLength()
                     expected_len += exp_len
                     rec_len = self.checkAttrLength(val)
-                    received_len += rec_len
-                    # received_len += rec_len + 1 if rec_len != 0 and rec_len != exp_len else exp_len
+                    received_len += rec_len if rec_len != 0 else exp_len    # Disregards zeroed attributes on all bytes
 
             if expected_len != received_len:
                 invalid_received_len.append({

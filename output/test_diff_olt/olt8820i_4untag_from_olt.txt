@@ -47,49 +47,21 @@ GemInterworkingTerminationPoint (266) [261]:
 
 Conflicting Lengths:
 
-GemPortNetworkCtp (268) [4094]: 
-	Expected: 11
-	Received: 3
-
 GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [4094]: 
 	Expected: 3
 	Received: 2
 
-MacBridgeServiceProfile (45) [0]: 
-	Expected: 13
-	Received: 1
-
 GemPortNetworkCtp (268) [258]: 
 	Expected: 11
-	Received: 5
+	Received: 9
 
 GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [258]: 
 	Expected: 3
 	Received: 2
 
-GemInterworkingTerminationPoint (266) [258]: 
-	Expected: 9
-	Received: 5
-
-MulticastGemInterworkingTerminationPoint (281) [4094]: 
-	Expected: 10
-	Received: 5
-
-MacBridgePortConfigurationData (47) [258]: 
-	Expected: 13
-	Received: 6
-
-MacBridgePortConfigurationData (47) [0]: 
-	Expected: 13
-	Received: 6
-
-MacBridgePortConfigurationData (47) [8]: 
-	Expected: 13
-	Received: 6
-
 ExtendedVlanTaggingOperationConfigurationData (171) [257]: 
 	Expected: 24
-	Received: 18
+	Received: 23
 
 VlanTaggingFilterData (84) [258]: 
 	Expected: 26
@@ -99,41 +71,13 @@ VlanTaggingFilterData (84) [8]:
 	Expected: 26
 	Received: 4
 
-EthernetPmHistoryData (24) [257]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData2 (89) [257]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData3 (296) [257]: 
-	Expected: 2
-	Received: 0
-
-GemPortNetworkCtp (268) [3902]: 
-	Expected: 11
-	Received: 7
-
 GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [3902]: 
 	Expected: 3
 	Received: 2
 
-GemInterworkingTerminationPoint (266) [3902]: 
-	Expected: 9
-	Received: 5
-
-MacBridgePortConfigurationData (47) [3902]: 
-	Expected: 13
-	Received: 6
-
-MacBridgePortConfigurationData (47) [0]: 
-	Expected: 13
-	Received: 6
-
 ExtendedVlanTaggingOperationConfigurationData (171) [257]: 
 	Expected: 24
-	Received: 18
+	Received: 23
 
 VlanTaggingFilterData (84) [3902]: 
 	Expected: 26
@@ -143,49 +87,13 @@ VlanTaggingFilterData (84) [8]:
 	Expected: 26
 	Received: 6
 
-EthernetPmHistoryData (24) [257]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData2 (89) [257]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData3 (296) [257]: 
-	Expected: 2
-	Received: 0
-
-MacBridgeServiceProfile (45) [1]: 
-	Expected: 13
-	Received: 1
-
-GemPortNetworkCtp (268) [259]: 
-	Expected: 11
-	Received: 7
-
 GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [259]: 
 	Expected: 3
 	Received: 2
 
-GemInterworkingTerminationPoint (266) [259]: 
-	Expected: 9
-	Received: 7
-
-MacBridgePortConfigurationData (47) [259]: 
-	Expected: 13
-	Received: 8
-
-MacBridgePortConfigurationData (47) [1]: 
-	Expected: 13
-	Received: 8
-
-MacBridgePortConfigurationData (47) [9]: 
-	Expected: 13
-	Received: 8
-
 ExtendedVlanTaggingOperationConfigurationData (171) [258]: 
 	Expected: 24
-	Received: 18
+	Received: 23
 
 VlanTaggingFilterData (84) [259]: 
 	Expected: 26
@@ -195,49 +103,13 @@ VlanTaggingFilterData (84) [9]:
 	Expected: 26
 	Received: 4
 
-EthernetPmHistoryData (24) [258]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData2 (89) [258]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData3 (296) [258]: 
-	Expected: 2
-	Received: 0
-
-MacBridgeServiceProfile (45) [2]: 
-	Expected: 13
-	Received: 1
-
-GemPortNetworkCtp (268) [260]: 
-	Expected: 11
-	Received: 7
-
 GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [260]: 
 	Expected: 3
 	Received: 2
 
-GemInterworkingTerminationPoint (266) [260]: 
-	Expected: 9
-	Received: 7
-
-MacBridgePortConfigurationData (47) [260]: 
-	Expected: 13
-	Received: 8
-
-MacBridgePortConfigurationData (47) [2]: 
-	Expected: 13
-	Received: 8
-
-MacBridgePortConfigurationData (47) [10]: 
-	Expected: 13
-	Received: 8
-
 ExtendedVlanTaggingOperationConfigurationData (171) [259]: 
 	Expected: 24
-	Received: 18
+	Received: 23
 
 VlanTaggingFilterData (84) [260]: 
 	Expected: 26
@@ -247,49 +119,13 @@ VlanTaggingFilterData (84) [10]:
 	Expected: 26
 	Received: 4
 
-EthernetPmHistoryData (24) [259]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData2 (89) [259]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData3 (296) [259]: 
-	Expected: 2
-	Received: 0
-
-MacBridgeServiceProfile (45) [3]: 
-	Expected: 13
-	Received: 1
-
-GemPortNetworkCtp (268) [261]: 
-	Expected: 11
-	Received: 7
-
 GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [261]: 
 	Expected: 3
 	Received: 2
 
-GemInterworkingTerminationPoint (266) [261]: 
-	Expected: 9
-	Received: 7
-
-MacBridgePortConfigurationData (47) [261]: 
-	Expected: 13
-	Received: 8
-
-MacBridgePortConfigurationData (47) [3]: 
-	Expected: 13
-	Received: 8
-
-MacBridgePortConfigurationData (47) [11]: 
-	Expected: 13
-	Received: 8
-
 ExtendedVlanTaggingOperationConfigurationData (171) [260]: 
 	Expected: 24
-	Received: 18
+	Received: 23
 
 VlanTaggingFilterData (84) [261]: 
 	Expected: 26
@@ -298,18 +134,6 @@ VlanTaggingFilterData (84) [261]:
 VlanTaggingFilterData (84) [11]: 
 	Expected: 26
 	Received: 4
-
-EthernetPmHistoryData (24) [260]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData2 (89) [260]: 
-	Expected: 2
-	Received: 0
-
-EthernetPmHistoryData3 (296) [260]: 
-	Expected: 2
-	Received: 0
 
 
 #################################################
