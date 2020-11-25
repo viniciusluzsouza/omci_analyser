@@ -220,6 +220,7 @@ class Analyser:
                 if attr_pointer is not None:
                     for me_candidate in attr_pointer:
                         val = attr.getValue()
+                        val_len = attr.getLength()
                         if val is None:
                             continue
 
@@ -232,7 +233,9 @@ class Analyser:
                             if me_candidate in ManagedEntity.me_dict and val_int != 0:
                                 e_append = {'me': me_candidate, 'name': ManagedEntity.me_dict[me_candidate], 'inst': val_int}
                                 appendMeWithPointer(ent_obj, e_append)
-                                if e_append not in added_mes:
+
+                                # If not 0x[F..F] and not already saved, append it!
+                                if val_int != ((2**(val_len*8))-1) and e_append not in added_mes:
                                     added_mes.append(e_append)
 
             imp_link = e.getImplicitlyLinked()
