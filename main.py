@@ -355,8 +355,8 @@ if __name__ == '__main__':
     argParser._optionals.title = "Mandatory Params"
 
     argGroup = argParser.add_mutually_exclusive_group()
-    argGroup.add_argument("-r", action="store_true", help="Run in continuous mode")
-    argGroup.add_argument("-c", type=str, help="Interface to capture", metavar='INTERFACE')
+    argGroup.add_argument("-c", action="store_true", help="Run in continuous mode")
+    argGroup.add_argument("-i", type=str, help="Interface to capture", metavar='INTERFACE')
     argGroup.add_argument("-a", type=str, help="Analyse and generate image from capture", metavar='PCAP_FILE')
     argGroup.add_argument("-v", type=str, help="Verify packets", metavar='PCAP_FILE')
 
@@ -365,7 +365,7 @@ if __name__ == '__main__':
 
     args = argParser.parse_args()
 
-    if args.r:
+    if args.c:
         if os.getuid() != 0:
             print("You need root permissions to execute. Run with sudo!")
             exit(0)
@@ -374,9 +374,9 @@ if __name__ == '__main__':
         mainMenu.setLocationOrigin(run_orig)
         mainMenu.start()
     else:
-        if args.c:
+        if args.i:
             if checkOutputFile(args):
-                runCapture(args.c, args.o, run_orig)
+                runCapture(args.i, args.o, run_orig)
         elif args.a:
             if checkOutputFile(args):
                 runAnalyse(args.a, args.o, run_orig)
