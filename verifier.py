@@ -168,18 +168,27 @@ class Verifier:
         printout += "\n"
         return printout
 
-    def runAllAndGenerateReport(self):
+    def runAllAndGenerateReport(self, reportfile=None, location=None):
+        printout = False
         try:
-            while True:
-                reportfile = input("Report file name: ")
-                if reportfile != "":
-                    break
+            if reportfile is None:
+                printout = True
+                while True:
+                    reportfile = input("Report file name: ")
+                    if reportfile != "":
+                        if not reportfile.startswith('/'):
+                            reportfile = location + '/' + reportfile
+
+                        break
 
             output = self.runAll()
-            with open("output/" + reportfile, "w") as f:
+
+            reportfile = reportfile + ".txt" if "txt" not in reportfile else reportfile
+            with open(reportfile, "w") as f:
                 f.write(output)
 
-            print("Report generated on folder output.")
+            if printout:
+                print("\nReport successfully generated.\n")
 
         except KeyboardInterrupt:
             return

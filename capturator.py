@@ -78,8 +78,9 @@ class Capturator:
 
     def saveDump(self, file):
         file_str = file + ".pcap" if "pcap" not in file else file
+        tmp = os.path.dirname(os.path.abspath(__file__)) + "/output/temp.txt"
 
-        with open("output/temp.txt", "w") as f:
+        with open(tmp, "w") as f:
             for pkt in self.buff:
                 line = "\n"
                 for i, p in enumerate(pkt):
@@ -89,8 +90,8 @@ class Capturator:
                 f.write(line)
 
         # TODO: Change to subprocess
-        os.system("text2pcap output/temp.txt output/%s -q" % file_str)
-        os.system("rm -rf output/temp.txt")
+        os.system("text2pcap %s %s -q" % (tmp, file_str))
+        os.system("rm -rf %s" % tmp)
 
     @staticmethod
     def loadDump(file):

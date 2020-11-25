@@ -1,7 +1,6 @@
 from enum import Enum
 import struct
 import binascii
-from pcapfile import savefile
 import os
 import re
 
@@ -335,15 +334,17 @@ class Analyser:
     def getOutput(self):
         return self.output
 
-    def generateImage(self, name):
-        file = "output/" + name
-        with open(file, "w") as f:
+    def generateImage(self, file):
+        file_img = file + ".png" if "png" not in file else file
+        file_tmp = file + "_tmp"
+
+        with open(file_tmp, "w") as f:
             f.write(self.output)
 
         # TODO Change to subprocess
         #os.system("blockdiag %s --no-transparency" % file)
-        os.system("dot -Tpng %s -o %s.png" % (file, file))
-        os.system("rm -rf %s" % file)
+        os.system("dot -Tpng %s -o %s" % (file_tmp, file_img))
+        os.system("rm -rf %s" % file_tmp)
 
     def setBuffer(self, buf):
         self.buffer = buf

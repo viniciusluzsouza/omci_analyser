@@ -1,6 +1,5 @@
 from socket import socket, AF_PACKET, SOCK_RAW
 from time import sleep
-import unicodedata
 
 s = socket(AF_PACKET, SOCK_RAW)
 s.bind(("lo", 0))

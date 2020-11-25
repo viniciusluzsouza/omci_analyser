@@ -1,7 +1,11 @@
+#!/usr/bin/python3 -u
+
 import os
 from capturator import Capturator
 from analyser import Analyser
 from verifier import Verifier
+
+import argparse
 
 class MainMenu:
     CHOOSE = "Option: "
@@ -69,6 +73,7 @@ Choose an option and press ENTER:
         self.verifier = Verifier()
         self.loaded_buffer = []
         self.last_loaded = MainMenu.NOTHING_LOADED
+        self.locationOrigin = ""
 
     def convertOptWithPrint(self, opt):
         try:
@@ -119,13 +124,19 @@ Choose an option and press ENTER:
         except Exception as e:
             print(str(e))
 
+    def getPath(self, output):
+        if self.locationOrigin.startswith('/'):
+            return output
+        else:
+            return self.locationOrigin + '/' + output
+
     def loadCapture(self):
         while True:
             file = input("Inform the file with location: ")
             if file != "":
                 break
 
-        buf = Capturator.loadDump(file)
+        buf = Capturator.loadDump(self.getPath(file))
         if len(buf):
             self.loaded_buffer = buf
             self.last_loaded = MainMenu.LOADED_FROM_FILE
@@ -134,10 +145,10 @@ Choose an option and press ENTER:
     def saveCapture(self):
         if self.capturator and self.capturator.hasCapture():
             file = input("File to export: ")
-            self.capturator.saveDump(file)
-            print("Saved sucessfully! See folder output.\n")
+            self.capturator.saveDump(self.getPath(file))
+            print("\nCapture successfully saved.\n")
         else:
-            print("Nothing to save!")
+            print("Nothing to save!\n")
 
     def checkLastCapture(self):
         buf = None
@@ -181,8 +192,9 @@ Choose an option and press ENTER:
                         pngfile = input("File name: ")
                         if pngfile != "":
                             break
-                    self.analyser.generateImage(pngfile)
-                    print("Generated on folder output.")
+
+                    self.analyser.generateImage(self.getPath(pngfile))
+                    print("\nImage successfully generated.\n")
 
         except Exception as e:
             print(str(e))
@@ -213,7 +225,7 @@ Choose an option and press ENTER:
                     self.verifier.verifySetWithoutPermission()
 
                 elif opt == 9:
-                    self.verifier.runAllAndGenerateReport()
+                    self.verifier.runAllAndGenerateReport(location=self.locationOrigin)
 
                 elif opt == 0:
                     break
@@ -222,6 +234,9 @@ Choose an option and press ENTER:
 
             except Exception as e:
                 print(str(e))
+
+    def setLocationOrigin(self, orig):
+        self.locationOrigin = orig
 
     def start(self):
         self.printTitle = True
@@ -263,10 +278,110 @@ Choose an option and press ENTER:
                 raise e
 
 
-if __name__ == '__main__':
+def runCapture(interface, output, orig):
     if os.getuid() != 0:
-        print("You need root permissions to execute. Run with sudo!")
-        exit(0)
+        print("You need root permissions to execute the capturator. Run with sudo!")
+        return
 
-    mainMenu = MainMenu()
-    mainMenu.start()
+    cap = Capturator()
+    try:
+        cap.setInterface(interface)
+        print("\nStarting capture. Press CTRL + C to stop.\n")
+        print("#############################################\n")
+        cap.createSock()
+        cap.start()
+    except KeyboardInterrupt:
+        pass
+    except Exception as e:
+        print(str(e))
+        return
+    finally:
+        cap.close()
+
+    if cap.hasCapture():
+        if orig.startswith('/'):
+            cap.saveDump(output)
+        else:
+            cap.saveDump(orig + '/' + output)
+        print("Saved sucessfully!\n")
+    else:
+        print("Nothing to save!")
+
+
+def runAnalyse(file_from, output, orig):
+    buf = Capturator.loadDump(file_from)
+    if not len(buf):
+        return
+
+    anal = Analyser()
+    try:
+        anal.setBuffer(buf)
+        anal.analyse()
+        if orig.startswith('/'):
+            anal.generateImage(output)
+        else:
+            anal.generateImage(orig + '/' + output)
+    except Exception as e:
+        print(str(e))
+
+
+def runVerify(file_from, output, orig):
+    buf = Capturator.loadDump(file_from)
+    if not len(buf):
+        return
+
+    ver = Verifier()
+    try:
+        ver.setPacketBuffer(buf)
+        if orig.startswith('/'):
+            ver.runAllAndGenerateReport(reportfile=output)
+        else:
+            ver.runAllAndGenerateReport(reportfile=orig + '/' + output)
+    except Exception as e:
+        print(str(e))
+
+
+def checkOutputFile(rec_args):
+    if not rec_args.o:
+        print("Inform the output file. Option '-o'.")
+        return False
+
+    return True
+
+
+if __name__ == '__main__':
+    run_orig = os.getcwd()
+    argParser = argparse.ArgumentParser(description='GPON OMCI Analyser')
+    argParser._optionals.title = "Mandatory Params"
+
+    argGroup = argParser.add_mutually_exclusive_group()
+    argGroup.add_argument("-r", action="store_true", help="Run in continuous mode")
+    argGroup.add_argument("-c", type=str, help="Interface to capture", metavar='INTERFACE')
+    argGroup.add_argument("-a", type=str, help="Analyse and generate image from capture", metavar='PCAP_FILE')
+    argGroup.add_argument("-v", type=str, help="Verify packets", metavar='PCAP_FILE')
+
+    argParser.add_argument("-o", type=str, help="Output file", metavar='FILENAME')
+    # argParser.add_argument("-s", "--show-output", help="Show image text file (only for analyser)")
+
+    args = argParser.parse_args()
+
+    if args.r:
+        if os.getuid() != 0:
+            print("You need root permissions to execute. Run with sudo!")
+            exit(0)
+
+        mainMenu = MainMenu()
+        mainMenu.setLocationOrigin(run_orig)
+        mainMenu.start()
+    else:
+        if args.c:
+            if checkOutputFile(args):
+                runCapture(args.c, args.o, run_orig)
+        elif args.a:
+            if checkOutputFile(args):
+                runAnalyse(args.a, args.o, run_orig)
+        elif args.v:
+            if checkOutputFile(args):
+                runVerify(args.v, args.o, run_orig)
+        else:
+            argParser.print_help()
