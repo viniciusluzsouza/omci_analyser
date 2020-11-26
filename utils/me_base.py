@@ -119,6 +119,7 @@ class ManagedEntity:
         329: "Virtual Ethernet interface point",
         340: "BBF TR",
         341: "GEM port network CTP performance monitoring history data",
+        349: "Power over Ethernet control",
         65303: "PPPoE INTELBRAS OLT 8820i 110Gi",
         65320: "Wan Extended Config FH",
         65321: "WAN Profile File FH",
@@ -2787,6 +2788,48 @@ class GemPortNetworkCtpPerformanceMonitoringHistoryData(ManagedEntity):
         self.threshold_data_id_pointer.setPointer([273])
 
 
+class PowerOverEthernetControl(ManagedEntity):
+    def __init__(self, instance):
+        ManagedEntity.__init__(self, 349, instance)
+        self.name = "PowerOverEthernetControl"
+        self.imp_link = [11]
+        self.poe_capabilities = MeAttribute("PoE capabilities", 2, False, True, MeAttribute.READ_PERMISSION, None)
+        self.power_pair_pinout_control = MeAttribute("Power pair pinout control", 1, False, True, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.operational_state = MeAttribute("Operational state", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.power_detection_status = MeAttribute("Power detection status", 1, False, True, MeAttribute.READ_PERMISSION, None)
+        self.power_classification_status = MeAttribute("Power classification status", 1, False, False, MeAttribute.READ_PERMISSION, None)
+        self.power_priority = MeAttribute("Power priority", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.invalid_signature_counter = MeAttribute("Invalid signature counter", 2, False, False, MeAttribute.READ_PERMISSION, None)
+        self.power_denied_counter = MeAttribute("Power denied counter", 2, False, False, MeAttribute.READ_PERMISSION, None)
+        self.overload_counter = MeAttribute("Overload counter", 2, False, False, MeAttribute.READ_PERMISSION, None)
+        self.short_counter = MeAttribute("Short counter", 2, False, False, MeAttribute.READ_PERMISSION, None)
+        self.mps_absent_counter = MeAttribute("MPS absent counter", 2, False, False, MeAttribute.READ_PERMISSION, None)
+        self.pse_class_control = MeAttribute("PsE class control", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.current_power_consumption = MeAttribute("Current Power Consumption", 4, False, False, MeAttribute.READ_PERMISSION, None)
+
+        self.attributes = (
+            self.poe_capabilities,
+            self.power_pair_pinout_control,
+            self.operational_state,
+            self.power_detection_status,
+            self.power_classification_status,
+            self.power_priority,
+            self.invalid_signature_counter,
+            self.power_denied_counter,
+            self.overload_counter,
+            self.short_counter,
+            self.mps_absent_counter,
+            self.pse_class_control,
+            self.current_power_consumption,
+        )
+
+    def getImplicitlyLinked(self):
+        return self.imp_link
+
+    def setPointers(self):
+        pass
+
+
 class PppoeIntelbrasOlt8820I110Gi(ManagedEntity):
     def __init__(self, instance):
         ManagedEntity.__init__(self, 65303, instance)
@@ -3393,6 +3436,8 @@ class MeTranslate:
             return BbfTr(inst)
         elif me == 341:
             return GemPortNetworkCtpPerformanceMonitoringHistoryData(inst)
+        elif me == 349:
+            return PowerOverEthernetControl(inst)
         elif me == 65303:
             return PppoeIntelbrasOlt8820I110Gi(inst)
         elif me == 65320:

@@ -767,6 +767,22 @@
 	{ attname="Transmitted payload bytes", length=8, setbycreate=false, mandatory=true, perm=r }, -- 6
 	{ attname="Encryption key errors", length=4, setbycreate=false, mandatory=false, perm=r }}, -- 7
 
+-- ADD by Vinicius at 2020-11-226
+[349] = { me_class_name = "Power over Ethernet control", imp_link=(11),
+	{ attname="PoE capabilities", length=2, setbycreate=false, mandatory=true, perm=r },
+	{ attname="Power pair pinout control", length=1, setbycreate=false, mandatory=true, perm=rw },
+	{ attname="Operational state", length=1, setbycreate=false, mandatory=true, perm=r },
+	{ attname="Power detection status", length=1, setbycreate=false, mandatory=true, perm=r },
+	{ attname="Power classification status", length=1, setbycreate=false, mandatory=false, perm=r },
+	{ attname="Power priority", length=1, setbycreate=false, mandatory=false, perm=rw },
+	{ attname="Invalid signature counter", length=2, setbycreate=false, mandatory=false, perm=r },
+	{ attname="Power denied counter", length=2, setbycreate=false, mandatory=false, perm=r },
+	{ attname="Overload counter", length=2, setbycreate=false, mandatory=false, perm=r },
+	{ attname="Short counter", length=2, setbycreate=false, mandatory=false, perm=r },
+	{ attname="MPS absent counter", length=2, setbycreate=false, mandatory=false, perm=r },
+	{ attname="PsE class control", length=1, setbycreate=false, mandatory=false, perm=rw },
+	{ attname="Current Power Consumption", length=4, setbycreate=false, mandatory=false, perm=r }},
+
 -- ADD by Maycon at 2020-05-29
 [65303] = { me_class_name = "PPPoE INTELBRAS OLT 8820i 110Gi",
 	{ attname="Wan-Type", length=1, setbycreate=false, mandatory=false, perm=rw },

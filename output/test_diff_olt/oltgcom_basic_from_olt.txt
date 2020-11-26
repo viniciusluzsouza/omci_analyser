@@ -14,6 +14,9 @@ PptpEthernetUni (11) [257]:
 	Max Frame Size;
 	DTE or DCE
 
+PowerOverEthernetControl (349) [257]: 
+	Power pair pinout control
+
 Olt (131) [0]: 
 	Equipment id;
 	OLT version
