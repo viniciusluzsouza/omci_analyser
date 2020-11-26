@@ -172,7 +172,7 @@ Choose an option and press ENTER:
 
             if self.analyser.hasEntities():
                 while True:
-                    entity = input("Inform the entity identifier. E.g: [45-0] (0 to exit): ")
+                    entity = input("Inform the entity identifier. E.g: 45-0 (0 to exit): ")
                     if entity == '0':
                         break
 
