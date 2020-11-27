@@ -303,9 +303,9 @@ def runCapture(interface, output, orig):
             cap.saveDump(output)
         else:
             cap.saveDump(orig + '/' + output)
-        print("Saved sucessfully!\n")
+        print("\nSaved sucessfully!\n")
     else:
-        print("Nothing to save!")
+        print("\nNothing to save!")
 
 
 def runAnalyse(file_from, output, orig):
