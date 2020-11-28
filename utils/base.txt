@@ -759,7 +759,7 @@
 
 -- ADD by Maycon at 2020-05-08	
 [341] = { me_class_name = "GEM port network CTP performance monitoring history data", imp_link=(268),
-	{ attname="Interval end time", length=1, setbycreate=true, mandatory=true, perm=r }, -- 1
+	{ attname="Interval end time", length=1, setbycreate=false, mandatory=true, perm=r }, -- 1
 	{ attname="Threshold data ID pointer", length=2, setbycreate=true, mandatory=true, perm=rw }, -- 2
 	{ attname="Transmitted GEM frames", length=4, setbycreate=false, mandatory=true, perm=r }, -- 3
 	{ attname="Received GEM frames", length=4, setbycreate=false, mandatory=true, perm=r }, -- 4

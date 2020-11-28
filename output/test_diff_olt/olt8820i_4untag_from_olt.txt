@@ -47,17 +47,9 @@ GemInterworkingTerminationPoint (266) [261]:
 
 Conflicting Lengths:
 
-GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [4094]: 
-	Expected: 3
-	Received: 2
-
 GemPortNetworkCtp (268) [258]: 
 	Expected: 11
 	Received: 9
-
-GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [258]: 
-	Expected: 3
-	Received: 2
 
 ExtendedVlanTaggingOperationConfigurationData (171) [257]: 
 	Expected: 24
@@ -71,10 +63,6 @@ VlanTaggingFilterData (84) [8]:
 	Expected: 26
 	Received: 4
 
-GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [3902]: 
-	Expected: 3
-	Received: 2
-
 ExtendedVlanTaggingOperationConfigurationData (171) [257]: 
 	Expected: 24
 	Received: 23
@@ -86,10 +74,6 @@ VlanTaggingFilterData (84) [3902]:
 VlanTaggingFilterData (84) [8]: 
 	Expected: 26
 	Received: 6
-
-GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [259]: 
-	Expected: 3
-	Received: 2
 
 ExtendedVlanTaggingOperationConfigurationData (171) [258]: 
 	Expected: 24
@@ -103,10 +87,6 @@ VlanTaggingFilterData (84) [9]:
 	Expected: 26
 	Received: 4
 
-GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [260]: 
-	Expected: 3
-	Received: 2
-
 ExtendedVlanTaggingOperationConfigurationData (171) [259]: 
 	Expected: 24
 	Received: 23
@@ -118,10 +98,6 @@ VlanTaggingFilterData (84) [260]:
 VlanTaggingFilterData (84) [10]: 
 	Expected: 26
 	Received: 4
-
-GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [261]: 
-	Expected: 3
-	Received: 2
 
 ExtendedVlanTaggingOperationConfigurationData (171) [260]: 
 	Expected: 24
@@ -139,23 +115,5 @@ VlanTaggingFilterData (84) [11]:
 #################################################
 3) Check configured attributes without permission
 
-Attributes configured without permission:
-
-GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [4094]: 
-	Interval end time
-
-GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [258]: 
-	Interval end time
-
-GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [3902]: 
-	Interval end time
-
-GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [259]: 
-	Interval end time
-
-GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [260]: 
-	Interval end time
-
-GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [261]: 
-	Interval end time
+Not found configured attributes without permission.
 

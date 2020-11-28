@@ -23,10 +23,6 @@ MulticastGemInterworkingTerminationPoint (281) [4094]:
 
 Conflicting Lengths:
 
-GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [4094]: 
-	Expected: 3
-	Received: 2
-
 Tcont (262) [32768]: 
 	Expected: 2
 	Received: 1
@@ -34,10 +30,6 @@ Tcont (262) [32768]:
 GemPortNetworkCtp (268) [257]: 
 	Expected: 11
 	Received: 9
-
-GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [257]: 
-	Expected: 3
-	Received: 2
 
 ExtendedVlanTaggingOperationConfigurationData (171) [257]: 
 	Expected: 24
@@ -55,11 +47,5 @@ VlanTaggingFilterData (84) [8]:
 #################################################
 3) Check configured attributes without permission
 
-Attributes configured without permission:
-
-GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [4094]: 
-	Interval end time
-
-GemPortNetworkCtpPerformanceMonitoringHistoryData (341) [257]: 
-	Interval end time
+Not found configured attributes without permission.
 

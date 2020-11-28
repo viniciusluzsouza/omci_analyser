@@ -2763,7 +2763,7 @@ class GemPortNetworkCtpPerformanceMonitoringHistoryData(ManagedEntity):
         ManagedEntity.__init__(self, 341, instance)
         self.name = "GemPortNetworkCtpPerformanceMonitoringHistoryData"
         self.imp_link = [268]
-        self.interval_end_time = MeAttribute("Interval end time", 1, True, True, MeAttribute.READ_PERMISSION, None)
+        self.interval_end_time = MeAttribute("Interval end time", 1, False, True, MeAttribute.READ_PERMISSION, None)
         self.threshold_data_id_pointer = MeAttribute("Threshold data ID pointer", 2, True, True, MeAttribute.READ_WRITE_PERMISSION, None)
         self.transmitted_gem_frames = MeAttribute("Transmitted GEM frames", 4, False, True, MeAttribute.READ_PERMISSION, None)
         self.received_gem_frames = MeAttribute("Received GEM frames", 4, False, True, MeAttribute.READ_PERMISSION, None)
