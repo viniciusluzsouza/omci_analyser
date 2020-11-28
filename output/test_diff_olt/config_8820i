@@ -1,0 +1,11 @@
+bridge add gpon 1 onu 1 downlink vlan 1234 tagged eth 1
+
+bridge add gpon 1 onu 1 downlink vlan 123 tagged eth 1
+bridge add gpon 1 onu 1 downlink vlan 321 tagged eth 1 uni-vlan 100
+
+bridge add gpon 1 onu 2 downlink vlan 11 tagged eth 1
+bridge add gpon 1 onu 2 downlink vlan 22 tagged eth 2
+bridge add gpon 1 onu 2 downlink vlan 33 tagged eth 3
+bridge add gpon 1 onu 2 downlink vlan 44 tagged eth 4
+
+bridge add gpon 1 onu 2 downlink vlan 2222 tagged router
