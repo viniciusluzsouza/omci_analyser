@@ -78,13 +78,5 @@ ExtendedVlanTaggingOperationConfigurationData (171) [257]:
 #################################################
 3) Check configured attributes without permission
 
-Attributes configured without permission:
-
-EthernetPerformanceMonitoringHistoryData4 (255) [32769]: 
-	threshold_data_1_2_id;
-	association_type
-
-EthernetPerformanceMonitoringHistoryData4 (255) [257]: 
-	threshold_data_1_2_id;
-	association_type
+Not found configured attributes without permission.
 

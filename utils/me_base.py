@@ -1620,19 +1620,19 @@ class EthernetPerformanceMonitoringHistoryData4(ManagedEntity):
         ManagedEntity.__init__(self, 255, instance)
         self.name = "EthernetPerformanceMonitoringHistoryData4"
         self.imp_link = [11]
-        self.interval_end_time = MeAttribute("interval_end_time", 1, False, False, MeAttribute.READ_PERMISSION, None)
-        self.threshold_data_1_2_id = MeAttribute("threshold_data_1_2_id", 2, True, False, MeAttribute.READ_PERMISSION, None)
-        self.association_type = MeAttribute("association_type", 1, True, False, MeAttribute.READ_PERMISSION, None)
-        self.transmitted_traffic = MeAttribute("transmitted_traffic", 4, False, False, MeAttribute.READ_PERMISSION, None)
-        self.received_traffic = MeAttribute("received_traffic", 4, False, False, MeAttribute.READ_PERMISSION, None)
-        self.transmitted_rate = MeAttribute("transmitted_rate", 4, False, False, MeAttribute.READ_PERMISSION, None)
-        self.received_rate = MeAttribute("received_rate", 4, False, False, MeAttribute.READ_PERMISSION, None)
-        self.transmitted_octets = MeAttribute("transmitted_octets", 4, False, False, MeAttribute.READ_PERMISSION, None)
-        self.received_octets = MeAttribute("received_octets", 4, False, False, MeAttribute.READ_PERMISSION, None)
-        self.transmitted_discarded_counter = MeAttribute("transmitted_discarded_counter", 4, False, False, MeAttribute.READ_PERMISSION, None)
-        self.received_discarded_counter = MeAttribute("received_discarded_counter", 4, False, False, MeAttribute.READ_PERMISSION, None)
-        self.transmitted_error_counter = MeAttribute("transmitted_error_counter", 4, False, False, MeAttribute.READ_PERMISSION, None)
-        self.received_error_counter = MeAttribute("received_error_counter", 4, False, False, MeAttribute.READ_PERMISSION, None)
+        self.interval_end_time = MeAttribute("interval_end_time", 1, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.threshold_data_1_2_id = MeAttribute("threshold_data_1_2_id", 2, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.association_type = MeAttribute("association_type", 1, True, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.transmitted_traffic = MeAttribute("transmitted_traffic", 4, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.received_traffic = MeAttribute("received_traffic", 4, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.transmitted_rate = MeAttribute("transmitted_rate", 4, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.received_rate = MeAttribute("received_rate", 4, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.transmitted_octets = MeAttribute("transmitted_octets", 4, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.received_octets = MeAttribute("received_octets", 4, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.transmitted_discarded_counter = MeAttribute("transmitted_discarded_counter", 4, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.received_discarded_counter = MeAttribute("received_discarded_counter", 4, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.transmitted_error_counter = MeAttribute("transmitted_error_counter", 4, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
+        self.received_error_counter = MeAttribute("received_error_counter", 4, False, False, MeAttribute.READ_WRITE_PERMISSION, None)
 
         self.attributes = (
             self.interval_end_time,
