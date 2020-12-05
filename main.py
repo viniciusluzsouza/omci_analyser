@@ -87,10 +87,16 @@ Choose an option and press ENTER:
         if self.capturator:
             self.capturator.close()
 
-    def askConfirm(self, question):
+    def askConfirm(self, question, defaultYes=True):
         while True:
-            opt = input(question + " [Y/n]: ").lower()
-            if opt == 'y' or opt == 'yes' or opt == '':
+            if defaultYes:
+                opt = input(question + " [Y/n]: ").lower()
+                opt = 'y' if opt == '' else opt
+            else:
+                opt = input(question + " [y/N]: ").lower()
+                opt = 'n' if opt == '' else opt
+
+            if opt == 'y' or opt == 'yes':
                 return True
             elif opt == 'n' or opt == 'no':
                 return False
@@ -183,7 +189,9 @@ Choose an option and press ENTER:
             buf = self.checkLastCapture()
             if buf:
                 self.analyser.setBuffer(buf)
-                self.analyser.analyse()
+
+                showpointzeroinst = self.askConfirm("Show pointers to zeroed instances?", defaultYes=False)
+                self.analyser.analyse(showPointerToInstZero=showpointzeroinst)
                 if self.askConfirm("Show the output?"):
                     print("\n%s" % self.analyser.getOutput())
 
@@ -308,7 +316,7 @@ def runCapture(interface, output, orig):
         print("\nNothing to save!")
 
 
-def runAnalyse(file_from, output, orig):
+def runAnalyse(file_from, output, orig, show_zeroed_pointer=False):
     buf = Capturator.loadDump(file_from)
     if not len(buf):
         return
@@ -316,7 +324,7 @@ def runAnalyse(file_from, output, orig):
     anal = Analyser()
     try:
         anal.setBuffer(buf)
-        anal.analyse()
+        anal.analyse(show_zeroed_pointer)
         if orig.startswith('/'):
             anal.generateImage(output)
         else:
@@ -361,6 +369,7 @@ if __name__ == '__main__':
     argGroup.add_argument("-v", type=str, help="Verify packets", metavar='PCAP_FILE')
 
     argParser.add_argument("-o", type=str, help="Output file", metavar='FILENAME')
+    argParser.add_argument("--show-zero-pointers", action='store_true', help="If -a option was selected, generate an image showing pointers with zeroed instance")
     # argParser.add_argument("-s", "--show-output", help="Show image text file (only for analyser)")
 
     args = argParser.parse_args()
@@ -379,7 +388,7 @@ if __name__ == '__main__':
                 runCapture(args.i, args.o, run_orig)
         elif args.a:
             if checkOutputFile(args):
-                runAnalyse(args.a, args.o, run_orig)
+                runAnalyse(args.a, args.o, run_orig, args.show_zero_pointers)
         elif args.v:
             if checkOutputFile(args):
                 runVerify(args.v, args.o, run_orig)

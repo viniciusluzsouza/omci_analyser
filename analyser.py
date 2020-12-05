@@ -187,7 +187,7 @@ class Analyser:
         self.entities = translated_entities
         return True
 
-    def analyse(self):
+    def analyse(self, showPointerToInstZero=False):
         if not self.translateToMyself():
             print("Nothing to analyse ...")
             return
@@ -218,9 +218,9 @@ class Analyser:
             for attr in e.getAttributes():
                 attr_pointer = attr.getPointer()
                 if attr_pointer is not None:
+                    unfound_pointers_candidate = []
                     for me_candidate in attr_pointer:
                         val = attr.getValue()
-                        val_len = attr.getLength()
                         if val is None:
                             continue
 
@@ -230,7 +230,7 @@ class Analyser:
                             e_append = {'me': entity.getId(), 'name': entity.getName(), 'inst': entity.getInstance()}
                             appendMeWithPointer(ent_obj, e_append)
                         else:
-                            if me_candidate in ManagedEntity.me_dict and val_int != 0:
+                            if me_candidate in ManagedEntity.me_dict and (val_int != 0 or showPointerToInstZero):
                                 e_append = {'me': me_candidate, 'name': ManagedEntity.me_dict[me_candidate], 'inst': val_int}
 
                                 # If not 0xFFFF and not already saved, append it!
