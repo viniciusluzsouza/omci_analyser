@@ -19,7 +19,7 @@ Requisitos: Python3
 
 Após a instalação, o comando omci_analyser estará disponvível. Utilize a opção -h para mostrar a ajuda.
 
-![Help OMCI Analyser](./oneshot_help.png)
+![Help OMCI Analyser](./imgs/oneshot_help.png)
 
 <br />
 
@@ -74,7 +74,7 @@ O parâmetros são descritos como:
 
 A imagem a seguir mostra a execução dos três módulos em sequência. Primeiro e executado o capturador, depois realizada uma análise e por fim, uma verificação.
 
-![OMCI Analyser Example](./oneshot_example.png)
+![OMCI Analyser Example](./imgs/oneshot_example.png)
 
 <br />
 
