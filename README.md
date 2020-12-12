@@ -2,7 +2,7 @@
 
 Projeto desenvolvido como Trabalho de Conclusão de Curso do curso de Engenharia de Telecomunicações do Instituto Federal de Santa Catarina campus São Jose (IFSC-SJ), cujo tema é definido por: Desenvolvimento de Ferramenta para Captura e Análise de Pacotes OMCI em Redes GPON.
 
-O software desenvolvido possui três módulos: capturador, analisador e verificador. Que serao descritos a seguir.
+O software desenvolvido possui três módulos: capturador, analisador e verificador. Que serão descritos a seguir.
 
 <br />
 
@@ -15,7 +15,7 @@ Requisitos: Python3
 
 <br />
 
-## Modos de Utilização
+## Utilização
 
 Após a instalação, o comando omci_analyser estará disponvível. Utilize a opção -h para mostrar a ajuda.
 
