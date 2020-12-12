@@ -21,6 +21,8 @@ Após a instalação, o comando omci_analyser estará disponvível. Utilize a op
 
 ![Help OMCI Analyser](./oneshot_help.png)
 
+<br />
+
 ### Módulo capturador
 
 Captura pacotes com Ethertype 0x88b5 (Local Experimental) a partir da interface selecionada. Remove o cabeçalho ethernet e interpreta  o restante como quadro OMCI. Utiliza-se a seguinte sintaxe:
@@ -34,6 +36,8 @@ O parâmetros são descritos como:
 
 **Obs.:** necessário executar como super usuário, devido as permissões de acesso a interface de rede.
 
+<br />
+
 ### Módulo Analisador
 
 Este módulo realiza uma análise dos pacotes OMCI de uma determinada captura. Ele identifica as entidades OMCI e desenha um diagrama mostrando a relações que foram percebidas. Utiliza-se a seguinte sintaxe:
@@ -44,6 +48,8 @@ O parâmetros são descritos como:
 
  - **input-file:** nome do arquivo a ser analisado, que deve estar no formato .pcap.
  - **output-file:** nome do arquivo de saida. Sera gerada imagem no formato .png.
+
+<br />
 
 ### Módulo Verificador
 
@@ -62,11 +68,15 @@ O parâmetros são descritos como:
  - **input-file:** nome do arquivo a ser verificado, que deve estar no formato .pcap.
  - **output-file:** nome do arquivo de saida. Sera gerado arquivo no formato .txt com o resultado das três verificações.
 
+<br />
+
 ### Exemplo de Execução
 
 A imagem a seguir mostra a execução dos três módulos em sequência. Primeiro e executado o capturador, depois realizada uma análise e por fim, uma verificação.
 
 ![OMCI Analyser Example](./oneshot_example.png)
+
+<br />
 
 ### Execução em Modo Contínuo
 
